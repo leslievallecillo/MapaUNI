@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros | UNI-WAY</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand-container">
+    <div class="logo-img" style="display: flex; justify-content: center; align-items: center; color: var(--primary-color);">
+      <span class="material-icons">map</span>
+    </div>
+    <div class="brand-name">UNI-WAY</div>
+  </a>
+  
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html" class="nav-link">INICIO</a></li>
+      <li><a href="destinos.html" class="nav-link">DESTINOS</a></li>
+      <li><a href="guia.html" class="nav-link">GUÍA UNI</a></li>
+      <li><a href="nosotros.html" class="nav-link activo">NOSOTROS</a></li>
+      <li><a href="contactos.html" class="nav-link">CONTACTOS</a></li>
+    </ul>
+  </nav>
+
+  <div class="search-container" onclick="toggleSearchModal()">
+    <input type="text" placeholder="Acceder (Búsqueda)..." readonly>
+    <span class="material-icons">search</span>
+  </div>
+
+  <button class="btn-menu-movil" onclick="toggleMenuMovil()">
+    <span class="material-icons">menu</span>
+  </button>
+</header>
+
+<button class="btn-floating" onclick="window.location.href='contactos.html'">
+  <span class="material-icons">mail</span>
+  <span>Contacto</span>
+</button>
+
+<main>
+  <div id="vista-nosotros" class="vista activa">
+    <section id="nosotros" class="anim-element visible" style="margin-top: 40px;">
+      <h2 class="section-title">Nosotros</h2>
+      
+      <div class="about-container">
+        <div class="about-main">
+          <div class="about-image-new">
+            <span>[ Imagen del Proyecto ]</span>
+          </div>
+          
+          <div class="about-history">
+            <h3><span class="material-icons">history_edu</span> Nuestra Historia</h3>
+            <p>El proyecto UNI-WAY nació de una experiencia común: la desorientación que todos sentimos en nuestro primer año de clases. La universidad es un campus inmenso y complejo, y perderse es parte del ritual de iniciación.</p>
+            <br>
+            <p>Utilizando entornos virtuales y herramientas de frontend modernas, hemos creado recorridos visuales en primera persona para que te enfoques en aprender desde el día uno, no en buscar aulas. Hecho de estudiantes, para estudiantes.</p>
+          </div>
+        </div>
+
+        <div class="about-cards">
+          <div class="mv-card">
+            <div class="mv-icon"><span class="material-icons">flag</span></div>
+            <h3>Misión</h3>
+            <p>Facilitar la integración, orientación y movilidad de la comunidad estudiantil dentro del recinto universitario mediante herramientas interactivas, garantizando una experiencia fluida y sin contratiempos durante sus primeros pasos en la universidad.</p>
+          </div>
+          
+          <div class="mv-card">
+            <div class="mv-icon"><span class="material-icons">visibility</span></div>
+            <h3>Visión</h3>
+            <p>Convertirnos en la plataforma de navegación universitaria líder y el referente principal para la comunidad de la Universidad Nacional de Ingeniería, promoviendo un entorno cada vez más accesible, tecnológico e integrado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="equipo" class="anim-element visible" style="margin-top: -30px;">
+      <h2 class="section-title"><i class="fa-solid fa-laptop-code" style="color: var(--accent-color);"></i> Nuestro Equipo Creador</h2>
+      <p style="text-align: center; margin-bottom: 30px; color: var(--text-gray); font-size: 1.1rem;">Desarrollado por un pequeño y apasionado equipo de estudiantes de Ingeniería de Sistemas.</p>
+      
+      <div class="equipo-grid">
+          <div class="equipo-card">
+              <div class="equipo-avatar"><i class="fa-solid fa-user-tie"></i></div>
+              <h3>Luis Zelaya</h3>
+              <h4 class="equipo-rol">Líder del Proyecto / Desarrollo</h4>
+              <p>Encargado de la estructura, interactividad 360 y la visión general de la plataforma.</p>
+          </div>
+          
+          <div class="equipo-card">
+              <div class="equipo-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+              <h3>Compañero 2</h3>
+              <h4 class="equipo-rol">Diseño / UI UX</h4>
+              <p>Especialista en experiencia de usuario y diseño visual del frontend.</p>
+          </div>
+
+          <div class="equipo-card">
+              <div class="equipo-avatar"><i class="fa-solid fa-camera"></i></div>
+              <h3>Compañero 3</h3>
+              <h4 class="equipo-rol">Recopilación 360</h4>
+              <p>Encargado del mapeo visual y fotografía inmersiva de los recintos de la UNI.</p>
+          </div>
+
+          <div class="equipo-card">
+              <div class="equipo-avatar"><i class="fa-solid fa-database"></i></div>
+              <h3>Compañero 4</h3>
+              <h4 class="equipo-rol">Base de Datos</h4>
+              <p>Gestión de la información de las aulas, rutas y optimización de datos.</p>
+          </div>
+
+          <div class="equipo-card">
+              <div class="equipo-avatar"><i class="fa-solid fa-video"></i></div>
+              <h3>Compañero 5</h3>
+              <h4 class="equipo-rol">Audiovisual</h4>
+              <p>Edición de los videos de recorridos guiados y material multimedia del sistema.</p>
+          </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-container">
+      <div class="footer-info">
+          <h3><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color);"></i> UNI-WAY</h3>
+          <p>Tu guía interactiva para dominar el campus de la Universidad Nacional de Ingeniería.</p>
+      </div>
+      <div class="footer-enlaces">
+          <h4>Enlaces Rápidos</h4>
+          <ul>
+              <li><a href="#nosotros">Misión y Visión</a></li>
+              <li><a href="destinos.html">Tour de Edificios</a></li>
+              <li><a href="#equipo">Desarrolladores</a></li>
+          </ul>
+      </div>
+      <div class="footer-contacto">
+          <h4>Contacto</h4>
+          <p><i class="fa-solid fa-envelope"></i> equipo@uniway.edu.ni</p>
+          <p><i class="fa-solid fa-location-dot"></i> Recinto Universitario Simón Bolívar, UNI.</p>
+      </div>
+  </div>
+  <div class="footer-bottom">
+      <p>© 2026 UNI-WAY. Desarrollado por estudiantes de Ingeniería de Sistemas. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<div class="overlay-search" id="searchOverlay" onclick="toggleSearchModal()"></div>
+<div class="search-modal" id="searchModal">
+  <div class="search-input-wrapper">
+    <span class="material-icons">location_on</span>
+    <input type="text" placeholder="Buscar lugar" autofocus>
+    <span class="material-icons">mic</span>
+  </div>
+  <div class="search-recent">
+    <h4>Busquedas Recientes</h4>
+    <div class="recent-tags">
+      <span class="tag">Biblioteca</span>
+      <span class="tag">El Gueguense</span>
+      <span class="tag">Secretaria Academica</span>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

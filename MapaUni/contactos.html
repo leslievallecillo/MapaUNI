@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contactos | UNI-WAY</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand-container">
+    <div class="logo-img" style="display: flex; justify-content: center; align-items: center; color: var(--primary-color);">
+      <span class="material-icons">map</span>
+    </div>
+    <div class="brand-name">UNI-WAY</div>
+  </a>
+  
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html" class="nav-link">INICIO</a></li>
+      <li><a href="destinos.html" class="nav-link">DESTINOS</a></li>
+      <li><a href="guia.html" class="nav-link">GUÍA UNI</a></li>
+      <li><a href="nosotros.html" class="nav-link">NOSOTROS</a></li>
+      <li><a href="contactos.html" class="nav-link activo">CONTACTOS</a></li>
+    </ul>
+  </nav>
+
+  <div class="search-container" onclick="toggleSearchModal()">
+    <input type="text" placeholder="Acceder (Búsqueda)..." readonly>
+    <span class="material-icons">search</span>
+  </div>
+
+  <button class="btn-menu-movil" onclick="toggleMenuMovil()">
+    <span class="material-icons">menu</span>
+  </button>
+</header>
+
+<main>
+  <div id="vista-contactos" class="vista activa">
+    <section id="contacto" class="anim-element visible" style="margin-top: 40px; margin-bottom: 60px;">
+      <h2 class="section-title">Contáctanos</h2>
+      <p class="section-subtitle">¿Tienes alguna duda, encontraste un error en una ruta o tienes una sugerencia para mejorar UNI-WAY? Escríbenos y nuestro equipo te responderá a la brevedad.</p>
+      
+      <div style="display: flex; flex-wrap: wrap; gap: 40px; max-width: 1000px; margin: 0 auto; background: var(--bg-light); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-color);">
+        
+        <div style="flex: 1; min-width: 300px;">
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('¡Mensaje enviado con éxito!');">
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; font-weight: bold; margin-bottom: 8px; color: var(--text-dark);">Nombre Completo</label>
+              <input type="text" placeholder="Ej. Juan Pérez" required style="width: 100%; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='var(--primary-color)'" onblur="this.style.borderColor='var(--border-color)'">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+              <label style="display: block; font-weight: bold; margin-bottom: 8px; color: var(--text-dark);">Correo Institucional</label>
+              <input type="email" placeholder="usuario@uni.edu.ni" required style="width: 100%; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='var(--primary-color)'" onblur="this.style.borderColor='var(--border-color)'">
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+              <label style="display: block; font-weight: bold; margin-bottom: 8px; color: var(--text-dark);">Mensaje</label>
+              <textarea rows="6" placeholder="Escribe tu duda o sugerencia aquí..." required style="width: 100%; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; outline: none; resize: vertical; transition: 0.3s;" onfocus="this.style.borderColor='var(--primary-color)'" onblur="this.style.borderColor='var(--border-color)'"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-select" style="width: 100%; padding: 15px; font-size: 16px; border-radius: 8px;">
+              <span class="material-icons">send</span> Enviar Mensaje
+            </button>
+          </form>
+        </div>
+
+        <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center; gap: 30px;">
+          
+          <div style="display: flex; align-items: flex-start; gap: 15px;">
+            <div style="background: var(--primary-color); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
+              <span class="material-icons">email</span>
+            </div>
+            <div>
+              <h3 style="color: var(--text-dark); margin-bottom: 5px; font-size: 18px;">Correo Electrónico</h3>
+              <p style="color: var(--text-gray); line-height: 1.5;">equipo@uniway.edu.ni</p>
+              <p style="color: var(--text-gray); font-size: 14px; margin-top: 5px;">Te responderemos en un plazo de 24 horas.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: flex-start; gap: 15px;">
+            <div style="background: var(--primary-color); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
+              <span class="material-icons">location_on</span>
+            </div>
+            <div>
+              <h3 style="color: var(--text-dark); margin-bottom: 5px; font-size: 18px;">Ubicación</h3>
+              <p style="color: var(--text-gray); line-height: 1.5;">Recinto Universitario Simón Bolívar (RUSB)<br>Universidad Nacional de Ingeniería (UNI)</p>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: flex-start; gap: 15px;">
+            <div style="background: var(--primary-color); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
+              <span class="material-icons">groups</span>
+            </div>
+            <div>
+              <h3 style="color: var(--text-dark); margin-bottom: 5px; font-size: 18px;">Comunidad Estudiantil</h3>
+              <p style="color: var(--text-gray); line-height: 1.5;">Este es un proyecto colaborativo. ¡Anímate a formar parte de nuestra comunidad y aportar tus propias rutas!</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-container">
+      <div class="footer-info">
+          <h3><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color);"></i> UNI-WAY</h3>
+          <p>Tu guía interactiva para dominar el campus de la Universidad Nacional de Ingeniería.</p>
+      </div>
+      <div class="footer-enlaces">
+          <h4>Enlaces Rápidos</h4>
+          <ul>
+              <li><a href="nosotros.html">Misión y Visión</a></li>
+              <li><a href="destinos.html">Tour de Edificios</a></li>
+              <li><a href="nosotros.html#equipo">Desarrolladores</a></li>
+          </ul>
+      </div>
+      <div class="footer-contacto">
+          <h4>Contacto</h4>
+          <p><i class="fa-solid fa-envelope"></i> equipo@uniway.edu.ni</p>
+          <p><i class="fa-solid fa-location-dot"></i> Recinto Universitario Simón Bolívar, UNI.</p>
+      </div>
+  </div>
+  <div class="footer-bottom">
+      <p>© 2026 UNI-WAY. Desarrollado por estudiantes de Ingeniería de Sistemas. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<div class="overlay-search" id="searchOverlay" onclick="toggleSearchModal()"></div>
+<div class="search-modal" id="searchModal">
+  <div class="search-input-wrapper">
+    <span class="material-icons">location_on</span>
+    <input type="text" placeholder="Buscar lugar" autofocus>
+    <span class="material-icons">mic</span>
+  </div>
+  <div class="search-recent">
+    <h4>Busquedas Recientes</h4>
+    <div class="recent-tags">
+      <span class="tag">Biblioteca</span>
+      <span class="tag">El Gueguense</span>
+      <span class="tag">Secretaria Academica</span>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
