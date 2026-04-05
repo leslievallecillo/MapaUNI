@@ -8,6 +8,50 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="styles.css">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+    /* Estilos específicos para el panel de navegación del mapa */
+    .nav-panel {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .info-ruta {
+        margin-top: 15px;
+        padding: 15px;
+        background: #f0faff;
+        border-radius: 8px;
+        text-align: center;
+        display: none;
+        border: 1px solid #b3e5fc;
+    }
+    .status-gps {
+        font-size: 1rem;
+        color: #666;
+        text-align: center;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+
+    /* Animación del pulso para la ubicación GPS */
+    .gps-pulse {
+        background: rgba(0, 116, 217, 0.4);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        100% { transform: scale(3); opacity: 0; }
+    }
+</style>
 </head>
 <body>
 
@@ -47,7 +91,7 @@
 <main>
   <div id="vista-inicio" class="vista activa">
     
-    <section id="inicio" class="anim-element visible" style="background-image: linear-gradient(rgba(0, 10, 30, 0.7), rgba(0, 10, 30, 0.5)), url('PON_TU_IMAGEN_AQUI.jpg'); background-size: cover; background-position: center; border-radius: 10px; margin-top: 20px; padding: 60px 40px; color: var(--white); text-align: center;">
+    <section id="inicio" class="anim-element visible" style="background-image: linear-gradient(rgba(0, 10, 30, 0.7), rgba(0, 10, 30, 0.5)), url('https://nicaraguaactual.tv/wp-content/uploads/2023/11/Universidad-Nacional-de-Ingenieria-UNI-Foto-Nicaragua-Actual.jpeg'); background-size: cover; background-position: center; border-radius: 10px; margin-top: 20px; padding: 60px 40px; color: var(--white); text-align: center;">
       <div class="hero-text fade-in-delay-1" style="max-width: 800px; margin: 0 auto;">
         <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2;">Explora y navega por la Universidad Nacional de Ingeniería.</h1>
         <p style="font-size: 1.2rem; margin-bottom: 30px; color: #ddd;">Encuentra todo fácilmente, edificios, cafeterías y servicios en todo el campus.</p>
@@ -186,14 +230,41 @@
       </div>
     </section>
 
-    <section id="minimapa-preview" class="anim-element">
-      <div class="minimap-preview">
-        <h3>Explora el campus en tiempo real</h3>
-        <p>Utiliza nuestra herramienta de GPS simulada para recibir indicaciones como si estuvieras usando una app de navegación real en tu teléfono.</p>
-        <button class="btn-glow" onclick="abrirModalGPS()" style="margin-top: 10px; font-size: 16px; padding: 12px 30px;">
-          <span class="material-icons">navigation</span> Abrir GPS Virtual
-        </button>
-      </div>
+    <section id="navegacion-inteligente" class="anim-element" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 10px;">Navegador del Campus Asistido</h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 30px;">Activa tu GPS, sube el volumen y escucha las direcciones paso a paso.</p>
+        
+        <div class="nav-panel">
+            <div id="statusGPS" class="status-gps">
+                Presiona "Activar GPS" para iniciar la navegación.
+            </div>
+            
+            <div class="nav-control" style="display: flex; gap: 15px; align-items: center; justify-content: center; margin-top: 10px; flex-wrap: wrap;">
+                
+                <button id="btnActivarGPS" style="background-color: #28a745; color: #001f3f; font-weight: 900; border: 2px solid #001f3f; border-radius: 50px; padding: 10px 24px; font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <span class="material-icons" style="font-size: 20px;">my_location</span> Activar GPS
+                </button>
+
+                <select id="destino" style="padding: 12px 15px; border-radius: 8px; border: 1px solid #001f3f; font-family: 'Roboto', sans-serif; font-size: 16px; min-width: 250px; color: #001f3f;">
+                    <option value="">-- ¿A dónde quieres ir? --</option>
+                    </select>
+
+                <button id="btnIr" style="background-color: #00d2ff; color: #001f3f; font-weight: 900; border: none; border-radius: 50px; padding: 12px 28px; font-size: 16px; cursor: pointer;">
+                    Trazar Ruta
+                </button>
+
+                <button id="btnCentrar" style="display:none; background-color: white; border: 2px solid #001f3f; border-radius: 50%; width: 45px; height: 45px; align-items: center; justify-content: center; cursor: pointer;" title="Centrar cámara en mí">
+                    <span class="material-icons" style="color: #001f3f;">gps_fixed</span>
+                </button>
+            </div>
+
+            <div id="infoRuta" class="info-ruta">
+                <p id="instruccionActual" style="font-size: 20px; font-weight: 900; color: var(--primary-color); margin: 0;"></p>
+                <p id="distanciaTexto" style="font-size: 16px; color: #555; margin: 5px 0 0 0;"></p>
+            </div>
+        </div>
+
+        <div id="uni-mapa" style="height: 500px; width: 100%; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); border: 2px solid #001f3f; z-index: 1;"></div>
     </section>
 
     <section id="testimonios" class="anim-element">
@@ -260,6 +331,219 @@
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const sitiosUNI = {
+        "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
+        "Edificio Posgrado": [12.131009312952209, -86.27012610686415],
+        "Laboratorios robotica": [12.131584651748083, -86.27005832378829], 
+        "Laboratorios redes": [12.12897799279944, -86.26963729145416],
+        "Cajero": [12.128732715683613, -86.26999540370072],
+        "Cafetin el chele": [12.130425471825298, -86.27054166943908],
+        "Cafetin El Duarte": [12.130516172843175, -86.26998792094867],
+        "Cafetin EL Gueguense": [12.132155478384627, -86.2704627539127],
+        "Cafetin el Rapido": [0, 0],
+        "Fusion": [0, 0],
+        "El Deportivo": [0, 0],
+        "La mita": [12.12981213040029, -86.26985736622525],
+        "Batidos Miranda": [12.13216668645582, -86.27065887811888],
+        "Pabellon 1 IES": [12.131981369972088, -86.27086467145331],
+        "Pabellon 2 IES": [12.132192465418543, -86.27090490458653],
+        "Pabellon 3 IES": [12.132315713614327, -86.27097061870413],
+        "Edificio Albert Einstein": [12.131887915661862, -86.2704855286818],
+        "Laboratorios IES": [12.132152859333264, -86.27083395225783],
+        "Copias UNI": [12.13053395719282, -86.27045150893927],
+        "Autoservicio de impresiones": [12.129091217122017, -86.27057892767442],
+        "Entrada Principal": [12.129222488740314, -86.27027854062317],
+        "Entrada IES": [12.13144814009071, -86.27106191565036],
+        "Parqueo Posgrado": [12.130806261883121, -86.27004596357038],
+        "Parqueo edificio rigoberto": [12.132240605882307, -86.26940334418464],
+        "Registro academico": [12.129346707202687, -86.27020754103975],
+        "Edificio Arquitectura": [12.129290529982416, -86.26991042954135],
+        "Edificio Quimica": [12.12891915159251, -86.26961484455204],
+        "Piscina": [12.12945410736998, -86.2699139108461],
+        "Auditorio Salomon de la Selva": [12.131729141982937, -86.27069090194155],
+
+        "Edificio Carlos Santos Berroterán": [12.131721857663178, -86.27102664352297]
+    };
+
+    let mapa, userMarker, markerPulse, rutaLine, marcadorDestino;
+    let userLocation = null;
+    let watchId = null;
+    
+    let isNavigating = false; 
+    let currentDestinoCoords = null;
+    let currentDestinoNombre = "";
+    let ultimaDistanciaHablada = 0; 
+
+    // FUNCIÓN DE VOZ
+    function hablar(texto) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel(); 
+            let mensaje = new SpeechSynthesisUtterance(texto);
+            mensaje.lang = 'es-ES'; 
+            window.speechSynthesis.speak(mensaje);
+        }
+    }
+
+    // MAPA BASE SATELITAL Y OSM
+    const capaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '© Esri', maxZoom: 19
+    });
+
+    const capaOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap', maxZoom: 19
+    });
+
+    mapa = L.map('uni-mapa', {
+        center: [12.131932, -86.269389],
+        zoom: 17,
+        layers: [capaSatelite] 
+    });
+
+    L.control.layers({ "Vista Satélite": capaSatelite, "Mapa de Calles": capaOSM }).addTo(mapa);
+
+    // LLENAR SELECT CON LUGARES Y MARCADORES
+    const grupoEdificios = L.layerGroup().addTo(mapa);
+    const select = document.getElementById('destino');
+    for (let nombre in sitiosUNI) {
+        let option = document.createElement('option');
+        option.value = nombre; option.text = nombre;
+        select.appendChild(option);
+        
+        if(sitiosUNI[nombre][0] !== 0) {
+            L.marker(sitiosUNI[nombre]).bindPopup(`<strong style="color:#001f3f;">${nombre}</strong>`).addTo(grupoEdificios);
+        }
+    }
+
+    // BOTÓN CENTRAR CÁMARA
+    document.getElementById('btnCentrar').onclick = function() {
+        if(userLocation) mapa.setView(userLocation, 19);
+    };
+
+    // ACTIVAR GPS
+    document.getElementById('btnActivarGPS').onclick = function() {
+        let utterance = new SpeechSynthesisUtterance("");
+        window.speechSynthesis.speak(utterance);
+        
+        if (!navigator.geolocation) {
+            return Swal.fire("Error", "Tu navegador no soporta geolocalización.", "error");
+        }
+
+        Swal.fire({
+            title: 'Buscando tu ubicación...',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
+
+        watchId = navigator.geolocation.watchPosition(
+            (pos) => {
+                Swal.close(); 
+                userLocation = [pos.coords.latitude, pos.coords.longitude];
+                
+                document.getElementById('statusGPS').innerHTML = `<span style="color: #28a745; font-weight: bold;"><i class="fa-solid fa-location-dot"></i> GPS Conectado.</span>`;
+                document.getElementById('btnCentrar').style.display = 'inline-flex'; 
+
+                if (!userMarker) {
+                    markerPulse = L.marker(userLocation, { icon: L.divIcon({className: 'gps-pulse', iconSize: [40, 40], iconAnchor: [20, 20]}) }).addTo(mapa);
+                    userMarker = L.marker(userLocation, { icon: L.divIcon({className: 'user-icon', html: '<div style="background: #0074D9; width: 14px; height: 14px; border-radius: 50%; border: 3px solid white;"></div>'}) }).addTo(mapa).bindPopup("¡Estás aquí!");
+                    mapa.setView(userLocation, 18);
+                    hablar("GPS Activado.");
+                } else {
+                    userMarker.setLatLng(userLocation);
+                    markerPulse.setLatLng(userLocation);
+                }
+
+                // LÓGICA DE NAVEGACIÓN EN TIEMPO REAL
+                if (isNavigating && currentDestinoCoords) {
+                    rutaLine.setLatLngs([userLocation, currentDestinoCoords]);
+                    
+                    let distMetros = Math.round(mapa.distance(userLocation, currentDestinoCoords));
+                    let pasos = Math.round(distMetros / 0.75);
+
+                    document.getElementById('distanciaTexto').innerText = `Faltan ${distMetros} metros para llegar.`;
+
+                    if (distMetros <= 15) {
+                        isNavigating = false;
+                        document.getElementById('instruccionActual').innerText = "📍 ¡Has llegado!";
+                        hablar("Has llegado a tu destino: " + currentDestinoNombre);
+                        
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Llegaste!',
+                            text: `Te encuentras en ${currentDestinoNombre}.`,
+                            confirmButtonColor: '#28a745'
+                        });
+                        
+                        mapa.removeLayer(rutaLine);
+                        mapa.removeLayer(marcadorDestino);
+                        
+                    } else if (ultimaDistanciaHablada - distMetros >= 20) {
+                        document.getElementById('instruccionActual').innerText = "🧭 Sigue la ruta marcada en amarillo.";
+                        hablar(`Vas por buen camino. Faltan ${distMetros} metros.`);
+                        ultimaDistanciaHablada = distMetros;
+                        
+                    } else if (distMetros - ultimaDistanciaHablada >= 15) {
+                        document.getElementById('instruccionActual').innerText = "⚠️ Te estás alejando del destino.";
+                        hablar("Atención, te estás alejando de tu destino. Gira y sigue la ruta amarilla en tu pantalla.");
+                        ultimaDistanciaHablada = distMetros;
+                    }
+                }
+            },
+            (err) => {
+                Swal.close();
+                Swal.fire("Encienda su ubicación", "Necesitamos acceder a tu GPS para guiarte.", "warning");
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 } 
+        );
+    };
+
+    // INICIAR RUTA
+    document.getElementById('btnIr').onclick = function() {
+        
+        const destinoNombre = document.getElementById('destino').value;
+        
+        if (!userLocation) return Swal.fire("Falta tu ubicación", "Primero presiona Activar GPS.", "info");
+        if (!destinoNombre) return Swal.fire("¿A dónde vamos?", "Selecciona un destino.", "question");
+        
+        currentDestinoCoords = sitiosUNI[destinoNombre];
+        currentDestinoNombre = destinoNombre;
+
+        if (currentDestinoCoords[0] === 0) return Swal.fire("Error", "Coordenadas no definidas.", "error");
+
+        isNavigating = true;
+
+        if (rutaLine) mapa.removeLayer(rutaLine);
+        if (marcadorDestino) mapa.removeLayer(marcadorDestino);
+
+        // LÍNEA RECTA INSTANTÁNEA 
+        rutaLine = L.polyline([userLocation, currentDestinoCoords], {
+            color: '#FFD700', 
+            weight: 6,
+            dashArray: '10, 15',
+            opacity: 0.9
+        }).addTo(mapa);
+
+        marcadorDestino = L.marker(currentDestinoCoords).addTo(mapa)
+            .bindPopup(`<strong style="color:#FF4136;">¡Llega aquí!</strong><br>${destinoNombre}`)
+            .openPopup();
+
+        mapa.fitBounds(rutaLine.getBounds(), {padding: [50, 50]});
+
+        let distMetros = Math.round(mapa.distance(userLocation, currentDestinoCoords));
+        ultimaDistanciaHablada = distMetros; 
+        
+        hablar(`Iniciando ruta hacia ${destinoNombre}. Distancia aproximada: ${distMetros} metros. Sigue la línea amarilla en tu pantalla.`);
+
+        document.getElementById('infoRuta').style.display = 'block';
+        document.getElementById('instruccionActual').innerHTML = `<span class="material-icons" style="vertical-align: middle;">explore</span> Sigue la ruta marcada en amarillo.`;
+        document.getElementById('distanciaTexto').innerText = `Faltan ${distMetros} metros para llegar.`;
+    };
+
+});
+</script>
 
 <script src="script.js"></script>
 
