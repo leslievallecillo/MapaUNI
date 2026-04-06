@@ -9,79 +9,128 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="styles.css">
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
-    /* Estilos específicos para el panel de navegación del mapa */
-    .nav-panel {
-        background: #ffffff;
-        padding: 20px;
-        border-radius: 12px;
-        margin-bottom: 20px;
-        border: 1px solid #e0e0e0;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    }
-    .info-ruta {
-        margin-top: 15px;
-        padding: 15px;
-        background: #f0faff;
-        border-radius: 8px;
-        text-align: center;
-        display: none;
-        border: 1px solid #b3e5fc;
-    }
-    .status-gps {
-        font-size: 1rem;
-        color: #666;
-        text-align: center;
-        font-weight: 500;
-        margin-bottom: 10px;
+    /* Fondo sutil para toda la página */
+    body {
+        background-color: #f8f9fa;
+        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+        background-size: 30px 30px;
     }
 
-    /* Animación del pulso para la ubicación GPS */
-    .gps-pulse {
-        background: rgba(0, 116, 217, 0.4);
-        border-radius: 50%;
-        animation: pulse 2s infinite;
+    /* Efecto Parallax en el Hero */
+    #inicio {
+        background-attachment: fixed;
+        box-shadow: 0 15px 40px rgba(0, 31, 63, 0.2);
+        position: relative;
+        overflow: hidden;
     }
-    @keyframes pulse {
-        0% { transform: scale(1); opacity: 1; }
-        100% { transform: scale(3); opacity: 0; }
+
+    /* Barra de Estadísticas Rápidas */
+    .stats-bar {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        background: var(--white);
+        padding: 25px;
+        border-radius: 15px;
+        margin: -40px auto 40px auto;
+        max-width: 900px;
+        position: relative;
+        z-index: 10;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        border-bottom: 4px solid var(--accent-color);
+        flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-number { font-size: 32px; font-weight: 900; color: var(--primary-color); display: block; }
+    .stat-label { font-size: 14px; color: var(--text-gray); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Tarjetas Modernizadas */
+    .card {
+        border: none;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        background: var(--white);
+    }
+    .card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0, 31, 63, 0.15); }
+    .card img { transition: transform 0.6s ease; }
+    .card:hover img { transform: scale(1.08); }
+    .card-body { position: relative; background: var(--white); }
+    .card-body .btn-select { background: var(--primary-color); transition: all 0.3s; }
+    .card:hover .btn-select { background: var(--accent-color); color: var(--primary-color); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4); }
+
+    /* ========================================================
+       NUEVOS ESTILOS: BANNER LLAMATIVO PARA NAVEGACIÓN GPS
+       ======================================================== */
+    .gps-banner {
+        background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
+        border-radius: 20px;
+        padding: 60px 30px;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 31, 63, 0.25);
+        margin: 60px auto;
+        max-width: 1000px;
+        border: 1px solid rgba(0, 210, 255, 0.2);
+    }
+    
+    /* Animación de luz de fondo giratoria */
+    .gps-banner::before {
+        content: '';
+        position: absolute;
+        top: -50%; left: -50%; width: 200%; height: 200%;
+        background: radial-gradient(circle, rgba(0,210,255,0.15) 0%, transparent 60%);
+        animation: rotateBg 15s linear infinite;
+    }
+    @keyframes rotateBg {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .gps-content { position: relative; z-index: 2; }
+    .gps-banner h2 { font-size: 2.8rem; font-weight: 900; margin-bottom: 15px; color: var(--white); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+    .gps-banner h2 span { color: var(--accent-color); }
+    .gps-banner p { font-size: 1.2rem; margin-bottom: 35px; color: #d0e5ff; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+    
+    /* Botón Super Glow con palpitación (Pulse) */
+    .btn-super-glow {
+        background: var(--accent-color);
+        color: var(--primary-color);
+        font-size: 1.3rem;
+        font-weight: 900;
+        padding: 18px 45px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        animation: pulse-glow 2s infinite;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .btn-super-glow:hover {
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 0 0 40px rgba(0, 210, 255, 0.9);
+        background: #ffffff;
+    }
+    @keyframes pulse-glow {
+        0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7); }
+        70% { box-shadow: 0 0 0 20px rgba(0, 210, 255, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
     }
 </style>
 </head>
 <body>
 
-<header>
-  <a href="index.html" class="brand-container">
-    <div class="logo-img" style="display: flex; justify-content: center; align-items: center; color: var(--primary-color);">
-      <span class="material-icons">map</span>
-    </div>
-    <div class="brand-name">UNI-WAY</div>
-  </a>
-  
-  <nav class="main-nav">
-    <ul>
-      <li><a href="index.html" class="nav-link activo">INICIO</a></li>
-      <li><a href="destinos.html" class="nav-link">DESTINOS</a></li>
-      <li><a href="guia.html" class="nav-link">GUÍA UNI</a></li>
-      <li><a href="nosotros.html" class="nav-link">NOSOTROS</a></li>
-      <li><a href="contactos.html" class="nav-link">CONTACTOS</a></li>
-    </ul>
-  </nav>
-
-  <div class="search-container" onclick="toggleSearchModal()">
-    <input type="text" placeholder="Acceder (Búsqueda)..." readonly>
-    <span class="material-icons">search</span>
-  </div>
-
-  <button class="btn-menu-movil" onclick="toggleMenuMovil()">
-    <span class="material-icons">menu</span>
-  </button>
-</header>
+<div id="menu-contenedor"></div>
 
 <button class="btn-floating" onclick="window.location.href='contactos.html'">
   <span class="material-icons">mail</span>
@@ -91,28 +140,57 @@
 <main>
   <div id="vista-inicio" class="vista activa">
     
-    <section id="inicio" class="anim-element visible" style="background-image: linear-gradient(rgba(0, 10, 30, 0.7), rgba(0, 10, 30, 0.5)), url('https://nicaraguaactual.tv/wp-content/uploads/2023/11/Universidad-Nacional-de-Ingenieria-UNI-Foto-Nicaragua-Actual.jpeg'); background-size: cover; background-position: center; border-radius: 10px; margin-top: 20px; padding: 60px 40px; color: var(--white); text-align: center;">
-      <div class="hero-text fade-in-delay-1" style="max-width: 800px; margin: 0 auto;">
-        <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2;">Explora y navega por la Universidad Nacional de Ingeniería.</h1>
-        <p style="font-size: 1.2rem; margin-bottom: 30px; color: #ddd;">Encuentra todo fácilmente, edificios, cafeterías y servicios en todo el campus.</p>
+    <section id="inicio" class="anim-element visible" style="background-image: linear-gradient(rgba(0, 10, 30, 0.7), rgba(0, 10, 30, 0.5)), url('https://nicaraguaactual.tv/wp-content/uploads/2023/11/Universidad-Nacional-de-Ingenieria-UNI-Foto-Nicaragua-Actual.jpeg'); background-size: cover; background-position: center; border-radius: 15px; margin-top: 20px; padding: 100px 40px 120px 40px; color: var(--white); text-align: center;">
+      <div class="hero-text fade-in-delay-1" style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
+        <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">Navega el Campus con Precisión.</h1>
+        <p style="font-size: 1.2rem; margin-bottom: 30px; color: #f0f0f0; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">Encuentra aulas, laboratorios y servicios al instante mediante recorridos inmersivos.</p>
         
-        <div class="hero-search-box fade-in-delay-2" style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <div class="hero-search-box fade-in-delay-2" style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 6px 6px 6px 20px;">
           <input type="text" placeholder="¿A dónde quieres ir? (Ej. Aula A-11)">
           <button onclick="abrirModalAulaVirtual('Búsqueda Rápida')">Encontrar ruta</button>
         </div>
 
-        <div class="hero-ctas fade-in-delay-3" style="justify-content: center;">
-          <button class="btn-glow" onclick="abrirSimulacion('Demo Recorrido UNI')">
-            <span class="material-icons">play_circle_outline</span> Probar demo
+        <div class="hero-ctas fade-in-delay-3" style="justify-content: center; margin-top: 30px;">
+          <button class="btn-glow" onclick="window.location.href='destinos.html';">
+            <span class="material-icons">map</span> Abrir Mapa Interactivo
           </button>
-          <button class="btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(255,255,255,0.2);" onclick="window.location.href='destinos.html';">
-            <span class="material-icons">map</span> Ir a mapa
-          </button>
-          <button class="btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(255,255,255,0.2);" onclick="window.location.href='destinos.html';">
-            <span class="material-icons">apartment</span> Explorar edificios
+          <button class="btn-outline" style="border-color: rgba(255,255,255,0.5); color: var(--white); background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);" onclick="window.location.href='destinos.html';">
+            <span class="material-icons">apartment</span> Ver Edificios 360°
           </button>
         </div>
       </div>
+    </section>
+
+    <div class="stats-bar anim-element visible">
+        <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Campus Mapeado</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">+25</span>
+            <span class="stat-label">Destinos Clave</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">360°</span>
+            <span class="stat-label">Vistas Inmersivas</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Acceso Total</span>
+        </div>
+    </div>
+
+    <section class="anim-element visible" style="padding: 0 20px;">
+        <div class="gps-banner">
+            <div class="gps-content">
+                <span class="material-icons" style="font-size: 70px; color: var(--accent-color); margin-bottom: 10px;">explore</span>
+                <h2>¿Perdido en el <span>Campus?</span></h2>
+                <p>No des más vueltas. Activa nuestro Navegador GPS con instrucciones en tiempo real y llega a tu clase a tiempo y sin complicaciones.</p>
+                <button class="btn-super-glow" onclick="window.location.href='destinos.html'">
+                    <span class="material-icons">near_me</span> Iniciar Navegación Asistida
+                </button>
+            </div>
+        </div>
     </section>
 
     <section id="smart-nav" class="anim-element visible" style="padding-top: 20px;">
@@ -150,9 +228,6 @@
               <option value="A-1-1">A-1-1</option>
               <option value="A-1-2">A-1-2</option>
               <option value="A-1-3">A-1-3</option>
-              <option value="A-1-4">A-1-4</option>
-              <option value="A-1-5">A-1-5</option>
-              <option value="A-1-6">A-1-6</option>
             </optgroup>
           </select>
 
@@ -182,28 +257,34 @@
     <section id="populares-preview" class="anim-element">
       <h2 class="section-title" style="margin-bottom: 20px;">Destinos Frecuentes</h2>
       <div class="popular-grid">
-        <div class="card" onclick="abrirSimulacion('Biblioteca Central')">
-          <img src="imagenes/biblioteca.png" alt="Biblioteca">
+        <div class="card">
+          <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
+             <img src="imagenes/biblioteca.png" alt="Biblioteca">
+          </div>
           <div class="card-body">
             <h3>Biblioteca Central</h3>
             <p>Estudio y Recursos</p>
-            <button class="btn-select">Ver Ruta</button>
+            <button class="btn-select" onclick="abrirSimulacion('Biblioteca Central')">Ver Ruta</button>
           </div>
         </div>
-        <div class="card" onclick="abrirSimulacion('Auditorio Salomón de la Selva')">
-          <img src="imagenes/auditorio.png" alt="Auditorio Salomón de la Selva" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200/001f3f/ffffff?text=Auditorio';">
+        <div class="card">
+          <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
+             <img src="imagenes/auditorio.png" alt="Auditorio Salomón de la Selva" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200/001f3f/ffffff?text=Auditorio';">
+          </div>
           <div class="card-body">
             <h3>Auditorio Salomón de la Selva</h3>
             <p>Eventos y Conferencias</p>
-            <button class="btn-select">Ver Ruta</button>
+            <button class="btn-select" onclick="abrirSimulacion('Auditorio Salomón de la Selva')">Ver Ruta</button>
           </div>
         </div>
-        <div class="card" onclick="abrirSimulacion('Secretaría Académica')">
-          <img src="imagenes/registro.png" alt="Secretaria">
+        <div class="card">
+          <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
+             <img src="imagenes/registro.png" alt="Secretaria">
+          </div>
           <div class="card-body">
             <h3>Secretaría Académica</h3>
             <p>Trámites Estudiantiles</p>
-            <button class="btn-select">Ver Ruta</button>
+            <button class="btn-select" onclick="abrirSimulacion('Secretaría Académica')">Ver Ruta</button>
           </div>
         </div>
       </div>
@@ -220,70 +301,33 @@
         <div class="step-box">
           <div class="step-icon"><span class="material-icons">touch_app</span></div>
           <h3>2. Selecciona la ruta</h3>
-          <p>Elige entre ver el entorno virtual 360° o un recorrido real en video.</p>
+          <p>Elige entre ver el entorno virtual 360° o usar el GPS asistido.</p>
         </div>
         <div class="step-box">
           <div class="step-icon"><span class="material-icons">map</span></div>
           <h3>3. Llega sin perderte</h3>
-          <p>Sigue las indicaciones paso a paso y calcula tu tiempo de llegada.</p>
+          <p>Sigue las indicaciones en tiempo real y calcula tu tiempo de llegada.</p>
         </div>
       </div>
-    </section>
-
-    <section id="navegacion-inteligente" class="anim-element" style="padding: 40px 20px; max-width: 1200px; margin: 0 auto;">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 10px;">Navegador del Campus Asistido</h2>
-        <p style="text-align: center; color: var(--text-gray); margin-bottom: 30px;">Activa tu GPS, sube el volumen y escucha las direcciones paso a paso.</p>
-        
-        <div class="nav-panel">
-            <div id="statusGPS" class="status-gps">
-                Presiona "Activar GPS" para iniciar la navegación.
-            </div>
-            
-            <div class="nav-control" style="display: flex; gap: 15px; align-items: center; justify-content: center; margin-top: 10px; flex-wrap: wrap;">
-                
-                <button id="btnActivarGPS" style="background-color: #28a745; color: #001f3f; font-weight: 900; border: 2px solid #001f3f; border-radius: 50px; padding: 10px 24px; font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                    <span class="material-icons" style="font-size: 20px;">my_location</span> Activar GPS
-                </button>
-
-                <select id="destino" style="padding: 12px 15px; border-radius: 8px; border: 1px solid #001f3f; font-family: 'Roboto', sans-serif; font-size: 16px; min-width: 250px; color: #001f3f;">
-                    <option value="">-- ¿A dónde quieres ir? --</option>
-                    </select>
-
-                <button id="btnIr" style="background-color: #00d2ff; color: #001f3f; font-weight: 900; border: none; border-radius: 50px; padding: 12px 28px; font-size: 16px; cursor: pointer;">
-                    Trazar Ruta
-                </button>
-
-                <button id="btnCentrar" style="display:none; background-color: white; border: 2px solid #001f3f; border-radius: 50%; width: 45px; height: 45px; align-items: center; justify-content: center; cursor: pointer;" title="Centrar cámara en mí">
-                    <span class="material-icons" style="color: #001f3f;">gps_fixed</span>
-                </button>
-            </div>
-
-            <div id="infoRuta" class="info-ruta">
-                <p id="instruccionActual" style="font-size: 20px; font-weight: 900; color: var(--primary-color); margin: 0;"></p>
-                <p id="distanciaTexto" style="font-size: 16px; color: #555; margin: 5px 0 0 0;"></p>
-            </div>
-        </div>
-
-        <div id="uni-mapa" style="height: 500px; width: 100%; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); border: 2px solid #001f3f; z-index: 1;"></div>
     </section>
 
     <section id="testimonios" class="anim-element">
       <h2 class="section-title">Testimonios</h2>
       <div class="testimonials-grid">
-        <div class="testimonio-card">
+        <div class="testimonio-card" style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
           <div class="stars">★★★★★</div>
           <p>"Gracias a esta plataforma encontré mi aula en el Edificio Rigoberto en menos de 5 minutos en mi primer día de clases."</p>
-          <br><strong>- Carlos M.</strong>
+          <br><strong style="color: var(--primary-color);">- Carlos M.</strong>
         </div>
-        <div class="testimonio-card">
+        <div class="testimonio-card" style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
           <div class="stars">★★★★★</div>
           <p>"Los videos guiados son increíbles. Sientes que ya caminaste por el campus antes de siquiera llegar."</p>
-          <br><strong>- Ana P.</strong>
+          <br><strong style="color: var(--primary-color);">- Ana P.</strong>
         </div>
-        <div class="testimonio-card">
+        <div class="testimonio-card" style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
           <div class="stars">★★★★★</div>
           <p>"La ubicación de los cafetines me salvó la vida en semana de exámenes. Excelente iniciativa estudiantil."</p>
-          <br><strong>- Luis R.</strong>
+          <br><strong style="color: var(--primary-color);">- Luis R.</strong>
         </div>
       </div>
     </section>
@@ -332,217 +376,180 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="videoModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">Cargando Recorrido...</h3>
+      <button class="close-btn" onclick="cerrarSimulacion()"><span class="material-icons">close</span></button>
+    </div>
+    <div class="modal-body">
+      <div class="video-container">
+        <p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido</p>
+      </div>
+      <div class="steps-container">
+        <h4>Indicaciones de ruta:</h4>
+        <ol>
+          <li>Entra por el portón principal.</li>
+          <li>Avanza recto pasando el jardín central.</li>
+          <li>Gira a la derecha en la plaza de banderas.</li>
+          <li>Sube las escaleras hasta el piso correspondiente.</li>
+          <li>¡Has llegado a tu destino!</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalSmart">
+  <div class="modal-content" style="max-width: 500px;">
+    <div class="modal-header">
+      <h3 id="smartTitle">Asistente UNI-WAY</h3>
+      <button class="close-btn" onclick="cerrarModalSmart()"><span class="material-icons">close</span></button>
+    </div>
+    <div class="modal-body" style="display: block; padding: 30px;" id="smartBody">
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalAulaVirtual">
+  <div class="modal-content" style="max-width: 900px;">
+    <div class="modal-header">
+      <h3 id="titulo-aula-virtual">Visualizador de Aula</h3>
+      <button class="close-btn" onclick="cerrarModalAulaVirtual()"><span class="material-icons">close</span></button>
+    </div>
+    <div class="modal-body" style="display: block; padding: 25px;">
+      <div style="display: flex; gap: 15px; margin-bottom: 20px; justify-content: center;">
+        <button class="view-mode-btn active">Entorno Virtual 3D</button>
+        <button class="view-mode-btn inactive">Recorrido Real en Video</button>
+      </div>
+      <div class="video-container" style="background: #111; aspect-ratio: 16/9; display: flex; justify-content: center; align-items: center; color: var(--white); border-radius: 10px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+        <p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido / Video</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+// --- SCRIPT PARA CARGAR EL NAVBAR ---
+fetch('navbar.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('menu-contenedor').innerHTML = data;
+    // Iluminar el enlace correcto
+    document.getElementById('nav-inicio').classList.add('activo');
+  });
+
+// --- FUNCIONES PARA ABRIR Y CERRAR LOS MODALES ---
+function abrirSimulacion(lugar) {
+    const modal = document.getElementById('videoModal');
+    const title = document.getElementById('modalTitle');
+    title.innerText = 'Ruta hacia: ' + lugar;
+    modal.classList.add('active');
+}
+
+function cerrarSimulacion() {
+    document.getElementById('videoModal').classList.remove('active');
+}
+
+function abrirModalAulaVirtual(aula) {
+    document.getElementById('titulo-aula-virtual').innerText = 'Destino: ' + aula;
+    document.getElementById('modalAulaVirtual').classList.add('active');
+}
+
+function cerrarModalAulaVirtual() {
+    document.getElementById('modalAulaVirtual').classList.remove('active');
+}
+
+function abrirModalSmart(tipo) {
+    const titulo = document.getElementById('smartTitle');
+    const cuerpo = document.getElementById('smartBody');
     
-    const sitiosUNI = {
-        "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
-        "Edificio Posgrado": [12.131009312952209, -86.27012610686415],
-        "Laboratorios robotica": [12.131584651748083, -86.27005832378829], 
-        "Laboratorios redes": [12.12897799279944, -86.26963729145416],
-        "Cajero": [12.128732715683613, -86.26999540370072],
-        "Cafetin el chele": [12.130425471825298, -86.27054166943908],
-        "Cafetin El Duarte": [12.130516172843175, -86.26998792094867],
-        "Cafetin EL Gueguense": [12.132155478384627, -86.2704627539127],
-        "Cafetin el Rapido": [0, 0],
-        "Fusion": [0, 0],
-        "El Deportivo": [0, 0],
-        "La mita": [12.12981213040029, -86.26985736622525],
-        "Batidos Miranda": [12.13216668645582, -86.27065887811888],
-        "Pabellon 1 IES": [12.131981369972088, -86.27086467145331],
-        "Pabellon 2 IES": [12.132192465418543, -86.27090490458653],
-        "Pabellon 3 IES": [12.132315713614327, -86.27097061870413],
-        "Edificio Albert Einstein": [12.131887915661862, -86.2704855286818],
-        "Laboratorios IES": [12.132152859333264, -86.27083395225783],
-        "Copias UNI": [12.13053395719282, -86.27045150893927],
-        "Autoservicio de impresiones": [12.129091217122017, -86.27057892767442],
-        "Entrada Principal": [12.129222488740314, -86.27027854062317],
-        "Entrada IES": [12.13144814009071, -86.27106191565036],
-        "Parqueo Posgrado": [12.130806261883121, -86.27004596357038],
-        "Parqueo edificio rigoberto": [12.132240605882307, -86.26940334418464],
-        "Registro academico": [12.129346707202687, -86.27020754103975],
-        "Edificio Arquitectura": [12.129290529982416, -86.26991042954135],
-        "Edificio Quimica": [12.12891915159251, -86.26961484455204],
-        "Piscina": [12.12945410736998, -86.2699139108461],
-        "Auditorio Salomon de la Selva": [12.131729141982937, -86.27069090194155],
-
-        "Edificio Carlos Santos Berroterán": [12.131721857663178, -86.27102664352297]
-    };
-
-    let mapa, userMarker, markerPulse, rutaLine, marcadorDestino;
-    let userLocation = null;
-    let watchId = null;
+    if(tipo === 'primer-dia') {
+      titulo.innerText = "¡Modo Primer Día!";
+      cuerpo.innerHTML = `
+        <div style="text-align: left;">
+          <p style="margin-bottom: 20px; color: var(--text-gray); font-size: 16px;">¡No te preocupes! Te guiaremos paso a paso para que domines tu primer día en el campus:</p>
+          <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
+            <div style="display: flex; align-items: center; gap: 15px; background: var(--bg-light); padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary-color);">
+              <span class="material-icons" style="color: var(--primary-color); font-size: 28px;">login</span>
+              <div><h4 style="margin:0; font-size: 16px;">Paso 1: Entrada Principal</h4><p style="margin: 5px 0 0; font-size: 13px; color: var(--text-gray);">Ingreso y control de carnet.</p></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px; background: var(--bg-light); padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary-color);">
+              <span class="material-icons" style="color: var(--primary-color); font-size: 28px;">badge</span>
+              <div><h4 style="margin:0; font-size: 16px;">Paso 2: Secretaría Académica</h4><p style="margin: 5px 0 0; font-size: 13px; color: var(--text-gray);">Confirmación de horarios.</p></div>
+            </div>
+          </div>
+          <button class="btn-select" style="width: 100%; font-size: 16px; padding: 15px;" onclick="window.location.href='destinos.html'">Ir al Navegador GPS</button>
+        </div>
+      `;
+    } else if(tipo === 'donde-estoy') {
+      titulo.innerText = "Localización Activa";
+      cuerpo.innerHTML = `
+        <div style="text-align: center;">
+          <span class="material-icons" style="font-size: 60px; color: var(--accent-color);">gps_fixed</span>
+          <h3 style="margin: 20px 0 10px; color: var(--primary-color);">Revisa el Mapa Interactivo</h3>
+          <p style="color: var(--text-gray); margin-bottom: 25px;">Abre nuestro navegador GPS para ver tu posición exacta en tiempo real.</p>
+          <button class="btn-select" onclick="window.location.href='destinos.html'">Abrir GPS</button>
+        </div>
+      `;
+    } else if(tipo === 'hambre') {
+       titulo.innerText = "¡Hora de comer!";
+       cuerpo.innerHTML = `
+         <div style="text-align: center;">
+           <span class="material-icons" style="font-size: 60px; color: #e74c3c;">fastfood</span>
+           <p style="color: var(--text-gray); margin: 20px 0;">Aquí tienes todas las opciones disponibles en el campus:</p>
+           <div style="display: flex; flex-direction: column; gap: 10px;">
+              <button class="btn-select" style="background: var(--primary-color);" onclick="cerrarModalSmart(); abrirSimulacion('Cafetería El Chele')">Cafetería "El Chele"</button>
+              <button class="btn-select" style="background: var(--primary-color);" onclick="cerrarModalSmart(); abrirSimulacion('Cafetería El Güegüense')">Cafetería "El Güegüense"</button>
+           </div>
+         </div>
+       `;
+    } else if(tipo === 'tarde') {
+       titulo.innerText = "¡Voy tarde!";
+       cuerpo.innerHTML = `
+         <div style="text-align: center;">
+           <span class="material-icons" style="font-size: 60px; color: #f39c12;">directions_run</span>
+           <p style="color: var(--text-gray); margin: 20px 0;">Activando modo de ruta ultrarrápida. Evitaremos pasillos concurridos.</p>
+           <button class="btn-select" style="background: #e74c3c;" onclick="window.location.href='destinos.html'">Generar Atajo Ahora</button>
+         </div>
+       `;
+    } else if(tipo === 'imprimir') {
+       titulo.innerText = "Centros de Copiado";
+       cuerpo.innerHTML = `
+         <div style="text-align: center;">
+           <span class="material-icons" style="font-size: 60px; color: #3498db;">print</span>
+           <p style="color: var(--text-gray); margin: 20px 0;">Selecciona el centro de copiado al que deseas ir:</p>
+           <div style="display: flex; flex-direction: column; gap: 10px;">
+             <button class="btn-select" onclick="cerrarModalSmart(); abrirSimulacion('RapiCopias Castellón')">RapiCopias Castellón</button>
+             <button class="btn-select" onclick="cerrarModalSmart(); abrirSimulacion('Fotocopiadora Central')">Fotocopiadora Central</button>
+           </div>
+         </div>
+       `;
+    } else if(tipo === 'planner') {
+       const p1 = document.getElementById('plan1').value || "Destino 1";
+       const p2 = document.getElementById('plan2').value || "Destino 2";
+       const p3 = document.getElementById('plan3').value || "Destino 3";
+       
+       titulo.innerText = "Ruta Optimizada";
+       cuerpo.innerHTML = `
+         <div style="text-align: left;">
+           <p style="color: var(--text-gray); margin-bottom: 20px;">Hemos organizado tu día para caminar lo menos posible. Esta es tu ruta:</p>
+           <div style="background: var(--bg-light); border-radius: 10px; padding: 20px; border: 1px solid var(--border-color);">
+              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">1. Inicio → <span style="color: var(--text-dark);">${p1}</span></p>
+              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">2. Siguiente → <span style="color: var(--text-dark);">${p2}</span></p>
+              <p style="font-weight: bold; color: var(--primary-color);">3. Final → <span style="color: var(--text-dark);">${p3}</span></p>
+           </div>
+           <button class="btn-select" style="margin-top: 25px; width: 100%;" onclick="window.location.href='destinos.html'">Comenzar Ruta en el Mapa</button>
+         </div>
+       `;
+    }
     
-    let isNavigating = false; 
-    let currentDestinoCoords = null;
-    let currentDestinoNombre = "";
-    let ultimaDistanciaHablada = 0; 
+    document.getElementById('modalSmart').classList.add('active');
+}
 
-    // FUNCIÓN DE VOZ
-    function hablar(texto) {
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel(); 
-            let mensaje = new SpeechSynthesisUtterance(texto);
-            mensaje.lang = 'es-ES'; 
-            window.speechSynthesis.speak(mensaje);
-        }
-    }
-
-    // MAPA BASE SATELITAL Y OSM
-    const capaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: '© Esri', maxZoom: 19
-    });
-
-    const capaOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap', maxZoom: 19
-    });
-
-    mapa = L.map('uni-mapa', {
-        center: [12.131932, -86.269389],
-        zoom: 17,
-        layers: [capaSatelite] 
-    });
-
-    L.control.layers({ "Vista Satélite": capaSatelite, "Mapa de Calles": capaOSM }).addTo(mapa);
-
-    // LLENAR SELECT CON LUGARES Y MARCADORES
-    const grupoEdificios = L.layerGroup().addTo(mapa);
-    const select = document.getElementById('destino');
-    for (let nombre in sitiosUNI) {
-        let option = document.createElement('option');
-        option.value = nombre; option.text = nombre;
-        select.appendChild(option);
-        
-        if(sitiosUNI[nombre][0] !== 0) {
-            L.marker(sitiosUNI[nombre]).bindPopup(`<strong style="color:#001f3f;">${nombre}</strong>`).addTo(grupoEdificios);
-        }
-    }
-
-    // BOTÓN CENTRAR CÁMARA
-    document.getElementById('btnCentrar').onclick = function() {
-        if(userLocation) mapa.setView(userLocation, 19);
-    };
-
-    // ACTIVAR GPS
-    document.getElementById('btnActivarGPS').onclick = function() {
-        let utterance = new SpeechSynthesisUtterance("");
-        window.speechSynthesis.speak(utterance);
-        
-        if (!navigator.geolocation) {
-            return Swal.fire("Error", "Tu navegador no soporta geolocalización.", "error");
-        }
-
-        Swal.fire({
-            title: 'Buscando tu ubicación...',
-            allowOutsideClick: false,
-            didOpen: () => { Swal.showLoading(); }
-        });
-
-        watchId = navigator.geolocation.watchPosition(
-            (pos) => {
-                Swal.close(); 
-                userLocation = [pos.coords.latitude, pos.coords.longitude];
-                
-                document.getElementById('statusGPS').innerHTML = `<span style="color: #28a745; font-weight: bold;"><i class="fa-solid fa-location-dot"></i> GPS Conectado.</span>`;
-                document.getElementById('btnCentrar').style.display = 'inline-flex'; 
-
-                if (!userMarker) {
-                    markerPulse = L.marker(userLocation, { icon: L.divIcon({className: 'gps-pulse', iconSize: [40, 40], iconAnchor: [20, 20]}) }).addTo(mapa);
-                    userMarker = L.marker(userLocation, { icon: L.divIcon({className: 'user-icon', html: '<div style="background: #0074D9; width: 14px; height: 14px; border-radius: 50%; border: 3px solid white;"></div>'}) }).addTo(mapa).bindPopup("¡Estás aquí!");
-                    mapa.setView(userLocation, 18);
-                    hablar("GPS Activado.");
-                } else {
-                    userMarker.setLatLng(userLocation);
-                    markerPulse.setLatLng(userLocation);
-                }
-
-                // LÓGICA DE NAVEGACIÓN EN TIEMPO REAL
-                if (isNavigating && currentDestinoCoords) {
-                    rutaLine.setLatLngs([userLocation, currentDestinoCoords]);
-                    
-                    let distMetros = Math.round(mapa.distance(userLocation, currentDestinoCoords));
-                    let pasos = Math.round(distMetros / 0.75);
-
-                    document.getElementById('distanciaTexto').innerText = `Faltan ${distMetros} metros para llegar.`;
-
-                    if (distMetros <= 15) {
-                        isNavigating = false;
-                        document.getElementById('instruccionActual').innerText = "📍 ¡Has llegado!";
-                        hablar("Has llegado a tu destino: " + currentDestinoNombre);
-                        
-                        Swal.fire({
-                            icon: 'success',
-                            title: '¡Llegaste!',
-                            text: `Te encuentras en ${currentDestinoNombre}.`,
-                            confirmButtonColor: '#28a745'
-                        });
-                        
-                        mapa.removeLayer(rutaLine);
-                        mapa.removeLayer(marcadorDestino);
-                        
-                    } else if (ultimaDistanciaHablada - distMetros >= 20) {
-                        document.getElementById('instruccionActual').innerText = "🧭 Sigue la ruta marcada en amarillo.";
-                        hablar(`Vas por buen camino. Faltan ${distMetros} metros.`);
-                        ultimaDistanciaHablada = distMetros;
-                        
-                    } else if (distMetros - ultimaDistanciaHablada >= 15) {
-                        document.getElementById('instruccionActual').innerText = "⚠️ Te estás alejando del destino.";
-                        hablar("Atención, te estás alejando de tu destino. Gira y sigue la ruta amarilla en tu pantalla.");
-                        ultimaDistanciaHablada = distMetros;
-                    }
-                }
-            },
-            (err) => {
-                Swal.close();
-                Swal.fire("Encienda su ubicación", "Necesitamos acceder a tu GPS para guiarte.", "warning");
-            },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 } 
-        );
-    };
-
-    // INICIAR RUTA
-    document.getElementById('btnIr').onclick = function() {
-        
-        const destinoNombre = document.getElementById('destino').value;
-        
-        if (!userLocation) return Swal.fire("Falta tu ubicación", "Primero presiona Activar GPS.", "info");
-        if (!destinoNombre) return Swal.fire("¿A dónde vamos?", "Selecciona un destino.", "question");
-        
-        currentDestinoCoords = sitiosUNI[destinoNombre];
-        currentDestinoNombre = destinoNombre;
-
-        if (currentDestinoCoords[0] === 0) return Swal.fire("Error", "Coordenadas no definidas.", "error");
-
-        isNavigating = true;
-
-        if (rutaLine) mapa.removeLayer(rutaLine);
-        if (marcadorDestino) mapa.removeLayer(marcadorDestino);
-
-        // LÍNEA RECTA INSTANTÁNEA 
-        rutaLine = L.polyline([userLocation, currentDestinoCoords], {
-            color: '#FFD700', 
-            weight: 6,
-            dashArray: '10, 15',
-            opacity: 0.9
-        }).addTo(mapa);
-
-        marcadorDestino = L.marker(currentDestinoCoords).addTo(mapa)
-            .bindPopup(`<strong style="color:#FF4136;">¡Llega aquí!</strong><br>${destinoNombre}`)
-            .openPopup();
-
-        mapa.fitBounds(rutaLine.getBounds(), {padding: [50, 50]});
-
-        let distMetros = Math.round(mapa.distance(userLocation, currentDestinoCoords));
-        ultimaDistanciaHablada = distMetros; 
-        
-        hablar(`Iniciando ruta hacia ${destinoNombre}. Distancia aproximada: ${distMetros} metros. Sigue la línea amarilla en tu pantalla.`);
-
-        document.getElementById('infoRuta').style.display = 'block';
-        document.getElementById('instruccionActual').innerHTML = `<span class="material-icons" style="vertical-align: middle;">explore</span> Sigue la ruta marcada en amarillo.`;
-        document.getElementById('distanciaTexto').innerText = `Faltan ${distMetros} metros para llegar.`;
-    };
-
-});
+function cerrarModalSmart() {
+    document.getElementById('modalSmart').classList.remove('active');
+}
 </script>
 
 <script src="script.js"></script>
