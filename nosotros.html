@@ -11,33 +11,7 @@
 </head>
 <body>
 
-<header>
-  <a href="index.html" class="brand-container">
-    <div class="logo-img" style="display: flex; justify-content: center; align-items: center; color: var(--primary-color);">
-      <span class="material-icons">map</span>
-    </div>
-    <div class="brand-name">UNI-WAY</div>
-  </a>
-  
-  <nav class="main-nav">
-    <ul>
-      <li><a href="index.html" class="nav-link">INICIO</a></li>
-      <li><a href="destinos.html" class="nav-link">DESTINOS</a></li>
-      <li><a href="guia.html" class="nav-link">GUÍA UNI</a></li>
-      <li><a href="nosotros.html" class="nav-link activo">NOSOTROS</a></li>
-      <li><a href="contactos.html" class="nav-link">CONTACTOS</a></li>
-    </ul>
-  </nav>
-
-  <div class="search-container" onclick="toggleSearchModal()">
-    <input type="text" placeholder="Acceder (Búsqueda)..." readonly>
-    <span class="material-icons">search</span>
-  </div>
-
-  <button class="btn-menu-movil" onclick="toggleMenuMovil()">
-    <span class="material-icons">menu</span>
-  </button>
-</header>
+<div id="menu-contenedor"></div>
 
 <button class="btn-floating" onclick="window.location.href='contactos.html'">
   <span class="material-icons">mail</span>
@@ -52,8 +26,7 @@
       <div class="about-container">
         <div class="about-main">
           <div class="about-image-new">
-
-          </div>
+            </div>
           
           <div class="about-history">
             <h3><span class="material-icons">history_edu</span> Nuestra Historia</h3>
@@ -83,7 +56,7 @@
       <h2 class="section-title"><i class="fa-solid fa-laptop-code" style="color: var(--accent-color);"></i> Nuestro Equipo Creador</h2>
       <p style="text-align: center; margin-bottom: 30px; color: var(--text-gray); font-size: 1.1rem;">Desarrollado por un equipo de estudiantes de Ingeniería de Sistemas.</p>
       
-<div class="equipo-grid">
+      <div class="equipo-grid">
           <div class="equipo-card">
               <div class="equipo-avatar"><i class="fa-solid fa-laptop-code"></i></div>
               <h3>Erling Aleman</h3>
@@ -143,8 +116,21 @@
   </div>
 </footer>
 
-
 <script src="script.js"></script>
+
+<script>
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('menu-contenedor').innerHTML = data;
+      // Iluminar el enlace correcto de la página "Nosotros"
+      const navNosotros = document.getElementById('nav-nosotros');
+      if (navNosotros) {
+          navNosotros.classList.add('activo');
+      }
+    })
+    .catch(error => console.error('Error cargando el navbar:', error));
+</script>
 
 </body>
 </html>
