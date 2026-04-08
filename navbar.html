@@ -6,12 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
+ <header>
   <a href="index.html" class="brand-container">
-  <div class="logo-img" style="display: flex; justify-content: center; align-items: center;">
-    <img src="imagenes/logo-removebg-preview.png" alt="Logo UNI-WAY" style="width: 70px; height: auto;">
-  </div>
-  <div class="brand-name">UNI-WAY</div>
+    <div class="logo-img" style="display: flex; justify-content: center; align-items: center;">
+      <img src="imagenes/logo-removebg-preview.png" alt="Logo UNI-WAY" style="width: 70px; height: auto;">
+    </div>
+    <div class="brand-name">UNI-WAY</div>
   </a>
   
   <nav class="main-nav">
@@ -33,5 +33,22 @@
     <span class="material-icons">menu</span>
   </button>
 </header>
+
+<div class="overlay-search" id="searchOverlay" onclick="toggleSearchModal()"></div>
+<div class="search-modal" id="searchModal">
+  <div class="search-input-wrapper">
+    <span class="material-icons">location_on</span>
+    <input type="text" placeholder="Buscar lugar">
+    <span class="material-icons">mic</span>
+  </div>
+  <div class="search-recent">
+    <h4>Busquedas Recientes</h4>
+    <div class="recent-tags">
+      <span class="tag">Biblioteca</span>
+      <span class="tag">El Gueguense</span>
+      <span class="tag">Secretaria Academica</span>
+    </div>
+  </div>
+</div>
 </body>
 </html>

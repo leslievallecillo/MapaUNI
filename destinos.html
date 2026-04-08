@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="styles.css">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -18,14 +17,73 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
-    /* Fondo sutil y mejoras estéticas generales */
+    /* ========== VARIABLES GLOBALES ========== */
+    :root {
+        --primary-color: #001f3f;
+        --accent-color: #00d2ff;
+        --white: #FFFFFF;
+        --bg-light: #f4f4f4;
+        --text-dark: #333333;
+        --text-gray: #666666;
+        --border-color: #e0e0e0;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+        scroll-behavior: smooth;
+    }
+
     body {
         background-color: #f8f9fa;
         background-image: radial-gradient(#d1d5db 1px, transparent 1px);
         background-size: 30px 30px;
+        color: var(--text-dark);
+        padding-top: 100px; 
+        overflow-x: hidden;
     }
 
-    /* Hero pequeño para Destinos */
+    /* ========== ANIMACIONES ========== */
+    .vista { display: none; animation: fadeIn 0.4s ease-in-out; }
+    .vista.activa { display: block; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-element { opacity: 0; transform: translateY(40px); transition: all 0.7s ease-out; }
+    .anim-element.visible { opacity: 1; transform: translateY(0); }
+
+    /* ========== HEADER RESPONSIVE ========== */
+    header {
+        background-color: var(--primary-color);
+        color: var(--white);
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100px; 
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 0 40px; z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .brand-container { display: flex; align-items: center; gap: 15px; text-decoration: none; color: var(--white); cursor: pointer; }
+    .logo-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; background-color: var(--white); border: 2px solid var(--accent-color); }
+    .brand-name { font-size: 28px; font-weight: 900; letter-spacing: 1px; }
+
+    nav.main-nav { display: flex; align-items: center; justify-content: center; flex-grow: 1; }
+    nav.main-nav ul { list-style: none; display: flex; align-items: center; gap: 35px; }
+    nav.main-nav a { text-decoration: none; color: var(--white); font-weight: bold; font-size: 18px; transition: color 0.3s; cursor: pointer; }
+    nav.main-nav a:hover, nav.main-nav a.activo { color: var(--accent-color); }
+
+    .search-container { display: flex; align-items: center; background: rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 5px 15px; width: 250px; justify-content: space-between; cursor: pointer; }
+    .search-container input { background: transparent; border: none; color: var(--white); outline: none; padding: 2px 5px; width: 100%; cursor: pointer; }
+    .search-container input::placeholder { color: rgba(255, 255, 255, 0.7); }
+    .search-container .material-icons { color: var(--white); cursor: pointer; font-size: 20px; }
+
+    .btn-menu-movil { display: none; background: none; border: none; color: var(--white); font-size: 32px; cursor: pointer; }
+
+    /* ========== HERO ========== */
     .destinos-hero {
         background: linear-gradient(135deg, var(--primary-color) 0%, #003366 100%);
         padding: 50px 20px 80px 20px;
@@ -36,7 +94,11 @@
     .destinos-hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
     .destinos-hero p { font-size: 1.1rem; color: #d0e5ff; max-width: 600px; margin: 0 auto; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 
-    /* Dashboard del Navegador GPS */
+    /* ========== SECCIONES ========== */
+    section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+    .section-title { text-align: center; font-size: 32px; font-weight: 900; color: var(--primary-color); margin-bottom: 40px; text-transform: uppercase; }
+
+    /* ========== GPS DASHBOARD ========== */
     .gps-dashboard {
         background: var(--white);
         border-radius: 20px;
@@ -82,19 +144,62 @@
         justify-content: center;
         gap: 8px;
     }
+/* AJUSTE EXCLUSIVO PARA ESCRITORIO (SIMETRÍA EXACTA 3 TARJETAS) */
+   /* AJUSTE EXCLUSIVO PARA ESCRITORIO (TAMAÑO FIJO Y ROBUSTO) */
+    @media (min-width: 769px) {
+        .carousel-track .card {
+            min-width: 340px !important; /* Puedes subir o bajar este número a tu gusto (ej. 320px o 350px) */
+            width: 340px !important;
+            flex: 0 0 340px !important;
+            scroll-snap-align: start; 
+        }
+    }
+    /* ========== CARRUSEL Y TARJETAS ========== */
+    .carousel-container { margin-bottom: 50px; }
+    .carousel-title { font-size: 22px; color: var(--text-dark); margin-bottom: 15px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+    .contenedor-slider { position: relative; padding: 0 50px; }
+    .carousel-track { 
+        display: flex; 
+        gap: 20px; 
+        overflow-x: auto; 
+        scroll-behavior: smooth; 
+        padding-bottom: 20px; 
+        scrollbar-width: none; 
+        -ms-overflow-style: none; 
+        scroll-snap-type: x mandatory; /* Mejora para móviles */
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    
+    .boton-slider { 
+        position: absolute; top: calc(50% - 10px); transform: translateY(-50%); 
+        background: var(--white); color: var(--primary-color); width: 40px; height: 40px; 
+        border-radius: 50%; border: none; font-size: 1.2rem; cursor: pointer; 
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1); z-index: 10; transition: all 0.3s ease; 
+        display: flex; align-items: center; justify-content: center; 
+    }
+    .boton-slider:hover { background: var(--primary-color); color: var(--white); }
+    .anterior { left: 0; }
+    .siguiente { right: 0; }
 
-    /* Solución Centrado de Imágenes en Carrusel y Tarjetas */
     .card {
-        border: none;
+        min-width: 300px;
+        max-width: 100%; /* Evita desbordamiento */
+        border: 1px solid var(--border-color);
         box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         border-radius: 15px;
         overflow: hidden;
         background: var(--white);
         transition: transform 0.3s, box-shadow 0.3s;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        scroll-snap-align: center; /* Auto-centrado en móviles */
     }
     .card:hover {
         transform: translateY(-10px);
         box-shadow: 0 15px 35px rgba(0,31,63,0.15);
+        border-color: var(--primary-color);
     }
     .card-img-container {
         width: 100%;
@@ -115,8 +220,13 @@
     .card:hover .card-img-container img {
         transform: scale(1.08);
     }
+    .card-body { 
+        padding: 1.5rem; text-align: left; flex-grow: 1; display: flex; flex-direction: column;
+    }
+    .card-body h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--primary-color); }
+    .card-body p { font-size: 0.95rem; color: #666; margin-bottom: 20px; line-height: 1.5; flex-grow: 1; }
 
-    /* Botones GPS */
+    /* ========== BOTONES ========== */
     .btn-activar-gps-glow {
         display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px;
         background-color: #28a745; color: white; border-radius: 50px; font-weight: 900; font-size: 16px;
@@ -130,9 +240,135 @@
     }
     .btn-trazar-ruta:hover { background-color: var(--primary-color); color: white; }
 
+    .btn-select { 
+        background-color: var(--primary-color); color: var(--white); border: none; padding: 12px 20px; 
+        border-radius: 8px; font-weight: bold; cursor: pointer; transition: transform 0.2s, background 0.3s; 
+        width: 100%; text-align: center; display: inline-flex; justify-content: center; align-items: center; gap: 8px; font-size: 1rem; 
+    }
+    .btn-select:hover { background-color: var(--accent-color); color: var(--primary-color); }
+
+    .piso-btn { 
+        min-width: 130px; 
+        padding: 15px; 
+        background: var(--white); 
+        border: 2px solid var(--border-color); 
+        border-radius: 8px; 
+        font-weight: bold; 
+        color: var(--text-dark); 
+        cursor: pointer; 
+        transition: all 0.3s; 
+        flex: 0 0 auto; 
+        font-size: 16px; 
+        scroll-snap-align: center; /* auto-centrado magnético */
+    }
+    .piso-btn:hover, .piso-btn.activo { border-color: var(--primary-color); color: var(--white); background: var(--primary-color); }
+    .view-mode-btn { padding: 10px 20px; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 15px; }
+    .view-mode-btn.active { background: var(--primary-color); color: white; }
+    .view-mode-btn.inactive { background: var(--border-color); color: var(--text-dark); }
+
+    /* ========== MAPA ========== */
     .leaflet-routing-container { display: none !important; }
     .gps-pulse { background: rgba(0, 116, 217, 0.4); border-radius: 50%; animation: pulse 2s infinite; }
     @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
+
+    /* ========== FOOTER ========== */
+    footer { background-color: var(--primary-color); color: white; padding: 50px 5% 20px 5%; margin-top: 40px; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+    .footer-info h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;}
+    .footer-info p { color: #ccc; line-height: 1.5; }
+    .footer-enlaces h4, .footer-contacto h4 { margin-bottom: 20px; border-bottom: 2px solid var(--accent-color); display: inline-block; padding-bottom: 5px; }
+    .footer-enlaces ul { list-style: none; }
+    .footer-enlaces ul li { margin-bottom: 10px; }
+    .footer-enlaces ul li a { color: #ccc; text-decoration: none; transition: 0.3s; cursor: pointer;}
+    .footer-enlaces ul li a:hover { color: var(--accent-color); padding-left: 5px; }
+    .footer-contacto p { margin-bottom: 10px; color: #ccc; display: flex; align-items: center; gap: 10px;}
+    .footer-contacto i, .footer-contacto .material-icons { color: var(--accent-color); font-size: 18px;}
+    .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); color: #888; font-size: 0.9rem; }
+
+    /* ========== OTROS ========== */
+    .btn-floating { position: fixed; right: 0; top: 50%; transform: translateY(-50%); background-color: var(--accent-color); color: var(--primary-color); border: none; padding: 15px 10px; border-radius: 10px 0 0 10px; cursor: pointer; z-index: 1000; box-shadow: -2px 2px 5px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; gap: 5px; font-weight: bold; }
+
+    /* Modales */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    .modal-content { background: var(--white); width: 90%; max-width: 900px; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; max-height: 90vh; }
+    .modal-header { background: var(--primary-color); color: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .close-btn { background: none; border: none; color: var(--white); font-size: 24px; cursor: pointer; }
+    .modal-body { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; padding: 20px; overflow-y: auto; }
+    .video-container { background: #000; aspect-ratio: 16/9; display: flex; justify-content: center; align-items: center; color: var(--white); border-radius: 5px; }
+    .steps-container { background: var(--bg-light); padding: 15px; border-radius: 5px; height: 100%; overflow-y: auto; }
+    .steps-container h4 { margin-bottom: 10px; color: var(--primary-color); }
+    .steps-container ol { padding-left: 20px; color: var(--text-gray); line-height: 1.6; }
+
+    .overlay-search { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1500; display: none; opacity: 0; transition: opacity 0.4s ease; }
+    .overlay-search.active { display: block; opacity: 1; }
+    .search-modal { position: fixed; top: -400px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 450px; background-color: #efefef; border-radius: 20px; z-index: 2000; transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); padding: 30px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    .search-modal.active { top: 100px; }
+    .search-input-wrapper { display: flex; align-items: center; background: var(--white); border-radius: 30px; padding: 12px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .search-input-wrapper input { border: none; outline: none; flex-grow: 1; padding: 0 10px; font-size: 16px; background: transparent; font-weight: 500; }
+    .search-input-wrapper .material-icons { color: var(--text-dark); cursor: pointer; }
+    .search-recent { margin-top: 30px; }
+    .search-recent h4 { font-size: 16px; color: var(--text-dark); margin-bottom: 15px; font-weight: 700; }
+    .recent-tags { display: flex; flex-wrap: wrap; gap: 15px; }
+    .tag { background: var(--white); color: var(--text-dark); padding: 10px 20px; border-radius: 20px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.2s; }
+    .tag:hover { transform: scale(1.05); }
+
+    /* =========================================
+       MEDIA QUERIES PARA RESPONSIVIDAD 
+       ========================================= */
+    @media (max-width: 992px) {
+        header { padding: 0 20px; }
+        .search-container { display: none; }
+        .btn-menu-movil { display: block; }
+        nav.main-nav { 
+            position: fixed; top: 100px; left: -100%; width: 100%; height: calc(100vh - 100px); 
+            background: var(--primary-color); flex-direction: column; justify-content: flex-start; 
+            padding-top: 40px; transition: left 0.3s ease; z-index: 999;
+        }
+        nav.main-nav.active { left: 0; }
+        nav.main-nav ul { flex-direction: column; gap: 30px; }
+        .modal-body { grid-template-columns: 1fr !important; }
+        #modalPisos .modal-body > div:nth-child(2) > div { flex-direction: column; gap: 15px; }
+        #modalPisos .modal-body > div:nth-child(3) > div:first-child { flex-direction: column; gap: 15px; }
+    }
+
+    @media (max-width: 768px) {
+        .destinos-hero { padding: 40px 15px 60px 15px; }
+        .destinos-hero h1 { font-size: 1.8rem; }
+        .gps-dashboard { padding: 15px; margin-bottom: 40px; }
+        .nav-control { flex-direction: column; gap: 12px; padding: 15px; }
+        .nav-control > button, .nav-control > select { width: 100%; }
+        #btnCentrar { width: 100% !important; border-radius: 12px !important; gap: 10px; }
+        #btnCentrar::after { content: "Centrar en mí"; color: var(--primary-color); font-weight: bold; }
+        .map-wrapper { height: 350px !important; }
+        .contenedor-slider { padding: 0 30px; }
+        .modal-body { padding: 15px !important; }
+        #modalPisos .modal-body > div:first-child { flex-direction: column; }
+        #opciones-aula > div:first-child { flex-direction: column; gap: 10px !important; }
+        #opciones-aula > div:last-child { justify-content: center; }
+        #modalAulaVirtual .modal-body > div:first-child { flex-direction: column; }
+        .view-mode-btn { width: 100%; }
+    }
+
+    @media (max-width: 576px) {
+        .brand-name { font-size: 22px; }
+        .logo-img { width: 40px; height: 40px; }
+        .section-title { font-size: 26px; }
+        
+        /* Ajustes precisos para el carrusel en móviles */
+        .contenedor-slider { padding: 0; }
+        .boton-slider { display: none; }
+        .carousel-track { gap: 15px; padding: 0 20px 20px 20px; }
+        .card { min-width: 85vw; }
+        /* Ajuste Exclusivo para Vista Completa (Escritorio/Tablet) */
+@media (min-width: 769px) {
+    .carousel-track .card {
+        /* Calcula exactamente 1/3 del espacio disponible menos los 20px de gap */
+        min-width: calc((100% - 40px) / 3); 
+        scroll-snap-align: start; /* Alinea la tarjeta perfecta a la izquierda al hacer scroll */
+    }
+}
+    }
 </style>
 </head>
 <body>
@@ -383,22 +619,7 @@
   </div>
 </footer>
 
-<div class="overlay-search" id="searchOverlay" onclick="toggleSearchModal()"></div>
-<div class="search-modal" id="searchModal">
-  <div class="search-input-wrapper">
-    <span class="material-icons">location_on</span>
-    <input type="text" placeholder="Buscar lugar" autofocus>
-    <span class="material-icons">mic</span>
-  </div>
-  <div class="search-recent">
-    <h4>Busquedas Recientes</h4>
-    <div class="recent-tags">
-      <span class="tag">Biblioteca</span>
-      <span class="tag">El Gueguense</span>
-      <span class="tag">Secretaria Academica</span>
-    </div>
-  </div>
-</div>
+
 
 <div class="modal-overlay" id="videoModal">
   <div class="modal-content">
@@ -461,7 +682,8 @@
 
       <div id="contenido-aulas-rigoberto" style="display: none;">
         <h4 style="margin-bottom: 15px; color: var(--primary-color); font-size: 18px;">Explorar por Pisos:</h4>
-        <div class="contenedor-slider" style="padding: 0 40px; margin-bottom: 30px;">
+        
+        <div class="contenedor-slider" style="margin-bottom: 30px;">
           <button class="boton-slider anterior" onclick="desplazarCarruselPisos(-200)"><span class="material-icons">chevron_left</span></button>
           <div class="carousel-track" id="track-pisos" style="gap: 15px; padding-bottom: 10px;">
             <button class="piso-btn" onclick="seleccionarPiso('Piso 1', this)">PISO 1</button>
@@ -472,6 +694,7 @@
           </div>
           <button class="boton-slider siguiente" onclick="desplazarCarruselPisos(200)"><span class="material-icons">chevron_right</span></button>
         </div>
+
         <div id="opciones-aula" style="display: none; background: var(--bg-light); padding: 25px; border-radius: 10px; border: 1px solid var(--border-color);">
           <div style="display: flex; gap: 20px; margin-bottom: 25px;">
             <div style="flex: 1;">
@@ -486,12 +709,13 @@
               </select>
             </div>
           </div>
-          <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; width: 160px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; width: 100%;">
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
               <h4 style="margin-bottom: 12px; font-size: 16px;">Aula A-11</h4>
               <button onclick="abrirModalAulaVirtual('Aula A-11')" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s;"><span class="material-icons" style="font-size: 18px; vertical-align: bottom; margin-right: 5px;">vrpano</span> Entrar (360)</button>
             </div>
-            <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; width: 160px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
               <h4 style="margin-bottom: 12px; font-size: 16px;">Aula A-12</h4>
               <button onclick="abrirModalAulaVirtual('Aula A-12')" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s;"><span class="material-icons" style="font-size: 18px; vertical-align: bottom; margin-right: 5px;">vrpano</span> Entrar (360)</button>
             </div>
@@ -527,197 +751,393 @@ fetch('navbar.html')
   .then(data => {
     document.getElementById('menu-contenedor').innerHTML = data;
     // Iluminar el enlace correcto
-    document.getElementById('nav-destinos').classList.add('activo');
+    const navDestinos = document.getElementById('nav-destinos');
+    if (navDestinos) navDestinos.classList.add('activo');
+  }).catch(() => console.log('Navbar no encontrado'));
+
+// Funciones de navegación e interfaz general
+function cambiarVista(idVista) {
+  document.querySelectorAll('.vista').forEach(vista => vista.classList.remove('activa'));
+  document.getElementById(idVista).classList.add('activa');
+  window.scrollTo(0, 0); 
+
+  document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('activo'));
+  if(event && event.currentTarget && event.currentTarget.classList) {
+     event.currentTarget.classList.add('activo');
+  }
+
+  const navMovil = document.querySelector('nav.main-nav');
+  if(navMovil && navMovil.classList.contains('active')) {
+    navMovil.classList.remove('active');
+  }
+
+  if (idVista === 'vista-destinos') {
+    document.querySelectorAll('.contenedor-slider').forEach(contenedor => {
+      const sliderTrack = contenedor.querySelector('.carousel-track');
+      if (sliderTrack) sliderTrack.dispatchEvent(new Event('scroll'));
+    });
+  }
+}
+
+function toggleMenuMovil() {
+  document.querySelector('nav.main-nav').classList.toggle('active');
+}
+
+// LOGICA DE CARRUSELES Y OBSERVADORES DE INTERSECCIÓN
+document.addEventListener("DOMContentLoaded", function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.anim-element').forEach((el) => {
+    observer.observe(el);
   });
 
-function abrirSimulacion(lugar) {
-    const modal = document.getElementById('videoModal');
-    const title = document.getElementById('modalTitle');
-    title.innerText = 'Ruta hacia: ' + lugar;
-    modal.classList.add('active');
+  // Configuración de los carruseles
+  document.querySelectorAll('.contenedor-slider').forEach(contenedor => {
+    const sliderTrack = contenedor.querySelector('.carousel-track');
+    const botonAnterior = contenedor.querySelector('.boton-slider.anterior');
+    const botonSiguiente = contenedor.querySelector('.boton-slider.siguiente');
+
+    if (sliderTrack && botonAnterior && botonSiguiente) {
+      let cantidadDesplazamiento = 0;
+      // Obtiene el ancho real de la tarjeta en ese monitor + los 20px de separación
+const anchoSlide = sliderTrack.querySelector('.card').offsetWidth + 20;
+
+      function actualizarVisibilidadBotones() {
+        botonAnterior.style.display = cantidadDesplazamiento <= 0 ? 'none' : 'flex';
+        botonSiguiente.style.display = cantidadDesplazamiento >= sliderTrack.scrollWidth - sliderTrack.clientWidth - 10 ? 'none' : 'flex';
+      }
+
+      botonSiguiente.addEventListener('click', () => {
+        const desplazamientoMaximo = sliderTrack.scrollWidth - sliderTrack.clientWidth;
+        cantidadDesplazamiento = Math.min(cantidadDesplazamiento + anchoSlide, desplazamientoMaximo);
+        sliderTrack.scrollTo({ left: cantidadDesplazamiento, behavior: 'smooth' });
+        setTimeout(actualizarVisibilidadBotones, 300);
+      });
+
+      botonAnterior.addEventListener('click', () => {
+        cantidadDesplazamiento = Math.max(cantidadDesplazamiento - anchoSlide, 0);
+        sliderTrack.scrollTo({ left: cantidadDesplazamiento, behavior: 'smooth' });
+        setTimeout(actualizarVisibilidadBotones, 300);
+      });
+
+      sliderTrack.addEventListener('wheel', (e) => {
+        // Opción: Puedes comentar el preventDefault si no quieres que el scroll vertical se bloquee
+        // e.preventDefault(); 
+        sliderTrack.scrollLeft += e.deltaY;
+        cantidadDesplazamiento = sliderTrack.scrollLeft;
+        actualizarVisibilidadBotones();
+      }, {passive: true});
+
+      sliderTrack.addEventListener('scroll', () => {
+        cantidadDesplazamiento = sliderTrack.scrollLeft;
+        actualizarVisibilidadBotones();
+      });
+
+      actualizarVisibilidadBotones();
+    }
+  });
+});
+
+// Funciones de Modales y Utilidades
+function toggleSidebar() {
+  const sidebar = document.getElementById('formSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  if(sidebar && overlay){
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
 }
-function cerrarSimulacion() { document.getElementById('videoModal').classList.remove('active'); }
-function abrirModalPisos() { document.getElementById('modalPisos').classList.add('active'); cambiarPestanaRigoberto('info'); }
-function cerrarModalPisos() { document.getElementById('modalPisos').classList.remove('active'); document.getElementById('opciones-aula').style.display = 'none'; }
-function abrirModalAulaVirtual(aula) { document.getElementById('titulo-aula-virtual').innerText = 'Destino: ' + aula; cerrarModalPisos(); document.getElementById('modalAulaVirtual').classList.add('active'); }
-function cerrarModalAulaVirtual() { document.getElementById('modalAulaVirtual').classList.remove('active'); }
+
+function toggleSearchModal() {
+  const modal = document.getElementById('searchModal');
+  const overlay = document.getElementById('searchOverlay');
+  if(modal && overlay){
+      modal.classList.toggle('active');
+      overlay.classList.toggle('active');
+  }
+}
+
+function abrirSimulacion(lugar) {
+  const modal = document.getElementById('videoModal');
+  const title = document.getElementById('modalTitle');
+  if(title) title.innerText = 'Ruta hacia: ' + lugar;
+  if(modal) modal.classList.add('active');
+}
+
+function cerrarSimulacion() {
+  const modal = document.getElementById('videoModal');
+  if(modal) modal.classList.remove('active');
+}
+
+function abrirModalPisos() {
+  const modal = document.getElementById('modalPisos');
+  if(modal) modal.classList.add('active');
+  cambiarPestanaRigoberto('info'); 
+}
+
+function cerrarModalPisos() {
+  const modal = document.getElementById('modalPisos');
+  if(modal) modal.classList.remove('active');
+  
+  const opcionesAula = document.getElementById('opciones-aula');
+  if(opcionesAula) opcionesAula.style.display = 'none';
+  
+  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+  
+  const trackPisos = document.getElementById('track-pisos');
+  if(trackPisos) trackPisos.scrollTo({ left: 0 });
+}
 
 function cambiarPestanaRigoberto(pestana) {
-    const btnInfo = document.getElementById('btn-tab-info');
-    const btnAulas = document.getElementById('btn-tab-aulas');
-    const contenidoInfo = document.getElementById('contenido-info-rigoberto');
-    const contenidoAulas = document.getElementById('contenido-aulas-rigoberto');
+  const btnInfo = document.getElementById('btn-tab-info');
+  const btnAulas = document.getElementById('btn-tab-aulas');
+  const contenidoInfo = document.getElementById('contenido-info-rigoberto');
+  const contenidoAulas = document.getElementById('contenido-aulas-rigoberto');
 
-    if(pestana === 'info') {
-      contenidoInfo.style.display = 'block'; contenidoAulas.style.display = 'none';
-      btnInfo.style.background = 'var(--primary-color)'; btnInfo.style.color = 'white';
-      btnAulas.style.background = '#e0e0e0'; btnAulas.style.color = 'var(--text-gray)';
-    } else {
-      contenidoInfo.style.display = 'none'; contenidoAulas.style.display = 'block';
-      btnAulas.style.background = 'var(--primary-color)'; btnAulas.style.color = 'white';
-      btnInfo.style.background = '#e0e0e0'; btnInfo.style.color = 'var(--text-gray)';
-    }
+  if(pestana === 'info') {
+    if(contenidoInfo) contenidoInfo.style.display = 'block';
+    if(contenidoAulas) contenidoAulas.style.display = 'none';
+    if(btnInfo) { btnInfo.style.background = 'var(--primary-color)'; btnInfo.style.color = 'white'; }
+    if(btnAulas) { btnAulas.style.background = '#e0e0e0'; btnAulas.style.color = 'var(--text-gray)'; }
+  } else {
+    if(contenidoInfo) contenidoInfo.style.display = 'none';
+    if(contenidoAulas) contenidoAulas.style.display = 'block';
+    if(btnAulas) { btnAulas.style.background = 'var(--primary-color)'; btnAulas.style.color = 'white'; }
+    if(btnInfo) { btnInfo.style.background = '#e0e0e0'; btnInfo.style.color = 'var(--text-gray)'; }
+  }
 }
 
-// LOGICA MAPA GPS
+function desplazarCarruselPisos(cantidad) {
+  const track = document.getElementById('track-pisos');
+  if(track) track.scrollBy({ left: cantidad, behavior: 'smooth' });
+}
+
+function seleccionarPiso(piso, botonHtml) {
+  const inputPiso = document.getElementById('input-piso-actual');
+  if(inputPiso) inputPiso.value = piso;
+  
+  const opcionesAula = document.getElementById('opciones-aula');
+  if(opcionesAula) opcionesAula.style.display = 'block';
+  
+  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+  if(botonHtml) botonHtml.classList.add('activo');
+}
+
+function abrirModalAulaVirtual(aula) {
+  const titulo = document.getElementById('titulo-aula-virtual');
+  if(titulo) titulo.innerText = 'Destino: ' + aula;
+  cerrarModalPisos();
+  const modal = document.getElementById('modalAulaVirtual');
+  if(modal) modal.classList.add('active');
+}
+
+function cerrarModalAulaVirtual() {
+  const modal = document.getElementById('modalAulaVirtual');
+  if(modal) modal.classList.remove('active');
+}
+
+function abrirModalGPS() {
+  const modal = document.getElementById('modalGPS');
+  if(modal) modal.classList.add('active');
+}
+
+function cerrarGPS() {
+  const modal = document.getElementById('modalGPS');
+  if(modal) modal.classList.remove('active');
+}
+
+// LÓGICA MAPA GPS
 document.addEventListener('DOMContentLoaded', function() {
-    const sitiosUNI = {
-        "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
-        "Edificio Posgrado": [12.131009312952209, -86.27012610686415],
-        "Laboratorios robotica": [12.131584651748083, -86.27005832378829], 
-        "Laboratorios redes": [12.12897799279944, -86.26963729145416],
-        "Cajero": [12.128732715683613, -86.26999540370072],
-        "Cafetin el chele": [12.130425471825298, -86.27054166943908],
-        "Cafetin El Duarte": [12.130516172843175, -86.26998792094867],
-        "Cafetin EL Gueguense": [12.132155478384627, -86.2704627539127],
-        "La mita": [12.12981213040029, -86.26985736622525],
-        "Batidos Miranda": [12.13216668645582, -86.27065887811888],
-        "Pabellon 1 IES": [12.131981369972088, -86.27086467145331],
-        "Pabellon 2 IES": [12.132192465418543, -86.27090490458653],
-        "Pabellon 3 IES": [12.132315713614327, -86.27097061870413],
-        "Edificio Albert Einstein": [12.131887915661862, -86.2704855286818],
-        "Laboratorios IES": [12.132152859333264, -86.27083395225783],
-        "Copias UNI": [12.13053395719282, -86.27045150893927],
-        "Autoservicio de impresiones": [12.129091217122017, -86.27057892767442],
-        "Entrada Principal": [12.129222488740314, -86.27027854062317],
-        "Entrada IES": [12.13144814009071, -86.27106191565036],
-        "Parqueo Posgrado": [12.130806261883121, -86.27004596357038],
-        "Parqueo edificio rigoberto": [12.132240605882307, -86.26940334418464],
-        "Registro academico": [12.129346707202687, -86.27020754103975],
-        "Edificio Arquitectura": [12.129290529982416, -86.26991042954135],
-        "Edificio Quimica": [12.12891915159251, -86.26961484455204],
-        "Piscina": [12.12945410736998, -86.2699139108461],
-        "Auditorio Salomon de la Selva": [12.131729141982937, -86.27069090194155],
-        "Edificio Carlos Santos Berroterán": [12.131721857663178, -86.27102664352297]
-    };
+  const sitiosUNI = {
+      "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
+      "Edificio Posgrado": [12.131009312952209, -86.27012610686415],
+      "Laboratorios robotica": [12.131584651748083, -86.27005832378829], 
+      "Laboratorios redes": [12.12897799279944, -86.26963729145416],
+      "Cajero": [12.128732715683613, -86.26999540370072],
+      "Cafetin el chele": [12.130425471825298, -86.27054166943908],
+      "Cafetin El Duarte": [12.130516172843175, -86.26998792094867],
+      "Cafetin EL Gueguense": [12.132155478384627, -86.2704627539127],
+      "La mita": [12.12981213040029, -86.26985736622525],
+      "Batidos Miranda": [12.13216668645582, -86.27065887811888],
+      "Pabellon 1 IES": [12.131981369972088, -86.27086467145331],
+      "Pabellon 2 IES": [12.132192465418543, -86.27090490458653],
+      "Pabellon 3 IES": [12.132315713614327, -86.27097061870413],
+      "Edificio Albert Einstein": [12.131887915661862, -86.2704855286818],
+      "Laboratorios IES": [12.132152859333264, -86.27083395225783],
+      "Copias UNI": [12.13053395719282, -86.27045150893927],
+      "Autoservicio de impresiones": [12.129091217122017, -86.27057892767442],
+      "Entrada Principal": [12.129222488740314, -86.27027854062317],
+      "Entrada IES": [12.13144814009071, -86.27106191565036],
+      "Parqueo Posgrado": [12.130806261883121, -86.27004596357038],
+      "Parqueo edificio rigoberto": [12.132240605882307, -86.26940334418464],
+      "Registro academico": [12.129346707202687, -86.27020754103975],
+      "Edificio Arquitectura": [12.129290529982416, -86.26991042954135],
+      "Edificio Quimica": [12.12891915159251, -86.26961484455204],
+      "Piscina": [12.12945410736998, -86.2699139108461],
+      "Auditorio Salomon de la Selva": [12.131729141982937, -86.27069090194155],
+      "Edificio Carlos Santos Berroterán": [12.131721857663178, -86.27102664352297]
+  };
 
-    let mapa, userMarker, markerPulse, enrutadorActual;
-    let userLocation = null;
-    let instruccionHablada = "";
+  let mapa, userMarker, markerPulse, enrutadorActual;
+  let userLocation = null;
+  let instruccionHablada = "";
 
-    function hablar(texto) {
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel(); 
-            let msj = new SpeechSynthesisUtterance(texto);
-            msj.lang = 'es-ES'; 
-            window.speechSynthesis.speak(msj);
-        }
-    }
+  function hablar(texto) {
+      if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel(); 
+          let msj = new SpeechSynthesisUtterance(texto);
+          msj.lang = 'es-ES'; 
+          window.speechSynthesis.speak(msj);
+      }
+  }
 
-    const capaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 });
-    const capaOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 });
+  // Verifica si el div del mapa existe antes de inicializarlo
+  if (document.getElementById('uni-mapa')) {
+      const capaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 });
+      const capaOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 });
 
-    mapa = L.map('uni-mapa', { center: [12.131932, -86.269389], zoom: 17, layers: [capaSatelite] });
-    L.control.layers({ "Vista Satélite": capaSatelite, "Calles": capaOSM }).addTo(mapa);
+      mapa = L.map('uni-mapa', { center: [12.131932, -86.269389], zoom: 17, layers: [capaSatelite] });
+      L.control.layers({ "Vista Satélite": capaSatelite, "Calles": capaOSM }).addTo(mapa);
 
-    const select = document.getElementById('destino');
-    for (let nombre in sitiosUNI) {
-        let option = document.createElement('option');
-        option.value = nombre; option.text = nombre;
-        select.appendChild(option);
-        if(sitiosUNI[nombre][0] !== 0) {
-            L.marker(sitiosUNI[nombre]).bindPopup(`<strong style="color:#001f3f;">${nombre}</strong>`).addTo(mapa);
-        }
-    }
+      const select = document.getElementById('destino');
+      for (let nombre in sitiosUNI) {
+          let option = document.createElement('option');
+          option.value = nombre; option.text = nombre;
+          if(select) select.appendChild(option);
+          if(sitiosUNI[nombre][0] !== 0) {
+              L.marker(sitiosUNI[nombre]).bindPopup(`<strong style="color:#001f3f;">${nombre}</strong>`).addTo(mapa);
+          }
+      }
 
-    document.getElementById('btnCentrar').onclick = () => { if(userLocation) mapa.setView(userLocation, 19); };
+      const btnCentrar = document.getElementById('btnCentrar');
+      if(btnCentrar) {
+          btnCentrar.onclick = () => { if(userLocation) mapa.setView(userLocation, 19); };
+      }
 
-    document.getElementById('btnActivarGPS').onclick = function() {
-        let utterance = new SpeechSynthesisUtterance(""); window.speechSynthesis.speak(utterance); 
-        if (!navigator.geolocation) return Swal.fire("Error", "GPS no soportado.", "error");
+      const btnActivarGPS = document.getElementById('btnActivarGPS');
+      if(btnActivarGPS) {
+          btnActivarGPS.onclick = function() {
+              let utterance = new SpeechSynthesisUtterance(""); window.speechSynthesis.speak(utterance); 
+              if (!navigator.geolocation) return Swal.fire("Error", "GPS no soportado.", "error");
 
-        Swal.fire({ title: 'Buscando tu ubicación...', didOpen: () => { Swal.showLoading(); }});
+              Swal.fire({ title: 'Buscando tu ubicación...', didOpen: () => { Swal.showLoading(); }});
 
-        navigator.geolocation.watchPosition(
-            (pos) => {
-                Swal.close(); 
-                userLocation = [pos.coords.latitude, pos.coords.longitude];
-                document.getElementById('statusGPS').innerHTML = `<span style="color: #28a745; font-weight: bold;"><i class="fa-solid fa-location-dot"></i> GPS Conectado.</span>`;
-                document.getElementById('btnCentrar').style.display = 'inline-flex'; 
+              navigator.geolocation.watchPosition(
+                  (pos) => {
+                      Swal.close(); 
+                      userLocation = [pos.coords.latitude, pos.coords.longitude];
+                      const statusGPS = document.getElementById('statusGPS');
+                      if(statusGPS) statusGPS.innerHTML = `<span style="color: #28a745; font-weight: bold;"><i class="fa-solid fa-location-dot"></i> GPS Conectado.</span>`;
+                      if(btnCentrar) btnCentrar.style.display = 'inline-flex'; 
 
-                if (!userMarker) {
-                    markerPulse = L.marker(userLocation, { icon: L.divIcon({className: 'gps-pulse', iconSize:[40,40], iconAnchor:[20,20]}) }).addTo(mapa);
-                    userMarker = L.marker(userLocation, { icon: L.divIcon({className: 'user-icon', html: '<div style="background: #00c8f5; width: 14px; height: 14px; border-radius: 50%; border: 3px solid white;"></div>'}) }).addTo(mapa).bindPopup("Tú");
-                    mapa.setView(userLocation, 18);
-                    hablar("GPS conectado.");
-                } else {
-                    userMarker.setLatLng(userLocation);
-                    markerPulse.setLatLng(userLocation);
-                }
+                      if (!userMarker) {
+                          markerPulse = L.marker(userLocation, { icon: L.divIcon({className: 'gps-pulse', iconSize:[40,40], iconAnchor:[20,20]}) }).addTo(mapa);
+                          userMarker = L.marker(userLocation, { icon: L.divIcon({className: 'user-icon', html: '<div style="background: #00c8f5; width: 14px; height: 14px; border-radius: 50%; border: 3px solid white;"></div>'}) }).addTo(mapa).bindPopup("Tú");
+                          mapa.setView(userLocation, 18);
+                          hablar("GPS conectado.");
+                      } else {
+                          userMarker.setLatLng(userLocation);
+                          markerPulse.setLatLng(userLocation);
+                      }
 
-                if (enrutadorActual) {
-                    enrutadorActual.setWaypoints([
-                        L.latLng(userLocation[0], userLocation[1]),
-                        enrutadorActual.getWaypoints()[1].latLng
-                    ]);
-                }
-            },
-            (err) => { Swal.fire("Enciende tu ubicación", "Permite el acceso al GPS.", "warning"); },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 } 
-        );
-    };
+                      if (enrutadorActual) {
+                          enrutadorActual.setWaypoints([
+                              L.latLng(userLocation[0], userLocation[1]),
+                              enrutadorActual.getWaypoints()[1].latLng
+                          ]);
+                      }
+                  },
+                  (err) => { Swal.fire("Enciende tu ubicación", "Permite el acceso al GPS.", "warning"); },
+                  { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 } 
+              );
+          };
+      }
 
-    document.getElementById('btnIr').onclick = function() {
-        const destinoNombre = document.getElementById('destino').value;
-        if (!userLocation) return Swal.fire("Atención", "Primero activa el GPS.", "info");
-        if (!destinoNombre) return Swal.fire("Atención", "Selecciona un destino.", "info");
-        
-        const destinoCoords = sitiosUNI[destinoNombre];
-        if (destinoCoords[0] === 0) return Swal.fire("Error", "Faltan coordenadas.", "error");
+      const btnIr = document.getElementById('btnIr');
+      if(btnIr) {
+          btnIr.onclick = function() {
+              const destinoNombre = document.getElementById('destino').value;
+              if (!userLocation) return Swal.fire("Atención", "Primero activa el GPS.", "info");
+              if (!destinoNombre) return Swal.fire("Atención", "Selecciona un destino.", "info");
+              
+              const destinoCoords = sitiosUNI[destinoNombre];
+              if (destinoCoords[0] === 0) return Swal.fire("Error", "Faltan coordenadas.", "error");
 
-        if (enrutadorActual) mapa.removeControl(enrutadorActual);
+              if (enrutadorActual) mapa.removeControl(enrutadorActual);
 
-        enrutadorActual = L.Routing.control({
-            waypoints: [
-                L.latLng(userLocation[0], userLocation[1]),
-                L.latLng(destinoCoords[0], destinoCoords[1])
-            ],
-            router: L.Routing.osrmv1({ language: 'es', profile: 'foot' }),
-            show: false, 
-            createMarker: function() { return null; }, 
-            lineOptions: { styles: [{color: '#00c8f5', opacity: 0.9, weight: 7}] } 
-        }).addTo(mapa);
+              enrutadorActual = L.Routing.control({
+                  waypoints: [
+                      L.latLng(userLocation[0], userLocation[1]),
+                      L.latLng(destinoCoords[0], destinoCoords[1])
+                  ],
+                  router: L.Routing.osrmv1({ language: 'es', profile: 'foot' }),
+                  show: false, 
+                  createMarker: function() { return null; }, 
+                  lineOptions: { styles: [{color: '#00c8f5', opacity: 0.9, weight: 7}] } 
+              }).addTo(mapa);
 
-        enrutadorActual.on('routesfound', function(e) {
-            let ruta = e.routes[0];
-            let maniobras = ruta.instructions; 
-            let pasoActual = maniobras[0];
-            let txtInstruccion = pasoActual.text;
-            let distPaso = Math.round(pasoActual.distance); 
+              enrutadorActual.on('routesfound', function(e) {
+                  let ruta = e.routes[0];
+                  let maniobras = ruta.instructions; 
+                  let pasoActual = maniobras[0];
+                  let txtInstruccion = pasoActual.text;
+                  let distPaso = Math.round(pasoActual.distance); 
 
-            document.getElementById('infoRuta').style.display = 'block';
-            document.getElementById('instruccionActual').innerText = "➡ " + txtInstruccion;
-            document.getElementById('distanciaTexto').innerText = `En ${distPaso} metros. (Faltan ${Math.round(ruta.summary.totalDistance)}m en total)`;
+                  const infoRuta = document.getElementById('infoRuta');
+                  const instruccionActual = document.getElementById('instruccionActual');
+                  const distanciaTexto = document.getElementById('distanciaTexto');
 
-            let fraseVoz = `${txtInstruccion}. Continúa por ${distPaso} metros.`;
-            
-            if (txtInstruccion !== instruccionHablada) {
-                hablar(fraseVoz);
-                instruccionHablada = txtInstruccion;
-            }
+                  if(infoRuta) infoRuta.style.display = 'block';
+                  if(instruccionActual) instruccionActual.innerText = "➡ " + txtInstruccion;
+                  if(distanciaTexto) distanciaTexto.innerText = `En ${distPaso} metros. (Faltan ${Math.round(ruta.summary.totalDistance)}m en total)`;
 
-            if (ruta.summary.totalDistance <= 15) {
-                hablar(`Has llegado a tu destino: ${destinoNombre}`);
-                Swal.fire({ icon: 'success', title: '¡Llegaste!', text: `Estás en ${destinoNombre}.`, confirmButtonColor: '#28a745' });
-                mapa.removeControl(enrutadorActual);
-                enrutadorActual = null;
-                document.getElementById('infoRuta').style.display = 'none';
-            }
-        });
+                  let fraseVoz = `${txtInstruccion}. Continúa por ${distPaso} metros.`;
+                  
+                  if (txtInstruccion !== instruccionHablada) {
+                      hablar(fraseVoz);
+                      instruccionHablada = txtInstruccion;
+                  }
 
-        enrutadorActual.on('routingerror', function() {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Zona sin mapear',
-                text: 'Los pasillos no están en el servidor global. Sigue la línea recta.',
-                confirmButtonColor: '#001f3f'
-            });
-            mapa.removeControl(enrutadorActual);
-            L.polyline([userLocation, destinoCoords], {color: '#00c8f5', weight: 6, dashArray: '10'}).addTo(mapa);
-            hablar("Dirígete hacia la línea marcada en tu pantalla.");
-        });
-    };
+                  if (ruta.summary.totalDistance <= 15) {
+                      hablar(`Has llegado a tu destino: ${destinoNombre}`);
+                      Swal.fire({ icon: 'success', title: '¡Llegaste!', text: `Estás en ${destinoNombre}.`, confirmButtonColor: '#28a745' });
+                      mapa.removeControl(enrutadorActual);
+                      enrutadorActual = null;
+                      if(infoRuta) infoRuta.style.display = 'none';
+                  }
+              });
+
+              enrutadorActual.on('routingerror', function() {
+                  Swal.fire({
+                      icon: 'warning',
+                      title: 'Zona sin mapear',
+                      text: 'Los pasillos no están en el servidor global. Sigue la línea recta.',
+                      confirmButtonColor: '#001f3f'
+                  });
+                  mapa.removeControl(enrutadorActual);
+                  L.polyline([userLocation, destinoCoords], {color: '#00c8f5', weight: 6, dashArray: '10'}).addTo(mapa);
+                  hablar("Dirígete hacia la línea marcada en tu pantalla.");
+              });
+          };
+      }
+  }
 });
+
+// Eventos para cerrar modales haciendo clic afuera
+const modalVideo = document.getElementById('videoModal');
+if(modalVideo) modalVideo.addEventListener('click', function(e) { if(e.target === this) cerrarSimulacion(); });
+
+const modalPisos = document.getElementById('modalPisos');
+if(modalPisos) modalPisos.addEventListener('click', function(e) { if(e.target === this) cerrarModalPisos(); });
+
+const modalAulaVirtual = document.getElementById('modalAulaVirtual');
+if(modalAulaVirtual) modalAulaVirtual.addEventListener('click', function(e) { if(e.target === this) cerrarModalAulaVirtual(); });
 </script>
 
 <script src="script.js"></script>

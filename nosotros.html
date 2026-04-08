@@ -8,15 +8,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="styles.css">
-
-<style>
-    /* Mantener la estética sutil en todo el sitio */
-    body {
-        background-color: #f8f9fa;
-        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-        background-size: 30px 30px;
-    }
-</style>
 </head>
 <body>
 
@@ -35,8 +26,7 @@
       <div class="about-container">
         <div class="about-main">
           <div class="about-image-new">
-            <span>[ Imagen del Proyecto ]</span>
-          </div>
+            </div>
           
           <div class="about-history">
             <h3><span class="material-icons">history_edu</span> Nuestra Historia</h3>
@@ -64,42 +54,37 @@
     
     <section id="equipo" class="anim-element visible" style="margin-top: -30px;">
       <h2 class="section-title"><i class="fa-solid fa-laptop-code" style="color: var(--accent-color);"></i> Nuestro Equipo Creador</h2>
-      <p style="text-align: center; margin-bottom: 30px; color: var(--text-gray); font-size: 1.1rem;">Desarrollado por un pequeño y apasionado equipo de estudiantes de Ingeniería de Sistemas.</p>
+      <p style="text-align: center; margin-bottom: 30px; color: var(--text-gray); font-size: 1.1rem;">Desarrollado por un equipo de estudiantes de Ingeniería de Sistemas.</p>
       
       <div class="equipo-grid">
           <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-user-tie"></i></div>
-              <h3>Luis Zelaya</h3>
-              <h4 class="equipo-rol">Líder del Proyecto / Desarrollo</h4>
-              <p>Encargado de la estructura, interactividad 360 y la visión general de la plataforma.</p>
+              <div class="equipo-avatar"><i class="fa-solid fa-laptop-code"></i></div>
+              <h3>Erling Aleman</h3>
+              <h4 class="equipo-rol">Desarrollador Frontend</h4>
           </div>
           
           <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
-              <h3>Compañero 2</h3>
-              <h4 class="equipo-rol">Diseño / UI UX</h4>
-              <p>Especialista en experiencia de usuario y diseño visual del frontend.</p>
+              <div class="equipo-avatar"><i class="fa-solid fa-code"></i></div>
+              <h3>Andrea Chavarría</h3>
+              <h4 class="equipo-rol">Desarrolladora Frontend</h4>
           </div>
 
           <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-camera"></i></div>
-              <h3>Compañero 3</h3>
-              <h4 class="equipo-rol">Recopilación 360</h4>
-              <p>Encargado del mapeo visual y fotografía inmersiva de los recintos de la UNI.</p>
+              <div class="equipo-avatar"><i class="fa-solid fa-window-maximize"></i></div>
+              <h3>Uriel Palacios</h3>
+              <h4 class="equipo-rol">Desarrollador Frontend</h4>
           </div>
 
           <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-database"></i></div>
-              <h3>Compañero 4</h3>
-              <h4 class="equipo-rol">Base de Datos</h4>
-              <p>Gestión de la información de las aulas, rutas y optimización de datos.</p>
+              <div class="equipo-avatar"><i class="fa-solid fa-desktop"></i></div>
+              <h3>Leslie Vallecillo</h3>
+              <h4 class="equipo-rol">Desarrolladora Frontend</h4>
           </div>
 
           <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-video"></i></div>
-              <h3>Compañero 5</h3>
-              <h4 class="equipo-rol">Audiovisual</h4>
-              <p>Edición de los videos de recorridos guiados y material multimedia del sistema.</p>
+              <div class="equipo-avatar"><i class="fa-solid fa-file-code"></i></div>
+              <h3>Luis Zelaya</h3>
+              <h4 class="equipo-rol">Desarrollador Frontend</h4>
           </div>
       </div>
     </section>
@@ -131,36 +116,21 @@
   </div>
 </footer>
 
-<div class="overlay-search" id="searchOverlay" onclick="toggleSearchModal()"></div>
-<div class="search-modal" id="searchModal">
-  <div class="search-input-wrapper">
-    <span class="material-icons">location_on</span>
-    <input type="text" placeholder="Buscar lugar" autofocus>
-    <span class="material-icons">mic</span>
-  </div>
-  <div class="search-recent">
-    <h4>Busquedas Recientes</h4>
-    <div class="recent-tags">
-      <span class="tag">Biblioteca</span>
-      <span class="tag">El Gueguense</span>
-      <span class="tag">Secretaria Academica</span>
-    </div>
-  </div>
-</div>
+<script src="script.js"></script>
 
 <script>
-// --- SCRIPT PARA CARGAR EL NAVBAR ---
-fetch('navbar.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('menu-contenedor').innerHTML = data;
-    // Iluminamos el enlace de "Nosotros"
-    const navItem = document.getElementById('nav-nosotros');
-    if (navItem) navItem.classList.add('activo');
-  });
+  fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('menu-contenedor').innerHTML = data;
+      // Iluminar el enlace correcto de la página "Nosotros"
+      const navNosotros = document.getElementById('nav-nosotros');
+      if (navNosotros) {
+          navNosotros.classList.add('activo');
+      }
+    })
+    .catch(error => console.error('Error cargando el navbar:', error));
 </script>
-
-<script src="script.js"></script>
 
 </body>
 </html>
