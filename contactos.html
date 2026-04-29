@@ -1,117 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contactos | UNI-WAY</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contactos | UNI-WAY</title>
 
-<style>
-    /* Mantener la estética sutil en todo el sitio */
-    body {
-        background-color: #f8f9fa;
-        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-        background-size: 30px 30px;
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    /* Ajustes específicos para la vista de contactos */
-    .contact-container {
-        display: flex; 
-        flex-wrap: wrap; 
-        gap: 40px; 
-        max-width: 1100px; 
-        margin: 0 auto; 
-        background: var(--white); 
-        border-radius: 20px; 
-        padding: 40px; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-        border: 1px solid var(--border-color);
-    }
-
-    .info-card {
-        display: flex; 
-        align-items: flex-start; 
-        gap: 15px;
-        padding: 10px;
-        transition: 0.3s;
-    }
-
-    .info-card:hover {
-        transform: translateX(5px);
-    }
-
-    .icon-circle {
-        background: var(--primary-color); 
-        color: white; 
-        width: 50px; 
-        height: 50px; 
-        border-radius: 50%; 
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        flex-shrink: 0;
-        box-shadow: 0 4px 10px rgba(0, 31, 63, 0.2);
-    }
-
-    @media (max-width: 768px) {
-        .contact-container {
-            padding: 25px;
-            gap: 30px;
-        }
-        .section-title {
-            font-size: 28px;
-        }
-    }
-</style>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="Style/contactos.css">
 </head>
+
 <body>
 
 <div id="menu-contenedor"></div>
 
 <main>
   <div id="vista-contactos" class="vista activa">
-    <section id="contacto" class="anim-element visible" style="margin-top: 40px; margin-bottom: 60px; padding: 0 20px;">
-      <h2 class="section-title">Contáctanos</h2>
-      <p class="section-subtitle">¿Tienes alguna duda, encontraste un error en una ruta o tienes una sugerencia para mejorar UNI-WAY? Escríbenos y nuestro equipo te responderá a la brevedad.</p>
-      
+
+    <section id="contacto" class="anim-element visible contact-section">
+
+      <h2 id="titulo-contacto" class="section-title"></h2>
+
+      <p id="subtitulo-contacto" class="section-subtitle"></p>
+
       <div class="contact-container">
-        
-        <div style="flex: 1.2; min-width: 300px;">
-          <form class="contact-form" onsubmit="event.preventDefault(); Swal.fire('¡Enviado!', 'Tu mensaje ha sido enviado con éxito.', 'success');">
-            <div style="margin-bottom: 20px;">
-              <label style="display: block; font-weight: bold; margin-bottom: 8px; color: var(--text-dark);">Nombre Completo</label>
-              <input type="text" placeholder="Ej. Juan Pérez" required style="width: 100%; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 8px rgba(0,210,255,0.2)'" onblur="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'">
+
+        <div class="contact-form-column">
+
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/mjgjnpog"
+            method="POST"
+          >
+
+            <div class="form-group">
+              <label id="label-nombre" class="form-label"></label>
+
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                required
+                class="form-input"
+              >
             </div>
-            
-            <div style="margin-bottom: 20px;">
-              <label style="display: block; font-weight: bold; margin-bottom: 8px; color: var(--text-dark);">Correo Electrónico</label>
-              <input type="email" placeholder="tu-correo@ejemplo.com" required style="width: 100%; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 8px rgba(0,210,255,0.2)'" onblur="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'">
+
+            <div class="form-group">
+              <label id="label-correo" class="form-label"></label>
+
+              <input
+                id="correo"
+                name="email"
+                type="email"
+                required
+                class="form-input"
+              >
             </div>
-            
-            <div style="margin-bottom: 25px;">
-              <label style="display: block; font-weight: bold; margin-bottom: 8px; color: var(--text-dark);">Mensaje</label>
-              <textarea rows="5" placeholder="Escribe tu duda o sugerencia aquí..." required style="width: 100%; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; font-family: inherit; outline: none; resize: vertical; transition: 0.3s;" onfocus="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 8px rgba(0,210,255,0.2)'" onblur="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'"></textarea>
+
+            <div class="form-group-message">
+              <label id="label-mensaje" class="form-label"></label>
+
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                rows="5"
+                required
+                class="form-textarea"
+              ></textarea>
             </div>
-            
-            <button type="submit" class="btn-glow" style="width: 100%; justify-content: center; padding: 15px; font-size: 16px;">
-              <span class="material-icons">send</span> Enviar Mensaje
+
+            <button
+              id="boton-enviar"
+              type="submit"
+              class="btn-glow submit-button"
+            >
             </button>
+
           </form>
         </div>
 
-        <div style="flex: 0.8; min-width: 280px; display: flex; flex-direction: column; justify-content: center; gap: 30px;">
-          
+        <div class="contact-info-column">
+
           <div class="info-card">
             <div class="icon-circle">
               <span class="material-icons">email</span>
             </div>
+
             <div>
-              <h3 style="color: var(--text-dark); margin-bottom: 5px; font-size: 18px; font-weight: 700;">Correo Electrónico</h3>
-              <a href="mailto:uni.waycampusuniversitario@gmail.com" style="color: var(--primary-color); text-decoration: none; font-weight: 500; word-break: break-all;">uni.waycampusuniversitario@gmail.com</a>
-              <p style="color: var(--text-gray); font-size: 13px; margin-top: 5px;">Atención rápida de lunes a viernes.</p>
+              <h3 id="info-correo-titulo" class="info-title"></h3>
+
+              <a
+                id="info-correo-email"
+                href="#"
+                class="info-link"
+              ></a>
+
+              <p id="info-correo-detalle" class="info-small"></p>
             </div>
           </div>
 
@@ -119,9 +107,11 @@
             <div class="icon-circle">
               <span class="material-icons">location_on</span>
             </div>
+
             <div>
-              <h3 style="color: var(--text-dark); margin-bottom: 5px; font-size: 18px; font-weight: 700;">Ubicación</h3>
-              <p style="color: var(--text-gray); line-height: 1.5;">Recinto Universitario Simón Bolívar (RUSB)<br>Universidad Nacional de Ingeniería (UNI)</p>
+              <h3 id="info-ubicacion-titulo" class="info-title"></h3>
+
+              <p id="info-ubicacion-detalle" class="info-text"></p>
             </div>
           </div>
 
@@ -129,9 +119,11 @@
             <div class="icon-circle">
               <span class="material-icons">groups</span>
             </div>
+
             <div>
-              <h3 style="color: var(--text-dark); margin-bottom: 5px; font-size: 18px; font-weight: 700;">Colaboración</h3>
-              <p style="color: var(--text-gray); line-height: 1.5;">¿Eres desarrollador o conoces bien el campus? ¡Únete y aporta nuevas rutas!</p>
+              <h3 id="info-colaboracion-titulo" class="info-title"></h3>
+
+              <p id="info-colaboracion-detalle" class="info-text"></p>
             </div>
           </div>
 
@@ -143,42 +135,49 @@
 
 <footer>
   <div class="footer-container">
-      <div class="footer-info">
-          <h3><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color);"></i> UNI-WAY</h3>
-          <p>Tu guía interactiva para dominar el campus de la Universidad Nacional de Ingeniería.</p>
-      </div>
-      <div class="footer-enlaces">
-          <h4>Enlaces Rápidos</h4>
-          <ul>
-              <li><a href="nosotros.html">Misión y Visión</a></li>
-              <li><a href="destinos.html">Tour de Edificios</a></li>
-              <li><a href="nosotros.html#equipo">Desarrolladores</a></li>
-          </ul>
-      </div>
-      <div class="footer-contacto">
-          <h4>Contacto</h4>
-          <p><i class="fa-solid fa-envelope"></i> uni.waycampusuniversitario@gmail.com</p>
-          <p><i class="fa-solid fa-location-dot"></i> Recinto Universitario Simón Bolívar, UNI.</p>
-      </div>
+
+    <div class="footer-info">
+      <h3>
+        <i class="fa-solid fa-map-location-dot"></i>
+        <span id="footer-marca"></span>
+      </h3>
+
+      <p id="footer-descripcion"></p>
+    </div>
+
+    <div class="footer-enlaces">
+      <h4>Enlaces Rápidos</h4>
+
+      <ul>
+        <li><a href="nosotros.html">Misión y Visión</a></li>
+        <li><a href="destinos.html">Tour de Edificios</a></li>
+        <li><a href="nosotros.html#equipo">Desarrolladores</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contacto">
+      <h4>Contacto</h4>
+
+      <p>
+        <i class="fa-solid fa-envelope"></i>
+        <span id="footer-correo"></span>
+      </p>
+
+      <p>
+        <i class="fa-solid fa-location-dot"></i>
+        <span id="footer-ubicacion"></span>
+      </p>
+    </div>
+
   </div>
+
   <div class="footer-bottom">
-      <p>© 2026 UNI-WAY. Desarrollado por estudiantes de Ingeniería de Sistemas. Todos los derechos reservados.</p>
+    <p id="footer-copyright"></p>
   </div>
 </footer>
 
-<script>
-// --- SCRIPT PARA CARGAR EL NAVBAR ---
-fetch('navbar.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('menu-contenedor').innerHTML = data;
-    // Iluminamos el enlace de "Contactos"
-    const navItem = document.getElementById('nav-contactos');
-    if (navItem) navItem.classList.add('activo');
-  }).catch(() => console.log('Navbar no encontrado'));
-</script>
-
 <script src="script.js"></script>
+<script src="Script/contacto.js"></script>
 
 </body>
 </html>

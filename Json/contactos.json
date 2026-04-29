@@ -1,0 +1,46 @@
+{
+  "titulo": "Contáctanos",
+  "subtitulo": "¿Tienes alguna duda, encontraste un error en una ruta o tienes una sugerencia para mejorar UNI-WAY? Escríbenos y nuestro equipo te responderá a la brevedad.",
+
+  "formulario": {
+    "nombre": {
+      "label": "Nombre Completo",
+      "placeholder": "Ej. Juan Pérez"
+    },
+    "correo": {
+      "label": "Correo Electrónico",
+      "placeholder": "tu-correo@ejemplo.com"
+    },
+    "mensaje": {
+      "label": "Mensaje",
+      "placeholder": "Escribe tu duda o sugerencia aquí..."
+    },
+    "boton": "Enviar Mensaje",
+    "asunto": "Contacto desde UNI-WAY",
+    "destino": "uni.waycampusuniversitario@gmail.com"
+  },
+
+  "informacion": {
+    "correo": {
+      "titulo": "Correo Electrónico",
+      "email": "uni.waycampusuniversitario@gmail.com",
+      "detalle": "Atención rápida de lunes a viernes."
+    },
+
+    "ubicacion": {
+      "titulo": "Ubicación",
+      "detalle": "Recinto Universitario Simón Bolívar (RUSB), Universidad Nacional de Ingeniería (UNI)"
+    },
+
+    "colaboracion": {
+      "titulo": "Colaboración",
+      "detalle": "¿Eres desarrollador o conoces bien el campus? ¡Únete y aporta nuevas rutas!"
+    }
+  },
+
+  "footer": {
+    "marca": "UNI-WAY",
+    "descripcion": "Tu guía interactiva para dominar el campus de la Universidad Nacional de Ingeniería.",
+    "copyright": "© 2026 UNI-WAY. Desarrollado por estudiantes de Ingeniería de Sistemas. Todos los derechos reservados."
+  }
+}
