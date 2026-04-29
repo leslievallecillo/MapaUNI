@@ -43,8 +43,8 @@
         { "id": "p3", "label": "Piso 3" },
         { "id": "p4", "label": "Piso 4" },
         { "id": "p5", "label": "Piso 5" },
-        { "id": "s2", "label": "Sótano 2" },
-        { "id": "s1", "label": "Sótano 1" }
+        { "id": "s2", "label": "Sótano A" },
+        { "id": "s1", "label": "Sótano B" }
       ],
       "aulas": {
         "p1": {
