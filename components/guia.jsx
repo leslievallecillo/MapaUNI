@@ -1,76 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import Swal from 'sweetalert2'; // Importamos SweetAlert2
+import Swal from 'sweetalert2';
 import './Style/guia.css';
 
 const GuiaCampus = () => {
   const [favoritos, setFavoritos] = useState([]);
   const [seleccionado, setSeleccionado] = useState(null);
-  const [enviando, setEnviando] = useState(false);
+  const [resenas, setResenas] = useState([]);
 
   useEffect(() => {
     fetch('Json/guia.json')
       .then(res => res.json())
       .then(data => setFavoritos(data));
+      
+    const resenasGuardadas = JSON.parse(localStorage.getItem('resenas_uniway')) || [];
+    setResenas(resenasGuardadas);
   }, []);
 
-  const manejarEnvio = async (e) => {
+  const manejarEnvio = (e) => {
     e.preventDefault();
-    setEnviando(true);
-
+    
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+    const nuevaResena = {
+        lugarId: seleccionado.id,
+        nombre: formData.get('nombre'),
+        calificacion: formData.get('calificacion'),
+        mensaje: formData.get('mensaje')
+    };
 
-    const formspreeUrl = "https://formspree.io/f/mdayqwgp"; 
+    const actualizadas = [...resenas, nuevaResena];
+    setResenas(actualizadas);
+    localStorage.setItem('resenas_uniway', JSON.stringify(actualizadas));
 
-    try {
-      const response = await fetch(formspreeUrl, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        // SWEETALERT DE ÉXITO
-        Swal.fire({
-            title: '¡Mensaje enviado!',
-            text: 'Tu comentario ha sido enviado correctamente.',
-            icon: 'success',
-            timer: 2500,
-            showConfirmButton: false
-        }).then(() => {
-            setSeleccionado(null);
-        });
-      } else {
-        // SWEETALERT DE ERROR (Falta ID)
-        Swal.fire({
-            title: 'Error',
-            text: 'Error al enviar. Revisa tu ID de Formspree.',
-            icon: 'error',
-            confirmButtonColor: '#0056b3'
-        });
-      }
-    } catch (error) {
-      // SWEETALERT DE ERROR DE RED
-      Swal.fire({
-          title: 'Error de conexión',
-          text: 'Ocurrió un error de red. Inténtalo más tarde.',
-          icon: 'error',
-          confirmButtonColor: '#0056b3'
-      });
-    } finally {
-      setEnviando(false);
-    }
+    Swal.fire({
+        title: '¡Guardado!',
+        text: 'Tu comentario ha sido almacenado localmente.',
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false
+    });
+    
+    e.target.reset();
   };
+
+  const resenasDelLugar = resenas.filter(r => seleccionado && r.lugarId === seleccionado.id);
 
   return (
     <div className="vista activa">
       <section id="recomendaciones" className="anim-element visible">
         <h2 className="section-title">Nuestros Favoritos</h2>
-        <p className="section-subtitle">Haz clic sobre las tarjetas para ver detalles y enviar tus comentarios.</p>
-        
         <div className="recomendaciones-container">
           {favoritos.map(fav => (
             <div key={fav.id} className="rec-card" onClick={() => setSeleccionado(fav)}>
@@ -96,7 +73,6 @@ const GuiaCampus = () => {
               
               <div className="contenedor-media-modal">
                 <img src={seleccionado.imagen} className="imagen-lugar" alt={seleccionado.titulo} />
-                <iframe src={seleccionado.mapa_url} className="mapa-iframe" allowFullScreen loading="lazy"></iframe>
               </div>
               
               <div className="info-texto-modal">
@@ -109,29 +85,42 @@ const GuiaCampus = () => {
                 <p>{seleccionado.recomendacion}</p>
               </div>
 
+              <div style={{ marginTop: '20px' }}>
+                <h4 style={{ color: '#333', fontSize: '15px', marginBottom: '10px', borderBottom: '2px solid #ddd', paddingBottom: '5px', textAlign: 'left' }}>Opiniones de Estudiantes</h4>
+                <div style={{ maxHeight: '150px', overflowY: 'auto', marginBottom: '15px' }}>
+                    {resenasDelLugar.length > 0 ? (
+                        resenasDelLugar.map((r, index) => (
+                            <div key={index} style={{ background: '#f1f3f5', padding: '10px', borderRadius: '6px', marginBottom: '10px', textAlign: 'left' }}>
+                                <strong style={{ color: 'var(--primary-color)', fontSize: '14px' }}>{r.nombre}</strong> 
+                                <span style={{ color: '#f39c12', fontSize: '13px', marginLeft: '5px' }}>(Nota: {r.calificacion}/5)</span>
+                                <p style={{ margin: '5px 0 0 0', fontSize: '13px', color: '#555' }}>{r.mensaje}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p style={{ fontSize: '13px', color: '#777', textAlign: 'center' }}>Aún no hay opiniones. ¡Sé el primero!</p>
+                    )}
+                </div>
+              </div>
+
               <form className="formulario-guia" onSubmit={manejarEnvio}>
-                <h4>Enviar Comentario</h4>
+                <h4 style={{ textAlign: 'center', marginBottom: '15px' }}>Añadir Reseña</h4>
                 <label>Tu nombre:</label>
                 <input type="text" name="nombre" required />
-                
                 <label>Calificación:</label>
                 <select name="calificacion" required>
                     <option value="">Seleccionar...</option>
                     <option value="5">Excelente</option>
                     <option value="4">Muy bueno</option>
                     <option value="3">Bueno</option>
+                    <option value="2">Regular</option>
+                    <option value="1">Malo</option>
                 </select>
-
                 <label>Tu opinión:</label>
                 <textarea name="mensaje" required></textarea>
-                
-                <input type="hidden" name="lugar" value={seleccionado.titulo} />
-
-                <button type="submit" className="btn-enviar-resena" disabled={enviando}>
-                  {enviando ? "Enviando..." : "Enviar a Formspree"}
+                <button type="submit" className="btn-enviar-resena">
+                  Guardar Opinión
                 </button>
               </form>
-              
             </div>
           </div>
         </div>

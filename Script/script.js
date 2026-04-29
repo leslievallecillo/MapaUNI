@@ -341,3 +341,16 @@
   document.getElementById('modalAulaVirtual').addEventListener('click', function(e) { if(e.target === this) cerrarModalAulaVirtual(); });
   document.getElementById('modalGPS').addEventListener('click', function(e) { if(e.target === this) cerrarGPS(); });
   document.getElementById('modalSmart').addEventListener('click', function(e) { if(e.target === this) cerrarModalSmart(); });
+
+
+    fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('menu-contenedor').innerHTML = data;
+      // Iluminar el enlace correcto de la página "Nosotros"
+      const navNosotros = document.getElementById('nav-nosotros');
+      if (navNosotros) {
+          navNosotros.classList.add('activo');
+      }
+    })
+    .catch(error => console.error('Error cargando el navbar:', error));

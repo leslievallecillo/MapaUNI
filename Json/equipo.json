@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nombre": "Erling Aleman",
+    "rol": "Desarrollador Frontend",
+    "icono": "fa-laptop-code"
+  },
+  {
+    "id": 2,
+    "nombre": "Andrea Chavarría",
+    "rol": "Desarrolladora Frontend",
+    "icono": "fa-code"
+  },
+  {
+    "id": 3,
+    "nombre": "Uriel Palacios",
+    "rol": "Desarrollador Frontend",
+    "icono": "fa-window-maximize"
+  },
+  {
+    "id": 4,
+    "nombre": "Leslie Vallecillo",
+    "rol": "Desarrolladora Frontend",
+    "icono": "fa-desktop"
+  },
+  {
+    "id": 5,
+    "nombre": "Luis Zelaya",
+    "rol": "Desarrollador Frontend",
+    "icono": "fa-file-code"
+  }
+]

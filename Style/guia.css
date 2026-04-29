@@ -3,6 +3,7 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background: #fff;
 }
 
 .imagen-lugar {
@@ -92,4 +93,10 @@
     cursor: pointer;
     font-weight: bold;
     font-size: 15px;
+}
+
+/* --- SOLUCIÓN AL PROBLEMA DE SWEETALERT --- */
+/* Esta regla fuerza al contenedor de SweetAlert2 a estar por encima de todos los modales */
+.swal2-container {
+    z-index: 99999 !important;
 }

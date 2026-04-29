@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="Style/styles.css">
 </head>
 <body>
 
@@ -79,42 +79,12 @@
       </div>
     </section>
     
-    <section id="equipo" class="anim-element visible" style="margin-top: -30px;">
-      <h2 class="section-title"><i class="fa-solid fa-laptop-code" style="color: var(--accent-color);"></i> Nuestro Equipo Creador</h2>
-      <p style="text-align: center; margin-bottom: 30px; color: var(--text-gray); font-size: 1.1rem;">Desarrollado por un equipo de estudiantes de Ingeniería de Sistemas.</p>
-      
-      <div class="equipo-grid">
-          <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-laptop-code"></i></div>
-              <h3>Erling Aleman</h3>
-              <h4 class="equipo-rol">Desarrollador Frontend</h4>
-          </div>
-          
-          <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-code"></i></div>
-              <h3>Andrea Chavarría</h3>
-              <h4 class="equipo-rol">Desarrolladora Frontend</h4>
-          </div>
-
-          <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-window-maximize"></i></div>
-              <h3>Uriel Palacios</h3>
-              <h4 class="equipo-rol">Desarrollador Frontend</h4>
-          </div>
-
-          <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-desktop"></i></div>
-              <h3>Leslie Vallecillo</h3>
-              <h4 class="equipo-rol">Desarrolladora Frontend</h4>
-          </div>
-
-          <div class="equipo-card">
-              <div class="equipo-avatar"><i class="fa-solid fa-file-code"></i></div>
-              <h3>Luis Zelaya</h3>
-              <h4 class="equipo-rol">Desarrollador Frontend</h4>
-          </div>
-      </div>
-    </section>
+   <section id="equipo" class="anim-element visible" style="margin-top: -30px;">
+  <h2 class="section-title"><i class="fa-solid fa-laptop-code" style="color: var(--accent-color);"></i> Nuestro Equipo Creador</h2>
+  <p style="text-align: center; margin-bottom: 30px; color: var(--text-gray); font-size: 1.1rem;">Desarrollado por un equipo de estudiantes de Ingeniería de Sistemas.</p>
+  
+  <div id="react-equipo-root"></div>
+</section>
   </div>
 </main>
 
@@ -143,21 +113,13 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="/Script/script.js"></script>
 
-<script>
-  fetch('navbar.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('menu-contenedor').innerHTML = data;
-      // Iluminar el enlace correcto de la página "Nosotros"
-      const navNosotros = document.getElementById('nav-nosotros');
-      if (navNosotros) {
-          navNosotros.classList.add('activo');
-      }
-    })
-    .catch(error => console.error('Error cargando el navbar:', error));
-</script>
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
+<script type="text/babel" src="Components/nosotros.jsx"></script>
+<script src="Script/script.js"></script>
 </body>
 </html>
