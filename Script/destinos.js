@@ -36,7 +36,7 @@ window.toggleMenuMovil = function() {
 // -------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   
-  fetch('Json/destinos.json')
+  fetch('./Json/destinos.json')
     .then(response => {
         if(!response.ok) throw new Error("No se pudo cargar el JSON");
         return response.json();
