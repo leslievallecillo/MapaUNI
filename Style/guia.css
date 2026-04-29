@@ -8,8 +8,16 @@
 
 .imagen-lugar {
     width: 100%;
-    height: 250px; 
+    height: 200px;
     object-fit: cover;
+    display: block;
+}
+
+.mapa-iframe {
+    width: 100%;
+    height: 180px;
+    border: none;
+    margin-top: 5px;
     display: block;
 }
 
@@ -42,6 +50,13 @@
     margin-top: 20px;
 }
 
+.formulario-guia h4 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 16px;
+    text-align: center;
+}
+
 .formulario-guia label {
     display: block;
     font-size: 13px;
@@ -59,7 +74,13 @@
     border: 1px solid #ddd;
     border-radius: 6px;
     font-family: inherit;
+    font-size: 14px;
     box-sizing: border-box;
+}
+
+.formulario-guia textarea {
+    resize: vertical;
+    min-height: 90px;
 }
 
 .btn-enviar-resena {
@@ -71,4 +92,11 @@
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 15px;
+}
+
+/* --- SOLUCIÓN AL PROBLEMA DE SWEETALERT --- */
+/* Esta regla fuerza al contenedor de SweetAlert2 a estar por encima de todos los modales */
+.swal2-container {
+    z-index: 99999 !important;
 }
