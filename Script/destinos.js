@@ -1,0 +1,393 @@
+// --- SCRIPT PARA CARGAR EL NAVBAR ---
+fetch('navbar.html')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('menu-contenedor').innerHTML = data;
+    // Iluminar el enlace correcto
+    const navDestinos = document.getElementById('nav-destinos');
+    if (navDestinos) navDestinos.classList.add('activo');
+  }).catch(() => console.log('Navbar no encontrado'));
+
+// Funciones de navegación e interfaz general
+function cambiarVista(idVista) {
+  document.querySelectorAll('.vista').forEach(vista => vista.classList.remove('activa'));
+  document.getElementById(idVista).classList.add('activa');
+  window.scrollTo(0, 0); 
+
+  document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('activo'));
+  if(event && event.currentTarget && event.currentTarget.classList) {
+     event.currentTarget.classList.add('activo');
+  }
+
+  const navMovil = document.querySelector('nav.main-nav');
+  if(navMovil && navMovil.classList.contains('active')) {
+    navMovil.classList.remove('active');
+  }
+
+  if (idVista === 'vista-destinos') {
+    document.querySelectorAll('.contenedor-slider').forEach(contenedor => {
+      const sliderTrack = contenedor.querySelector('.carousel-track');
+      if (sliderTrack) sliderTrack.dispatchEvent(new Event('scroll'));
+    });
+  }
+}
+
+function toggleMenuMovil() {
+  document.querySelector('nav.main-nav').classList.toggle('active');
+}
+
+// LOGICA DE CARRUSELES Y OBSERVADORES DE INTERSECCIÓN
+document.addEventListener("DOMContentLoaded", function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.anim-element').forEach((el) => {
+    observer.observe(el);
+  });
+
+  // Configuración de los carruseles
+  document.querySelectorAll('.contenedor-slider').forEach(contenedor => {
+    const sliderTrack = contenedor.querySelector('.carousel-track');
+    const botonAnterior = contenedor.querySelector('.boton-slider.anterior');
+    const botonSiguiente = contenedor.querySelector('.boton-slider.siguiente');
+
+    if (sliderTrack && botonAnterior && botonSiguiente) {
+      let cantidadDesplazamiento = 0;
+      // Obtiene el ancho real de la tarjeta en ese monitor + los 20px de separación
+const anchoSlide = sliderTrack.querySelector('.card').offsetWidth + 20;
+
+      function actualizarVisibilidadBotones() {
+        botonAnterior.style.display = cantidadDesplazamiento <= 0 ? 'none' : 'flex';
+        botonSiguiente.style.display = cantidadDesplazamiento >= sliderTrack.scrollWidth - sliderTrack.clientWidth - 10 ? 'none' : 'flex';
+      }
+
+      botonSiguiente.addEventListener('click', () => {
+        const desplazamientoMaximo = sliderTrack.scrollWidth - sliderTrack.clientWidth;
+        cantidadDesplazamiento = Math.min(cantidadDesplazamiento + anchoSlide, desplazamientoMaximo);
+        sliderTrack.scrollTo({ left: cantidadDesplazamiento, behavior: 'smooth' });
+        setTimeout(actualizarVisibilidadBotones, 300);
+      });
+
+      botonAnterior.addEventListener('click', () => {
+        cantidadDesplazamiento = Math.max(cantidadDesplazamiento - anchoSlide, 0);
+        sliderTrack.scrollTo({ left: cantidadDesplazamiento, behavior: 'smooth' });
+        setTimeout(actualizarVisibilidadBotones, 300);
+      });
+
+      sliderTrack.addEventListener('wheel', (e) => {
+        // Opción: Puedes comentar el preventDefault si no quieres que el scroll vertical se bloquee
+        // e.preventDefault(); 
+        sliderTrack.scrollLeft += e.deltaY;
+        cantidadDesplazamiento = sliderTrack.scrollLeft;
+        actualizarVisibilidadBotones();
+      }, {passive: true});
+
+      sliderTrack.addEventListener('scroll', () => {
+        cantidadDesplazamiento = sliderTrack.scrollLeft;
+        actualizarVisibilidadBotones();
+      });
+
+      actualizarVisibilidadBotones();
+    }
+  });
+});
+
+// Funciones de Modales y Utilidades
+function toggleSidebar() {
+  const sidebar = document.getElementById('formSidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  if(sidebar && overlay){
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+}
+
+function toggleSearchModal() {
+  const modal = document.getElementById('searchModal');
+  const overlay = document.getElementById('searchOverlay');
+  if(modal && overlay){
+      modal.classList.toggle('active');
+      overlay.classList.toggle('active');
+  }
+}
+
+function abrirSimulacion(lugar) {
+  const modal = document.getElementById('videoModal');
+  const title = document.getElementById('modalTitle');
+  if(title) title.innerText = 'Ruta hacia: ' + lugar;
+  if(modal) modal.classList.add('active');
+}
+
+function cerrarSimulacion() {
+  const modal = document.getElementById('videoModal');
+  if(modal) modal.classList.remove('active');
+}
+
+function abrirModalPisos() {
+  const modal = document.getElementById('modalPisos');
+  if(modal) modal.classList.add('active');
+  cambiarPestanaRigoberto('info'); 
+}
+
+function cerrarModalPisos() {
+  const modal = document.getElementById('modalPisos');
+  if(modal) modal.classList.remove('active');
+  
+  const opcionesAula = document.getElementById('opciones-aula');
+  if(opcionesAula) opcionesAula.style.display = 'none';
+  
+  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+  
+  const trackPisos = document.getElementById('track-pisos');
+  if(trackPisos) trackPisos.scrollTo({ left: 0 });
+}
+
+function cambiarPestanaRigoberto(pestana) {
+  const btnInfo = document.getElementById('btn-tab-info');
+  const btnAulas = document.getElementById('btn-tab-aulas');
+  const contenidoInfo = document.getElementById('contenido-info-rigoberto');
+  const contenidoAulas = document.getElementById('contenido-aulas-rigoberto');
+
+  if(pestana === 'info') {
+    if(contenidoInfo) contenidoInfo.style.display = 'block';
+    if(contenidoAulas) contenidoAulas.style.display = 'none';
+    if(btnInfo) { btnInfo.style.background = 'var(--primary-color)'; btnInfo.style.color = 'white'; }
+    if(btnAulas) { btnAulas.style.background = '#e0e0e0'; btnAulas.style.color = 'var(--text-gray)'; }
+  } else {
+    if(contenidoInfo) contenidoInfo.style.display = 'none';
+    if(contenidoAulas) contenidoAulas.style.display = 'block';
+    if(btnAulas) { btnAulas.style.background = 'var(--primary-color)'; btnAulas.style.color = 'white'; }
+    if(btnInfo) { btnInfo.style.background = '#e0e0e0'; btnInfo.style.color = 'var(--text-gray)'; }
+  }
+}
+
+function desplazarCarruselPisos(cantidad) {
+  const track = document.getElementById('track-pisos');
+  if(track) track.scrollBy({ left: cantidad, behavior: 'smooth' });
+}
+
+function seleccionarPiso(piso, botonHtml) {
+  const inputPiso = document.getElementById('input-piso-actual');
+  if(inputPiso) inputPiso.value = piso;
+  
+  const opcionesAula = document.getElementById('opciones-aula');
+  if(opcionesAula) opcionesAula.style.display = 'block';
+  
+  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+  if(botonHtml) botonHtml.classList.add('activo');
+}
+
+function abrirModalAulaVirtual(aula) {
+  const titulo = document.getElementById('titulo-aula-virtual');
+  if(titulo) titulo.innerText = 'Destino: ' + aula;
+  cerrarModalPisos();
+  const modal = document.getElementById('modalAulaVirtual');
+  if(modal) modal.classList.add('active');
+}
+
+function cerrarModalAulaVirtual() {
+  const modal = document.getElementById('modalAulaVirtual');
+  if(modal) modal.classList.remove('active');
+}
+
+function abrirModalGPS() {
+  const modal = document.getElementById('modalGPS');
+  if(modal) modal.classList.add('active');
+}
+
+function cerrarGPS() {
+  const modal = document.getElementById('modalGPS');
+  if(modal) modal.classList.remove('active');
+}
+
+// LÓGICA MAPA GPS
+document.addEventListener('DOMContentLoaded', function() {
+  const sitiosUNI = {
+      "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
+      "Edificio Posgrado": [12.131009312952209, -86.27012610686415],
+      "Laboratorios robotica": [12.131584651748083, -86.27005832378829], 
+      "Laboratorios redes": [12.12897799279944, -86.26963729145416],
+      "Cajero": [12.128732715683613, -86.26999540370072],
+      "Cafetin el chele": [12.130425471825298, -86.27054166943908],
+      "Cafetin El Duarte": [12.130516172843175, -86.26998792094867],
+      "Cafetin EL Gueguense": [12.132155478384627, -86.2704627539127],
+      "La mita": [12.12981213040029, -86.26985736622525],
+      "Batidos Miranda": [12.13216668645582, -86.27065887811888],
+      "Pabellon 1 IES": [12.131981369972088, -86.27086467145331],
+      "Pabellon 2 IES": [12.132192465418543, -86.27090490458653],
+      "Pabellon 3 IES": [12.132315713614327, -86.27097061870413],
+      "Edificio Albert Einstein": [12.131887915661862, -86.2704855286818],
+      "Laboratorios IES": [12.132152859333264, -86.27083395225783],
+      "Copias UNI": [12.13053395719282, -86.27045150893927],
+      "Autoservicio de impresiones": [12.129091217122017, -86.27057892767442],
+      "Entrada Principal": [12.129222488740314, -86.27027854062317],
+      "Entrada IES": [12.13144814009071, -86.27106191565036],
+      "Parqueo Posgrado": [12.130806261883121, -86.27004596357038],
+      "Parqueo edificio rigoberto": [12.132240605882307, -86.26940334418464],
+      "Registro academico": [12.129346707202687, -86.27020754103975],
+      "Edificio Arquitectura": [12.129290529982416, -86.26991042954135],
+      "Edificio Quimica": [12.12891915159251, -86.26961484455204],
+      "Piscina": [12.12945410736998, -86.2699139108461],
+      "Auditorio Salomon de la Selva": [12.131729141982937, -86.27069090194155],
+      "Edificio Carlos Santos Berroterán": [12.131721857663178, -86.27102664352297]
+  };
+
+  let mapa, userMarker, markerPulse, enrutadorActual;
+  let userLocation = null;
+  let instruccionHablada = "";
+
+  function hablar(texto) {
+      if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel(); 
+          let msj = new SpeechSynthesisUtterance(texto);
+          msj.lang = 'es-ES'; 
+          window.speechSynthesis.speak(msj);
+      }
+  }
+
+  // Verifica si el div del mapa existe antes de inicializarlo
+  if (document.getElementById('uni-mapa')) {
+      const capaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 });
+      const capaOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 });
+
+      mapa = L.map('uni-mapa', { center: [12.131932, -86.269389], zoom: 17, layers: [capaSatelite] });
+      L.control.layers({ "Vista Satélite": capaSatelite, "Calles": capaOSM }).addTo(mapa);
+
+      const select = document.getElementById('destino');
+      for (let nombre in sitiosUNI) {
+          let option = document.createElement('option');
+          option.value = nombre; option.text = nombre;
+          if(select) select.appendChild(option);
+          if(sitiosUNI[nombre][0] !== 0) {
+              L.marker(sitiosUNI[nombre]).bindPopup(`<strong style="color:#001f3f;">${nombre}</strong>`).addTo(mapa);
+          }
+      }
+
+      const btnCentrar = document.getElementById('btnCentrar');
+      if(btnCentrar) {
+          btnCentrar.onclick = () => { if(userLocation) mapa.setView(userLocation, 19); };
+      }
+
+      const btnActivarGPS = document.getElementById('btnActivarGPS');
+      if(btnActivarGPS) {
+          btnActivarGPS.onclick = function() {
+              let utterance = new SpeechSynthesisUtterance(""); window.speechSynthesis.speak(utterance); 
+              if (!navigator.geolocation) return Swal.fire("Error", "GPS no soportado.", "error");
+
+              Swal.fire({ title: 'Buscando tu ubicación...', didOpen: () => { Swal.showLoading(); }});
+
+              navigator.geolocation.watchPosition(
+                  (pos) => {
+                      Swal.close(); 
+                      userLocation = [pos.coords.latitude, pos.coords.longitude];
+                      const statusGPS = document.getElementById('statusGPS');
+                      if(statusGPS) statusGPS.innerHTML = `<span style="color: #28a745; font-weight: bold;"><i class="fa-solid fa-location-dot"></i> GPS Conectado.</span>`;
+                      if(btnCentrar) btnCentrar.style.display = 'inline-flex'; 
+
+                      if (!userMarker) {
+                          markerPulse = L.marker(userLocation, { icon: L.divIcon({className: 'gps-pulse', iconSize:[40,40], iconAnchor:[20,20]}) }).addTo(mapa);
+                          userMarker = L.marker(userLocation, { icon: L.divIcon({className: 'user-icon', html: '<div style="background: #00c8f5; width: 14px; height: 14px; border-radius: 50%; border: 3px solid white;"></div>'}) }).addTo(mapa).bindPopup("Tú");
+                          mapa.setView(userLocation, 18);
+                          hablar("GPS conectado.");
+                      } else {
+                          userMarker.setLatLng(userLocation);
+                          markerPulse.setLatLng(userLocation);
+                      }
+
+                      if (enrutadorActual) {
+                          enrutadorActual.setWaypoints([
+                              L.latLng(userLocation[0], userLocation[1]),
+                              enrutadorActual.getWaypoints()[1].latLng
+                          ]);
+                      }
+                  },
+                  (err) => { Swal.fire("Enciende tu ubicación", "Permite el acceso al GPS.", "warning"); },
+                  { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 } 
+              );
+          };
+      }
+
+      const btnIr = document.getElementById('btnIr');
+      if(btnIr) {
+          btnIr.onclick = function() {
+              const destinoNombre = document.getElementById('destino').value;
+              if (!userLocation) return Swal.fire("Atención", "Primero activa el GPS.", "info");
+              if (!destinoNombre) return Swal.fire("Atención", "Selecciona un destino.", "info");
+              
+              const destinoCoords = sitiosUNI[destinoNombre];
+              if (destinoCoords[0] === 0) return Swal.fire("Error", "Faltan coordenadas.", "error");
+
+              if (enrutadorActual) mapa.removeControl(enrutadorActual);
+
+              enrutadorActual = L.Routing.control({
+                  waypoints: [
+                      L.latLng(userLocation[0], userLocation[1]),
+                      L.latLng(destinoCoords[0], destinoCoords[1])
+                  ],
+                  router: L.Routing.osrmv1({ language: 'es', profile: 'foot' }),
+                  show: false, 
+                  createMarker: function() { return null; }, 
+                  lineOptions: { styles: [{color: '#00c8f5', opacity: 0.9, weight: 7}] } 
+              }).addTo(mapa);
+
+              enrutadorActual.on('routesfound', function(e) {
+                  let ruta = e.routes[0];
+                  let maniobras = ruta.instructions; 
+                  let pasoActual = maniobras[0];
+                  let txtInstruccion = pasoActual.text;
+                  let distPaso = Math.round(pasoActual.distance); 
+
+                  const infoRuta = document.getElementById('infoRuta');
+                  const instruccionActual = document.getElementById('instruccionActual');
+                  const distanciaTexto = document.getElementById('distanciaTexto');
+
+                  if(infoRuta) infoRuta.style.display = 'block';
+                  if(instruccionActual) instruccionActual.innerText = "➡ " + txtInstruccion;
+                  if(distanciaTexto) distanciaTexto.innerText = `En ${distPaso} metros. (Faltan ${Math.round(ruta.summary.totalDistance)}m en total)`;
+
+                  let fraseVoz = `${txtInstruccion}. Continúa por ${distPaso} metros.`;
+                  
+                  if (txtInstruccion !== instruccionHablada) {
+                      hablar(fraseVoz);
+                      instruccionHablada = txtInstruccion;
+                  }
+
+                  if (ruta.summary.totalDistance <= 15) {
+                      hablar(`Has llegado a tu destino: ${destinoNombre}`);
+                      Swal.fire({ icon: 'success', title: '¡Llegaste!', text: `Estás en ${destinoNombre}.`, confirmButtonColor: '#28a745' });
+                      mapa.removeControl(enrutadorActual);
+                      enrutadorActual = null;
+                      if(infoRuta) infoRuta.style.display = 'none';
+                  }
+              });
+
+              enrutadorActual.on('routingerror', function() {
+                  Swal.fire({
+                      icon: 'warning',
+                      title: 'Zona sin mapear',
+                      text: 'Los pasillos no están en el servidor global. Sigue la línea recta.',
+                      confirmButtonColor: '#001f3f'
+                  });
+                  mapa.removeControl(enrutadorActual);
+                  L.polyline([userLocation, destinoCoords], {color: '#00c8f5', weight: 6, dashArray: '10'}).addTo(mapa);
+                  hablar("Dirígete hacia la línea marcada en tu pantalla.");
+              });
+          };
+      }
+  }
+});
+
+// Eventos para cerrar modales haciendo clic afuera
+const modalVideo = document.getElementById('videoModal');
+if(modalVideo) modalVideo.addEventListener('click', function(e) { if(e.target === this) cerrarSimulacion(); });
+
+const modalPisos = document.getElementById('modalPisos');
+if(modalPisos) modalPisos.addEventListener('click', function(e) { if(e.target === this) cerrarModalPisos(); });
+
+const modalAulaVirtual = document.getElementById('modalAulaVirtual');
+if(modalAulaVirtual) modalAulaVirtual.addEventListener('click', function(e) { if(e.target === this) cerrarModalAulaVirtual(); });
