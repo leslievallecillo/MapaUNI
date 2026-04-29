@@ -182,7 +182,7 @@
   .rec-card:hover .rec-content p { opacity: 1; transform: translateY(0); max-height: 150px; margin-top: 15px; }
 
 .about-image-new {
-  background: url('imagenes/logo.jpeg') center / cover no-repeat;
+  background: url('../imagenes/logo.jpeg') center / cover no-repeat;
   border-radius: 20px;
   min-height: 400px;
   height: 100%;
