@@ -32,32 +32,50 @@ window.toggleMenuMovil = function() {
 }
 
 // -------------------------------------------------------------
-// LÓGICA DE CARGA JSON Y CARRUSELES
+// LÓGICA DE CARGA JSON (A PRUEBA DE GITHUB PAGES)
 // -------------------------------------------------------------
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   
-  fetch('./Json/destinos.json')
-    .then(response => {
-        if(!response.ok) throw new Error("No se pudo cargar el JSON");
-        return response.json();
-    })
-    .then(data => {
-      // Guardamos los datos globalmente para usarlos en el modal de pisos
-      datosCompletos = data;
+  // Lista de todas las rutas posibles para evadir el error de GitHub (Mayúsculas/Minúsculas/Carpetas)
+  const rutasPosibles = [
+      './Json/destinos.json',
+      './json/destinos.json',
+      'Json/destinos.json',
+      'json/destinos.json',
+      '../Json/destinos.json',
+      '../json/destinos.json'
+  ];
 
-      // Dibujamos las tarjetas principales
-      renderizarCategoria(data.categorias.principales, 'track-principales');
-      renderizarCategoria(data.categorias.laboratorios, 'track-laboratorios');
-      renderizarCategoria(data.categorias.cafetines, 'track-cafetines');
+  let dataCargada = null;
 
-      // Activamos el deslizamiento
-      inicializarCarruseles();
-    })
-    .catch(error => {
-        console.error("Error al cargar JSON:", error);
-        alert("Error al cargar los datos. Verifica que el archivo JSON esté bien escrito y usa Live Server.");
-    });
+  // Intentamos cargar el JSON probando cada ruta
+  for (const ruta of rutasPosibles) {
+      try {
+          const response = await fetch(ruta);
+          if (response.ok) {
+              dataCargada = await response.json();
+              console.log("JSON cargado exitosamente desde:", ruta);
+              break; // Si lo encuentra, detenemos la búsqueda
+          }
+      } catch (e) {
+          // Si falla, el ciclo continua con la siguiente ruta invisiblemente
+      }
+  }
 
+  // Si después de probar todo no hay datos, mostramos el error
+  if (!dataCargada) {
+      console.error("No se pudo cargar el archivo destinos.json en ninguna ruta.");
+      return; 
+  }
+
+  // Si lo encontró, asignamos los datos y dibujamos la página
+  datosCompletos = dataCargada;
+  renderizarCategoria(datosCompletos.categorias.principales, 'track-principales');
+  renderizarCategoria(datosCompletos.categorias.laboratorios, 'track-laboratorios');
+  renderizarCategoria(datosCompletos.categorias.cafetines, 'track-cafetines');
+  inicializarCarruseles();
+
+  // Función para inyectar las tarjetas
   function renderizarCategoria(items, contenedorId) {
     const contenedor = document.getElementById(contenedorId);
     if (!contenedor) return;
@@ -80,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     contenedor.innerHTML = html;
   }
 
+  // Función para mover el carrusel
   function inicializarCarruseles() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -331,7 +350,6 @@ window.cerrarSimulacion = function() {
   if(modal) modal.classList.remove('active');
 }
 
-// Modificado para inyectar los botones de los pisos dinámicamente desde el JSON
 window.abrirModalPisos = function(edificioId) {
   edificioActualId = edificioId || "rigoberto";
   const modal = document.getElementById('modalPisos');
@@ -388,7 +406,6 @@ window.desplazarCarruselPisos = function(cantidad) {
   if(track) track.scrollBy({ left: cantidad, behavior: 'smooth' });
 }
 
-// Modificado para inyectar las aulas de ese piso específico desde el JSON
 window.seleccionarPiso = function(pisoId, pisoLabel, botonHtml) {
   document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
   if(botonHtml) botonHtml.classList.add('activo');
@@ -405,7 +422,6 @@ window.seleccionarPiso = function(pisoId, pisoLabel, botonHtml) {
   contenedorTarjetas.innerHTML = "";
 
   if(datosCompletos && datosCompletos.detallesEdificios[edificioActualId] && datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId]) {
-      // Extraemos las aulas del lado seleccionado en el combo box
       const selectLado = document.getElementById('select-lado-aula');
       const ladoActual = selectLado ? selectLado.value : 'A';
       
@@ -431,16 +447,14 @@ window.seleccionarPiso = function(pisoId, pisoLabel, botonHtml) {
   }
 }
 
-// Listener para que cuando cambies "Lado A" a "Lado B" se actualicen las aulas solas
 document.addEventListener('change', function(e) {
   if(e.target && e.target.id === 'select-lado-aula'){
       const btnActivo = document.querySelector('.piso-btn.activo');
       if(btnActivo) {
-          btnActivo.click(); // Re-dispara el evento para volver a dibujar las aulas
+          btnActivo.click(); 
       }
   }
 });
-
 
 window.abrirModalAulaVirtual = function(aula) {
   const titulo = document.getElementById('titulo-aula-virtual');
@@ -455,7 +469,6 @@ window.cerrarModalAulaVirtual = function() {
   if(modal) modal.classList.remove('active');
 }
 
-// Cerrar haciendo clic afuera
 document.addEventListener('click', function(e) {
   const mVideo = document.getElementById('videoModal');
   const mPisos = document.getElementById('modalPisos');
