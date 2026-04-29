@@ -3,40 +3,36 @@
     "id": "fav-chele",
     "icono": "fastfood",
     "titulo": "Comedor El Chele",
-    "descripcion": "El comedor más popular entre la comunidad de la UNI, conocido por sus almuerzos completos y accesibles.",
-    "recomendacion": "Seleccionamos este lugar por ofrecer la mejor relación calidad-precio en todo el campus. Sus porciones son generosas, el menú es variado todos los días y es el salvavidas oficial a fin de mes.",
+    "descripcion": "El comedor más economico entre la comunidad de la UNI, conocido por sus almuerzos completos y accesibles.",
+    "recomendacion": "Ofrece la mejor relación calidad-precio en todo el campus.",
     "color": "#e67e22",
-    "imagen": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
-    "mapa_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.743123456789!2d-86.27!3d12.14!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA4JzI0LjAiTiA4NsKwMTYnMTIuMCJX!5e0!3m2!1ses!2sni!4v1234567890"
+    "imagen": "imagenes/Chele.jpeg"
   },
   {
     "id": "fav-copias",
     "icono": "print",
-    "titulo": "RapiCopias Castellón",
-    "descripcion": "Centro de copiado e impresión especializado en formatos universitarios, planos y encuadernaciones.",
-    "recomendacion": "Elegido por tener los precios más accesibles. El servicio es rápido, entienden exactamente los formatos que piden los profesores y te sacan de apuros 5 minutos antes de la clase.",
+    "titulo": "Batidos Miranda",
+    "descripcion": "Batidos hechos al instante y con ingredientes saludables y nutritivos.",
+    "recomendacion": "El servicio es rápido y todo con ingredientes 100% naturales",
     "color": "#9b59b6",
-    "imagen": "https://images.unsplash.com/photo-1562564055-71e051d33c19?auto=format&fit=crop&w=800&q=80",
-    "mapa_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.743123456789!2d-86.27!3d12.14!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA4JzI0LjAiTiA4NsKwMTYnMTIuMCJX!5e0!3m2!1ses!2sni!4v1234567890"
+    "imagen": "imagenes/BatidosMiranda.jpeg"
   },
   {
     "id": "fav-biblioteca",
     "icono": "menu_book",
     "titulo": "Biblioteca Central",
-    "descripcion": "Instalación principal de recursos literarios y digitales de la universidad, equipada con áreas de estudio.",
-    "recomendacion": "El santuario definitivo para el estudio. Lo elegimos por ser el lugar más silencioso y con mejor clima del campus. Cuenta con cubículos y conexión Wi-Fi estable.",
+    "descripcion": "Instalación principal de recursos literarios y digitales de la universidad, equipada con una segunda planta con área de estudio.",
+    "recomendacion": "El lugar donde puedes obtener señal completamente gratuita.",
     "color": "#2980b9",
-    "imagen": "https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=800&q=80",
-    "mapa_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.743123456789!2d-86.27!3d12.14!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA4JzI0LjAiTiA4NsKwMTYnMTIuMCJX!5e0!3m2!1ses!2sni!4v1234567890"
+    "imagen": "imagenes/Biblioteca.jpeg"
   },
   {
     "id": "fav-cajero",
     "icono": "local_atm",
     "titulo": "Cajero Automático",
-    "descripcion": "Terminal de autoservicio bancario ubicada en una zona estratégica y segura dentro del recinto.",
-    "recomendacion": "Un punto estratégico vital. Lo recomendamos porque siempre es necesario tener efectivo para emergencias, copias de última hora o comprar un snack. Es seguro y siempre disponible.",
+    "descripcion": "Terminal de autoservicio bancario ubicada en una zona segura dentro del recinto.",
+    "recomendacion": "Lo recomendamos porque siempre es necesario tener efectivo para emergencias o copias de última hora.",
     "color": "#7f8c8d",
-    "imagen": "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&w=800&q=80",
-    "mapa_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.743123456789!2d-86.27!3d12.14!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA4JzI0LjAiTiA4NsKwMTYnMTIuMCJX!5e0!3m2!1ses!2sni!4v1234567890"
+    "imagen": "imagenes/Cajero.jpeg"
   }
 ]
