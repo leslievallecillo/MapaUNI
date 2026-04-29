@@ -8,9 +8,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="Style/guia.css">
 
 <style>
-    /* Mantener la estética sutil en todo el sitio */
     body {
         background-color: #f8f9fa;
         background-image: radial-gradient(#d1d5db 1px, transparent 1px);
@@ -207,7 +207,7 @@
 </div>
 
 <div class="modal-overlay" id="modalSmart">
-  <div class="modal-content" style="max-width: 500px;">
+  <div class="modal-content" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
     <div class="modal-header">
       <h3 id="smartTitle">Asistente UNI-WAY</h3>
       <button class="close-btn" onclick="cerrarModalSmart()"><span class="material-icons">close</span></button>
@@ -217,92 +217,8 @@
   </div>
 </div>
 
-<script>
-// --- SCRIPT PARA CARGAR EL NAVBAR ---
-fetch('navbar.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('menu-contenedor').innerHTML = data;
-    // Iluminamos el enlace de "Guía" (debe coincidir con el ID que le pusiste en navbar.html)
-    const navItem = document.getElementById('nav-guia');
-    if (navItem) navItem.classList.add('activo');
-  });
-
-// --- FUNCIONES PARA ABRIR Y CERRAR LOS MODALES DE ESTA PÁGINA ---
-function abrirSimulacion(lugar) {
-    const modal = document.getElementById('videoModal');
-    const title = document.getElementById('modalTitle');
-    title.innerText = 'Ruta hacia: ' + lugar;
-    modal.classList.add('active');
-}
-
-function cerrarSimulacion() {
-    document.getElementById('videoModal').classList.remove('active');
-}
-
-function abrirModalSmart(tipo) {
-    const titulo = document.getElementById('smartTitle');
-    const cuerpo = document.getElementById('smartBody');
-    
-    if(tipo === 'fav-chele') {
-       titulo.innerText = "Comedor El Chele";
-       cuerpo.innerHTML = `
-         <div style="text-align: center;">
-           <span class="material-icons" style="font-size: 60px; color: var(--primary-color);">fastfood</span>
-           <h3 style="color: var(--primary-color); margin: 15px 0;">¿Por qué lo recomendamos?</h3>
-           <p style="color: var(--text-gray); line-height: 1.6; text-align: justify; margin-bottom: 20px;">
-             Seleccionamos este lugar por ofrecer la <strong>mejor relación calidad-precio</strong> en todo el campus. Sus porciones son generosas, el menú es variado todos los días y es el salvavidas oficial de los estudiantes a fin de mes. ¡No te pierdas su especialidad los viernes!
-           </p>
-           <button class="btn-select" onclick="window.location.href='destinos.html'">Ver Ruta en Mapa GPS</button>
-         </div>
-       `;
-    } else if(tipo === 'fav-copias') {
-       titulo.innerText = "RapiCopias Castellón";
-       cuerpo.innerHTML = `
-         <div style="text-align: center;">
-           <span class="material-icons" style="font-size: 60px; color: var(--accent-color);">print</span>
-           <h3 style="color: var(--primary-color); margin: 15px 0;">¿Por qué lo recomendamos?</h3>
-           <p style="color: var(--text-gray); line-height: 1.6; text-align: justify; margin-bottom: 20px;">
-             Elegido por tener los <strong>precios más accesibles</strong> en impresiones y copias. Además, el servicio es rápido, entienden exactamente los formatos que piden los profesores y siempre te sacan de apuros cuando necesitas imprimir tu proyecto 5 minutos antes de la clase.
-           </p>
-           <button class="btn-select" onclick="window.location.href='destinos.html'">Ver Ruta en Mapa GPS</button>
-         </div>
-       `;
-    } else if(tipo === 'fav-biblioteca') {
-       titulo.innerText = "Biblioteca Central";
-       cuerpo.innerHTML = `
-         <div style="text-align: center;">
-           <span class="material-icons" style="font-size: 60px; color: #2980b9;">menu_book</span>
-           <h3 style="color: var(--primary-color); margin: 15px 0;">¿Por qué lo recomendamos?</h3>
-           <p style="color: var(--text-gray); line-height: 1.6; text-align: justify; margin-bottom: 20px;">
-             El santuario definitivo para el estudio. Lo elegimos por ser <strong>el lugar más silencioso y con mejor clima</strong> del campus. Cuenta con cubículos privados, enchufes para tu laptop, conexión Wi-Fi estable y un acervo bibliográfico enorme para tus investigaciones.
-           </p>
-           <button class="btn-select" onclick="window.location.href='destinos.html'">Ver Ruta en Mapa GPS</button>
-         </div>
-       `;
-    } else if(tipo === 'fav-cajero') {
-       titulo.innerText = "Cajero Automático";
-       cuerpo.innerHTML = `
-         <div style="text-align: center;">
-           <span class="material-icons" style="font-size: 60px; color: #7f8c8d;">local_atm</span>
-           <h3 style="color: var(--primary-color); margin: 15px 0;">¿Por qué lo recomendamos?</h3>
-           <p style="color: var(--text-gray); line-height: 1.6; text-align: justify; margin-bottom: 20px;">
-             Un punto estratégico vital. Lo recomendamos porque <strong>siempre es necesario tener efectivo para emergencias</strong>, copias de última hora o comprar un snack en los quioscos que no aceptan tarjeta. Es un lugar seguro, céntrico y siempre disponible.
-           </p>
-           <button class="btn-select" onclick="window.location.href='destinos.html'">Ver Ruta en Mapa GPS</button>
-         </div>
-       `;
-    }
-    
-    document.getElementById('modalSmart').classList.add('active');
-}
-
-function cerrarModalSmart() {
-    document.getElementById('modalSmart').classList.remove('active');
-}
-</script>
-
-<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="Script/guia.js"></script>
 
 </body>
 </html>
