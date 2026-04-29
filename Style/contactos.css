@@ -1,3 +1,11 @@
+:root {
+    --white: #ffffff;
+    --border-color: #e5e7eb;
+    --text-dark: #1f2937;
+    --text-gray: #6b7280;
+    --primary-color: #001f3f; 
+    --accent-color: #00d2ff;  
+}
 body {
     background-color: #f8f9fa;
     background-image: radial-gradient(#d1d5db 1px, transparent 1px);
