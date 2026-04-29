@@ -1,15 +1,17 @@
+// --- VARIABLES GLOBALES PARA ALMACENAR DATOS ---
+let datosCompletos = null;
+
 // --- SCRIPT PARA CARGAR EL NAVBAR ---
 fetch('navbar.html')
   .then(response => response.text())
   .then(data => {
     document.getElementById('menu-contenedor').innerHTML = data;
-    // Iluminar el enlace correcto
     const navDestinos = document.getElementById('nav-destinos');
     if (navDestinos) navDestinos.classList.add('activo');
   }).catch(() => console.log('Navbar no encontrado'));
 
 // Funciones de navegación e interfaz general
-function cambiarVista(idVista) {
+window.cambiarVista = function(idVista) {
   document.querySelectorAll('.vista').forEach(vista => vista.classList.remove('activa'));
   document.getElementById(idVista).classList.add('activa');
   window.scrollTo(0, 0); 
@@ -23,189 +25,121 @@ function cambiarVista(idVista) {
   if(navMovil && navMovil.classList.contains('active')) {
     navMovil.classList.remove('active');
   }
-
-  if (idVista === 'vista-destinos') {
-    document.querySelectorAll('.contenedor-slider').forEach(contenedor => {
-      const sliderTrack = contenedor.querySelector('.carousel-track');
-      if (sliderTrack) sliderTrack.dispatchEvent(new Event('scroll'));
-    });
-  }
 }
 
-function toggleMenuMovil() {
+window.toggleMenuMovil = function() {
   document.querySelector('nav.main-nav').classList.toggle('active');
 }
 
-// LOGICA DE CARRUSELES Y OBSERVADORES DE INTERSECCIÓN
-document.addEventListener("DOMContentLoaded", function() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+// -------------------------------------------------------------
+// LÓGICA DE CARGA JSON Y CARRUSELES
+// -------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  
+  fetch('Json/destinos.json')
+    .then(response => {
+        if(!response.ok) throw new Error("No se pudo cargar el JSON");
+        return response.json();
+    })
+    .then(data => {
+      // Guardamos los datos globalmente para usarlos en el modal de pisos
+      datosCompletos = data;
+
+      // Dibujamos las tarjetas principales
+      renderizarCategoria(data.categorias.principales, 'track-principales');
+      renderizarCategoria(data.categorias.laboratorios, 'track-laboratorios');
+      renderizarCategoria(data.categorias.cafetines, 'track-cafetines');
+
+      // Activamos el deslizamiento
+      inicializarCarruseles();
+    })
+    .catch(error => {
+        console.error("Error al cargar JSON:", error);
+        alert("Error al cargar los datos. Verifica que el archivo JSON esté bien escrito y usa Live Server.");
+    });
+
+  function renderizarCategoria(items, contenedorId) {
+    const contenedor = document.getElementById(contenedorId);
+    if (!contenedor) return;
+
+    let html = items.map(item => `
+      <div class="card">
+        <div class="card-img-container">
+          <img src="${item.img}" alt="${item.nombre}" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200/001f3f/ffffff?text=${encodeURIComponent(item.nombre)}';">
+        </div>
+        <div class="card-body">
+          <h3>${item.nombre}</h3>
+          <p>${item.desc}</p>
+          <button class="btn-select" onclick="${item.tipo === 'complejo' ? `window.abrirModalPisos('${item.id}')` : `window.abrirSimulacion('${item.nombre}')`}">
+            <span class="material-icons" style="font-size:18px; vertical-align: middle;">360</span> Entrar
+          </button>
+        </div>
+      </div>
+    `).join('');
+
+    contenedor.innerHTML = html;
+  }
+
+  function inicializarCarruseles() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.anim-element').forEach((el) => observer.observe(el));
+
+    document.querySelectorAll('.contenedor-slider').forEach(contenedor => {
+      const sliderTrack = contenedor.querySelector('.carousel-track');
+      const botonAnterior = contenedor.querySelector('.boton-slider.anterior');
+      const botonSiguiente = contenedor.querySelector('.boton-slider.siguiente');
+
+      if (sliderTrack && botonAnterior && botonSiguiente) {
+        let cantidadDesplazamiento = 0;
+        const card = sliderTrack.querySelector('.card');
+        const anchoSlide = card ? card.offsetWidth + 20 : 320; 
+
+        function actualizarVisibilidadBotones() {
+          botonAnterior.style.display = cantidadDesplazamiento <= 0 ? 'none' : 'flex';
+          botonSiguiente.style.display = cantidadDesplazamiento >= sliderTrack.scrollWidth - sliderTrack.clientWidth - 10 ? 'none' : 'flex';
+        }
+
+        botonSiguiente.addEventListener('click', () => {
+          const desplazamientoMaximo = sliderTrack.scrollWidth - sliderTrack.clientWidth;
+          cantidadDesplazamiento = Math.min(cantidadDesplazamiento + anchoSlide, desplazamientoMaximo);
+          sliderTrack.scrollTo({ left: cantidadDesplazamiento, behavior: 'smooth' });
+          setTimeout(actualizarVisibilidadBotones, 300);
+        });
+
+        botonAnterior.addEventListener('click', () => {
+          cantidadDesplazamiento = Math.max(cantidadDesplazamiento - anchoSlide, 0);
+          sliderTrack.scrollTo({ left: cantidadDesplazamiento, behavior: 'smooth' });
+          setTimeout(actualizarVisibilidadBotones, 300);
+        });
+
+        sliderTrack.addEventListener('wheel', (e) => {
+          sliderTrack.scrollLeft += e.deltaY;
+          cantidadDesplazamiento = sliderTrack.scrollLeft;
+          actualizarVisibilidadBotones();
+        }, {passive: true});
+
+        sliderTrack.addEventListener('scroll', () => {
+          cantidadDesplazamiento = sliderTrack.scrollLeft;
+          actualizarVisibilidadBotones();
+        });
+
+        actualizarVisibilidadBotones();
       }
     });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.anim-element').forEach((el) => {
-    observer.observe(el);
-  });
-
-  // Configuración de los carruseles
-  document.querySelectorAll('.contenedor-slider').forEach(contenedor => {
-    const sliderTrack = contenedor.querySelector('.carousel-track');
-    const botonAnterior = contenedor.querySelector('.boton-slider.anterior');
-    const botonSiguiente = contenedor.querySelector('.boton-slider.siguiente');
-
-    if (sliderTrack && botonAnterior && botonSiguiente) {
-      let cantidadDesplazamiento = 0;
-      // Obtiene el ancho real de la tarjeta en ese monitor + los 20px de separación
-const anchoSlide = sliderTrack.querySelector('.card').offsetWidth + 20;
-
-      function actualizarVisibilidadBotones() {
-        botonAnterior.style.display = cantidadDesplazamiento <= 0 ? 'none' : 'flex';
-        botonSiguiente.style.display = cantidadDesplazamiento >= sliderTrack.scrollWidth - sliderTrack.clientWidth - 10 ? 'none' : 'flex';
-      }
-
-      botonSiguiente.addEventListener('click', () => {
-        const desplazamientoMaximo = sliderTrack.scrollWidth - sliderTrack.clientWidth;
-        cantidadDesplazamiento = Math.min(cantidadDesplazamiento + anchoSlide, desplazamientoMaximo);
-        sliderTrack.scrollTo({ left: cantidadDesplazamiento, behavior: 'smooth' });
-        setTimeout(actualizarVisibilidadBotones, 300);
-      });
-
-      botonAnterior.addEventListener('click', () => {
-        cantidadDesplazamiento = Math.max(cantidadDesplazamiento - anchoSlide, 0);
-        sliderTrack.scrollTo({ left: cantidadDesplazamiento, behavior: 'smooth' });
-        setTimeout(actualizarVisibilidadBotones, 300);
-      });
-
-      sliderTrack.addEventListener('wheel', (e) => {
-        // Opción: Puedes comentar el preventDefault si no quieres que el scroll vertical se bloquee
-        // e.preventDefault(); 
-        sliderTrack.scrollLeft += e.deltaY;
-        cantidadDesplazamiento = sliderTrack.scrollLeft;
-        actualizarVisibilidadBotones();
-      }, {passive: true});
-
-      sliderTrack.addEventListener('scroll', () => {
-        cantidadDesplazamiento = sliderTrack.scrollLeft;
-        actualizarVisibilidadBotones();
-      });
-
-      actualizarVisibilidadBotones();
-    }
-  });
+  }
 });
 
-// Funciones de Modales y Utilidades
-function toggleSidebar() {
-  const sidebar = document.getElementById('formSidebar');
-  const overlay = document.getElementById('sidebarOverlay');
-  if(sidebar && overlay){
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-  }
-}
 
-function toggleSearchModal() {
-  const modal = document.getElementById('searchModal');
-  const overlay = document.getElementById('searchOverlay');
-  if(modal && overlay){
-      modal.classList.toggle('active');
-      overlay.classList.toggle('active');
-  }
-}
-
-function abrirSimulacion(lugar) {
-  const modal = document.getElementById('videoModal');
-  const title = document.getElementById('modalTitle');
-  if(title) title.innerText = 'Ruta hacia: ' + lugar;
-  if(modal) modal.classList.add('active');
-}
-
-function cerrarSimulacion() {
-  const modal = document.getElementById('videoModal');
-  if(modal) modal.classList.remove('active');
-}
-
-function abrirModalPisos() {
-  const modal = document.getElementById('modalPisos');
-  if(modal) modal.classList.add('active');
-  cambiarPestanaRigoberto('info'); 
-}
-
-function cerrarModalPisos() {
-  const modal = document.getElementById('modalPisos');
-  if(modal) modal.classList.remove('active');
-  
-  const opcionesAula = document.getElementById('opciones-aula');
-  if(opcionesAula) opcionesAula.style.display = 'none';
-  
-  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
-  
-  const trackPisos = document.getElementById('track-pisos');
-  if(trackPisos) trackPisos.scrollTo({ left: 0 });
-}
-
-function cambiarPestanaRigoberto(pestana) {
-  const btnInfo = document.getElementById('btn-tab-info');
-  const btnAulas = document.getElementById('btn-tab-aulas');
-  const contenidoInfo = document.getElementById('contenido-info-rigoberto');
-  const contenidoAulas = document.getElementById('contenido-aulas-rigoberto');
-
-  if(pestana === 'info') {
-    if(contenidoInfo) contenidoInfo.style.display = 'block';
-    if(contenidoAulas) contenidoAulas.style.display = 'none';
-    if(btnInfo) { btnInfo.style.background = 'var(--primary-color)'; btnInfo.style.color = 'white'; }
-    if(btnAulas) { btnAulas.style.background = '#e0e0e0'; btnAulas.style.color = 'var(--text-gray)'; }
-  } else {
-    if(contenidoInfo) contenidoInfo.style.display = 'none';
-    if(contenidoAulas) contenidoAulas.style.display = 'block';
-    if(btnAulas) { btnAulas.style.background = 'var(--primary-color)'; btnAulas.style.color = 'white'; }
-    if(btnInfo) { btnInfo.style.background = '#e0e0e0'; btnInfo.style.color = 'var(--text-gray)'; }
-  }
-}
-
-function desplazarCarruselPisos(cantidad) {
-  const track = document.getElementById('track-pisos');
-  if(track) track.scrollBy({ left: cantidad, behavior: 'smooth' });
-}
-
-function seleccionarPiso(piso, botonHtml) {
-  const inputPiso = document.getElementById('input-piso-actual');
-  if(inputPiso) inputPiso.value = piso;
-  
-  const opcionesAula = document.getElementById('opciones-aula');
-  if(opcionesAula) opcionesAula.style.display = 'block';
-  
-  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
-  if(botonHtml) botonHtml.classList.add('activo');
-}
-
-function abrirModalAulaVirtual(aula) {
-  const titulo = document.getElementById('titulo-aula-virtual');
-  if(titulo) titulo.innerText = 'Destino: ' + aula;
-  cerrarModalPisos();
-  const modal = document.getElementById('modalAulaVirtual');
-  if(modal) modal.classList.add('active');
-}
-
-function cerrarModalAulaVirtual() {
-  const modal = document.getElementById('modalAulaVirtual');
-  if(modal) modal.classList.remove('active');
-}
-
-function abrirModalGPS() {
-  const modal = document.getElementById('modalGPS');
-  if(modal) modal.classList.add('active');
-}
-
-function cerrarGPS() {
-  const modal = document.getElementById('modalGPS');
-  if(modal) modal.classList.remove('active');
-}
-
-// LÓGICA MAPA GPS
+// -------------------------------------------------------------
+// LÓGICA MAPA GPS 
+// -------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function() {
   const sitiosUNI = {
       "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
@@ -250,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
 
-  // Verifica si el div del mapa existe antes de inicializarlo
   if (document.getElementById('uni-mapa')) {
       const capaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 });
       const capaOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 });
@@ -382,12 +315,152 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Eventos para cerrar modales haciendo clic afuera
-const modalVideo = document.getElementById('videoModal');
-if(modalVideo) modalVideo.addEventListener('click', function(e) { if(e.target === this) cerrarSimulacion(); });
+// -------------------------------------------------------------
+// FUNCIONES DE MODALES Y LÓGICA DE AULAS DINÁMICA
+// -------------------------------------------------------------
+let edificioActualId = "";
 
-const modalPisos = document.getElementById('modalPisos');
-if(modalPisos) modalPisos.addEventListener('click', function(e) { if(e.target === this) cerrarModalPisos(); });
+window.abrirSimulacion = function(lugar) {
+  const modal = document.getElementById('videoModal');
+  const title = document.getElementById('modalTitle');
+  if(title) title.innerText = 'Ruta hacia: ' + lugar;
+  if(modal) modal.classList.add('active');
+}
+window.cerrarSimulacion = function() {
+  const modal = document.getElementById('videoModal');
+  if(modal) modal.classList.remove('active');
+}
 
-const modalAulaVirtual = document.getElementById('modalAulaVirtual');
-if(modalAulaVirtual) modalAulaVirtual.addEventListener('click', function(e) { if(e.target === this) cerrarModalAulaVirtual(); });
+// Modificado para inyectar los botones de los pisos dinámicamente desde el JSON
+window.abrirModalPisos = function(edificioId) {
+  edificioActualId = edificioId || "rigoberto";
+  const modal = document.getElementById('modalPisos');
+  if(modal) modal.classList.add('active');
+  window.cambiarPestanaRigoberto('info'); 
+  
+  if(datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
+      const pisosData = datosCompletos.detallesEdificios[edificioActualId].pisos;
+      const trackPisos = document.getElementById('track-pisos');
+      if(trackPisos) {
+          trackPisos.innerHTML = "";
+          pisosData.forEach(piso => {
+              let btn = document.createElement('button');
+              btn.className = 'piso-btn';
+              btn.innerText = piso.label.toUpperCase();
+              btn.onclick = function() { window.seleccionarPiso(piso.id, piso.label, this); };
+              trackPisos.appendChild(btn);
+          });
+      }
+  }
+}
+
+window.cerrarModalPisos = function() {
+  const modal = document.getElementById('modalPisos');
+  if(modal) modal.classList.remove('active');
+  const opcionesAula = document.getElementById('opciones-aula');
+  if(opcionesAula) opcionesAula.style.display = 'none';
+  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+  const trackPisos = document.getElementById('track-pisos');
+  if(trackPisos) trackPisos.scrollTo({ left: 0 });
+}
+
+window.cambiarPestanaRigoberto = function(pestana) {
+  const btnInfo = document.getElementById('btn-tab-info');
+  const btnAulas = document.getElementById('btn-tab-aulas');
+  const contenidoInfo = document.getElementById('contenido-info-rigoberto');
+  const contenidoAulas = document.getElementById('contenido-aulas-rigoberto');
+
+  if(pestana === 'info') {
+    if(contenidoInfo) contenidoInfo.style.display = 'block';
+    if(contenidoAulas) contenidoAulas.style.display = 'none';
+    if(btnInfo) { btnInfo.style.background = 'var(--primary-color)'; btnInfo.style.color = 'white'; }
+    if(btnAulas) { btnAulas.style.background = '#e0e0e0'; btnAulas.style.color = 'var(--text-gray)'; }
+  } else {
+    if(contenidoInfo) contenidoInfo.style.display = 'none';
+    if(contenidoAulas) contenidoAulas.style.display = 'block';
+    if(btnAulas) { btnAulas.style.background = 'var(--primary-color)'; btnAulas.style.color = 'white'; }
+    if(btnInfo) { btnInfo.style.background = '#e0e0e0'; btnInfo.style.color = 'var(--text-gray)'; }
+  }
+}
+
+window.desplazarCarruselPisos = function(cantidad) {
+  const track = document.getElementById('track-pisos');
+  if(track) track.scrollBy({ left: cantidad, behavior: 'smooth' });
+}
+
+// Modificado para inyectar las aulas de ese piso específico desde el JSON
+window.seleccionarPiso = function(pisoId, pisoLabel, botonHtml) {
+  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+  if(botonHtml) botonHtml.classList.add('activo');
+  
+  const opcionesAula = document.getElementById('opciones-aula');
+  if(opcionesAula) opcionesAula.style.display = 'block';
+  
+  const inputPiso = document.getElementById('input-piso-actual');
+  if(inputPiso) inputPiso.value = pisoLabel;
+
+  const contenedorTarjetas = document.getElementById('contenedor-tarjetas-aula');
+  if(!contenedorTarjetas) return;
+  
+  contenedorTarjetas.innerHTML = "";
+
+  if(datosCompletos && datosCompletos.detallesEdificios[edificioActualId] && datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId]) {
+      // Extraemos las aulas del lado seleccionado en el combo box
+      const selectLado = document.getElementById('select-lado-aula');
+      const ladoActual = selectLado ? selectLado.value : 'A';
+      
+      const aulasDelPiso = datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId][ladoActual] || [];
+
+      if(aulasDelPiso.length === 0) {
+          contenedorTarjetas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">No hay aulas registradas en el Lado ${ladoActual} de este piso.</p>`;
+          return;
+      }
+
+      aulasDelPiso.forEach(aula => {
+          contenedorTarjetas.innerHTML += `
+              <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                  <h4 style="margin-bottom: 12px; font-size: 16px;">${aula.nombre}</h4>
+                  <button onclick="window.abrirModalAulaVirtual('${aula.nombre}')" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s;">
+                      <span class="material-icons" style="font-size: 18px; vertical-align: bottom; margin-right: 5px;">vrpano</span> Entrar (360)
+                  </button>
+              </div>
+          `;
+      });
+  } else {
+      contenedorTarjetas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">Datos no disponibles para este piso aún.</p>`;
+  }
+}
+
+// Listener para que cuando cambies "Lado A" a "Lado B" se actualicen las aulas solas
+document.addEventListener('change', function(e) {
+  if(e.target && e.target.id === 'select-lado-aula'){
+      const btnActivo = document.querySelector('.piso-btn.activo');
+      if(btnActivo) {
+          btnActivo.click(); // Re-dispara el evento para volver a dibujar las aulas
+      }
+  }
+});
+
+
+window.abrirModalAulaVirtual = function(aula) {
+  const titulo = document.getElementById('titulo-aula-virtual');
+  if(titulo) titulo.innerText = 'Destino: ' + aula;
+  window.cerrarModalPisos();
+  const modal = document.getElementById('modalAulaVirtual');
+  if(modal) modal.classList.add('active');
+}
+
+window.cerrarModalAulaVirtual = function() {
+  const modal = document.getElementById('modalAulaVirtual');
+  if(modal) modal.classList.remove('active');
+}
+
+// Cerrar haciendo clic afuera
+document.addEventListener('click', function(e) {
+  const mVideo = document.getElementById('videoModal');
+  const mPisos = document.getElementById('modalPisos');
+  const mAula = document.getElementById('modalAulaVirtual');
+  if(e.target === mVideo) window.cerrarSimulacion();
+  if(e.target === mPisos) window.cerrarModalPisos();
+  if(e.target === mAula) window.cerrarModalAulaVirtual();
+});

@@ -1,0 +1,66 @@
+{
+  "categorias": {
+    "principales": [
+      { "id": "rigoberto", "nombre": "Edificio Rigoberto López Pérez", "desc": "Complejo principal con aulas y laboratorios de computación.", "img": "imagenes/edificiorusb.jpeg", "tipo": "complejo" },
+      { "id": "ies", "nombre": "Edificio IES", "desc": "Edificio correspondiente a la carrera de Ingeniería de Sistemas.", "img": "imagenes/edificioies.jpeg", "tipo": "estandar" },
+      { "id": "posgrado", "nombre": "Edificio Posgrado", "desc": "Dirección de posgrados y maestrías de la universidad.", "img": "imagenes/posgrado.jpeg", "tipo": "estandar" },
+      { "id": "quimica", "nombre": "Edificio Química", "desc": "Laboratorios y aulas teóricas de la facultad química.", "img": "imagenes/edificioquimica.jpeg", "tipo": "estandar" },
+      { "id": "arquitectura", "nombre": "Edificio Arquitectura", "desc": "Laboratorios y aulas teóricas.", "img": "imagenes/edificioarquitectura.jpeg", "tipo": "estandar" },
+      { "id": "berroteran", "nombre": "Edificio Ing. Carlos Santos Berroteran", "desc": "Oficinas para personal administrativo y maestros", "img": "imagenes/edificioBerroteran.jpeg", "tipo": "estandar" },
+      { "id": "auditorio", "nombre": "Auditorio Salomón de la Selva", "desc": "Auditorio para eventos o conferencias. Acceso subiendo las escaleras del Salomón.", "img": "imagenes/edificioSalomonSelva.jpeg", "tipo": "estandar" },
+      { "id": "unen", "nombre": "Oficinas de UNEN-ANECYS", "desc": "Oficina de miembros de la UNEN", "img": "imagenes/UNEN.jpeg", "tipo": "estandar" },
+      { "id": "registro", "nombre": "Departamento de Registro Académico", "desc": "En este departamento se encuentra secretaria academica para cada carrera y Caja", "img": "imagenes/RegistroAcademico.jpeg", "tipo": "estandar" }
+    ],
+    "laboratorios": [
+      { "id": "lab_robotica", "nombre": "Laboratorios Robótica (Sótano)", "desc": "Equipos especializados para proyectos de hardware y electrónica.", "img": "imagenes/lab_robotica.jpeg", "tipo": "estandar" },
+      { "id": "lab_analogica", "nombre": "Laboratorio de Electronica Analogica", "desc": "Salas de computación principales para estudiantes de sistemas.", "img": "imagenes/Lab_ElectronicaAnalogica.jpeg", "tipo": "estandar" },
+      { "id": "lab_leyda", "nombre": "Laboratorio Leyda", "desc": "Salas de computación principales para estudiantes de sistemas.", "img": "imagenes/Lab_Leyda.jpeg", "tipo": "estandar" },
+      { "id": "lab_control", "nombre": "Laboratorio de Control", "desc": "Salas de computación principales para estudiantes de sistemas.", "img": "imagenes/Lab_Control.jpeg", "tipo": "estandar" },
+      { "id": "lab_redes", "nombre": "Laboratorio Redes", "desc": "Prácticas de configuración de servidores y telecomunicaciones.", "img": "imagenes/lab_redes.jpeg", "tipo": "estandar" },
+      { "id": "lab_digital", "nombre": "Laboratorio Electronica Digital", "desc": "Equipo exclusivo para estudiantes y maestros.", "img": "imagenes/Lab_ElectronicaDigital.jpeg", "tipo": "estandar" },
+      { "id": "lab_circuitos", "nombre": "Laboratorio Circuitos Electricos", "desc": "Practicas de Arduinos y circuitos.", "img": "imagenes/Lab_CircuitosElectricos.jpeg", "tipo": "estandar" },
+      { "id": "lab_ambiental", "nombre": "Laboratorio Ambiental", "desc": "Equipo unicamente para estudiantes y docentes.", "img": "imagenes/Lab_Ambientales.jpeg", "tipo": "estandar" },
+      { "id": "lab_alimentos", "nombre": "Laboratorio de Alimentos", "desc": "Equipo unicamente para estudiantes y docentes.", "img": "imagenes/Lab_Alimentos.jpeg", "tipo": "estandar" }
+    ],
+    "cafetines": [
+      { "id": "caf_gueguense", "nombre": "Cafetería El Güegüense", "desc": "Variedad de comida casera y postres deliciosos para el receso.", "img": "imagenes/gueguense1.jpeg", "tipo": "estandar" },
+      { "id": "caf_x", "nombre": "Cafetería X", "desc": "Especialidad en Hamburguesas, jugos y snacks", "img": "imagenes/cafetinX.jpeg", "tipo": "estandar" },
+      { "id": "caf_duarte", "nombre": "Cafetería El Duarte", "desc": "Desayunos tradicionales y el café más rápido de la zona.", "img": "imagenes/duarte.jpeg", "tipo": "estandar" },
+      { "id": "caf_deportivo", "nombre": "Cafetería El Deportivo", "desc": "Especialidad en almuerzos, pizza", "img": "imagenes/deportivo.jpeg", "tipo": "estandar" },
+      { "id": "caf_fritanga", "nombre": "Cafetería La Fritanga", "desc": "La auténtica comida nicaragüense asada disponible a toda hora.", "img": "imagenes/fritanga.jpeg", "tipo": "estandar" },
+      { "id": "caf_kafe", "nombre": "Cafetería Kafe", "desc": "Especialidad en comida rapida", "img": "imagenes/kafe.jpeg", "tipo": "estandar" },
+      { "id": "caf_fuzion", "nombre": "Cafetería Fuzion", "desc": "Especialidad en helados, postres y almuerzos", "img": "imagenes/fuzion.jpeg", "tipo": "estandar" },
+      { "id": "caf_kyoto", "nombre": "Cafetería Kyoto", "desc": "Especialidad en snacks y jugos", "img": "imagenes/Kyoto.jpeg", "tipo": "estandar" },
+      { "id": "caf_mita", "nombre": "Cafetería La Mita", "desc": "Especialidad en Nachos", "img": "imagenes/lamita.jpeg", "tipo": "estandar" },
+      { "id": "caf_comal", "nombre": "Cafetería El Comal", "desc": "Especialidad en Enchiladas, Arroz a la valenciana.", "img": "imagenes/comal.jpeg", "tipo": "estandar" }
+    ]
+  },
+  "detallesEdificios": {
+    "rigoberto": {
+      "pisos": [
+        { "id": "p1", "label": "Piso 1" },
+        { "id": "p2", "label": "Piso 2" },
+        { "id": "p3", "label": "Piso 3" },
+        { "id": "p4", "label": "Piso 4" },
+        { "id": "p5", "label": "Piso 5" },
+        { "id": "s2", "label": "Sótano 2" },
+        { "id": "s1", "label": "Sótano 1" }
+      ],
+      "aulas": {
+        "p1": {
+          "A": [
+            { "id": "A11", "nombre": "Aula A-11", "img": "imagenes/aulas/p1a11.jpg" },
+            { "id": "A12", "nombre": "Aula A-12", "img": "imagenes/aulas/p1a12.jpg" }
+          ],
+          "B": [
+            { "id": "B11", "nombre": "Aula B-11", "img": "imagenes/aulas/p1b11.jpg" }
+          ]
+        },
+        "s1": {
+          "A": [{ "id": "LAB1", "nombre": "Laboratorio Computo", "img": "imagenes/aulas/s1lab1.jpg" }],
+          "B": []
+        }
+      }
+    }
+  }
+}
