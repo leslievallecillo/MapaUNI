@@ -1,74 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UNI-WAY | Navegación Universitaria</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="Style/styles.css">
-<link rel="stylesheet" href="Style/guia.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNI-WAY | Navegación Universitaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="Style/styles.css">
+  <link rel="stylesheet" href="Style/guia.css">
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<style>
+  <style>
     body {
-        background-color: #f8f9fa;
-        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-        background-size: 30px 30px;
+      background-color: #f8f9fa;
+      background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+      background-size: 30px 30px;
     }
 
     #loader-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: #f8f9fa;
-        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-        background-size: 30px 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #f8f9fa;
+      background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+      background-size: 30px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
     .loader-content {
-        text-align: center;
+      text-align: center;
     }
 
     .loader-svg {
-        width: 220px;
-        height: 220px;
-        filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+      width: 220px;
+      height: 220px;
+      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
     }
 
     .loader-text {
-        color: #001f3f;
-        font-size: 1.8rem;
-        font-weight: 900;
-        margin-top: 15px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        animation: pulseText 1s infinite alternate;
+      color: #001f3f;
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-top: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: pulseText 1s infinite alternate;
     }
 
     @keyframes pulseText {
-        from { opacity: 0.5; }
-        to { opacity: 1; }
+      from {
+        opacity: 0.5;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes moveLoaderPath {
-        from { stroke-dashoffset: 50; }
-        to { stroke-dashoffset: 0; }
+      from {
+        stroke-dashoffset: 50;
+      }
+
+      to {
+        stroke-dashoffset: 0;
+      }
     }
 
     .loader-path {
-        stroke-dasharray: 25;
-        animation: moveLoaderPath 0.8s linear infinite;
+      stroke-dasharray: 25;
+      animation: moveLoaderPath 0.8s linear infinite;
     }
 
     /* Estado de carga finalizada (pausa las animaciones) */
@@ -78,763 +89,944 @@
     .loaded .mascot1-arm-left,
     .loaded .loader-path,
     .loaded .loader-text {
-        animation-play-state: paused !important;
+      animation-play-state: paused !important;
     }
 
     #inicio {
-        background-attachment: fixed;
-        box-shadow: 0 15px 40px rgba(0, 31, 63, 0.2);
-        position: relative;
-        overflow: hidden;
+      background-attachment: fixed;
+      box-shadow: 0 15px 40px rgba(0, 31, 63, 0.2);
+      position: relative;
+      overflow: hidden;
     }
 
     .phrase-container {
-        background: #ffffff;
-        padding: 40px 40px;
-        border-radius: 15px;
-        margin: -40px auto 50px auto;
-        max-width: 900px;
-        position: relative;
-        z-index: 10;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        border-bottom: 4px solid #00d2ff;
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        text-align: left;
+      background: #ffffff;
+      padding: 40px 40px;
+      border-radius: 15px;
+      margin: -40px auto 50px auto;
+      max-width: 900px;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-bottom: 4px solid #00d2ff;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      text-align: left;
     }
 
     .mascot-container {
-        flex-shrink: 0;
-        width: 200px;
-        height: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
+      flex-shrink: 0;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
 
     .svg-mascot {
-        width: 100%;
-        height: 100%;
-        overflow: visible;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
-    .mascot1-body-group { animation: mascotWalk 1s infinite ease-in-out; transform-origin: center bottom; }
-    .mascot1-leg-left { animation: legLeft 1s infinite ease-in-out; transform-origin: 55px 150px; }
-    .mascot1-leg-right { animation: legRight 1s infinite ease-in-out; transform-origin: 105px 150px; }
-    .mascot1-arm-left { animation: armWave 1.5s infinite ease-in-out; transform-origin: 20px 100px; }
-    .road-glow { stroke-dasharray: 20; animation: roadMove 1s linear infinite; }
-    .map-pin { animation: pinBounce 2s infinite ease-in-out; }
+    .mascot1-body-group {
+      animation: mascotWalk 1s infinite ease-in-out;
+      transform-origin: center bottom;
+    }
+
+    .mascot1-leg-left {
+      animation: legLeft 1s infinite ease-in-out;
+      transform-origin: 55px 150px;
+    }
+
+    .mascot1-leg-right {
+      animation: legRight 1s infinite ease-in-out;
+      transform-origin: 105px 150px;
+    }
+
+    .mascot1-arm-left {
+      animation: armWave 1.5s infinite ease-in-out;
+      transform-origin: 20px 100px;
+    }
+
+    .road-glow {
+      stroke-dasharray: 20;
+      animation: roadMove 1s linear infinite;
+    }
+
+    .map-pin {
+      animation: pinBounce 2s infinite ease-in-out;
+    }
 
     @keyframes mascotWalk {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-8px); }
-        100% { transform: translateY(0); }
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
     }
 
     @keyframes legLeft {
-        0% { transform: rotate(-20deg); }
-        50% { transform: rotate(25deg); }
-        100% { transform: rotate(-20deg); }
+      0% {
+        transform: rotate(-20deg);
+      }
+
+      50% {
+        transform: rotate(25deg);
+      }
+
+      100% {
+        transform: rotate(-20deg);
+      }
     }
 
     @keyframes legRight {
-        0% { transform: rotate(25deg); }
-        50% { transform: rotate(-20deg); }
-        100% { transform: rotate(25deg); }
+      0% {
+        transform: rotate(25deg);
+      }
+
+      50% {
+        transform: rotate(-20deg);
+      }
+
+      100% {
+        transform: rotate(25deg);
+      }
     }
 
     @keyframes armWave {
-        0% { transform: rotate(0deg); }
-        50% { transform: rotate(-35deg); }
-        100% { transform: rotate(0deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(-35deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
     }
 
     @keyframes roadMove {
-        from { stroke-dashoffset: 40; }
-        to { stroke-dashoffset: 0; }
+      from {
+        stroke-dashoffset: 40;
+      }
+
+      to {
+        stroke-dashoffset: 0;
+      }
     }
 
     @keyframes pinBounce {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0); }
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
     }
 
     .phrase-content {
-        flex: 1;
+      flex: 1;
     }
 
     .phrase-container h2 {
-        color: #001f3f;
-        font-size: 2.2rem;
-        font-weight: 900;
-        margin-bottom: 15px;
+      color: #001f3f;
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 15px;
     }
 
     .phrase-container p {
-        color: #6c757d;
-        font-size: 1.25rem;
-        line-height: 1.6;
-        margin: 0;
+      color: #6c757d;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      margin: 0;
     }
 
     .phrase-container strong {
-        color: #001f3f;
-        font-weight: 900;
+      color: #001f3f;
+      font-weight: 900;
     }
 
     @media (max-width: 768px) {
-        .phrase-container {
-            flex-direction: column;
-            text-align: center;
-            padding: 30px 20px;
-        }
+      .phrase-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+      }
     }
 
     .card {
-        border: none;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        background: var(--white);
+      border: none;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      background: var(--white);
     }
-    .card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0, 31, 63, 0.15); }
-    .card img { transition: transform 0.6s ease; }
-    .card:hover img { transform: scale(1.08); }
-    .card-body { position: relative; background: var(--white); }
-    .card-body .btn-select { background: var(--primary-color); transition: all 0.3s; }
-    .card:hover .btn-select { background: var(--accent-color); color: var(--primary-color); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4); }
+
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0, 31, 63, 0.15);
+    }
+
+    .card img {
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.08);
+    }
+
+    .card-body {
+      position: relative;
+      background: var(--white);
+    }
+
+    .card-body .btn-select {
+      background: var(--primary-color);
+      transition: all 0.3s;
+    }
+
+    .card:hover .btn-select {
+      background: var(--accent-color);
+      color: var(--primary-color);
+      box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+    }
 
     .gps-banner {
-        background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
-        border-radius: 20px;
-        padding: 60px 30px;
-        text-align: center;
-        color: white;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 20px 40px rgba(0, 31, 63, 0.25);
-        margin: 60px auto;
-        max-width: 1000px;
-        border: 1px solid rgba(0, 210, 255, 0.2);
+      background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
+      border-radius: 20px;
+      padding: 60px 30px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 31, 63, 0.25);
+      margin: 60px auto;
+      max-width: 1000px;
+      border: 1px solid rgba(0, 210, 255, 0.2);
     }
-    
+
     .gps-banner::before {
-        content: '';
-        position: absolute;
-        top: -50%; left: -50%; width: 200%; height: 200%;
-        background: radial-gradient(circle, rgba(0,210,255,0.15) 0%, transparent 60%);
-        animation: rotateBg 15s linear infinite;
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, transparent 60%);
+      animation: rotateBg 15s linear infinite;
     }
+
     @keyframes rotateBg {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
-    
-    .gps-content { position: relative; z-index: 2; }
-    .gps-banner h2 { font-size: 2.8rem; font-weight: 900; margin-bottom: 15px; color: var(--white); text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-    .gps-banner h2 span { color: var(--accent-color); }
-    .gps-banner p { font-size: 1.2rem; margin-bottom: 35px; color: #d0e5ff; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; }
-    
+
+    .gps-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .gps-banner h2 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+      color: var(--white);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .gps-banner h2 span {
+      color: var(--accent-color);
+    }
+
+    .gps-banner p {
+      font-size: 1.2rem;
+      margin-bottom: 35px;
+      color: #d0e5ff;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
     .btn-super-glow {
-        background: var(--accent-color);
-        color: var(--primary-color);
-        font-size: 1.3rem;
-        font-weight: 900;
-        padding: 18px 45px;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        animation: pulse-glow 2s infinite;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+      background: var(--accent-color);
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      font-weight: 900;
+      padding: 18px 45px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      animation: pulse-glow 2s infinite;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
+
     .btn-super-glow:hover {
-        transform: scale(1.05) translateY(-3px);
-        box-shadow: 0 0 40px rgba(0, 210, 255, 0.9);
-        background: #ffffff;
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 0 40px rgba(0, 210, 255, 0.9);
+      background: #ffffff;
     }
+
     @keyframes pulse-glow {
-        0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7); }
-        70% { box-shadow: 0 0 0 20px rgba(0, 210, 255, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 20px rgba(0, 210, 255, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0);
+      }
     }
 
     .corner-widget {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        z-index: 1000;
-        display: flex;
-        align-items: flex-end;
-        gap: 15px;
-        cursor: pointer;
-        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        max-width: calc(100vw - 40px);
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      display: flex;
+      align-items: flex-end;
+      gap: 15px;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      max-width: calc(100vw - 40px);
     }
 
     .corner-widget:hover {
-        transform: scale(1.08);
+      transform: scale(1.08);
     }
 
     .corner-bubble {
-        background: #ffffff;
-        color: #001f3f;
-        padding: 15px 25px;
-        border-radius: 25px 25px 0 25px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        font-weight: 700;
-        font-size: 1.1rem;
-        border: 2px solid #00d2ff;
-        text-align: center;
-        animation: floatBubble 3s infinite ease-in-out;
-        word-wrap: break-word;
+      background: #ffffff;
+      color: #001f3f;
+      padding: 15px 25px;
+      border-radius: 25px 25px 0 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: 2px solid #00d2ff;
+      text-align: center;
+      animation: floatBubble 3s infinite ease-in-out;
+      word-wrap: break-word;
     }
 
     .corner-bubble strong {
-        color: #00d2ff;
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+      color: #00d2ff;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .corner-svg-container {
-        width: 120px;
-        height: 120px;
-        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
-        flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+      flex-shrink: 0;
     }
 
     @keyframes floatBubble {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-8px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
     }
 
     @media (max-width: 768px) {
-        .corner-widget {
-            bottom: 20px;
-            right: 20px;
-            gap: 10px;
-        }
-        .corner-bubble {
-            padding: 10px 15px;
-            font-size: 0.95rem;
-            max-width: 220px;
-        }
-        .corner-svg-container {
-            width: 90px;
-            height: 90px;
-        }
+      .corner-widget {
+        bottom: 20px;
+        right: 20px;
+        gap: 10px;
+      }
+
+      .corner-bubble {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+        max-width: 220px;
+      }
+
+      .corner-svg-container {
+        width: 90px;
+        height: 90px;
+      }
     }
 
     @media (max-width: 480px) {
-        .corner-widget {
-            bottom: 15px;
-            right: 15px;
-            gap: 8px;
-        }
-        .corner-bubble {
-            padding: 8px 12px;
-            font-size: 0.85rem;
-            max-width: 160px;
-        }
-        .corner-svg-container {
-            width: 75px;
-            height: 75px;
-        }
+      .corner-widget {
+        bottom: 15px;
+        right: 15px;
+        gap: 8px;
+      }
+
+      .corner-bubble {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        max-width: 160px;
+      }
+
+      .corner-svg-container {
+        width: 75px;
+        height: 75px;
+      }
     }
-</style>
+  </style>
 </head>
+
 <body>
 
-<div id="loader-wrapper">
+  <div id="loader-wrapper">
     <div class="loader-content">
-        <svg class="loader-svg" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="bodyGradLoader" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#4da6ff" />
-                    <stop offset="100%" stop-color="#0044cc" />
-                </linearGradient>
-                <linearGradient id="shoeGradLoader" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#3388ff" />
-                    <stop offset="100%" stop-color="#003399" />
-                </linearGradient>
-            </defs>
-            
-            <!-- Sendero de la pantalla de carga -->
-            <path d="M 10 185 Q 125 195 240 185" fill="none" stroke="#003399" stroke-width="8" stroke-linecap="round" class="loader-path" opacity="0.3"/>
-            
-            <g class="mascot1-leg-left">
-                <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5"/>
-                <path d="M 35 165 C 35 160 65 160 65 165 L 65 175 C 65 180 35 180 35 175 Z" fill="url(#shoeGradLoader)"/>
-                <path d="M 35 172 L 65 172" stroke="#ffffff" stroke-width="3"/>
+      <svg class="loader-svg" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bodyGradLoader" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#4da6ff" />
+            <stop offset="100%" stop-color="#0044cc" />
+          </linearGradient>
+          <linearGradient id="shoeGradLoader" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#3388ff" />
+            <stop offset="100%" stop-color="#003399" />
+          </linearGradient>
+        </defs>
+
+        <!-- Sendero de la pantalla de carga -->
+        <path d="M 10 185 Q 125 195 240 185" fill="none" stroke="#003399" stroke-width="8" stroke-linecap="round"
+          class="loader-path" opacity="0.3" />
+
+        <g class="mascot1-leg-left">
+          <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5" />
+          <path d="M 35 165 C 35 160 65 160 65 165 L 65 175 C 65 180 35 180 35 175 Z" fill="url(#shoeGradLoader)" />
+          <path d="M 35 172 L 65 172" stroke="#ffffff" stroke-width="3" />
+        </g>
+        <g class="mascot1-leg-right">
+          <rect x="95" y="140" width="12" height="30" fill="#002277" rx="5" />
+          <path d="M 85 165 C 85 160 115 160 115 165 L 115 175 C 115 180 85 180 85 175 Z" fill="url(#shoeGradLoader)" />
+          <path d="M 85 172 L 115 172" stroke="#ffffff" stroke-width="3" />
+        </g>
+        <g class="mascot1-body-group">
+          <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8" />
+          <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4" />
+          <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGradLoader)" />
+          <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff"
+            stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="50" cy="120" r="5" fill="#1a1a1a" />
+          <circle cx="52" cy="118" r="1.5" fill="#ffffff" />
+          <circle cx="80" cy="120" r="5" fill="#1a1a1a" />
+          <circle cx="82" cy="118" r="1.5" fill="#ffffff" />
+          <path d="M 58 130 Q 65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
+
+          <g class="mascot1-arm-left">
+            <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10" stroke-linecap="round" />
+            <circle cx="15" cy="128" r="8" fill="#ffffff" />
+
+            <!-- Pequeño mapa en la mano -->
+            <g transform="translate(-5, 110) rotate(-20)">
+              <path d="M 0 0 L 25 -5 L 25 15 L 0 20 Z" fill="#ffffff" stroke="#003399" stroke-width="1.5"
+                stroke-linejoin="round" />
+              <path d="M 8.3 -1.6 L 8.3 18.3 M 16.6 -3.3 L 16.6 16.6" stroke="#003399" stroke-width="1" />
+              <circle cx="12" cy="8" r="2" fill="#ff3333" />
             </g>
-            <g class="mascot1-leg-right">
-                <rect x="95" y="140" width="12" height="30" fill="#002277" rx="5"/>
-                <path d="M 85 165 C 85 160 115 160 115 165 L 115 175 C 115 180 85 180 85 175 Z" fill="url(#shoeGradLoader)"/>
-                <path d="M 85 172 L 115 172" stroke="#ffffff" stroke-width="3"/>
-            </g>
-            <g class="mascot1-body-group">
-                <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8"/>
-                <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4"/>
-                <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGradLoader)"/>
-                <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="50" cy="120" r="5" fill="#1a1a1a"/>
-                <circle cx="52" cy="118" r="1.5" fill="#ffffff"/>
-                <circle cx="80" cy="120" r="5" fill="#1a1a1a"/>
-                <circle cx="82" cy="118" r="1.5" fill="#ffffff"/>
-                <path d="M 58 130 Q 65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-                
-                <g class="mascot1-arm-left">
-                    <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10" stroke-linecap="round"/>
-                    <circle cx="15" cy="128" r="8" fill="#ffffff"/>
-                    
-                    <!-- Pequeño mapa en la mano -->
-                    <g transform="translate(-5, 110) rotate(-20)">
-                        <path d="M 0 0 L 25 -5 L 25 15 L 0 20 Z" fill="#ffffff" stroke="#003399" stroke-width="1.5" stroke-linejoin="round"/>
-                        <path d="M 8.3 -1.6 L 8.3 18.3 M 16.6 -3.3 L 16.6 16.6" stroke="#003399" stroke-width="1"/>
-                        <circle cx="12" cy="8" r="2" fill="#ff3333"/>
-                    </g>
-                </g>
-            </g>
-        </svg>
-        <h2 class="loader-text">Cargando...</h2>
+          </g>
+        </g>
+      </svg>
+      <h2 class="loader-text">Cargando...</h2>
     </div>
-</div>
+  </div>
 
-<div id="menu-contenedor"></div>
+  <div id="menu-contenedor"></div>
 
-<button class="btn-floating" onclick="window.location.href='contactos.html'">
-  <span class="material-icons">mail</span>
-  <span>Contacto</span>
-</button>
+  <button class="btn-floating" onclick="window.location.href='contactos.html'">
+    <span class="material-icons">mail</span>
+    <span>Contacto</span>
+  </button>
 
-<main>
-  <div id="vista-inicio" class="vista activa">
-    
-    <section id="inicio" class="anim-element visible" style="background-image: linear-gradient(rgba(0, 10, 30, 0.7), rgba(0, 10, 30, 0.5)), url('https://nicaraguaactual.tv/wp-content/uploads/2023/11/Universidad-Nacional-de-Ingenieria-UNI-Foto-Nicaragua-Actual.jpeg'); background-size: cover; background-position: center; border-radius: 15px; margin-top: 20px; padding: 100px 40px 120px 40px; color: var(--white); text-align: center;">
-      <div class="hero-text fade-in-delay-1" style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
-        <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">Navega el Campus con Precisión.</h1>
-        <p style="font-size: 1.2rem; margin-bottom: 30px; color: #f0f0f0; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">Encuentra aulas, laboratorios y servicios al instante mediante recorridos inmersivos.</p>
-        
-        <div class="hero-search-box fade-in-delay-2" style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 6px 6px 6px 20px;">
-          <input type="text" placeholder="¿A dónde quieres ir? (Ej. Aula A-11)">
-          <button onclick="window.location.href='destinos.html'">Encontrar ruta</button>
+  <main>
+    <div id="vista-inicio" class="vista activa">
+
+      <section id="inicio" class="anim-element visible"
+        style="background-image: linear-gradient(rgba(0, 10, 30, 0.7), rgba(0, 10, 30, 0.5)), url('https://nicaraguaactual.tv/wp-content/uploads/2023/11/Universidad-Nacional-de-Ingenieria-UNI-Foto-Nicaragua-Actual.jpeg'); background-size: cover; background-position: center; border-radius: 15px; margin-top: 20px; padding: 100px 40px 120px 40px; color: var(--white); text-align: center;">
+        <div class="hero-text fade-in-delay-1"
+          style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
+          <h1
+            style="font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+            Navega el Campus con Precisión.</h1>
+          <p style="font-size: 1.2rem; margin-bottom: 30px; color: #f0f0f0; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">
+            Encuentra aulas, laboratorios y servicios al instante mediante recorridos inmersivos.</p>
+
+          <div class="hero-search-box fade-in-delay-2"
+            style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 6px 6px 6px 20px;">
+            <input type="text" id="busquedaDestino" placeholder="¿A dónde quieres ir? (Ej. Aula A-11)">
+            <button onclick="buscarDestino()">
+              Encontrar ruta
+            </button>
+          </div>
+
+          <div class="hero-ctas fade-in-delay-3" style="justify-content: center; margin-top: 30px;">
+            <button class="btn-glow" onclick="window.location.href='destinos.html';">
+              <span class="material-icons">map</span> Abrir Mapa Interactivo
+            </button>
+            <button class="btn-outline"
+              style="border-color: rgba(255,255,255,0.5); color: var(--white); background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);"
+              onclick="window.location.href='destinos.html';">
+              <span class="material-icons">apartment</span> Ver Edificios 360°
+            </button>
+          </div>
         </div>
+      </section>
 
-        <div class="hero-ctas fade-in-delay-3" style="justify-content: center; margin-top: 30px;">
-          <button class="btn-glow" onclick="window.location.href='destinos.html';">
-            <span class="material-icons">map</span> Abrir Mapa Interactivo
-          </button>
-          <button class="btn-outline" style="border-color: rgba(255,255,255,0.5); color: var(--white); background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);" onclick="window.location.href='destinos.html';">
-            <span class="material-icons">apartment</span> Ver Edificios 360°
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Banner Principal con Mascota Original -->
-    <div class="phrase-container anim-element visible">
+      <!-- Banner Principal con Mascota Original -->
+      <div class="phrase-container anim-element visible">
         <div class="mascot-container">
-            <svg class="svg-mascot" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#4da6ff" />
-                        <stop offset="100%" stop-color="#0044cc" />
-                    </linearGradient>
-                    <linearGradient id="shoeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#3388ff" />
-                        <stop offset="100%" stop-color="#003399" />
-                    </linearGradient>
-                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="5" result="blur" />
-                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                    </filter>
-                </defs>
-                
-                <path d="M 120 160 Q 200 160 230 80" fill="none" stroke="#00d2ff" stroke-width="15" filter="url(#glow)"/>
-                <path d="M 120 160 Q 200 160 230 80" fill="none" stroke="#ffffff" stroke-width="6" class="road-glow"/>
-                
-                <g class="map-pin" transform="translate(200, 20)">
-                    <path d="M 15 0 C 6.7 0 0 6.7 0 15 C 0 26.2 15 40 15 40 C 15 40 30 26.2 30 15 C 30 6.7 23.3 0 15 0 Z" fill="#ff3333"/>
-                    <circle cx="15" cy="15" r="6" fill="#ffffff"/>
-                </g>
+          <svg class="svg-mascot" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4da6ff" />
+                <stop offset="100%" stop-color="#0044cc" />
+              </linearGradient>
+              <linearGradient id="shoeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#3388ff" />
+                <stop offset="100%" stop-color="#003399" />
+              </linearGradient>
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="5" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
 
-                <g class="mascot1-leg-left">
-                    <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5"/>
-                    <path d="M 35 165 C 35 160 65 160 65 165 L 65 175 C 65 180 35 180 35 175 Z" fill="url(#shoeGrad)"/>
-                    <path d="M 35 172 L 65 172" stroke="#ffffff" stroke-width="3"/>
-                </g>
+            <path d="M 120 160 Q 200 160 230 80" fill="none" stroke="#00d2ff" stroke-width="15" filter="url(#glow)" />
+            <path d="M 120 160 Q 200 160 230 80" fill="none" stroke="#ffffff" stroke-width="6" class="road-glow" />
 
-                <g class="mascot1-leg-right">
-                    <rect x="95" y="140" width="12" height="30" fill="#002277" rx="5"/>
-                    <path d="M 85 165 C 85 160 115 160 115 165 L 115 175 C 115 180 85 180 85 175 Z" fill="url(#shoeGrad)"/>
-                    <path d="M 85 172 L 115 172" stroke="#ffffff" stroke-width="3"/>
-                </g>
+            <g class="map-pin" transform="translate(200, 20)">
+              <path d="M 15 0 C 6.7 0 0 6.7 0 15 C 0 26.2 15 40 15 40 C 15 40 30 26.2 30 15 C 30 6.7 23.3 0 15 0 Z"
+                fill="#ff3333" />
+              <circle cx="15" cy="15" r="6" fill="#ffffff" />
+            </g>
 
-                <g class="mascot1-body-group">
-                    <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8"/>
-                    <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4"/>
-                    
-                    <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGrad)"/>
-                    
-                    <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-                    
-                    <circle cx="50" cy="120" r="5" fill="#1a1a1a"/>
-                    <circle cx="52" cy="118" r="1.5" fill="#ffffff"/>
-                    <circle cx="80" cy="120" r="5" fill="#1a1a1a"/>
-                    <circle cx="82" cy="118" r="1.5" fill="#ffffff"/>
-                    <path d="M 58 130 Q 65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-                    
-                    <g class="mascot1-arm-left">
-                        <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10" stroke-linecap="round"/>
-                        <circle cx="15" cy="128" r="8" fill="#ffffff"/>
-                    </g>
-                </g>
-            </svg>
+            <g class="mascot1-leg-left">
+              <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5" />
+              <path d="M 35 165 C 35 160 65 160 65 165 L 65 175 C 65 180 35 180 35 175 Z" fill="url(#shoeGrad)" />
+              <path d="M 35 172 L 65 172" stroke="#ffffff" stroke-width="3" />
+            </g>
+
+            <g class="mascot1-leg-right">
+              <rect x="95" y="140" width="12" height="30" fill="#002277" rx="5" />
+              <path d="M 85 165 C 85 160 115 160 115 165 L 115 175 C 115 180 85 180 85 175 Z" fill="url(#shoeGrad)" />
+              <path d="M 85 172 L 115 172" stroke="#ffffff" stroke-width="3" />
+            </g>
+
+            <g class="mascot1-body-group">
+              <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8" />
+              <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4" />
+
+              <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGrad)" />
+
+              <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff"
+                stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+
+              <circle cx="50" cy="120" r="5" fill="#1a1a1a" />
+              <circle cx="52" cy="118" r="1.5" fill="#ffffff" />
+              <circle cx="80" cy="120" r="5" fill="#1a1a1a" />
+              <circle cx="82" cy="118" r="1.5" fill="#ffffff" />
+              <path d="M 58 130 Q 65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
+
+              <g class="mascot1-arm-left">
+                <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10"
+                  stroke-linecap="round" />
+                <circle cx="15" cy="128" r="8" fill="#ffffff" />
+              </g>
+            </g>
+          </svg>
         </div>
         <div class="phrase-content">
-            <h2>¿Desorientación en el recinto? UNI-WAY es la solución.</h2>
-            <p>Se ofrece un mapa interactivo completo y totalmente funcional para ubicar aulas, laboratorios y servicios al instante. <strong>El control del campus en un solo clic.</strong></p>
+          <h2>¿Desorientación en el recinto? UNI-WAY es la solución.</h2>
+          <p>Se ofrece un mapa interactivo completo y totalmente funcional para ubicar aulas, laboratorios y servicios
+            al instante. <strong>El control del campus en un solo clic.</strong></p>
         </div>
+      </div>
+
+      <section class="anim-element visible" style="padding: 0 20px;">
+        <div class="gps-banner">
+          <div class="gps-content">
+            <span class="material-icons"
+              style="font-size: 70px; color: var(--accent-color); margin-bottom: 10px;">explore</span>
+            <h2>¿Perdido en el <span>Campus?</span></h2>
+            <p>No des más vueltas. Activa nuestro Navegador GPS con instrucciones en tiempo real y llega a tu clase a
+              tiempo y sin complicaciones.</p>
+            <button class="btn-super-glow" onclick="window.location.href='destinos.html'">
+              <span class="material-icons">near_me</span> Iniciar Navegación Asistida
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="smart-nav" class="anim-element visible" style="padding-top: 20px;">
+        <h2 class="section-title" style="font-size: 26px; margin-bottom: 10px;">¿Qué necesitas hoy?</h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 30px;">Selecciona una opción rápida basada
+          en lo que buscas ahora mismo.</p>
+
+        <div class="context-grid">
+          <button class="btn-context" style="border-color: var(--accent-color); background: #f0faff;"
+            onclick="abrirModalSmart('primer-dia')">
+            <span class="material-icons">school</span> Es mi primer día
+          </button>
+          <button class="btn-context" onclick="abrirModalSmart('donde-estoy')">
+            <span class="material-icons">my_location</span> No sé dónde estoy
+          </button>
+          <button class="btn-context" onclick="abrirModalSmart('hambre')">
+            <span class="material-icons">lunch_dining</span> Tengo hambre
+          </button>
+          <button class="btn-context" onclick="abrirModalSmart('tarde')">
+            <span class="material-icons">timer</span> Voy tarde
+          </button>
+          <button class="btn-context" onclick="abrirModalSmart('imprimir')">
+            <span class="material-icons">print</span> Necesito imprimir
+          </button>
+        </div>
+
+        <div class="planner-box">
+          <h3
+            style="color: var(--primary-color); margin-bottom: 15px; font-size: 22px; display: flex; align-items: center; gap: 10px; font-weight: 900;">
+            <span class="material-icons" style="font-size: 28px;">route</span> Planificador de Día
+          </h3>
+          <p style="color: var(--text-gray); margin-bottom: 25px; font-size: 16px;">Arma tu ruta seleccionando tus
+            clases y descansos. Optimizaremos tu recorrido por el campus.</p>
+
+          <div class="planner-row">
+            <select class="planner-select" id="plan1">
+              <option value="">Aulas (Ej. A-1-1)</option>
+              <optgroup label="Piso 1">
+                <option value="A-1-1">A-1-1</option>
+                <option value="A-1-2">A-1-2</option>
+                <option value="A-1-3">A-1-3</option>
+              </optgroup>
+            </select>
+
+            <span class="material-icons" style="color: var(--text-gray);">arrow_forward</span>
+
+            <select class="planner-select" id="plan2">
+              <option value="">Laboratorios</option>
+              <optgroup label="Lab Redes">
+                <option value="Lab Redes 1">Lab Redes 1</option>
+                <option value="Lab Redes 2">Lab Redes 2</option>
+              </optgroup>
+            </select>
+
+            <span class="material-icons" style="color: var(--text-gray);">arrow_forward</span>
+
+            <select class="planner-select" id="plan3">
+              <option value="">Destino Final</option>
+              <option value="Auditorio Salomón de la Selva">Auditorio Salomón de la Selva</option>
+              <option value="Biblioteca">Biblioteca</option>
+            </select>
+
+            <button class="btn-select"
+              style="width: auto; padding: 15px 30px; font-size: 16px; margin-left: auto; border-radius: 8px;"
+              onclick="abrirModalSmart('planner')">Optimizar Ruta</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="populares-preview" class="anim-element">
+        <h2 class="section-title" style="margin-bottom: 20px;">Destinos Frecuentes</h2>
+        <div class="popular-grid">
+          <div class="card">
+            <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
+              <img src="imagenes/Biblioteca.jpeg" alt="Biblioteca">
+            </div>
+            <div class="card-body">
+              <h3>Biblioteca Central</h3>
+              <p>Estudio y Recursos</p>
+              <button class="btn-select" onclick="abrirSimulacion('Biblioteca Central')">Ver Ruta</button>
+            </div>
+          </div>
+          <div class="card">
+            <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
+              <img src="imagenes/edificioSalomonSelva.jpeg" alt="Auditorio Salomón de la Selva"
+                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200/001f3f/ffffff?text=Auditorio';">
+            </div>
+            <div class="card-body">
+              <h3>Auditorio Salomón de la Selva</h3>
+              <p>Eventos y Conferencias</p>
+              <button class="btn-select" onclick="abrirSimulacion('Auditorio Salomón de la Selva')">Ver Ruta</button>
+            </div>
+          </div>
+          <div class="card">
+            <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
+              <img src="imagenes/RegistroAcademico.jpeg" alt="Secretaria">
+            </div>
+            <div class="card-body">
+              <h3>Secretaría Académica</h3>
+              <p>Trámites Estudiantiles</p>
+              <button class="btn-select" onclick="abrirSimulacion('Secretaría Académica')">Ver Ruta</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="como-funciona" class="anim-element">
+        <h2 class="section-title">¿Cómo Funciona?</h2>
+        <div class="steps-wrapper">
+          <div class="step-box">
+            <div class="step-icon"><span class="material-icons">search</span></div>
+            <h3>1. Busca tu destino</h3>
+            <p>Escribe el nombre del aula, laboratorio o edificio al que necesitas llegar.</p>
+          </div>
+          <div class="step-box">
+            <div class="step-icon"><span class="material-icons">touch_app</span></div>
+            <h3>2. Selecciona la ruta</h3>
+            <p>Elige entre ver el entorno virtual 360° o usar el GPS asistido.</p>
+          </div>
+          <div class="step-box">
+            <div class="step-icon"><span class="material-icons">map</span></div>
+            <h3>3. Llega sin perderte</h3>
+            <p>Sigue las indicaciones en tiempo real y calcula tu tiempo de llegada.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonios" class="anim-element">
+        <h2 class="section-title">Testimonios</h2>
+        <div class="testimonials-grid">
+          <div class="testimonio-card"
+            style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
+            <div class="stars">★★★★★</div>
+            <p>"Gracias a esta plataforma encontré mi aula en el Edificio Rigoberto en menos de 5 minutos en mi primer
+              día de clases."</p>
+            <br><strong style="color: var(--primary-color);">- Carlos M.</strong>
+          </div>
+          <div class="testimonio-card"
+            style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
+            <div class="stars">★★★★★</div>
+            <p>"Los videos guiados son increíbles. Sientes que ya caminaste por el campus antes de siquiera llegar."</p>
+            <br><strong style="color: var(--primary-color);">- Ana P.</strong>
+          </div>
+          <div class="testimonio-card"
+            style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
+            <div class="stars">★★★★★</div>
+            <p>"La ubicación de los cafetines me salvó la vida en semana de exámenes. Excelente iniciativa estudiantil."
+            </p>
+            <br><strong style="color: var(--primary-color);">- Luis R.</strong>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <section class="anim-element visible" style="padding: 0 20px;">
-        <div class="gps-banner">
-            <div class="gps-content">
-                <span class="material-icons" style="font-size: 70px; color: var(--accent-color); margin-bottom: 10px;">explore</span>
-                <h2>¿Perdido en el <span>Campus?</span></h2>
-                <p>No des más vueltas. Activa nuestro Navegador GPS con instrucciones en tiempo real y llega a tu clase a tiempo y sin complicaciones.</p>
-                <button class="btn-super-glow" onclick="window.location.href='destinos.html'">
-                    <span class="material-icons">near_me</span> Iniciar Navegación Asistida
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="smart-nav" class="anim-element visible" style="padding-top: 20px;">
-      <h2 class="section-title" style="font-size: 26px; margin-bottom: 10px;">¿Qué necesitas hoy?</h2>
-      <p style="text-align: center; color: var(--text-gray); margin-bottom: 30px;">Selecciona una opción rápida basada en lo que buscas ahora mismo.</p>
-      
-      <div class="context-grid">
-        <button class="btn-context" style="border-color: var(--accent-color); background: #f0faff;" onclick="abrirModalSmart('primer-dia')">
-          <span class="material-icons">school</span> Es mi primer día
-        </button>
-        <button class="btn-context" onclick="abrirModalSmart('donde-estoy')">
-          <span class="material-icons">my_location</span> No sé dónde estoy
-        </button>
-        <button class="btn-context" onclick="abrirModalSmart('hambre')">
-          <span class="material-icons">lunch_dining</span> Tengo hambre
-        </button>
-        <button class="btn-context" onclick="abrirModalSmart('tarde')">
-          <span class="material-icons">timer</span> Voy tarde
-        </button>
-        <button class="btn-context" onclick="abrirModalSmart('imprimir')">
-          <span class="material-icons">print</span> Necesito imprimir
-        </button>
-      </div>
-
-      <div class="planner-box">
-        <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 22px; display: flex; align-items: center; gap: 10px; font-weight: 900;">
-          <span class="material-icons" style="font-size: 28px;">route</span> Planificador de Día
-        </h3>
-        <p style="color: var(--text-gray); margin-bottom: 25px; font-size: 16px;">Arma tu ruta seleccionando tus clases y descansos. Optimizaremos tu recorrido por el campus.</p>
-        
-        <div class="planner-row">
-          <select class="planner-select" id="plan1">
-            <option value="">Aulas (Ej. A-1-1)</option>
-            <optgroup label="Piso 1">
-              <option value="A-1-1">A-1-1</option>
-              <option value="A-1-2">A-1-2</option>
-              <option value="A-1-3">A-1-3</option>
-            </optgroup>
-          </select>
-
-          <span class="material-icons" style="color: var(--text-gray);">arrow_forward</span>
-          
-          <select class="planner-select" id="plan2">
-            <option value="">Laboratorios</option>
-            <optgroup label="Lab Redes">
-              <option value="Lab Redes 1">Lab Redes 1</option>
-              <option value="Lab Redes 2">Lab Redes 2</option>
-            </optgroup>
-          </select>
-
-          <span class="material-icons" style="color: var(--text-gray);">arrow_forward</span>
-          
-          <select class="planner-select" id="plan3">
-            <option value="">Destino Final</option>
-            <option value="Auditorio Salomón de la Selva">Auditorio Salomón de la Selva</option>
-            <option value="Biblioteca">Biblioteca</option>
-          </select>
-          
-          <button class="btn-select" style="width: auto; padding: 15px 30px; font-size: 16px; margin-left: auto; border-radius: 8px;" onclick="abrirModalSmart('planner')">Optimizar Ruta</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="populares-preview" class="anim-element">
-      <h2 class="section-title" style="margin-bottom: 20px;">Destinos Frecuentes</h2>
-      <div class="popular-grid">
-        <div class="card">
-          <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
-             <img src="imagenes/Biblioteca.jpeg" alt="Biblioteca">
-          </div>
-          <div class="card-body">
-            <h3>Biblioteca Central</h3>
-            <p>Estudio y Recursos</p>
-            <button class="btn-select" onclick="abrirSimulacion('Biblioteca Central')">Ver Ruta</button>
-          </div>
-        </div>
-        <div class="card">
-          <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
-             <img src="imagenes/edificioSalomonSelva.jpeg" alt="Auditorio Salomón de la Selva" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200/001f3f/ffffff?text=Auditorio';">
-          </div>
-          <div class="card-body">
-            <h3>Auditorio Salomón de la Selva</h3>
-            <p>Eventos y Conferencias</p>
-            <button class="btn-select" onclick="abrirSimulacion('Auditorio Salomón de la Selva')">Ver Ruta</button>
-          </div>
-        </div>
-        <div class="card">
-          <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
-             <img src="imagenes/RegistroAcademico.jpeg" alt="Secretaria">
-          </div>
-          <div class="card-body">
-            <h3>Secretaría Académica</h3>
-            <p>Trámites Estudiantiles</p>
-            <button class="btn-select" onclick="abrirSimulacion('Secretaría Académica')">Ver Ruta</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="como-funciona" class="anim-element">
-      <h2 class="section-title">¿Cómo Funciona?</h2>
-      <div class="steps-wrapper">
-        <div class="step-box">
-          <div class="step-icon"><span class="material-icons">search</span></div>
-          <h3>1. Busca tu destino</h3>
-          <p>Escribe el nombre del aula, laboratorio o edificio al que necesitas llegar.</p>
-        </div>
-        <div class="step-box">
-          <div class="step-icon"><span class="material-icons">touch_app</span></div>
-          <h3>2. Selecciona la ruta</h3>
-          <p>Elige entre ver el entorno virtual 360° o usar el GPS asistido.</p>
-        </div>
-        <div class="step-box">
-          <div class="step-icon"><span class="material-icons">map</span></div>
-          <h3>3. Llega sin perderte</h3>
-          <p>Sigue las indicaciones en tiempo real y calcula tu tiempo de llegada.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="testimonios" class="anim-element">
-      <h2 class="section-title">Testimonios</h2>
-      <div class="testimonials-grid">
-        <div class="testimonio-card" style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
-          <div class="stars">★★★★★</div>
-          <p>"Gracias a esta plataforma encontré mi aula en el Edificio Rigoberto en menos de 5 minutos en mi primer día de clases."</p>
-          <br><strong style="color: var(--primary-color);">- Carlos M.</strong>
-        </div>
-        <div class="testimonio-card" style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
-          <div class="stars">★★★★★</div>
-          <p>"Los videos guiados son increíbles. Sientes que ya caminaste por el campus antes de siquiera llegar."</p>
-          <br><strong style="color: var(--primary-color);">- Ana P.</strong>
-        </div>
-        <div class="testimonio-card" style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
-          <div class="stars">★★★★★</div>
-          <p>"La ubicación de los cafetines me salvó la vida en semana de exámenes. Excelente iniciativa estudiantil."</p>
-          <br><strong style="color: var(--primary-color);">- Luis R.</strong>
-        </div>
-      </div>
-    </section>
-  </div>
-  
-  <div class="corner-widget" onclick="window.location.href='destinos.html'">
+    <div class="corner-widget" onclick="window.location.href='destinos.html'">
       <div class="corner-bubble">¿Perdido en la UNI?<br><strong>Ve a destinos.</strong></div>
       <div class="corner-svg-container">
-          <svg class="svg-mascot" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                  <linearGradient id="bodyGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#4da6ff" />
-                      <stop offset="100%" stop-color="#0044cc" />
-                  </linearGradient>
-                  <linearGradient id="shoeGradCorner" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stop-color="#3388ff" />
-                      <stop offset="100%" stop-color="#003399" />
-                  </linearGradient>
-              </defs>
-              
-              <g class="mascot1-leg-left">
-                  <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5"/>
-                  <path d="M 35 165 C 35 160 65 160 65 165 L 65 175 C 65 180 35 180 35 175 Z" fill="url(#shoeGradCorner)"/>
-                  <path d="M 35 172 L 65 172" stroke="#ffffff" stroke-width="3"/>
-              </g>
+        <svg class="svg-mascot" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bodyGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4da6ff" />
+              <stop offset="100%" stop-color="#0044cc" />
+            </linearGradient>
+            <linearGradient id="shoeGradCorner" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#3388ff" />
+              <stop offset="100%" stop-color="#003399" />
+            </linearGradient>
+          </defs>
 
-              <g class="mascot1-leg-right">
-                  <rect x="95" y="140" width="12" height="30" fill="#002277" rx="5"/>
-                  <path d="M 85 165 C 85 160 115 160 115 165 L 115 175 C 115 180 85 180 85 175 Z" fill="url(#shoeGradCorner)"/>
-                  <path d="M 85 172 L 115 172" stroke="#ffffff" stroke-width="3"/>
-              </g>
+          <g class="mascot1-leg-left">
+            <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5" />
+            <path d="M 35 165 C 35 160 65 160 65 165 L 65 175 C 65 180 35 180 35 175 Z" fill="url(#shoeGradCorner)" />
+            <path d="M 35 172 L 65 172" stroke="#ffffff" stroke-width="3" />
+          </g>
 
-              <g class="mascot1-body-group">
-                  <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8"/>
-                  <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4"/>
-                  
-                  <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGradCorner)"/>
-                  
-                  <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-                  
-                  <circle cx="50" cy="120" r="5" fill="#1a1a1a"/>
-                  <circle cx="52" cy="118" r="1.5" fill="#ffffff"/>
-                  <circle cx="80" cy="120" r="5" fill="#1a1a1a"/>
-                  <circle cx="82" cy="118" r="1.5" fill="#ffffff"/>
-                  <path d="M 58 130 Q 65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-                  
-                  <g class="mascot1-arm-left">
-                      <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10" stroke-linecap="round"/>
-                      <circle cx="15" cy="128" r="8" fill="#ffffff"/>
-                  </g>
-              </g>
-          </svg>
+          <g class="mascot1-leg-right">
+            <rect x="95" y="140" width="12" height="30" fill="#002277" rx="5" />
+            <path d="M 85 165 C 85 160 115 160 115 165 L 115 175 C 115 180 85 180 85 175 Z"
+              fill="url(#shoeGradCorner)" />
+            <path d="M 85 172 L 115 172" stroke="#ffffff" stroke-width="3" />
+          </g>
+
+          <g class="mascot1-body-group">
+            <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8" />
+            <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4" />
+
+            <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGradCorner)" />
+
+            <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff"
+              stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+
+            <circle cx="50" cy="120" r="5" fill="#1a1a1a" />
+            <circle cx="52" cy="118" r="1.5" fill="#ffffff" />
+            <circle cx="80" cy="120" r="5" fill="#1a1a1a" />
+            <circle cx="82" cy="118" r="1.5" fill="#ffffff" />
+            <path d="M 58 130 Q 65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
+
+            <g class="mascot1-arm-left">
+              <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10"
+                stroke-linecap="round" />
+              <circle cx="15" cy="128" r="8" fill="#ffffff" />
+            </g>
+          </g>
+        </svg>
       </div>
-  </div>
+    </div>
 
-</main>
+  </main>
 
-<footer>
-  <div class="footer-container">
+  <footer>
+    <div class="footer-container">
       <div class="footer-info">
-          <h3><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color);"></i> UNI-WAY</h3>
-          <p>Tu guía interactiva para dominar el campus de la Universidad Nacional de Ingeniería.</p>
+        <h3><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color);"></i> UNI-WAY</h3>
+        <p>Tu guía interactiva para dominar el campus de la Universidad Nacional de Ingeniería.</p>
       </div>
       <div class="footer-enlaces">
-          <h4>Enlaces Rápidos</h4>
-          <ul>
-              <li><a href="nosotros.html">Misión y Visión</a></li>
-              <li><a href="destinos.html">Tour de Edificios</a></li>
-              <li><a href="nosotros.html#equipo">Desarrolladores</a></li>
-          </ul>
+        <h4>Enlaces Rápidos</h4>
+        <ul>
+          <li><a href="nosotros.html">Misión y Visión</a></li>
+          <li><a href="destinos.html">Tour de Edificios</a></li>
+          <li><a href="nosotros.html#equipo">Desarrolladores</a></li>
+        </ul>
       </div>
       <div class="footer-contacto">
-          <h4>Contacto</h4>
-          <p><i class="fa-solid fa-envelope"></i> equipo@uniway.edu.ni</p>
-          <p><i class="fa-solid fa-location-dot"></i> Recinto Universitario Simón Bolívar, UNI.</p>
+        <h4>Contacto</h4>
+        <p><i class="fa-solid fa-envelope"></i> equipo@uniway.edu.ni</p>
+        <p><i class="fa-solid fa-location-dot"></i> Recinto Universitario Simón Bolívar, UNI.</p>
       </div>
-  </div>
-  <div class="footer-bottom">
+    </div>
+    <div class="footer-bottom">
       <p>© 2026 UNI-WAY. Desarrollado por estudiantes de Ingeniería de Sistemas. Todos los derechos reservados.</p>
-  </div>
-</footer>
+    </div>
+  </footer>
 
-<div class="modal-overlay" id="videoModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 id="modalTitle">Cargando Recorrido...</h3>
-      <button class="close-btn" onclick="cerrarSimulacion()"><span class="material-icons">close</span></button>
-    </div>
-    <div class="modal-body">
-      <div class="video-container">
-        <p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido</p>
+  <div class="modal-overlay" id="videoModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Cargando Recorrido...</h3>
+        <button class="close-btn" onclick="cerrarSimulacion()"><span class="material-icons">close</span></button>
       </div>
-      <div class="steps-container">
-        <h4>Indicaciones de ruta:</h4>
-        <ol>
-          <li>Entra por el portón principal.</li>
-          <li>Avanza recto pasando el jardín central.</li>
-          <li>Gira a la derecha en la plaza de banderas.</li>
-          <li>Sube las escaleras hasta el piso correspondiente.</li>
-          <li>¡Has llegado a tu destino!</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modalSmart">
-  <div class="modal-content" style="max-width: 500px;">
-    <div class="modal-header">
-      <h3 id="smartTitle">Asistente UNI-WAY</h3>
-      <button class="close-btn" onclick="cerrarModalSmart()"><span class="material-icons">close</span></button>
-    </div>
-    <div class="modal-body" style="display: block; padding: 30px;" id="smartBody">
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modalAulaVirtual">
-  <div class="modal-content" style="max-width: 900px;">
-    <div class="modal-header">
-      <h3 id="titulo-aula-virtual">Visualizador de Aula</h3>
-      <button class="close-btn" onclick="cerrarModalAulaVirtual()"><span class="material-icons">close</span></button>
-    </div>
-    <div class="modal-body" style="display: block; padding: 25px;">
-      <div style="display: flex; gap: 15px; margin-bottom: 20px; justify-content: center;">
-        <button class="view-mode-btn active">Entorno Virtual 3D</button>
-        <button class="view-mode-btn inactive">Recorrido Real en Video</button>
-      </div>
-      <div class="video-container" style="background: #111; aspect-ratio: 16/9; display: flex; justify-content: center; align-items: center; color: var(--white); border-radius: 10px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-        <p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido / Video</p>
+      <div class="modal-body">
+        <div class="video-container">
+          <p><span class="material-icons"
+              style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido</p>
+        </div>
+        <div class="steps-container">
+          <h4>Indicaciones de ruta:</h4>
+          <ol>
+            <li>Entra por el portón principal.</li>
+            <li>Avanza recto pasando el jardín central.</li>
+            <li>Gira a la derecha en la plaza de banderas.</li>
+            <li>Sube las escaleras hasta el piso correspondiente.</li>
+            <li>¡Has llegado a tu destino!</li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<script>
-// Lógica para detener y desaparecer la pantalla de carga a los 2 segundos exactos.
-setTimeout(function() {
-    const loader = document.getElementById('loader-wrapper');
-    loader.classList.add('loaded'); // Detiene instantáneamente las animaciones
-    setTimeout(() => {
+  <div class="modal-overlay" id="modalSmart">
+    <div class="modal-content" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3 id="smartTitle">Asistente UNI-WAY</h3>
+        <button class="close-btn" onclick="cerrarModalSmart()"><span class="material-icons">close</span></button>
+      </div>
+      <div class="modal-body" style="display: block; padding: 30px;" id="smartBody">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalAulaVirtual">
+    <div class="modal-content" style="max-width: 900px;">
+      <div class="modal-header">
+        <h3 id="titulo-aula-virtual">Visualizador de Aula</h3>
+        <button class="close-btn" onclick="cerrarModalAulaVirtual()"><span class="material-icons">close</span></button>
+      </div>
+      <div class="modal-body" style="display: block; padding: 25px;">
+        <div style="display: flex; gap: 15px; margin-bottom: 20px; justify-content: center;">
+          <button class="view-mode-btn active">Entorno Virtual 3D</button>
+          <button class="view-mode-btn inactive">Recorrido Real en Video</button>
+        </div>
+        <div class="video-container"
+          style="background: #111; aspect-ratio: 16/9; display: flex; justify-content: center; align-items: center; color: var(--white); border-radius: 10px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+          <p style="text-align: center;"><span class="material-icons"
+              style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido /
+            Video</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Lógica para detener y desaparecer la pantalla de carga a los 2 segundos exactos.
+    setTimeout(function () {
+      const loader = document.getElementById('loader-wrapper');
+      loader.classList.add('loaded'); // Detiene instantáneamente las animaciones
+      setTimeout(() => {
         loader.style.opacity = '0';
         loader.style.visibility = 'hidden';
         setTimeout(() => loader.remove(), 500);
-    }, 400); // Mantiene la mascota "detenida" una fracción de segundo antes de desvanecerse
-}, 1600); // 1600ms animado + 400ms detenido = 2000ms (2 segundos) en total antes de desaparecer
+      }, 400); // Mantiene la mascota "detenida" una fracción de segundo antes de desvanecerse
+    }, 1600); // 1600ms animado + 400ms detenido = 2000ms (2 segundos) en total antes de desaparecer
 
-fetch('navbar.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('menu-contenedor').innerHTML = data;
-    document.getElementById('nav-inicio').classList.add('activo');
-  });
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('menu-contenedor').innerHTML = data;
+        document.getElementById('nav-inicio').classList.add('activo');
+      });
 
-function abrirSimulacion(lugar) {
-    const modal = document.getElementById('videoModal');
-    const title = document.getElementById('modalTitle');
-    title.innerText = 'Ruta hacia: ' + lugar;
-    modal.classList.add('active');
-}
+    function abrirSimulacion(lugar) {
+      const modal = document.getElementById('videoModal');
+      const title = document.getElementById('modalTitle');
+      title.innerText = 'Ruta hacia: ' + lugar;
+      modal.classList.add('active');
+    }
 
-function cerrarSimulacion() {
-    document.getElementById('videoModal').classList.remove('active');
-}
+    function cerrarSimulacion() {
+      document.getElementById('videoModal').classList.remove('active');
+    }
 
-function abrirModalAulaVirtual(aula) {
-    document.getElementById('titulo-aula-virtual').innerText = 'Destino: ' + aula;
-    document.getElementById('modalAulaVirtual').classList.add('active');
-}
+    function abrirModalAulaVirtual(aula) {
+      document.getElementById('titulo-aula-virtual').innerText = 'Destino: ' + aula;
+      document.getElementById('modalAulaVirtual').classList.add('active');
+    }
 
-function cerrarModalAulaVirtual() {
-    document.getElementById('modalAulaVirtual').classList.remove('active');
-}
+    function cerrarModalAulaVirtual() {
+      document.getElementById('modalAulaVirtual').classList.remove('active');
+    }
 
-function abrirModalSmart(tipo) {
-    const titulo = document.getElementById('smartTitle');
-    const cuerpo = document.getElementById('smartBody');
-    
-    if(tipo === 'primer-dia') {
-      titulo.innerText = "¡Modo Primer Día!";
-      cuerpo.innerHTML = `
+    function abrirModalSmart(tipo) {
+      const titulo = document.getElementById('smartTitle');
+      const cuerpo = document.getElementById('smartBody');
+
+      if (tipo === 'primer-dia') {
+        titulo.innerText = "¡Modo Primer Día!";
+        cuerpo.innerHTML = `
         <div style="text-align: left;">
           <p style="margin-bottom: 20px; color: var(--text-gray); font-size: 16px;">¡No te preocupes! Te guiaremos paso a paso para que domines tu primer día en el campus:</p>
           <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
@@ -850,9 +1042,9 @@ function abrirModalSmart(tipo) {
           <button class="btn-select" style="width: 100%; font-size: 16px; padding: 15px;" onclick="window.location.href='destinos.html'">Ir al Navegador GPS</button>
         </div>
       `;
-    } else if(tipo === 'donde-estoy') {
-      titulo.innerText = "Localización Activa";
-      cuerpo.innerHTML = `
+      } else if (tipo === 'donde-estoy') {
+        titulo.innerText = "Localización Activa";
+        cuerpo.innerHTML = `
         <div style="text-align: center;">
           <span class="material-icons" style="font-size: 60px; color: var(--accent-color);">gps_fixed</span>
           <h3 style="margin: 20px 0 10px; color: var(--primary-color);">Revisa el Mapa Interactivo</h3>
@@ -860,9 +1052,9 @@ function abrirModalSmart(tipo) {
           <button class="btn-select" onclick="window.location.href='destinos.html'">Abrir GPS</button>
         </div>
       `;
-    } else if(tipo === 'hambre') {
-       titulo.innerText = "¡Hora de comer!";
-       cuerpo.innerHTML = `
+      } else if (tipo === 'hambre') {
+        titulo.innerText = "¡Hora de comer!";
+        cuerpo.innerHTML = `
          <div style="text-align: center;">
            <span class="material-icons" style="font-size: 60px; color: #e74c3c;">fastfood</span>
            <p style="color: var(--text-gray); margin: 20px 0;">Aquí tienes todas las opciones disponibles en el campus:</p>
@@ -872,18 +1064,18 @@ function abrirModalSmart(tipo) {
            </div>
          </div>
        `;
-    } else if(tipo === 'tarde') {
-       titulo.innerText = "¡Voy tarde!";
-       cuerpo.innerHTML = `
+      } else if (tipo === 'tarde') {
+        titulo.innerText = "¡Voy tarde!";
+        cuerpo.innerHTML = `
          <div style="text-align: center;">
            <span class="material-icons" style="font-size: 60px; color: #f39c12;">directions_run</span>
            <p style="color: var(--text-gray); margin: 20px 0;">Activando modo de ruta ultrarrápida. Evitaremos pasillos concurridos.</p>
            <button class="btn-select" style="background: #e74c3c;" onclick="window.location.href='destinos.html'">Generar Atajo Ahora</button>
          </div>
        `;
-    } else if(tipo === 'imprimir') {
-       titulo.innerText = "Centros de Copiado";
-       cuerpo.innerHTML = `
+      } else if (tipo === 'imprimir') {
+        titulo.innerText = "Centros de Copiado";
+        cuerpo.innerHTML = `
          <div style="text-align: center;">
            <span class="material-icons" style="font-size: 60px; color: #3498db;">print</span>
            <p style="color: var(--text-gray); margin: 20px 0;">Selecciona el centro de copiado al que deseas ir:</p>
@@ -893,13 +1085,13 @@ function abrirModalSmart(tipo) {
            </div>
          </div>
        `;
-    } else if(tipo === 'planner') {
-       const p1 = document.getElementById('plan1').value || "Destino 1";
-       const p2 = document.getElementById('plan2').value || "Destino 2";
-       const p3 = document.getElementById('plan3').value || "Destino 3";
-       
-       titulo.innerText = "Ruta Optimizada";
-       cuerpo.innerHTML = `
+      } else if (tipo === 'planner') {
+        const p1 = document.getElementById('plan1').value || "Destino 1";
+        const p2 = document.getElementById('plan2').value || "Destino 2";
+        const p3 = document.getElementById('plan3').value || "Destino 3";
+
+        titulo.innerText = "Ruta Optimizada";
+        cuerpo.innerHTML = `
          <div style="text-align: left;">
            <p style="color: var(--text-gray); margin-bottom: 20px;">Hemos organizado tu día para caminar lo menos posible. Esta es tu ruta:</p>
            <div style="background: var(--bg-light); border-radius: 10px; padding: 20px; border: 1px solid var(--border-color);">
@@ -910,17 +1102,145 @@ function abrirModalSmart(tipo) {
            <button class="btn-select" style="margin-top: 25px; width: 100%;" onclick="window.location.href='destinos.html'">Comenzar Ruta en el Mapa</button>
          </div>
        `;
+      }
+
+      document.getElementById('modalSmart').classList.add('active');
     }
-    
-    document.getElementById('modalSmart').classList.add('active');
-}
 
-function cerrarModalSmart() {
-    document.getElementById('modalSmart').classList.remove('active');
-}
-</script>
+    function cerrarModalSmart() {
+      document.getElementById('modalSmart').classList.remove('active');
+    }
 
-<script src="Script/script.js"></script>
+
+    // De aqui trabaje io (io soy uriel)
+    async function buscarDestino() {
+      const textoBusqueda = document
+        .getElementById("busquedaDestino")
+        .value
+        .trim()
+        .toLowerCase();
+
+      if (textoBusqueda === "") {
+        Swal.fire({
+          icon: "warning",
+          title: "Campo vacío",
+          text: "Escribe un destino para buscar."
+        });
+        return;
+      }
+
+      try {
+        const response = await fetch("./Json/destinos.json");
+        const data = await response.json();
+        const lugares = [
+          ...data.categorias.principales,
+          ...data.categorias.laboratorios,
+          ...data.categorias.cafetines
+        ];
+
+        const resultado = lugares.find(lugar =>
+          lugar.nombre.toLowerCase().includes(textoBusqueda)
+        );
+
+        if (resultado) {
+          localStorage.setItem(
+            "destinoBuscado",
+            JSON.stringify(resultado)
+          );
+          window.location.href = "destinos.html";
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Destino no encontrado",
+            text: "No existe ese lugar en el sistema."
+          });
+        }
+
+      } catch (error) {
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se pudo cargar destino.json"
+        });
+      }
+    }
+
+    // para q sirva con el enter xd 
+    document
+      .getElementById("busquedaDestino")
+      .addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          buscarDestino();
+        }
+      });
+
+    async function buscarDestinoModal() {
+      const textoBusqueda = document
+        .getElementById("busquedaDestinoModal")
+        .value
+        .trim()
+        .toLowerCase();
+
+      if (textoBusqueda === "") {
+        Swal.fire({
+          icon: "warning",
+          title: "Campo vacío",
+          text: "Escribe un destino para buscar."
+        });
+        return;
+      }
+
+      try {
+        const response = await fetch("./Json/destinos.json");
+        const data = await response.json();
+
+        const lugares = [
+          ...data.categorias.principales,
+          ...data.categorias.laboratorios,
+          ...data.categorias.cafetines
+        ];
+
+        const resultado = lugares.find(lugar =>
+          lugar.nombre.toLowerCase().includes(textoBusqueda)
+        );
+
+        if (resultado) {
+          localStorage.setItem(
+            "destinoBuscado",
+            JSON.stringify(resultado)
+          );
+
+          window.location.href = "destinos.html";
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Destino no encontrado",
+            text: "No existe ese lugar."
+          });
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+
+    setTimeout(() => {
+      const inputModal = document.getElementById("busquedaDestinoModal");
+
+      if (inputModal) {
+        inputModal.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            buscarDestinoModal();
+          }
+        });
+      }
+    }, 500);
+  </script>
+
+  <script src="Script/script.js"></script>
 
 </body>
+
 </html>
