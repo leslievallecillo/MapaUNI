@@ -477,3 +477,27 @@ document.addEventListener('click', function(e) {
   if(e.target === mPisos) window.cerrarModalPisos();
   if(e.target === mAula) window.cerrarModalAulaVirtual();
 });
+
+
+// de aqui trabaje io (io soy uriel)
+document.addEventListener("DOMContentLoaded", function () {
+    const destinoGuardado = localStorage.getItem("destinoBuscado");
+
+    if (destinoGuardado) {
+        const destino = JSON.parse(destinoGuardado);
+
+        Swal.fire({
+            title: destino.nombre,
+            html: `
+                <img src="${destino.img}" 
+                     style="width:100%; max-height:250px; object-fit:cover; border-radius:10px; margin-bottom:15px;">
+                <p>${destino.desc}</p>
+            `,
+            confirmButtonText: "Ver ruta"
+        }).then(() => {
+            abrirSimulacion(destino.nombre);
+        });
+
+        localStorage.removeItem("destinoBuscado");
+    }
+});
