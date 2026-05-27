@@ -1,224 +1,387 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guía UNI | UNI-WAY</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="Style/guia.css">
-<link rel="stylesheet" href="Style/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+  <title>Guía UNI | Portal Institucional UNI</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="Style/guia.css">
+  <link rel="stylesheet" href="Style/styles.css">
+
+  <style>
     body {
-        background-color: #f8f9fa;
-        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-        background-size: 30px 30px;
+      background-color: #f8f9fa;
+      background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+      background-size: 30px 30px;
     }
-</style>
+  </style>
 </head>
+
+
 <body>
+  <div id="menu-contenedor"></div>
+  <button class="btn-floating" onclick="window.location.href='contactos.html'">
+    <span class="material-icons">mail</span>
+    <span>Contacto</span>
+  </button>
 
-<div id="menu-contenedor"></div>
-
-<button class="btn-floating" onclick="window.location.href='contactos.html'">
-  <span class="material-icons">mail</span>
-  <span>Contacto</span>
-</button>
-
-<main>
-  <div id="vista-guia" class="vista activa">
-    <section id="guia-estudiantil" class="anim-element visible" style="margin-top: 40px;">
-      <h2 class="section-title">📘 Guía de Campus – UNI</h2>
-      
-      <div style="text-align: center; max-width: 800px; margin: -20px auto 40px; color: var(--text-gray); line-height: 1.8; font-size: 16px;">
-        <h3 style="color: var(--primary-color); margin-bottom: 10px;">Sección: Ambiente UNI</h3>
-        <p>Bienvenido a la Universidad Nacional de Ingeniería.</p>
-        <p>Aunque al inicio pueda parecer un entorno nuevo y desafiante, con el tiempo se convertirá en una de las etapas más significativas de tu vida académica y personal. A continuación, se presentan una serie de recomendaciones orientadas a facilitar tu adaptación y desarrollo dentro de la institución.</p>
-      </div>
-
-      <div class="guia-grid" style="margin-bottom: 50px;">
-        <div class="guia-card">
-          <span class="material-icons guia-icon">psychology</span>
-          <h3>Actitud y adaptación</h3>
-          <p style="text-align: justify;">Es fundamental mantener una actitud humilde y abierta. Actitudes de superioridad, orgullo excesivo o falta de empatía pueden dificultar la integración social y académica. La convivencia universitaria requiere respeto mutuo, colaboración y disposición para apoyar a los demás. Asimismo, es importante dejar atrás la mentalidad propia de la educación secundaria. La dinámica universitaria es distinta: exige mayor autonomía, responsabilidad y criterio propio.</p>
+  <main>
+    <!-- Esto es para lo del profe, lo de la uni muy uapo-->
+    <div id="vista-guia" class="vista activa">
+      <section class="hero-uni anim-element visible">
+        <h1>Universidad Nacional de Ingeniería</h1>
+        <p>
+          Plataforma institucional e interactiva desarrollada para brindar orientación,
+          información académica y recursos útiles a estudiantes de la Universidad Nacional
+          de Ingeniería.
+        </p>
+        <div class="hero-buttons">
+          <a href="https://www.uni.edu.ni/" target="_blank" class="btn-primary-uni">
+            Sitio Oficial UNI
+          </a>
+          <a href="destinos.html" class="btn-secondary-uni">
+            Explorar Campus
+          </a>
         </div>
-        <div class="guia-card">
-          <span class="material-icons guia-icon">handshake</span>
-          <h3>Relaciones interpersonales</h3>
-          <p style="text-align: justify;">Fomentar relaciones positivas con compañeros es clave. Muchos estudiantes provienen de contextos diversos, por lo que la empatía y el respeto son esenciales. La colaboración académica y el trabajo en equipo serán determinantes a lo largo de la carrera. Se recomienda también ser prudente al momento de confiar en otros, manteniendo siempre un equilibrio entre apertura y criterio.</p>
+      </section>
+      <!-- SOBRE LA UNI -->
+      <section class="anim-element visible">
+        <h2 class="section-title">Conoce la UNI</h2>
+        <div class="institucional-box">
+          <p>
+            La Universidad Nacional de Ingeniería (UNI) es una institución de educación
+            superior comprometida con la formación de profesionales altamente capacitados
+            en las áreas de ingeniería, arquitectura y tecnologías aplicadas.
+          </p>
+          <br>
+          <p>
+            La UNI se caracteriza por promover la innovación, la investigación científica,
+            el desarrollo tecnológico y el compromiso social, contribuyendo activamente al
+            crecimiento y desarrollo del país mediante la formación integral de sus estudiantes.
+          </p>
         </div>
-        <div class="guia-card">
-          <span class="material-icons guia-icon">school</span>
-          <h3>Relación con docentes</h3>
-          <p style="text-align: justify;">Los docentes desempeñan un rol fundamental en la formación académica. Es recomendable mantener una relación respetuosa y profesional. Evita compartir información personal innecesaria o emitir comentarios negativos sobre ellos, especialmente en entornos no confiables. Muchos docentes están dispuestos a apoyar a los estudiantes que demuestran interés y compromiso. Acercarse para resolver dudas puede ser beneficioso.</p>
-        </div>
-        <div class="guia-card">
-          <span class="material-icons guia-icon">trending_down</span>
-          <h3>Rendimiento académico</h3>
-          <p style="text-align: justify;">Es importante comprender que no siempre se obtendrán los resultados esperados, incluso con esfuerzo. Existen diversos factores que pueden influir en el rendimiento académico. Por ello, se recomienda enfocar los esfuerzos no solo en aprobar, sino en adquirir conocimientos sólidos que serán útiles en el ámbito profesional.</p>
-        </div>
-        <div class="guia-card">
-          <span class="material-icons guia-icon">fitness_center</span>
-          <h3>Perseverancia y desarrollo</h3>
-          <p style="text-align: justify;">El proceso universitario implica desafíos constantes. En caso de reprobar una asignatura o enfrentar dificultades, es importante no desmotivarse. Cada estudiante avanza a su propio ritmo, y esto no define su valor ni su capacidad. La perseverancia es uno de los factores más importantes para alcanzar el éxito académico.</p>
-        </div>
-        <div class="guia-card">
-          <span class="material-icons guia-icon">self_improvement</span>
-          <h3>Vida universitaria y equilibrio</h3>
-          <p style="text-align: justify;">La vida universitaria no se limita únicamente al estudio. Es importante mantener un equilibrio entre las responsabilidades académicas y el bienestar personal. Participar en actividades extracurriculares, socializar y tomar descansos adecuados contribuye a una mejor salud mental y a una experiencia universitaria más enriquecedora.</p>
-        </div>
-      </div>
-
-      <div style="background: #fff3cd; border-left: 5px solid #f39c12; padding: 30px; border-radius: 10px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-        <h3 style="color: #d35400; font-size: 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
-          <span class="material-icons">warning</span> Normas y Recomendaciones Importantes
-        </h3>
-        <p style="color: var(--text-dark); font-weight: bold; margin-bottom: 20px;">“Cosas que no debes hacer en la UNI”</p>
-        <p style="color: var(--text-gray); margin-bottom: 25px;">A continuación, se presentan una serie de normas y recomendaciones que contribuirán a una mejor convivencia y evitarán inconvenientes dentro del entorno universitario:</p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
-          <div>
-            <h4 style="color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 5px;"><span class="material-icons" style="color: #e74c3c;">do_not_disturb_alt</span> Conductas</h4>
-            <ul style="color: var(--text-gray); padding-left: 20px; line-height: 1.6;">
-              <li>No fumar dentro de laboratorios ni aulas.</li>
-              <li>No consumir alimentos en espacios donde esté prohibido.</li>
-              <li>No grabar contenido dentro de laboratorios sin autorización.</li>
-              <li>Evitar el uso de aplicaciones o contenidos inapropiados durante clases.</li>
-            </ul>
+      </section>
+      <!-- MISION Y VISION -->
+      <section class="anim-element visible">
+        <h2 class="section-title">Identidad Institucional</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <span class="material-icons">flag</span>
+            <h3>Misión</h3>
+            <p>
+              Formar profesionales integrales en ingeniería y arquitectura con excelencia
+              académica, capacidad científica, tecnológica y humanística, comprometidos con
+              el desarrollo sostenible y la transformación social del país.
+            </p>
           </div>
-          <div>
-            <h4 style="color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 5px;"><span class="material-icons" style="color: #e74c3c;">menu_book</span> Normas académicas</h4>
-            <ul style="color: var(--text-gray); padding-left: 20px; line-height: 1.6;">
-              <li>No inscribir más asignaturas de las que realmente puedes manejar.</li>
-              <li>No subestimar asignaturas fundamentales como matemáticas o física.</li>
-              <li>No rendirse ante una asignatura; existen oportunidades adicionales.</li>
-              <li>Evitar depender únicamente de comentarios externos sobre docentes.</li>
-            </ul>
+          <div class="info-card">
+            <span class="material-icons">visibility</span>
+            <h3>Visión</h3>
+            <p>
+              Ser una universidad líder en innovación, investigación y formación tecnológica,
+              reconocida nacional e internacionalmente por su calidad educativa y su aporte
+              al desarrollo científico y social.
+            </p>
           </div>
-          <div>
-            <h4 style="color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 5px;"><span class="material-icons" style="color: #e74c3c;">badge</span> Normas institucionales</h4>
-            <ul style="color: var(--text-gray); padding-left: 20px; line-height: 1.6;">
-              <li>Portar siempre el carnet o documentación requerida para el ingreso.</li>
-              <li>No intentar ingresar con identificación ajena.</li>
-              <li>Cumplir con los reglamentos establecidos por la institución.</li>
-            </ul>
-          </div>
-          <div>
-            <h4 style="color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 5px;"><span class="material-icons" style="color: #e74c3c;">psychology</span> Hábitos y decisiones</h4>
-            <ul style="color: var(--text-gray); padding-left: 20px; line-height: 1.6;">
-              <li>No descuidar la salud mental por exceso de estudio.</li>
-              <li>No dejarse influenciar por actitudes negativas o grupos.</li>
-              <li>Evitar conductas que puedan generar conflictos innecesarios.</li>
-            </ul>
+          <div class="info-card">
+            <span class="material-icons">workspace_premium</span>
+            <h3>Valores</h3>
+            <p>
+              La UNI promueve valores como responsabilidad, ética profesional, innovación,
+              compromiso social, respeto, excelencia académica y trabajo colaborativo en
+              beneficio de la comunidad universitaria.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
+      <!-- FACULTADES -->
+      <section class="facultades anim-element visible">
+        <h2 class="section-title">Áreas Académicas</h2>
+        <div class="facultad-grid">
+          <div class="facultad-card">
+            <span class="material-icons">computer</span>
+            <h4>Ingeniería en Sistemas</h4>
+            <p>Desarrollo tecnológico y software.</p>
+          </div>
+          <div class="facultad-card">
+            <span class="material-icons">engineering</span>
+            <h4>Ingeniería Civil</h4>
+            <p>Infraestructura y construcción.</p>
+          </div>
+          <div class="facultad-card">
+            <span class="material-icons">architecture</span>
+            <h4>Arquitectura</h4>
+            <p>Diseño y planificación urbana.</p>
+          </div>
+          <div class="facultad-card">
+            <span class="material-icons">memory</span>
+            <h4>Electrónica</h4>
+            <p>Tecnologías electrónicas y automatización.</p>
+          </div>
+        </div>
+      </section>
+      <!-- ENLACES OFICIALES -->
+      <section class="anim-element visible">
+        <h2 class="section-title">Accesos Rápidos</h2>
+        <div class="enlaces-grid">
+          <a href="https://www.uni.edu.ni/" target="_blank" class="enlace-card">
+            <span class="material-icons">language</span>
+            <h3>Página Oficial</h3>
+            <p>Información institucional y noticias.</p>
+          </a>
+          <a href="https://www.facebook.com/UNIdeNicaraguaOficial/?http_ref=eyJ0cyI6IjE3Nzk4NTI2NTkxOTAiLCJyIjoiaHR0cHM6XC9cL3d3dy51bmkuZWR1Lm5pXC8ifQ%3D%3D"
+            target="_blank" class="enlace-card">
+            <span class="material-icons">groups</span>
+            <h3>Comunidad UNI</h3>
+            <p>Eventos y actividades universitarias.</p>
+          </a>
+          <a href="destinos.html" class="enlace-card">
+            <span class="material-icons">map</span>
+            <h3>Mapa Interactivo</h3>
+            <p>Explora edificios y ubicaciones.</p>
+          </a>
+          <a href="contactos.html" class="enlace-card">
+            <span class="material-icons">support_agent</span>
+            <h3>Soporte</h3>
+            <p>Contáctanos para más información.</p>
+          </a>
+        </div>
+      </section>
+      <!-- GUIA ESTUDIANTIL -->
+      <section id="guia-estudiantil" class="anim-element visible" style="margin-top: 40px;">
+        <h2 class="section-title">📘 Guía de Campus – UNI</h2>
+        <div
+          style="text-align: center; max-width: 800px; margin: -20px auto 40px; color: var(--text-gray); line-height: 1.8; font-size: 16px;">
+          <h3 style="color: var(--primary-color); margin-bottom: 10px;">Sección: Ambiente UNI</h3>
+          <p>Bienvenido a la Universidad Nacional de Ingeniería.</p>
+          <p>Aunque al inicio pueda parecer un entorno nuevo y desafiante, con el tiempo se convertirá en una de las
+            etapas más significativas de tu vida académica y personal. A continuación, se presentan una serie de
+            recomendaciones orientadas a facilitar tu adaptación y desarrollo dentro de la institución.
+          </p>
+        </div>
+        <div
+          style="background: #fff3cd; border-left: 5px solid #f39c12; padding: 30px; border-radius: 10px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+          <h3
+            style="color: #d35400; font-size: 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+            <span class="material-icons">warning</span> Normas y Recomendaciones Importantes
+          </h3>
+          <p style="color: var(--text-dark); font-weight: bold; margin-bottom: 20px;">“Cosas que no debes hacer en la
+            UNI”</p>
+          <p style="color: var(--text-gray); margin-bottom: 25px;">A continuación, se presentan una serie de normas y
+            recomendaciones que contribuirán a una mejor convivencia y evitarán inconvenientes dentro del entorno
+            universitario:</p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+            <div>
+              <h4 style="color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 5px;">
+                <span class="material-icons" style="color: #e74c3c;">do_not_disturb_alt</span> Conductas
+              </h4>
+              <ul style="color: var(--text-gray); padding-left: 20px; line-height: 1.6;">
+                <li>No fumar dentro de laboratorios ni aulas.</li>
+                <li>No consumir alimentos en espacios donde esté prohibido.</li>
+                <li>No grabar contenido dentro de laboratorios sin autorización.</li>
+                <li>Evitar el uso de aplicaciones o contenidos inapropiados durante clases.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 5px;">
+                <span class="material-icons" style="color: #e74c3c;">menu_book</span> Normas académicas
+              </h4>
+              <ul style="color: var(--text-gray); padding-left: 20px; line-height: 1.6;">
+                <li>No inscribir más asignaturas de las que realmente puedes manejar.</li>
+                <li>No subestimar asignaturas fundamentales como matemáticas o física.</li>
+                <li>No rendirse ante una asignatura; existen oportunidades adicionales.</li>
+                <li>Evitar depender únicamente de comentarios externos sobre docentes.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 5px;">
+                <span class="material-icons" style="color: #e74c3c;">badge</span> Normas institucionales
+              </h4>
+              <ul style="color: var(--text-gray); padding-left: 20px; line-height: 1.6;">
+                <li>Portar siempre el carnet o documentación requerida para el ingreso.</li>
+                <li>No intentar ingresar con identificación ajena.</li>
+                <li>Cumplir con los reglamentos establecidos por la institución.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="color: var(--text-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 5px;">
+                <span class="material-icons" style="color: #e74c3c;">psychology</span> Hábitos y decisiones
+              </h4>
+              <ul style="color: var(--text-gray); padding-left: 20px; line-height: 1.6;">
+                <li>No descuidar la salud mental por exceso de estudio.</li>
+                <li>No dejarse influenciar por actitudes negativas o grupos.</li>
+                <li>Evitar conductas que puedan generar conflictos innecesarios.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="recomendaciones" class="anim-element visible">
+        <h2 class="section-title">Nuestros Favoritos</h2>
+        <p class="section-subtitle">Desliza o haz clic sobre las tarjetas para descubrir por qué recomendamos estos
+          spots clave de la comunidad UNI-WAY.
+        </p>
+        <div class="recomendaciones-container">
+          <div class="rec-card" onclick="abrirModalSmart('fav-chele')">
+            <img src="imagenes/Chele.jpeg" alt="Comedor El Chele" class="rec-img">
+            <div class="rec-content">
+              <div class="rec-icon">
+                <span class="material-icons">fastfood</span>
+              </div>
+              <h3>Comedor El Chele</h3>
+              <p>
+                Calidad, precio y porciones generosas.
+              </p>
+            </div>
+          </div>
+
+          <div class="rec-card" onclick="abrirModalSmart('fav-copias')">
+            <img src="imagenes/BatidosMiranda.jpeg" alt="Batidos Miranda" class="rec-img">
+            <div class="rec-content">
+              <div class="rec-icon">
+                <span class="material-icons">local_cafe</span>
+              </div>
+              <h3>Batidos Miranda</h3>
+              <p>
+                Batidos naturales y nutritivos.
+              </p>
+            </div>
+          </div>
+
+          <div class="rec-card" onclick="abrirModalSmart('fav-biblioteca')">
+            <img src="imagenes/Biblioteca.jpeg" alt="Biblioteca Central" class="rec-img">
+            <div class="rec-content">
+              <div class="rec-icon">
+                <span class="material-icons">menu_book</span>
+              </div>
+              <h3>Biblioteca Central</h3>
+              <p>
+                El mejor ambiente para avanzar tus proyectos.
+              </p>
+            </div>
+          </div>
+
+          <div class="rec-card" onclick="abrirModalSmart('fav-cajero')">
+            <img src="imagenes/Cajero.jpeg" alt="Cajero Automático" class="rec-img">
+            <div class="rec-content">
+              <div class="rec-icon">
+                <span class="material-icons">local_atm</span>
+              </div>
+              <h3>Cajero Automático</h3>
+              <p>
+                Efectivo rápido para cualquier emergencia o gasto imprevisto.
+              </p>
+            </div>
+          </div>
+        </div>
+    </div>
     </section>
+    </div>
+  </main>
 
-    <section id="recomendaciones" class="anim-element visible">
-      <h2 class="section-title">Nuestros Favoritos</h2>
-      <p class="section-subtitle">Desliza o haz clic sobre las tarjetas para descubrir por qué recomendamos estos spots clave de la comunidad UNI-WAY.</p>
-      
-      <div class="recomendaciones-container">
-        
-        <div class="rec-card" onclick="abrirModalSmart('fav-chele')">
-          <div class="rec-content">
-            <div class="rec-icon"><span class="material-icons">fastfood</span></div>
-            <h3>Comedor El Chele</h3>
-            <p>Calidad, precio y porciones generosas.</p>
-          </div>
-        </div>
-
-        <div class="rec-card" onclick="abrirModalSmart('fav-copias')">
-          <div class="rec-content">
-            <div class="rec-icon"><span class="material-icons">print</span></div>
-            <h3>Batidos Miranda</h3>
-            <p>Batidos naturales y nutritivos.</p>
-          </div>
-        </div>
-
-        <div class="rec-card" onclick="abrirModalSmart('fav-biblioteca')">
-          <div class="rec-content">
-            <div class="rec-icon"><span class="material-icons">menu_book</span></div>
-            <h3>Biblioteca Central</h3>
-            <p>El mejor ambiente para avanzar tus proyectos.</p>
-          </div>
-        </div>
-
-        <div class="rec-card" onclick="abrirModalSmart('fav-cajero')">
-          <div class="rec-content">
-            <div class="rec-icon"><span class="material-icons">local_atm</span></div>
-            <h3>Cajero Automático</h3>
-            <p>Efectivo rápido para cualquier emergencia o gasto imprevisto en el campus.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </div>
-</main>
-
-<footer>
-  <div class="footer-container">
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
       <div class="footer-info">
-          <h3><i class="fa-solid fa-map-location-dot" style="color: var(--accent-color);"></i> UNI-WAY</h3>
-          <p>Tu guía interactiva para dominar el campus de la Universidad Nacional de Ingeniería.</p>
+        <h3>
+          <i class="fa-solid fa-map-location-dot" style="color: var(--accent-color);"></i> UNI-WAY
+        </h3>
+        <p>
+          Plataforma institucional e interactiva para estudiantes de la
+          Universidad Nacional de Ingeniería.
+        </p>
       </div>
       <div class="footer-enlaces">
-          <h4>Enlaces Rápidos</h4>
-          <ul>
-              <li><a href="nosotros.html">Misión y Visión</a></li>
-              <li><a href="destinos.html">Tour de Edificios</a></li>
-              <li><a href="nosotros.html#equipo">Desarrolladores</a></li>
-          </ul>
+        <h4>Enlaces Oficiales</h4>
+        <ul>
+          <li>
+            <a href="https://www.uni.edu.ni/" target="_blank">
+              Página Oficial UNI
+            </a>
+          </li>
+          <li>
+            <a href="destinos.html">
+              Tour de Edificios
+            </a>
+          </li>
+          <li>
+            <a href="nosotros.html#equipo">
+              Equipo de Desarrollo
+            </a>
+          </li>
+        </ul>
       </div>
       <div class="footer-contacto">
-          <h4>Contacto</h4>
-          <p><i class="fa-solid fa-envelope"></i> equipo@uniway.edu.ni</p>
-          <p><i class="fa-solid fa-location-dot"></i> Recinto Universitario Simón Bolívar, UNI.</p>
-      </div>
-  </div>
-  <div class="footer-bottom">
-      <p>© 2026 UNI-WAY. Desarrollado por estudiantes de Ingeniería de Sistemas. Todos los derechos reservados.</p>
-  </div>
-</footer>
-
-<div class="modal-overlay" id="videoModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3 id="modalTitle">Cargando Recorrido...</h3>
-      <button class="close-btn" onclick="cerrarSimulacion()"><span class="material-icons">close</span></button>
-    </div>
-    <div class="modal-body">
-      <div class="video-container">
-        <p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido</p>
-      </div>
-      <div class="steps-container">
-        <h4>Indicaciones de ruta:</h4>
-        <ol>
-          <li>Sigue las instrucciones hacia tu destino seleccionado.</li>
-          <li>¡Has llegado a tu destino!</li>
-        </ol>
+        <h4>Contacto</h4>
+        <p>
+          <i class="fa-solid fa-envelope"></i>
+          equipo@uniway.edu.ni
+        </p>
+        <p>
+          <i class="fa-solid fa-location-dot"></i>
+          Recinto Universitario Simón Bolívar, UNI.
+        </p>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="modalSmart">
-  <div class="modal-content" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
-    <div class="modal-header">
-      <h3 id="smartTitle">Asistente UNI-WAY</h3>
-      <button class="close-btn" onclick="cerrarModalSmart()"><span class="material-icons">close</span></button>
+    <div class="footer-bottom">
+      <p>
+        © 2026 UNI-WAY. Desarrollado por estudiantes de Ingeniería en Sistemas.
+      </p>
     </div>
-    <div class="modal-body" style="display: block; padding: 30px;" id="smartBody">
+  </footer>
+
+  <!-- MODAL VIDEO -->
+  <div class="modal-overlay" id="videoModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Cargando Recorrido...</h3>
+        <button class="close-btn" onclick="cerrarSimulacion()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="video-container">
+          <p>
+            <span class="material-icons" style="font-size: 48px; color: var(--accent-color);">
+              play_circle
+            </span>
+            <br>
+            Video 360° / Recorrido
+          </p>
+        </div>
+        <div class="steps-container">
+          <h4>Indicaciones de ruta:</h4>
+          <ol>
+            <li>Sigue las instrucciones hacia tu destino seleccionado.</li>
+            <li>¡Has llegado a tu destino!</li>
+          </ol>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="Script/guia.js"></script>
-
+  <!-- MODAL SMART -->
+  <div class="modal-overlay" id="modalSmart">
+    <div class="modal-content" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header">
+        <h3 id="smartTitle">Asistente UNI-WAY</h3>
+        <button class="close-btn" onclick="cerrarModalSmart()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="modal-body" style="display: block; padding: 30px;" id="smartBody">
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="Script/guia.js"></script>
 </body>
+
 </html>
