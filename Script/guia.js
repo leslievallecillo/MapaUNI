@@ -5,12 +5,12 @@ fetch('Json/guia.json')
     .then(data => datosFavoritos = data);
 
 fetch('navbar.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('menu-contenedor').innerHTML = data;
-    const navItem = document.getElementById('nav-guia');
-    if (navItem) navItem.classList.add('activo');
-  });
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('menu-contenedor').innerHTML = data;
+        const navItem = document.getElementById('nav-guia');
+        if (navItem) navItem.classList.add('activo');
+    });
 
 function abrirModalSmart(tipo) {
     const titulo = document.getElementById('smartTitle');
@@ -19,10 +19,10 @@ function abrirModalSmart(tipo) {
 
     if (lugar) {
         titulo.innerText = lugar.titulo;
-        
+
         const resenasGuardadas = JSON.parse(localStorage.getItem('resenas_uniway')) || [];
         const resenasLugar = resenasGuardadas.filter(r => r.lugarId === tipo);
-        
+
         let htmlResenas = '';
         if (resenasLugar.length > 0) {
             htmlResenas = resenasLugar.map(r => `
@@ -83,9 +83,9 @@ function abrirModalSmart(tipo) {
         `;
 
         const form = document.getElementById('form-comentarios');
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const formData = new FormData(form);
             const nuevaResena = {
                 lugarId: tipo,
@@ -109,7 +109,7 @@ function abrirModalSmart(tipo) {
             });
         });
     }
-    
+
     document.getElementById('modalSmart').classList.add('active');
 }
 
@@ -126,4 +126,89 @@ function abrirSimulacion(lugar) {
 
 function cerrarSimulacion() {
     document.getElementById('videoModal').classList.remove('active');
+}
+
+
+// Aqui trabaje io hoy 01 de junio
+const botonesFiltro =
+    document.querySelectorAll(".btn-filtro");
+const tarjetas =
+    document.querySelectorAll(".flip-card");
+botonesFiltro.forEach(btn => {
+    btn.addEventListener("click", () => {
+        botonesFiltro.forEach(b =>
+            b.classList.remove("activo")
+        );
+        btn.classList.add("activo");
+        const filtro =
+            btn.dataset.filter;
+        tarjetas.forEach(card => {
+            if (filtro === "all" || card.dataset.category === filtro) {
+                card.style.display = "block";
+                setTimeout(() => {
+                    card.style.opacity = "1";
+                    card.style.transform =
+                        "scale(1)";
+                }, 50);
+            } else {
+                card.style.opacity = "0";
+                card.style.transform =
+                    "scale(.8)";
+                setTimeout(() => {
+                    card.style.display =
+                        "none";
+                }, 300);
+            }
+        });
+    });
+});
+
+// Esto es supuestamente para la mascota
+const mascot = document.getElementById("careerMascot");
+const bubble = document.getElementById("careerBubble");
+if (mascot && bubble) {
+
+    document.querySelectorAll(".flip-card").forEach(card => {
+
+        card.addEventListener("mouseenter", () => {
+
+            const area = card.dataset.category;
+
+            switch (area) {
+
+                case "dactic":
+                    bubble.innerHTML =
+                        "💻 Hackeemos la NASA... digo, aprendamos a progaramar.";
+                    break;
+
+                case "dacip":
+                    bubble.innerHTML =
+                        "⚙️ Veo diagramas de flujo hasta en mis sueños";
+                    break;
+
+                case "daca":
+                    bubble.innerHTML =
+                        "🌳 Cultivemos el futuro... digo, primero veamos porque se murio la planta, de nuevo.";
+                    break;
+
+                case "dacac":
+                    bubble.innerHTML =
+                        "🏗️Diseñemos un gran edificio, que esta vez no se derrumbe si.";
+                    break;
+
+                default:
+                    bubble.innerHTML =
+                        "🎓 Explora las áreas de conocimiento.";
+            }
+            mascot.classList.add("show");
+        });
+        card.addEventListener("mouseleave", () => {
+            mascot.classList.remove("show");
+        });
+    });
+}
+else {
+    console.error(
+        "No se encontró careerMascot o careerBubble en el HTML."
+    );
 }

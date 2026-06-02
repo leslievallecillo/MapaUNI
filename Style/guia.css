@@ -436,3 +436,184 @@ body {
     transition:0.3s ease;
 }
 
+
+
+
+/* ===========================
+   CARRERAS UNI (AQUI TRABAJE IO HOY 01 DE JUNIO
+=========================== */
+.filtros-carreras{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin:35px 0;
+}
+.btn-filtro{
+    border:none;
+    padding:12px 20px;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:600;
+    background:white;
+    color:#002147;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+.btn-filtro:hover,
+.btn-filtro.activo{
+    background:#0056b3;
+    color:white;
+}
+.carreras-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+.flip-card{
+    perspective:1000px;
+    height:430px;
+    transition:.5s;
+}
+.flip-card-inner{
+    position:relative;
+    width:100%;
+    height:100%;
+    transition:transform .8s;
+    transform-style:preserve-3d;
+}
+.flip-card:hover .flip-card-inner{
+    transform:rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back{
+    position:absolute;
+    width:100%;
+    height:100%;
+    backface-visibility:hidden;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+.flip-card-front{
+    background:white;
+}
+.flip-card-front img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+.flip-card-front h3{
+    text-align:center;
+    padding:20px;
+    color:#002147;
+}
+.flip-card-back{
+    background:linear-gradient( 135deg,#002147,#0056b3 );
+    color:white;
+    transform:rotateY(180deg);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+    text-align:center;
+}
+.flip-card-back h3{
+    margin-bottom:15px;
+}
+.flip-card-back p{
+    line-height:1.7;
+}
+.oculta{
+    display:none;
+}
+.area-overlay{
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:8px;
+}
+.area-overlay h3{
+    min-height:55px;
+    margin:0;
+}
+.area-overlay p{
+    margin:0;
+}
+/* ==========================
+   MASCOTA DE CARRERAS
+========================== */
+.career-widget{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    pointer-events:none;
+}
+.career-bubble{
+    background:white;
+    color:#002147;
+    padding:14px 18px;
+    border-radius:18px;
+    max-width:250px;
+    font-size:14px;
+    font-weight:600;
+    line-height:1.4;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    opacity:0;
+    transform:translateX(20px);
+    transition:all .4s ease;
+}
+.career-icon{
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    background:#ffffff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
+    border:3px solid #0056b3;
+    overflow:hidden;
+}
+.career-icon .material-icons{
+    font-size:38px;
+}
+.career-widget.show .career-bubble{
+    opacity:1;
+    transform:translateX(0);
+}
+.career-icon svg{
+    width:65px;
+    height:65px;
+    display:block;
+    transform:translateY(3px);
+}
+.career-widget.show .svg-mascot{
+    animation: mascotBounce .8s ease;
+}
+@keyframes mascotBounce{
+    0%{
+        transform:translateY(0);
+    }
+    30%{
+        transform:translateY(-10px);
+    }
+    60%{
+        transform:translateY(0);
+    }
+    80%{
+        transform:translateY(-4px);
+    }
+    100%{
+        transform:translateY(0);
+    }
+}
