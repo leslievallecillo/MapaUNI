@@ -99,32 +99,125 @@
           </div>
         </div>
       </section>
-      <!-- FACULTADES -->
-      <section class="facultades anim-element visible">
-        <h2 class="section-title">Áreas Académicas</h2>
-        <div class="facultad-grid">
-          <div class="facultad-card">
-            <span class="material-icons">computer</span>
-            <h4>Ingeniería en Sistemas</h4>
-            <p>Desarrollo tecnológico y software.</p>
+
+      <!-- ÁREAS DE CONOCIMIENTO UNI -->
+      <section id="carreras-uni" class="anim-element visible">
+        <h2 class="section-title">Áreas de Conocimiento UNI</h2>
+        <p class="section-subtitle">
+          Explora las diferentes áreas académicas de la UNI y descubre
+          las carreras disponibles en cada una.
+        </p>
+        <!-- FILTROS -->
+        <div class="filtros-carreras">
+          <button class="btn-filtro activo" data-filter="all">
+            Todas
+          </button>
+          <button class="btn-filtro" data-filter="dactic">
+            DACTIC
+          </button>
+          <button class="btn-filtro" data-filter="dacip">
+            Industria
+          </button>
+          <button class="btn-filtro" data-filter="daca">
+            Agricultura
+          </button>
+          <button class="btn-filtro" data-filter="dacac">
+            Arquitectura
+          </button>
+        </div>
+        <div class="carreras-grid">
+          <!-- DACTIC -->
+          <div class="flip-card" data-category="dactic">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="imagenes/dactic.jpg" alt="DACTIC">
+                <div class="area-overlay">
+                  <span class="material-icons">computer</span>
+                  <h3>Tecnología de la Información y Comunicación</h3>
+                  <p> 4 carreras disponibles</p>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <h3>DACTIC</h3>
+                <ul>
+                  <li>Ingeniería en Sistemas</li>
+                  <li>Ingeniería en Computación</li>
+                  <li>Ingeniería Electrónica</li>
+                  <li>Ingeniería en Telecomunicaciones</li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="facultad-card">
-            <span class="material-icons">engineering</span>
-            <h4>Ingeniería Civil</h4>
-            <p>Infraestructura y construcción.</p>
+
+          <!-- DACIP -->
+          <div class="flip-card" data-category="dacip">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="imagenes/dacip.jpg" alt="DACIP">
+                <div class="area-overlay">
+                  <span class="material-icons">precision_manufacturing</span>
+                  <h3>Industria y Producción</h3>
+                  <p>4 carreras disponibles</p>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <h3>DACIP</h3>
+                <ul>
+                  <li>Ingeniería Mecánica</li>
+                  <li>Ingeniería Eléctrica</li>
+                  <li>Ingeniería Industrial</li>
+                  <li>Economía y Negocios</li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="facultad-card">
-            <span class="material-icons">architecture</span>
-            <h4>Arquitectura</h4>
-            <p>Diseño y planificación urbana.</p>
+
+          <!-- DACA -->
+          <div class="flip-card" data-category="daca">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="imagenes/daca.jpg" alt="DACA">
+                <div class="area-overlay">
+                  <span class="material-icons">agriculture</span>
+                  <h3>Agricultura</h3>
+                  <p>3 carreras disponibles</p>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <h3>DACA</h3>
+                <ul>
+                  <li>Ingeniería Agrícola</li>
+                  <li>Ingeniería Química</li>
+                  <li>Ingeniería Agroindustrial</li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="facultad-card">
-            <span class="material-icons">memory</span>
-            <h4>Electrónica</h4>
-            <p>Tecnologías electrónicas y automatización.</p>
+
+          <!-- DACAC -->
+          <div class="flip-card" data-category="dacac">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="imagenes/dacac.jpg" alt="DACAC">
+                <div class="area-overlay">
+                  <span class="material-icons">architecture</span>
+                  <h3>Arquitectura y Construcción</h3>
+                  <p> 2 carreras disponibles</p>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <h3>DACAC</h3>
+                <ul>
+                  <li>Arquitectura</li>
+                  <li>Ingeniería Civil</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
+
       <!-- ENLACES OFICIALES -->
       <section class="anim-element visible">
         <h2 class="section-title">Accesos Rápidos</h2>
@@ -380,6 +473,51 @@
       </div>
     </div>
   </div>
+
+  <!--Esto es el 18 intento para el icono -->
+  <div id="careerMascot" class="career-widget">
+    <div class="career-bubble" id="careerBubble"> Explora las areas de conocimento</div>
+  <div class="career-icon">
+    <svg class="svg-mascot" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bodyGradCareer" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4da6ff" />
+          <stop offset="100%" stop-color="#0044cc" />
+        </linearGradient>
+        <linearGradient id="shoeGradCareer" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#3388ff" />
+          <stop offset="100%" stop-color="#003399" />
+        </linearGradient>
+      </defs>
+      <g>
+        <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5" />
+        <path d="M35 165 C35 160 65 160 65 165
+           L65 175
+           C65 180 35 180 35 175 Z" fill="url(#shoeGradCareer)" />
+        <rect x="95" y="140" width="12" height="30" fill="#002277" rx="5" />
+        <path d="M85 165 C85 160 115 160 115 165
+           L115 175
+           C115 180 85 180 85 175 Z" fill="url(#shoeGradCareer)" />
+        <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8" />
+        <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4" />
+        <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGradCareer)" />
+        <path d="M20 70
+           L60 70
+           L60 120
+           L90 120
+           L90 80
+           L120 80
+           L120 150" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="50" cy="120" r="5" fill="#1a1a1a" />
+        <circle cx="80" cy="120" r="5" fill="#1a1a1a" />
+        <path d="M58 130 Q65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
+        <path d="M25 100 Q10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10" stroke-linecap="round" />
+        <circle cx="15" cy="128" r="8" fill="#ffffff" />
+      </g>
+    </svg>
+  </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="Script/guia.js"></script>
 </body>
