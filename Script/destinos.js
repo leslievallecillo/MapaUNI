@@ -69,30 +69,62 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Si lo encontró, asignamos los datos y dibujamos la página
+  //por aqui anduve yo tambien, Andrea
   datosCompletos = dataCargada;
-  renderizarCategoria(datosCompletos.categorias.principales, 'track-principales');
-  renderizarCategoria(datosCompletos.categorias.laboratorios, 'track-laboratorios');
-  renderizarCategoria(datosCompletos.categorias.cafetines, 'track-cafetines');
-  inicializarCarruseles();
-
+renderizarCategoria(datosCompletos.categorias.principales, 'track-principales');
+renderizarCategoria(datosCompletos.categorias.laboratorios, 'track-laboratorios');
+renderizarCategoria(datosCompletos.categorias.cafetines, 'track-cafetines');
+ //nmas especificamente aca
+setTimeout(() => {
+    inicializarCarruseles();
+}, 500);
+ 
   // Función para inyectar las tarjetas
   function renderizarCategoria(items, contenedorId) {
     const contenedor = document.getElementById(contenedorId);
     if (!contenedor) return;
-
+   
+    //Aqwui anduvo Andrea
     let html = items.map(item => `
       <div class="card">
-        <div class="card-img-container">
-          <img src="${item.img}" alt="${item.nombre}" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200/001f3f/ffffff?text=${encodeURIComponent(item.nombre)}';">
+
+    <div class="card-img-container">
+
+        <img src="${item.img}" alt="${item.nombre}"
+        onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200/001f3f/ffffff?text=${encodeURIComponent(item.nombre)}';">
+
+        <div class="card-title-overlay">
+            <h3>${item.nombre}</h3>
         </div>
-        <div class="card-body">
-          <h3>${item.nombre}</h3>
-          <p>${item.desc}</p>
-          <button class="btn-select" onclick="${item.tipo === 'complejo' ? `window.abrirModalPisos('${item.id}')` : `window.abrirSimulacion('${item.nombre}')`}">
-            <span class="material-icons" style="font-size:18px; vertical-align: middle;">360</span> Entrar
-          </button>
+
+        <div class="card-hover-content">
+
+            <h3>${item.nombre}</h3>
+
+            <p>${item.desc}</p>
+
+            <button class="btn-select"
+                onclick="${item.tipo === 'complejo'
+                ? `window.abrirModalPisos('${item.id}')`
+                : `window.abrirSimulacion('${item.nombre}')`}">
+
+                <span class="material-icons"
+                style="font-size:18px; vertical-align:middle;">
+                    360
+                </span>
+
+                Entrar
+
+            </button>
+
         </div>
-      </div>
+
+    </div>
+
+</div>
+
+
+      
     `).join('');
 
     contenedor.innerHTML = html;
@@ -121,9 +153,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         const anchoSlide = card ? card.offsetWidth + 20 : 320; 
 
         function actualizarVisibilidadBotones() {
+        
           botonAnterior.style.display = cantidadDesplazamiento <= 0 ? 'none' : 'flex';
           botonSiguiente.style.display = cantidadDesplazamiento >= sliderTrack.scrollWidth - sliderTrack.clientWidth - 10 ? 'none' : 'flex';
         }
+        //Voy a probar algo, Andrea
 
         botonSiguiente.addEventListener('click', () => {
           const desplazamientoMaximo = sliderTrack.scrollWidth - sliderTrack.clientWidth;
@@ -154,6 +188,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 });
+
 
 
 // -------------------------------------------------------------
@@ -500,4 +535,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
         localStorage.removeItem("destinoBuscado");
     }
+});
+// aqui tambien trabaje yo, Andrea
+localStorage.removeItem("destinoBuscado");
+// FILTRO VISUAL DE CATEGORÍAS
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const botones =
+    document.querySelectorAll(".filtro-btn");
+
+    botones.forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+            botones.forEach(b =>
+                b.classList.remove("activo")
+            );
+
+            btn.classList.add("activo");
+
+            document
+            .querySelectorAll(".categoria-destino")
+            .forEach(sec =>
+                sec.classList.remove("activa")
+            );
+
+            document
+            .getElementById(
+                btn.dataset.target
+            )
+            .classList.add("activa");
+            setTimeout(() => {
+
+    const track =
+        document.querySelector(
+            "#" + btn.dataset.target + " .carousel-track"
+        );
+
+    if(track){
+
+        track.scrollLeft = 0;
+
+        track.dispatchEvent(
+            new Event("scroll")
+        );
+
+    }
+
+}, 100);
+
+        });
+        
+
+    });
+
 });

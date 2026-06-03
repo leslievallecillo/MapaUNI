@@ -162,41 +162,49 @@
     .anterior { left: 0; }
     .siguiente { right: 0; }
 
-    .card {
-        min-width: 300px;
-        max-width: 100%; /* Evita desbordamiento */
-        border: 1px solid var(--border-color);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-        border-radius: 15px;
-        overflow: hidden;
-        background: var(--white);
-        transition: transform 0.3s, box-shadow 0.3s;
-        flex: 0 0 auto;
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        scroll-snap-align: center; /* Auto-centrado en móviles */
+    .card{
+    min-width:300px;
+    max-width:100%;
+
+    border:1px solid var(--border-color);
+    border-radius:15px;
+
+    overflow:hidden;
+
+    background:white;
+
+    position:relative;
+
+    cursor:pointer;
+
+    flex:0 0 auto;
+
+    scroll-snap-align:center;
     }
     .card:hover {
         transform: translateY(-10px);
         box-shadow: 0 15px 35px rgba(0,31,63,0.15);
         border-color: var(--primary-color);
     }
-    .card-img-container {
-        width: 100%;
-        height: 180px;
-        background-color: #e0e0e0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+    /* ========== ModificacionesAndrea========== */
+    .card-img-container{
+    position:relative;
+    width:100%;
+    height:300px;
+    overflow:hidden;
     }
-    .card-img-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        transition: transform 0.5s ease;
+    .card-img-container{
+    position:relative;
+    height:300px;
+    overflow:hidden;
+    }
+
+.card-img-container img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    transition:transform .5s ease;
     }
     .card:hover .card-img-container img {
         transform: scale(1.08);
@@ -350,3 +358,147 @@
     }
 }
     }
+    
+
+    /* Aqui tambien trabaje yo, Andrea*/
+    .filtros-destinos{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+.filtro-btn{
+    background:#f2f2f2;
+    border:none;
+    padding:12px 24px;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.filtro-btn:hover{
+    transform:translateY(-2px);
+}
+
+.filtro-btn.activo{
+    background:#001f3f;
+    color:white;
+}
+
+ /* chanchada vieja, ni locos cambien esto q me costo hasta las 1 poder hacer que las flechas sirvieran*/
+.categoria-destino{
+    visibility:hidden;
+    height:0;
+    overflow:hidden;
+}
+
+.categoria-destino.activa{
+    visibility:visible;
+    height:auto;
+    overflow:visible;
+}
+
+
+/* NOMBRE VISIBLE SOBRE LA IMAGEN ANDREA */
+
+.card-title-overlay{
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    z-index:4;
+    transition:all .5s ease;
+}
+
+.card:hover .card-title-overlay{
+    bottom:75%;
+}
+
+.card-title-overlay h3{
+    color:white;
+    font-size:1.5rem;
+    font-weight:900;
+    text-shadow:0 3px 8px rgba(0,0,0,.8);
+}
+
+/* PANEL QUE SUBE */
+
+.card-hover-content{
+    position:absolute;
+    left:0;
+    bottom:-100%;
+    width:100%;
+    height:100%;
+
+    background:#003366;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:25px;
+    text-align:center;
+
+    transition:all .5s ease;
+    z-index:3;
+    overflow:hidden;
+    
+
+}
+
+/* TITULO DENTRO DEL PANEL */
+
+.card-hover-content h3{
+    color:white;
+    font-size:1.4rem;
+    margin-bottom:15px;
+
+    transform:translateY(40px);
+    transition:.5s ease;
+    
+}
+
+/* DESCRIPCION */
+
+.card-hover-content p{
+    color:white;
+    margin-bottom:25px;
+    line-height:1.6;
+
+    transform:translateY(40px);
+    transition:.6s ease;
+}
+
+/* BOTON */
+
+.card-hover-content .btn-select{
+    background:transparent;
+    border:2px solid white;
+    color:white;
+    width:auto;
+    padding:12px 30px;
+
+    transform:translateY(40px);
+    transition:.7s ease;
+}
+
+.card-hover-content .btn-select:hover{
+    background:white;
+    color:#003366;
+}
+.card:hover .card-hover-content{
+    bottom:0;
+}
+
+.card:hover .card-title-overlay{
+    opacity:0;
+}
+
+.card:hover .card-hover-content h3,
+.card:hover .card-hover-content p,
+.card:hover .card-hover-content .btn-select{
+    transform:translateY(0);
+}
