@@ -587,9 +587,11 @@
             Encuentra aulas, laboratorios y servicios al instante mediante recorridos inmersivos.</p>
 
           <div class="hero-search-box fade-in-delay-2"
-            style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 6px 6px 6px 20px;">
-            <input type="text" id="busquedaDestino" placeholder="¿A dónde quieres ir? (Ej. Aula A-11)">
-            <button onclick="buscarDestino()">
+            style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 6px 6px 6px 20px; display: flex; align-items: center; background: white; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+            <select id="busquedaDestino" style="flex: 1; border: none; outline: none; background: transparent; font-size: 16px; padding: 0 35px 0 5px; cursor: pointer; color: #333; width: 100%; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23001f3f%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 10px center; background-size: 18px;">
+              <option value="" disabled selected>¿A dónde quieres ir? Selecciona un destino...</option>
+            </select>
+            <button onclick="buscarDestino()" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; white-space: nowrap;">
               Encontrar ruta
             </button>
           </div>
@@ -759,7 +761,7 @@
         </div>
       </section>
 
-      <section id="populares-preview" class="anim-element">
+      <section id="populares-preview" class="anim-element visible">
         <h2 class="section-title" style="margin-bottom: 20px;">Destinos Frecuentes</h2>
         <div class="popular-grid">
           <div class="card">
@@ -796,7 +798,7 @@
         </div>
       </section>
 
-      <section id="como-funciona" class="anim-element">
+      <section id="como-funciona" class="anim-element visible">
         <h2 class="section-title">¿Cómo Funciona?</h2>
         <div class="steps-wrapper">
           <div class="step-box">
@@ -817,7 +819,7 @@
         </div>
       </section>
 
-      <section id="testimonios" class="anim-element">
+      <section id="testimonios" class="anim-element visible">
         <h2 class="section-title">Testimonios</h2>
         <div class="testimonials-grid">
           <div class="testimonio-card"
@@ -998,7 +1000,9 @@
       .then(response => response.text())
       .then(data => {
         document.getElementById('menu-contenedor').innerHTML = data;
-        document.getElementById('nav-inicio').classList.add('activo');
+      const navInicio = document.getElementById('nav-inicio');
+      if (navInicio) navInicio.classList.add('activo');
+      if (typeof window.transformarBuscadoresEnSelect === 'function') window.transformarBuscadoresEnSelect();
       });
 
     function abrirSimulacion(lugar) {
@@ -1113,131 +1117,41 @@
     }
 
 
-    // De aqui trabaje io (io soy uriel)
-    async function buscarDestino() {
-      const textoBusqueda = document
-        .getElementById("busquedaDestino")
-        .value
-        .trim()
-        .toLowerCase();
-
-      if (textoBusqueda === "") {
+    function buscarDestino() {
+      const selectInicio = document.getElementById("busquedaDestino");
+      if (selectInicio && selectInicio.value) {
+        if (typeof window.manejarSeleccionDestino === 'function') {
+          window.manejarSeleccionDestino(selectInicio.value);
+        }
+      } else {
         Swal.fire({
           icon: "warning",
-          title: "Campo vacío",
-          text: "Escribe un destino para buscar."
-        });
-        return;
-      }
-
-      try {
-        const response = await fetch("./Json/destinos.json");
-        const data = await response.json();
-        const lugares = [
-          ...data.categorias.principales,
-          ...data.categorias.laboratorios,
-          ...data.categorias.cafetines
-        ];
-
-        const resultado = lugares.find(lugar =>
-          lugar.nombre.toLowerCase().includes(textoBusqueda)
-        );
-
-        if (resultado) {
-          localStorage.setItem(
-            "destinoBuscado",
-            JSON.stringify(resultado)
-          );
-          window.location.href = "destinos.html";
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Destino no encontrado",
-            text: "No existe ese lugar en el sistema."
-          });
-        }
-
-      } catch (error) {
-        console.error(error);
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "No se pudo cargar destino.json"
+          title: "Selecciona un destino",
+          text: "Por favor elige un lugar de la lista para continuar.",
+          confirmButtonColor: '#00d2ff'
         });
       }
     }
 
-    // para q sirva con el enter xd 
-    document
-      .getElementById("busquedaDestino")
-      .addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          buscarDestino();
+    function buscarDestinoModal() {
+      const selectModal = document.getElementById("busquedaDestinoModal");
+      if (selectModal && selectModal.value) {
+        if (typeof window.manejarSeleccionDestino === 'function') {
+          window.manejarSeleccionDestino(selectModal.value);
         }
-      });
-
-    async function buscarDestinoModal() {
-      const textoBusqueda = document
-        .getElementById("busquedaDestinoModal")
-        .value
-        .trim()
-        .toLowerCase();
-
-      if (textoBusqueda === "") {
+        const modal = document.getElementById('searchModal');
+        const overlay = document.getElementById('searchOverlay');
+        if(modal) modal.classList.remove('active');
+        if(overlay) overlay.classList.remove('active');
+      } else {
         Swal.fire({
           icon: "warning",
-          title: "Campo vacío",
-          text: "Escribe un destino para buscar."
+          title: "Selecciona un destino",
+          text: "Por favor elige un lugar de la lista para continuar.",
+          confirmButtonColor: '#00d2ff'
         });
-        return;
-      }
-
-      try {
-        const response = await fetch("./Json/destinos.json");
-        const data = await response.json();
-
-        const lugares = [
-          ...data.categorias.principales,
-          ...data.categorias.laboratorios,
-          ...data.categorias.cafetines
-        ];
-
-        const resultado = lugares.find(lugar =>
-          lugar.nombre.toLowerCase().includes(textoBusqueda)
-        );
-
-        if (resultado) {
-          localStorage.setItem(
-            "destinoBuscado",
-            JSON.stringify(resultado)
-          );
-
-          window.location.href = "destinos.html";
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Destino no encontrado",
-            text: "No existe ese lugar."
-          });
-        }
-
-      } catch (error) {
-        console.error(error);
       }
     }
-
-
-    setTimeout(() => {
-      const inputModal = document.getElementById("busquedaDestinoModal");
-
-      if (inputModal) {
-        inputModal.addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            buscarDestinoModal();
-          }
-        });
-      }
-    }, 500);
   </script>
 
   <script src="Script/script.js"></script>

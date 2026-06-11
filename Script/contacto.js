@@ -1,3 +1,61 @@
+const destinosGlobales = [
+    "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica", 
+    "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte", 
+    "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES", 
+    "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES", 
+    "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES", 
+    "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico", 
+    "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva", 
+    "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
+].sort();
+
+window.manejarSeleccionDestino = function(destino) {
+    if (!destino) return;
+    if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
+        if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
+        else abrirSimulacion(destino);
+    } else {
+        localStorage.setItem('destinoBuscadoSimple', destino);
+        window.location.href = 'destinos.html';
+    }
+};
+
+window.transformarBuscadoresEnSelect = function() {
+    const selectInicio = document.getElementById('busquedaDestino');
+    if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
+        destinosGlobales.forEach(destino => {
+            const opt = document.createElement('option');
+            opt.value = destino;
+            opt.text = destino;
+            selectInicio.appendChild(opt);
+        });
+
+        selectInicio.addEventListener('change', function() {
+            if (this.value) {
+                window.manejarSeleccionDestino(this.value);
+                this.value = ""; 
+            }
+        });
+    }
+
+    const selectModal = document.getElementById('busquedaDestinoModal');
+    if (selectModal && selectModal.options.length <= 1) {
+        destinosGlobales.forEach(destino => {
+            const opt = document.createElement('option');
+            opt.value = destino;
+            opt.text = destino;
+            selectModal.appendChild(opt);
+        });
+        
+        selectModal.addEventListener('change', function() {
+            if (this.value) {
+                window.manejarSeleccionDestino(this.value);
+                this.value = ""; 
+            }
+        });
+    }
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   fetch("navbar.html")
     .then(response => response.text())
@@ -8,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const navItem = document.getElementById("nav-contactos");
         if (navItem) navItem.classList.add("activo");
       }
+      if (typeof window.transformarBuscadoresEnSelect === 'function') window.transformarBuscadoresEnSelect();
     })
     .catch(error => console.log("Navbar no encontrado:", error));
 
@@ -40,6 +99,26 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => console.error("Error cargando el JSON de contactos:", error));
 });
 
+window.buscarDestinoModal = function() {
+    const selectModal = document.getElementById('busquedaDestinoModal');
+    if (selectModal && selectModal.value) {
+        window.manejarSeleccionDestino(selectModal.value);
+        
+        const modal = document.getElementById('searchModal');
+        const overlay = document.getElementById('searchOverlay');
+        if(modal) modal.classList.remove('active');
+        if(overlay) overlay.classList.remove('active');
+        selectModal.value = ""; 
+    }
+};
+
+window.toggleSearchModal = function() {
+    const modal = document.getElementById('searchModal');
+    const overlay = document.getElementById('searchOverlay');
+    if (modal) modal.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
+    window.transformarBuscadoresEnSelect();
+};
 
 const formulario = document.querySelector(".contact-form");
 

@@ -2,7 +2,7 @@
   "categorias": {
     "principales": [
       { "id": "rigoberto", "nombre": "Edificio Rigoberto López Pérez", "desc": "Complejo principal con aulas y laboratorios de computación.", "img": "imagenes/edificiorusb.jpeg", "tipo": "complejo" },
-      { "id": "ies", "nombre": "Edificio IES", "desc": "Edificio correspondiente a la carrera de Ingeniería de Sistemas.", "img": "imagenes/edificioies.jpeg", "tipo": "estandar" },
+      { "id": "ies", "nombre": "Edificio IES", "desc": "Edificio correspondiente a la carrera de Ingeniería de Sistemas.", "img": "imagenes/edificioies.jpeg", "tipo": "estandar", "media": "https://www.image2url.com/r2/default/videos/1781212543080-4e734fb5-7bdb-42e1-9a06-b841e8a89ac5.mp4", "tipoMedia": "video" },
       { "id": "posgrado", "nombre": "Edificio Posgrado", "desc": "Dirección de posgrados y maestrías de la universidad.", "img": "imagenes/posgrado.jpeg", "tipo": "estandar" },
       { "id": "quimica", "nombre": "Edificio Química", "desc": "Laboratorios y aulas teóricas de la facultad química.", "img": "imagenes/edificioquimica.jpeg", "tipo": "estandar" },
       { "id": "arquitectura", "nombre": "Edificio Arquitectura", "desc": "Laboratorios y aulas teóricas.", "img": "imagenes/edificioarquitectura.jpeg", "tipo": "estandar" },
@@ -12,7 +12,7 @@
       { "id": "registro", "nombre": "Departamento de Registro Académico", "desc": "En este departamento se encuentra secretaria academica para cada carrera y Caja", "img": "imagenes/RegistroAcademico.jpeg", "tipo": "estandar" }
     ],
     "laboratorios": [
-      { "id": "lab_robotica", "nombre": "Laboratorios Robótica (Sótano)", "desc": "Equipos especializados para proyectos de hardware y electrónica.", "img": "imagenes/lab_robotica.jpeg", "tipo": "estandar" },
+      { "id": "lab_robotica", "nombre": "Laboratorios Robótica (Sótano)", "desc": "Equipos especializados para proyectos de hardware y electrónica.", "img": "imagenes/lab_robotica.jpeg", "tipo": "estandar", "media": "imagenes/lab_robotica.mp4", "tipoMedia": "video" },
       { "id": "lab_analogica", "nombre": "Laboratorio de Electronica Analogica", "desc": "Salas de computación principales para estudiantes de sistemas.", "img": "imagenes/Lab_ElectronicaAnalogica.jpeg", "tipo": "estandar" },
       { "id": "lab_leyda", "nombre": "Laboratorio Leyda", "desc": "Salas de computación principales para estudiantes de sistemas.", "img": "imagenes/Lab_Leyda.jpeg", "tipo": "estandar" },
       { "id": "lab_control", "nombre": "Laboratorio de Control", "desc": "Salas de computación principales para estudiantes de sistemas.", "img": "imagenes/Lab_Control.jpeg", "tipo": "estandar" },
@@ -48,7 +48,7 @@
       "aulas": {
         "p1": {
           "A": [
-            { "id": "A11", "nombre": "Aula A-11", "img": "imagenes/aulas/p1a11.jpg" },
+            { "id": "A11", "nombre": "Aula A-11", "img": "imagenes/aulas/p1a11.jpg", "media": "https://i.postimg.cc/mrzGkHfy/Whats-App-Image-2026-06-10-at-1-42-00-PM.jpg", "tipoMedia": "imagen" },
             { "id": "A12", "nombre": "Aula A-12", "img": "imagenes/aulas/p1a12.jpg" }
           ],
           "B": [

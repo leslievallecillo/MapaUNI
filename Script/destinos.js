@@ -1,6 +1,66 @@
 // --- VARIABLES GLOBALES PARA ALMACENAR DATOS ---
 let datosCompletos = null;
 
+// Nueva función para transformar las barras de búsqueda en select (Combo box)
+const destinosGlobales = [
+    "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica", 
+    "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte", 
+    "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES", 
+    "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES", 
+    "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES", 
+    "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico", 
+    "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva", 
+    "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
+].sort();
+
+window.manejarSeleccionDestino = function(destino) {
+    if (!destino) return;
+    if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
+        if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
+        else abrirSimulacion(destino);
+    } else {
+        localStorage.setItem('destinoBuscadoSimple', destino);
+        window.location.href = 'destinos.html';
+    }
+};
+
+window.transformarBuscadoresEnSelect = function() {
+
+    const selectInicio = document.getElementById('busquedaDestino');
+    if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
+        destinosGlobales.forEach(destino => {
+            const opt = document.createElement('option');
+            opt.value = destino;
+            opt.text = destino;
+            selectInicio.appendChild(opt);
+        });
+
+        selectInicio.addEventListener('change', function() {
+            if (this.value) {
+                window.manejarSeleccionDestino(this.value);
+                this.value = ""; 
+            }
+        });
+    }
+
+    const selectModal = document.getElementById('busquedaDestinoModal');
+    if (selectModal && selectModal.options.length <= 1) {
+        destinosGlobales.forEach(destino => {
+            const opt = document.createElement('option');
+            opt.value = destino;
+            opt.text = destino;
+            selectModal.appendChild(opt);
+        });
+        
+        selectModal.addEventListener('change', function() {
+            if (this.value) {
+                window.manejarSeleccionDestino(this.value);
+                this.value = ""; 
+            }
+        });
+    }
+};
+
 // --- SCRIPT PARA CARGAR EL NAVBAR ---
 fetch('navbar.html')
   .then(response => response.text())
@@ -8,7 +68,30 @@ fetch('navbar.html')
     document.getElementById('menu-contenedor').innerHTML = data;
     const navDestinos = document.getElementById('nav-destinos');
     if (navDestinos) navDestinos.classList.add('activo');
+    
+    window.transformarBuscadoresEnSelect();
   }).catch(() => console.log('Navbar no encontrado'));
+
+window.buscarDestinoModal = function() {
+    const selectModal = document.getElementById('busquedaDestinoModal');
+    if (selectModal && selectModal.value) {
+        window.manejarSeleccionDestino(selectModal.value);
+        
+        const modal = document.getElementById('searchModal');
+        const overlay = document.getElementById('searchOverlay');
+        if(modal) modal.classList.remove('active');
+        if(overlay) overlay.classList.remove('active');
+        selectModal.value = ""; 
+    }
+};
+
+window.toggleSearchModal = function() {
+    const modal = document.getElementById('searchModal');
+    const overlay = document.getElementById('searchOverlay');
+    if (modal) modal.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
+    window.transformarBuscadoresEnSelect();
+};
 
 // Funciones de navegación e interfaz general
 window.cambiarVista = function(idVista) {
@@ -88,7 +171,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="card-body">
           <h3>${item.nombre}</h3>
           <p>${item.desc}</p>
-          <button class="btn-select" onclick="${item.tipo === 'complejo' ? `window.abrirModalPisos('${item.id}')` : `window.abrirSimulacion('${item.nombre}')`}">
+          <button class="btn-select" onclick="${item.tipo === 'complejo' ? `window.abrirModalPisos('${item.id}')` : `window.abrirSimulacion('${item.nombre}', '${item.media || ''}', '${item.tipoMedia || 'video'}')`}">
             <span class="material-icons" style="font-size:18px; vertical-align: middle;">360</span> Entrar
           </button>
         </div>
@@ -339,15 +422,40 @@ document.addEventListener('DOMContentLoaded', function() {
 // -------------------------------------------------------------
 let edificioActualId = "";
 
-window.abrirSimulacion = function(lugar) {
+window.abrirSimulacion = function(lugar, mediaUrl = '', tipoMedia = 'video') {
   const modal = document.getElementById('videoModal');
   const title = document.getElementById('modalTitle');
   if(title) title.innerText = 'Ruta hacia: ' + lugar;
+  
+  const videoContainer = modal.querySelector('.video-container');
+  if (videoContainer) {
+      if (mediaUrl) {
+          if (tipoMedia === 'imagen') {
+              videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${lugar}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
+          } else {
+              videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
+          }
+      } else {
+          videoContainer.innerHTML = `<p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido no disponible</p>`;
+      }
+  }
+
   if(modal) modal.classList.add('active');
 }
 window.cerrarSimulacion = function() {
   const modal = document.getElementById('videoModal');
-  if(modal) modal.classList.remove('active');
+  if(modal) {
+      modal.classList.remove('active');
+      const video = modal.querySelector('video');
+      if (video) {
+          video.pause();
+          video.removeAttribute('src'); // Corta la conexión de red
+          video.load(); // Fuerza al navegador a liberar la memoria
+      }
+      // Limpiamos el contenedor por completo
+      const videoContainer = modal.querySelector('.video-container');
+      if (videoContainer) videoContainer.innerHTML = '';
+  }
 }
 
 window.abrirModalPisos = function(edificioId) {
@@ -436,7 +544,7 @@ window.seleccionarPiso = function(pisoId, pisoLabel, botonHtml) {
           contenedorTarjetas.innerHTML += `
               <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                   <h4 style="margin-bottom: 12px; font-size: 16px;">${aula.nombre}</h4>
-                  <button onclick="window.abrirModalAulaVirtual('${aula.nombre}')" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s;">
+                  <button onclick="window.abrirModalAulaVirtual('${aula.nombre}', '${aula.media || ''}', '${aula.tipoMedia || 'imagen'}')" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s;">
                       <span class="material-icons" style="font-size: 18px; vertical-align: bottom; margin-right: 5px;">vrpano</span> Entrar (360)
                   </button>
               </div>
@@ -456,17 +564,41 @@ document.addEventListener('change', function(e) {
   }
 });
 
-window.abrirModalAulaVirtual = function(aula) {
+window.abrirModalAulaVirtual = function(aula, mediaUrl = '', tipoMedia = 'imagen') {
   const titulo = document.getElementById('titulo-aula-virtual');
   if(titulo) titulo.innerText = 'Destino: ' + aula;
-  window.cerrarModalPisos();
+  
   const modal = document.getElementById('modalAulaVirtual');
+  const videoContainer = modal.querySelector('.video-container');
+  if (videoContainer) {
+      if (mediaUrl) {
+          if (tipoMedia === 'video') {
+              videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
+          } else {
+              videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${aula}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
+          }
+      } else {
+          videoContainer.innerHTML = `<p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido no disponible</p>`;
+      }
+  }
+
+  window.cerrarModalPisos();
   if(modal) modal.classList.add('active');
 }
 
 window.cerrarModalAulaVirtual = function() {
   const modal = document.getElementById('modalAulaVirtual');
-  if(modal) modal.classList.remove('active');
+  if(modal) {
+      modal.classList.remove('active');
+      const video = modal.querySelector('video');
+      if (video) {
+          video.pause();
+          video.removeAttribute('src');
+          video.load();
+      }
+      const videoContainer = modal.querySelector('.video-container');
+      if (videoContainer) videoContainer.innerHTML = '';
+  }
 }
 
 document.addEventListener('click', function(e) {
@@ -499,5 +631,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         localStorage.removeItem("destinoBuscado");
+    }
+
+    const destinoSimple = localStorage.getItem("destinoBuscadoSimple");
+    if (destinoSimple) {
+        setTimeout(() => {
+            window.manejarSeleccionDestino(destinoSimple);
+        }, 300);
+        localStorage.removeItem("destinoBuscadoSimple");
     }
 });

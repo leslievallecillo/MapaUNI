@@ -4,12 +4,94 @@ fetch('Json/guia.json')
     .then(res => res.json())
     .then(data => datosFavoritos = data);
 
+const destinosGlobales = [
+    "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica", 
+    "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte", 
+    "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES", 
+    "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES", 
+    "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES", 
+    "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico", 
+    "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva", 
+    "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
+].sort();
+
+window.manejarSeleccionDestino = function(destino) {
+    if (!destino) return;
+    if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
+        if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
+        else abrirSimulacion(destino);
+    } else {
+        localStorage.setItem('destinoBuscadoSimple', destino);
+        window.location.href = 'destinos.html';
+    }
+};
+
+window.transformarBuscadoresEnSelect = function() {
+
+    const selectInicio = document.getElementById('busquedaDestino');
+    if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
+        destinosGlobales.forEach(destino => {
+            const opt = document.createElement('option');
+            opt.value = destino;
+            opt.text = destino;
+            selectInicio.appendChild(opt);
+        });
+
+        selectInicio.addEventListener('change', function() {
+            if (this.value) {
+                window.manejarSeleccionDestino(this.value);
+                this.value = ""; 
+            }
+        });
+    }
+
+    const selectModal = document.getElementById('busquedaDestinoModal');
+    if (selectModal && selectModal.options.length <= 1) {
+        destinosGlobales.forEach(destino => {
+            const opt = document.createElement('option');
+            opt.value = destino;
+            opt.text = destino;
+            selectModal.appendChild(opt);
+        });
+        
+        selectModal.addEventListener('change', function() {
+            if (this.value) {
+                window.manejarSeleccionDestino(this.value);
+                this.value = ""; 
+            }
+        });
+    }
+};
+
+window.buscarDestinoModal = function() {
+    const selectModal = document.getElementById('busquedaDestinoModal');
+    if (selectModal && selectModal.value) {
+        window.manejarSeleccionDestino(selectModal.value);
+        
+        const modal = document.getElementById('searchModal');
+        const overlay = document.getElementById('searchOverlay');
+        if(modal) modal.classList.remove('active');
+        if(overlay) overlay.classList.remove('active');
+        selectModal.value = ""; 
+    }
+};
+
+function toggleSearchModal() {
+    const modal = document.getElementById('searchModal');
+    const overlay = document.getElementById('searchOverlay');
+    if (modal) modal.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
+    window.transformarBuscadoresEnSelect();
+}
+
 fetch('navbar.html')
     .then(response => response.text())
     .then(data => {
         document.getElementById('menu-contenedor').innerHTML = data;
         const navItem = document.getElementById('nav-guia');
         if (navItem) navItem.classList.add('activo');
+        
+        window.transformarBuscadoresEnSelect();
     });
 
 function abrirModalSmart(tipo) {
@@ -117,98 +199,39 @@ function cerrarModalSmart() {
     document.getElementById('modalSmart').classList.remove('active');
 }
 
-function abrirSimulacion(lugar) {
+function abrirSimulacion(lugar, mediaUrl = '', tipoMedia = 'video') {
     const modal = document.getElementById('videoModal');
     const title = document.getElementById('modalTitle');
     title.innerText = 'Ruta hacia: ' + lugar;
+
+    const videoContainer = modal.querySelector('.video-container');
+    if (videoContainer) {
+        if (mediaUrl) {
+            if (tipoMedia === 'imagen') {
+                videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${lugar}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
+            } else {
+                videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
+            }
+        } else {
+            videoContainer.innerHTML = `<p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido no disponible</p>`;
+        }
+    }
+
     modal.classList.add('active');
 }
 
 function cerrarSimulacion() {
-    document.getElementById('videoModal').classList.remove('active');
+    const modal = document.getElementById('videoModal');
+    modal.classList.remove('active');
+    const video = modal.querySelector('video');
+    if (video) {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+    }
+    const videoContainer = modal.querySelector('.video-container');
+    if (videoContainer) videoContainer.innerHTML = '';
 }
 
 
-// Aqui trabaje io hoy 01 de junio
-const botonesFiltro =
-    document.querySelectorAll(".btn-filtro");
-const tarjetas =
-    document.querySelectorAll(".flip-card");
-botonesFiltro.forEach(btn => {
-    btn.addEventListener("click", () => {
-        botonesFiltro.forEach(b =>
-            b.classList.remove("activo")
-        );
-        btn.classList.add("activo");
-        const filtro =
-            btn.dataset.filter;
-        tarjetas.forEach(card => {
-            if (filtro === "all" || card.dataset.category === filtro) {
-                card.style.display = "block";
-                setTimeout(() => {
-                    card.style.opacity = "1";
-                    card.style.transform =
-                        "scale(1)";
-                }, 50);
-            } else {
-                card.style.opacity = "0";
-                card.style.transform =
-                    "scale(.8)";
-                setTimeout(() => {
-                    card.style.display =
-                        "none";
-                }, 300);
-            }
-        });
-    });
-});
-
-// Esto es supuestamente para la mascota
-const mascot = document.getElementById("careerMascot");
-const bubble = document.getElementById("careerBubble");
-if (mascot && bubble) {
-
-    document.querySelectorAll(".flip-card").forEach(card => {
-
-        card.addEventListener("mouseenter", () => {
-
-            const area = card.dataset.category;
-
-            switch (area) {
-
-                case "dactic":
-                    bubble.innerHTML =
-                        "💻 Hackeemos la NASA... digo, aprendamos a progaramar.";
-                    break;
-
-                case "dacip":
-                    bubble.innerHTML =
-                        "⚙️ Veo diagramas de flujo hasta en mis sueños";
-                    break;
-
-                case "daca":
-                    bubble.innerHTML =
-                        "🌳 Cultivemos el futuro... digo, primero veamos porque se murio la planta, de nuevo.";
-                    break;
-
-                case "dacac":
-                    bubble.innerHTML =
-                        "🏗️Diseñemos un gran edificio, que esta vez no se derrumbe si.";
-                    break;
-
-                default:
-                    bubble.innerHTML =
-                        "🎓 Explora las áreas de conocimiento.";
-            }
-            mascot.classList.add("show");
-        });
-        card.addEventListener("mouseleave", () => {
-            mascot.classList.remove("show");
-        });
-    });
-}
-else {
-    console.error(
-        "No se encontró careerMascot o careerBubble en el HTML."
-    );
-}
+// Aqui
