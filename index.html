@@ -61,7 +61,6 @@
       from {
         opacity: 0.5;
       }
-
       to {
         opacity: 1;
       }
@@ -71,7 +70,6 @@
       from {
         stroke-dashoffset: 50;
       }
-
       to {
         stroke-dashoffset: 0;
       }
@@ -161,83 +159,38 @@
     }
 
     @keyframes mascotWalk {
-      0% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-8px);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
     }
 
     @keyframes legLeft {
-      0% {
-        transform: rotate(-20deg);
-      }
-
-      50% {
-        transform: rotate(25deg);
-      }
-
-      100% {
-        transform: rotate(-20deg);
-      }
+      0% { transform: rotate(-20deg); }
+      50% { transform: rotate(25deg); }
+      100% { transform: rotate(-20deg); }
     }
 
     @keyframes legRight {
-      0% {
-        transform: rotate(25deg);
-      }
-
-      50% {
-        transform: rotate(-20deg);
-      }
-
-      100% {
-        transform: rotate(25deg);
-      }
+      0% { transform: rotate(25deg); }
+      50% { transform: rotate(-20deg); }
+      100% { transform: rotate(25deg); }
     }
 
     @keyframes armWave {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      50% {
-        transform: rotate(-35deg);
-      }
-
-      100% {
-        transform: rotate(0deg);
-      }
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(-35deg); }
+      100% { transform: rotate(0deg); }
     }
 
     @keyframes roadMove {
-      from {
-        stroke-dashoffset: 40;
-      }
-
-      to {
-        stroke-dashoffset: 0;
-      }
+      from { stroke-dashoffset: 40; }
+      to { stroke-dashoffset: 0; }
     }
 
     @keyframes pinBounce {
-      0% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
     }
 
     .phrase-content {
@@ -333,13 +286,8 @@
     }
 
     @keyframes rotateBg {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .gps-content {
@@ -396,17 +344,9 @@
     }
 
     @keyframes pulse-glow {
-      0% {
-        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7);
-      }
-
-      70% {
-        box-shadow: 0 0 0 20px rgba(0, 210, 255, 0);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0);
-      }
+      0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7); }
+      70% { box-shadow: 0 0 0 20px rgba(0, 210, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
     }
 
     .corner-widget {
@@ -455,15 +395,8 @@
     }
 
     @keyframes floatBubble {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-8px);
-      }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
     @media (max-width: 768px) {
@@ -472,13 +405,11 @@
         right: 20px;
         gap: 10px;
       }
-
       .corner-bubble {
         padding: 10px 15px;
         font-size: 0.95rem;
         max-width: 220px;
       }
-
       .corner-svg-container {
         width: 90px;
         height: 90px;
@@ -491,17 +422,44 @@
         right: 15px;
         gap: 8px;
       }
-
       .corner-bubble {
         padding: 8px 12px;
         font-size: 0.85rem;
         max-width: 160px;
       }
-
       .corner-svg-container {
         width: 75px;
         height: 75px;
       }
+    }
+
+    /* Estilos para el combobox */
+    .hero-search-box select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23001f3f'><path d='M7 10l5 5 5-5z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 24px;
+      padding-right: 45px;
+      cursor: pointer;
+    }
+
+    .hero-search-box select optgroup {
+      font-weight: bold;
+      color: #001f3f;
+      background-color: #f0f0f0;
+    }
+
+    .hero-search-box select option {
+      padding: 10px;
+      color: #333;
+      background-color: white;
+    }
+
+    .hero-search-box select option:hover {
+      background-color: #e6f3ff;
     }
   </style>
 </head>
@@ -578,6 +536,7 @@
 
       <section id="inicio" class="anim-element visible"
         style="background-image: linear-gradient(rgba(0, 10, 30, 0.7), rgba(0, 10, 30, 0.5)), url('https://nicaraguaactual.tv/wp-content/uploads/2023/11/Universidad-Nacional-de-Ingenieria-UNI-Foto-Nicaragua-Actual.jpeg'); background-size: cover; background-position: center; border-radius: 15px; margin-top: 20px; padding: 100px 40px 120px 40px; color: var(--white); text-align: center;">
+
         <div class="hero-text fade-in-delay-1"
           style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
           <h1
@@ -588,7 +547,9 @@
 
           <div class="hero-search-box fade-in-delay-2"
             style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 6px 6px 6px 20px;">
-            <input type="text" id="busquedaDestino" placeholder="¿A dónde quieres ir? (Ej. Aula A-11)">
+            <select id="busquedaDestino" style="flex: 1; padding: 15px; border: none; border-radius: 25px; font-size: 16px; outline: none; background: #ffffff; color: #001f3f; font-family: 'Roboto', sans-serif; margin-right: 10px;">
+              <option value="">Selecciona un destino...</option>
+            </select>
             <button onclick="buscarDestino()">
               Encontrar ruta
             </button>
@@ -597,11 +558,6 @@
           <div class="hero-ctas fade-in-delay-3" style="justify-content: center; margin-top: 30px;">
             <button class="btn-glow" onclick="window.location.href='destinos.html';">
               <span class="material-icons">map</span> Abrir Mapa Interactivo
-            </button>
-            <button class="btn-outline"
-              style="border-color: rgba(255,255,255,0.5); color: var(--white); background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);"
-              onclick="window.location.href='destinos.html';">
-              <span class="material-icons">apartment</span> Ver Edificios 360°
             </button>
           </div>
         </div>
@@ -676,88 +632,6 @@
             al instante. <strong>El control del campus en un solo clic.</strong></p>
         </div>
       </div>
-
-      <section class="anim-element visible" style="padding: 0 20px;">
-        <div class="gps-banner">
-          <div class="gps-content">
-            <span class="material-icons"
-              style="font-size: 70px; color: var(--accent-color); margin-bottom: 10px;">explore</span>
-            <h2>¿Perdido en el <span>Campus?</span></h2>
-            <p>No des más vueltas. Activa nuestro Navegador GPS con instrucciones en tiempo real y llega a tu clase a
-              tiempo y sin complicaciones.</p>
-            <button class="btn-super-glow" onclick="window.location.href='destinos.html'">
-              <span class="material-icons">near_me</span> Iniciar Navegación Asistida
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section id="smart-nav" class="anim-element visible" style="padding-top: 20px;">
-        <h2 class="section-title" style="font-size: 26px; margin-bottom: 10px;">¿Qué necesitas hoy?</h2>
-        <p style="text-align: center; color: var(--text-gray); margin-bottom: 30px;">Selecciona una opción rápida basada
-          en lo que buscas ahora mismo.</p>
-
-        <div class="context-grid">
-          <button class="btn-context" style="border-color: var(--accent-color); background: #f0faff;"
-            onclick="abrirModalSmart('primer-dia')">
-            <span class="material-icons">school</span> Es mi primer día
-          </button>
-          <button class="btn-context" onclick="abrirModalSmart('donde-estoy')">
-            <span class="material-icons">my_location</span> No sé dónde estoy
-          </button>
-          <button class="btn-context" onclick="abrirModalSmart('hambre')">
-            <span class="material-icons">lunch_dining</span> Tengo hambre
-          </button>
-          <button class="btn-context" onclick="abrirModalSmart('tarde')">
-            <span class="material-icons">timer</span> Voy tarde
-          </button>
-          <button class="btn-context" onclick="abrirModalSmart('imprimir')">
-            <span class="material-icons">print</span> Necesito imprimir
-          </button>
-        </div>
-
-        <div class="planner-box">
-          <h3
-            style="color: var(--primary-color); margin-bottom: 15px; font-size: 22px; display: flex; align-items: center; gap: 10px; font-weight: 900;">
-            <span class="material-icons" style="font-size: 28px;">route</span> Planificador de Día
-          </h3>
-          <p style="color: var(--text-gray); margin-bottom: 25px; font-size: 16px;">Arma tu ruta seleccionando tus
-            clases y descansos. Optimizaremos tu recorrido por el campus.</p>
-
-          <div class="planner-row">
-            <select class="planner-select" id="plan1">
-              <option value="">Aulas (Ej. A-1-1)</option>
-              <optgroup label="Piso 1">
-                <option value="A-1-1">A-1-1</option>
-                <option value="A-1-2">A-1-2</option>
-                <option value="A-1-3">A-1-3</option>
-              </optgroup>
-            </select>
-
-            <span class="material-icons" style="color: var(--text-gray);">arrow_forward</span>
-
-            <select class="planner-select" id="plan2">
-              <option value="">Laboratorios</option>
-              <optgroup label="Lab Redes">
-                <option value="Lab Redes 1">Lab Redes 1</option>
-                <option value="Lab Redes 2">Lab Redes 2</option>
-              </optgroup>
-            </select>
-
-            <span class="material-icons" style="color: var(--text-gray);">arrow_forward</span>
-
-            <select class="planner-select" id="plan3">
-              <option value="">Destino Final</option>
-              <option value="Auditorio Salomón de la Selva">Auditorio Salomón de la Selva</option>
-              <option value="Biblioteca">Biblioteca</option>
-            </select>
-
-            <button class="btn-select"
-              style="width: auto; padding: 15px 30px; font-size: 16px; margin-left: auto; border-radius: 8px;"
-              onclick="abrirModalSmart('planner')">Optimizar Ruta</button>
-          </div>
-        </div>
-      </section>
 
       <section id="populares-preview" class="anim-element">
         <h2 class="section-title" style="margin-bottom: 20px;">Destinos Frecuentes</h2>
@@ -844,6 +718,7 @@
       </section>
     </div>
 
+    <!--Este es el logo peque, el q voy a copiar-->
     <div class="corner-widget" onclick="window.location.href='destinos.html'">
       <div class="corner-bubble">¿Perdido en la UNI?<br><strong>Ve a destinos.</strong></div>
       <div class="corner-svg-container">
@@ -1000,6 +875,58 @@
         document.getElementById('nav-inicio').classList.add('activo');
       });
 
+    // Cargar los lugares en el combobox al iniciar la página
+    async function cargarComboboxDestinos() {
+      try {
+        const response = await fetch("./Json/destinos.json");
+        const data = await response.json();
+        
+        const lugares = [
+          ...data.categorias.principales,
+          ...data.categorias.laboratorios,
+          ...data.categorias.cafetines
+        ];
+        
+        const select = document.getElementById("busquedaDestino");
+        
+        // Limpiar opciones existentes (excepto la primera)
+        while (select.options.length > 1) {
+          select.remove(1);
+        }
+        
+        // Agrupar por categorías
+        const categorias = {
+          "🏛️ Edificios Principales": data.categorias.principales,
+          "🔬 Laboratorios": data.categorias.laboratorios,
+          "🍽️ Cafetines y Servicios": data.categorias.cafetines
+        };
+        
+        // Llenar el select con grupos
+        for (const [nombreCategoria, items] of Object.entries(categorias)) {
+          const optgroup = document.createElement("optgroup");
+          optgroup.label = nombreCategoria;
+          
+          items.forEach(lugar => {
+            const option = document.createElement("option");
+            option.value = lugar.nombre;
+            option.textContent = lugar.nombre;
+            optgroup.appendChild(option);
+          });
+          
+          select.appendChild(optgroup);
+        }
+        
+      } catch (error) {
+        console.error("Error cargando destinos:", error);
+        const select = document.getElementById("busquedaDestino");
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "Error al cargar destinos";
+        option.disabled = true;
+        select.appendChild(option);
+      }
+    }
+
     function abrirSimulacion(lugar) {
       const modal = document.getElementById('videoModal');
       const title = document.getElementById('modalTitle');
@@ -1095,9 +1022,9 @@
          <div style="text-align: left;">
            <p style="color: var(--text-gray); margin-bottom: 20px;">Hemos organizado tu día para caminar lo menos posible. Esta es tu ruta:</p>
            <div style="background: var(--bg-light); border-radius: 10px; padding: 20px; border: 1px solid var(--border-color);">
-              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">1. Inicio → <span style="color: var(--text-dark);">\${p1}</span></p>
-              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">2. Siguiente → <span style="color: var(--text-dark);">\${p2}</span></p>
-              <p style="font-weight: bold; color: var(--primary-color);">3. Final → <span style="color: var(--text-dark);">\${p3}</span></p>
+              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">1. Inicio → <span style="color: var(--text-dark);">${p1}</span></p>
+              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">2. Siguiente → <span style="color: var(--text-dark);">${p2}</span></p>
+              <p style="font-weight: bold; color: var(--primary-color);">3. Final → <span style="color: var(--text-dark);">${p3}</span></p>
            </div>
            <button class="btn-select" style="margin-top: 25px; width: 100%;" onclick="window.location.href='destinos.html'">Comenzar Ruta en el Mapa</button>
          </div>
@@ -1111,20 +1038,17 @@
       document.getElementById('modalSmart').classList.remove('active');
     }
 
-
-    // De aqui trabaje io (io soy uriel)
+    // Nueva función buscarDestino adaptada para combobox
     async function buscarDestino() {
-      const textoBusqueda = document
-        .getElementById("busquedaDestino")
-        .value
-        .trim()
-        .toLowerCase();
+      const select = document.getElementById("busquedaDestino");
+      const destinoSeleccionado = select.value.trim();
 
-      if (textoBusqueda === "") {
+      if (destinoSeleccionado === "") {
         Swal.fire({
           icon: "warning",
           title: "Campo vacío",
-          text: "Escribe un destino para buscar."
+          text: "Selecciona un destino para buscar.",
+          confirmButtonColor: '#001f3f'
         });
         return;
       }
@@ -1139,7 +1063,7 @@
         ];
 
         const resultado = lugares.find(lugar =>
-          lugar.nombre.toLowerCase().includes(textoBusqueda)
+          lugar.nombre === destinoSeleccionado
         );
 
         if (resultado) {
@@ -1147,7 +1071,18 @@
             "destinoBuscado",
             JSON.stringify(resultado)
           );
-          window.location.href = "destinos.html";
+          
+          // Mostrar confirmación antes de redirigir
+          Swal.fire({
+            icon: "success",
+            title: "Destino seleccionado",
+            text: `Redirigiendo a: ${resultado.nombre}`,
+            timer: 1500,
+            showConfirmButton: false
+          }).then(() => {
+            window.location.href = "destinos.html";
+          });
+          
         } else {
           Swal.fire({
             icon: "error",
@@ -1161,74 +1096,27 @@
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: "No se pudo cargar destino.json"
+          text: "No se pudo cargar el archivo de destinos."
         });
       }
     }
 
-    // para q sirva con el enter xd 
-    document
-      .getElementById("busquedaDestino")
-      .addEventListener("keypress", function (e) {
+    // Inicializar el combobox cuando la página cargue
+    document.addEventListener("DOMContentLoaded", function() {
+      cargarComboboxDestinos();
+      
+      // Opcional: Permitir búsqueda escribiendo en el select
+      const select = document.getElementById("busquedaDestino");
+      select.addEventListener("keypress", function(e) {
         if (e.key === "Enter") {
+          e.preventDefault();
           buscarDestino();
         }
       });
-
-    async function buscarDestinoModal() {
-      const textoBusqueda = document
-        .getElementById("busquedaDestinoModal")
-        .value
-        .trim()
-        .toLowerCase();
-
-      if (textoBusqueda === "") {
-        Swal.fire({
-          icon: "warning",
-          title: "Campo vacío",
-          text: "Escribe un destino para buscar."
-        });
-        return;
-      }
-
-      try {
-        const response = await fetch("./Json/destinos.json");
-        const data = await response.json();
-
-        const lugares = [
-          ...data.categorias.principales,
-          ...data.categorias.laboratorios,
-          ...data.categorias.cafetines
-        ];
-
-        const resultado = lugares.find(lugar =>
-          lugar.nombre.toLowerCase().includes(textoBusqueda)
-        );
-
-        if (resultado) {
-          localStorage.setItem(
-            "destinoBuscado",
-            JSON.stringify(resultado)
-          );
-
-          window.location.href = "destinos.html";
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Destino no encontrado",
-            text: "No existe ese lugar."
-          });
-        }
-
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
+    });
 
     setTimeout(() => {
       const inputModal = document.getElementById("busquedaDestinoModal");
-
       if (inputModal) {
         inputModal.addEventListener("keypress", function (e) {
           if (e.key === "Enter") {
