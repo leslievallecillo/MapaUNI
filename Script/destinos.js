@@ -1,5 +1,6 @@
 // --- VARIABLES GLOBALES PARA ALMACENAR DATOS ---
 let datosCompletos = null;
+let indicacionesData = null; // NUEVA VARIABLE
 
 // Nueva función para transformar las barras de búsqueda en select (Combo box)
 const destinosGlobales = [
@@ -171,7 +172,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="card-body">
           <h3>${item.nombre}</h3>
           <p>${item.desc}</p>
-          <button class="btn-select" onclick="${item.tipo === 'complejo' ? `window.abrirModalPisos('${item.id}')` : `window.abrirSimulacion('${item.nombre}', '${item.media || ''}', '${item.tipoMedia || 'video'}')`}">
+          <button class="btn-select" onclick="${item.tipo === 'complejo' ? `window.abrirModalPisos('${item.id}')` : `window.abrirSimulacion('${item.nombre}', '${item.media || item.img}', '${item.tipoMedia || 'imagen'}', '${item.id}')`}">
             <span class="material-icons" style="font-size:18px; vertical-align: middle;">360</span> Entrar
           </button>
         </div>
@@ -422,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // -------------------------------------------------------------
 let edificioActualId = "";
 
-window.abrirSimulacion = function(lugar, mediaUrl = '', tipoMedia = 'video') {
+window.abrirSimulacion = async function(lugar, mediaUrl = '', tipoMedia = 'imagen', itemId = '') {
   const modal = document.getElementById('videoModal');
   const title = document.getElementById('modalTitle');
   if(title) title.innerText = 'Ruta hacia: ' + lugar;
@@ -436,7 +437,47 @@ window.abrirSimulacion = function(lugar, mediaUrl = '', tipoMedia = 'video') {
               videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
           }
       } else {
-          videoContainer.innerHTML = `<p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido no disponible</p>`;
+          videoContainer.innerHTML = `<p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Recorrido no disponible</p>`;
+      }
+  }
+
+  // --- LÓGICA PARA INYECTAR INDICACIONES ---
+  const listaIndicaciones = document.getElementById("lista-indicaciones");
+  if (listaIndicaciones) {
+      listaIndicaciones.innerHTML = "<li>Cargando indicaciones...</li>";
+      
+      try {
+          // Cargamos el JSON de indicaciones si no se ha cargado antes
+          if (!indicacionesData) {
+              const res = await fetch('Json/indicaciones.json');
+              indicacionesData = await res.json();
+          }
+
+          // Identificamos el ID
+          let idBuscado = itemId;
+          if (!idBuscado && datosCompletos) {
+              for(let cat in datosCompletos.categorias) {
+                  let encontrado = datosCompletos.categorias[cat].find(i => i.nombre === lugar);
+                  if(encontrado) { idBuscado = encontrado.id; break; }
+              }
+          }
+
+          // Buscamos los pasos o ponemos unos por defecto
+          let pasos = indicacionesData[idBuscado];
+          if (!pasos || pasos.length === 0) {
+              pasos = ["Dirígete a tu destino siguiendo las indicaciones del mapa principal."];
+          }
+
+          // Dibujamos los pasos en el HTML
+          listaIndicaciones.innerHTML = "";
+          pasos.forEach(paso => {
+              let li = document.createElement("li");
+              li.textContent = paso;
+              listaIndicaciones.appendChild(li);
+          });
+
+      } catch (error) {
+          listaIndicaciones.innerHTML = "<li>Sigue la ruta marcada en el mapa.</li>";
       }
   }
 
@@ -464,6 +505,16 @@ window.abrirModalPisos = function(edificioId) {
   if(modal) modal.classList.add('active');
   window.cambiarPestanaRigoberto('info'); 
   
+  // --- LÓGICA NUEVA: Cargar la imagen del edificio dinámicamente ---
+  const imgEdificio = document.getElementById('img-info-edificio');
+  if (imgEdificio && datosCompletos) {
+      const edificioData = datosCompletos.categorias.principales.find(e => e.id === edificioActualId);
+      if (edificioData) {
+          imgEdificio.src = edificioData.img; // Inserta la URL de Postimg
+      }
+  }
+  // -----------------------------------------------------------------
+
   if(datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
       const pisosData = datosCompletos.detallesEdificios[edificioActualId].pisos;
       const trackPisos = document.getElementById('track-pisos');
@@ -542,10 +593,10 @@ window.seleccionarPiso = function(pisoId, pisoLabel, botonHtml) {
 
       aulasDelPiso.forEach(aula => {
           contenedorTarjetas.innerHTML += `
-              <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                  <h4 style="margin-bottom: 12px; font-size: 16px;">${aula.nombre}</h4>
-                  <button onclick="window.abrirModalAulaVirtual('${aula.nombre}', '${aula.media || ''}', '${aula.tipoMedia || 'imagen'}')" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s;">
-                      <span class="material-icons" style="font-size: 18px; vertical-align: bottom; margin-right: 5px;">vrpano</span> Entrar (360)
+              <div class="tarjeta-aula-modal">
+                  <h4>${aula.nombre}</h4>
+                  <button onclick="window.abrirModalAulaVirtual('${aula.nombre}', '${aula.media || ''}', '${aula.tipoMedia || 'imagen'}')">
+                      <span class="material-icons">image</span> Ver Imagen
                   </button>
               </div>
           `;
