@@ -58,7 +58,8 @@
     nav.main-nav a:hover, nav.main-nav a.activo { color: var(--accent-color); }
 
     .search-container { display: flex; align-items: center; background: rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 5px 15px; width: 250px; justify-content: space-between; cursor: pointer; }
-    .search-container input { background: transparent; border: none; color: var(--white); outline: none; padding: 2px 5px; width: 100%; cursor: pointer; }
+    .search-container input, .search-container select { background: transparent; border: none; color: var(--white); outline: none; padding: 2px 5px; width: 100%; cursor: pointer; }
+    .search-container select option { color: var(--text-dark); background: var(--white); }
     .search-container input::placeholder { color: rgba(255, 255, 255, 0.7); }
     .search-container .material-icons { color: var(--white); cursor: pointer; font-size: 20px; }
 
@@ -125,11 +126,10 @@
         justify-content: center;
         gap: 8px;
     }
-/* AJUSTE EXCLUSIVO PARA ESCRITORIO (SIMETRÍA EXACTA 3 TARJETAS) */
-   /* AJUSTE EXCLUSIVO PARA ESCRITORIO (TAMAÑO FIJO Y ROBUSTO) */
+    /* AJUSTE EXCLUSIVO PARA ESCRITORIO (TAMAÑO FIJO Y ROBUSTO) */
     @media (min-width: 769px) {
         .carousel-track .card {
-            min-width: 340px !important; /* Puedes subir o bajar este número a tu gusto (ej. 320px o 350px) */
+            min-width: 340px !important;
             width: 340px !important;
             flex: 0 0 340px !important;
             scroll-snap-align: start; 
@@ -147,7 +147,7 @@
         padding-bottom: 20px; 
         scrollbar-width: none; 
         -ms-overflow-style: none; 
-        scroll-snap-type: x mandatory; /* Mejora para móviles */
+        scroll-snap-type: x mandatory; 
     }
     .carousel-track::-webkit-scrollbar { display: none; }
     
@@ -162,6 +162,7 @@
     .anterior { left: 0; }
     .siguiente { right: 0; }
 
+<<<<<<< HEAD
     .card{
     min-width:300px;
     max-width:100%;
@@ -180,6 +181,22 @@
     flex:0 0 auto;
 
     scroll-snap-align:center;
+=======
+    .card {
+        min-width: 300px;
+        max-width: 100%; 
+        border: 1px solid var(--border-color);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        border-radius: 15px;
+        overflow: hidden;
+        background: var(--white);
+        transition: transform 0.3s, box-shadow 0.3s;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        scroll-snap-align: center;
+>>>>>>> origin/main
     }
     .card:hover {
         transform: translateY(-10px);
@@ -215,6 +232,48 @@
     .card-body h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--primary-color); }
     .card-body p { font-size: 0.95rem; color: #666; margin-bottom: 20px; line-height: 1.5; flex-grow: 1; }
 
+    /* ========== TARJETAS INTERNAS (MODAL AULAS) ========== */
+    .tarjeta-aula-modal {
+        background: var(--white);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Obliga a que todas midan lo mismo */
+    }
+    .tarjeta-aula-modal h4 {
+        margin-bottom: 15px;
+        font-size: 15px;
+        color: var(--text-dark);
+        flex-grow: 1; /* Empuja el botón siempre hacia abajo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .tarjeta-aula-modal button {
+        background: var(--accent-color);
+        color: var(--primary-color);
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+        transition: 0.3s;
+        margin-top: auto; /* Asegura que se quede abajo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+    .tarjeta-aula-modal button:hover {
+        background: var(--primary-color);
+        color: var(--white);
+    }
+
     /* ========== BOTONES ========== */
     .btn-activar-gps-glow {
         display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px;
@@ -248,7 +307,7 @@
         transition: all 0.3s; 
         flex: 0 0 auto; 
         font-size: 16px; 
-        scroll-snap-align: center; /* auto-centrado magnético */
+        scroll-snap-align: center; 
     }
     .piso-btn:hover, .piso-btn.activo { border-color: var(--primary-color); color: var(--white); background: var(--primary-color); }
     .view-mode-btn { padding: 10px 20px; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 15px; }
@@ -294,7 +353,8 @@
     .search-modal { position: fixed; top: -400px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 450px; background-color: #efefef; border-radius: 20px; z-index: 2000; transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); padding: 30px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
     .search-modal.active { top: 100px; }
     .search-input-wrapper { display: flex; align-items: center; background: var(--white); border-radius: 30px; padding: 12px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-    .search-input-wrapper input { border: none; outline: none; flex-grow: 1; padding: 0 10px; font-size: 16px; background: transparent; font-weight: 500; }
+    .search-input-wrapper input, .search-input-wrapper select { border: none; outline: none; flex-grow: 1; padding: 0 10px; font-size: 16px; background: transparent; font-weight: 500; cursor: pointer; }
+    .search-input-wrapper select option { color: var(--text-dark); }
     .search-input-wrapper .material-icons { color: var(--text-dark); cursor: pointer; }
     .search-recent { margin-top: 30px; }
     .search-recent h4 { font-size: 16px; color: var(--text-dark); margin-bottom: 15px; font-weight: 700; }
@@ -344,11 +404,11 @@
         .logo-img { width: 40px; height: 40px; }
         .section-title { font-size: 26px; }
         
-        /* Ajustes precisos para el carrusel en móviles */
         .contenedor-slider { padding: 0; }
         .boton-slider { display: none; }
         .carousel-track { gap: 15px; padding: 0 20px 20px 20px; }
         .card { min-width: 85vw; }
+<<<<<<< HEAD
         /* Ajuste Exclusivo para Vista Completa (Escritorio/Tablet) */
 @media (min-width: 769px) {
     .carousel-track .card {
@@ -502,3 +562,13 @@
 .card:hover .card-hover-content .btn-select{
     transform:translateY(0);
 }
+=======
+        
+        @media (min-width: 769px) {
+            .carousel-track .card {
+                min-width: calc((100% - 40px) / 3); 
+                scroll-snap-align: start; 
+            }
+        }
+    }
+>>>>>>> origin/main
