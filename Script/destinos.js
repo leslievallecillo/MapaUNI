@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
     "Autoservicio de impresiones": [12.129091217122017, -86.27057892767442],
     "Entrada Principal": [12.129222488740314, -86.27027854062317],
     "Entrada IES": [12.13144814009071, -86.27106191565036],
+    "Entrada Trasera":[12.132836010391078, -86.26883320255943],
     "Parqueo Posgrado": [12.130806261883121, -86.27004596357038],
     "Parqueo edificio rigoberto": [12.132240605882307, -86.26940334418464],
     "Registro academico": [12.129346707202687, -86.27020754103975],
@@ -195,9 +196,9 @@ document.addEventListener('DOMContentLoaded', function () {
     "Piscina": [12.12945410736998, -86.2699139108461],
     "Auditorio Salomon de la Selva": [12.131729141982937, -86.27069090194155],
     "Edificio Carlos Santos Berroterán": [12.131721857663178, -86.27102664352297],
-    "Biblioteca": [12.1311566, -86.2706552],
-    "Cafetin El Deportivo": [12.1307911, -86.2706804],
-    "Cafetin El Comal": [12.1299130, -86.2704363]
+    "Biblioteca": [12.131143624844496, -86.27087762197696],
+    "Cafetin El Deportivo": [12.130877631060027, -86.27074259503898],
+    "Cafetin El Comal": [12.129897227413625, -86.27048857927917]
   };
 
   const rutasUNI = {
@@ -231,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       {
         punto: sitiosUNI["Registro academico"],
-        texto: "Camina 116 metros hasta llegar al Cafetín El Chele "
+        texto: "Camina 116 metros hasta llegar al Cafetín El Chele"
       },
       {
         punto: sitiosUNI["Cafetin el chele"],
