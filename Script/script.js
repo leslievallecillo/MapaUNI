@@ -97,23 +97,112 @@
     overlay.classList.toggle('active');
   }
 
+  const destinosGlobales = [
+      "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica", 
+      "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte", 
+      "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES", 
+      "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES", 
+      "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES", 
+      "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico", 
+      "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva", 
+      "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
+  ].sort();
+
+  window.manejarSeleccionDestino = function(destino) {
+      if (!destino) return;
+      if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
+          if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
+          else abrirSimulacion(destino);
+      } else {
+          localStorage.setItem('destinoBuscadoSimple', destino);
+          window.location.href = 'destinos.html';
+      }
+  };
+
+  window.transformarBuscadoresEnSelect = function() {
+      const selectInicio = document.getElementById('busquedaDestino');
+      if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
+          destinosGlobales.forEach(destino => {
+              const opt = document.createElement('option');
+              opt.value = destino;
+              opt.text = destino;
+              selectInicio.appendChild(opt);
+          });
+
+          selectInicio.addEventListener('change', function() {
+              if (this.value) {
+                  window.manejarSeleccionDestino(this.value);
+                  this.value = ""; 
+              }
+          });
+      }
+
+      const selectModal = document.getElementById('busquedaDestinoModal');
+      if (selectModal && selectModal.options.length <= 1) {
+          destinosGlobales.forEach(destino => {
+              const opt = document.createElement('option');
+              opt.value = destino;
+              opt.text = destino;
+              selectModal.appendChild(opt);
+          });
+          
+          selectModal.addEventListener('change', function() {
+              if (this.value) {
+                  window.manejarSeleccionDestino(this.value);
+                  this.value = ""; 
+              }
+          });
+      }
+  };
+
   function toggleSearchModal() {
     const modal = document.getElementById('searchModal');
     const overlay = document.getElementById('searchOverlay');
-    modal.classList.toggle('active');
-    overlay.classList.toggle('active');
+    if (modal) modal.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
+    
+    transformarBuscadoresEnSelect();
   }
 
-  function abrirSimulacion(lugar) {
+  function abrirSimulacion(lugar, mediaUrl = '', tipoMedia = 'video') {
     const modal = document.getElementById('videoModal');
     const title = document.getElementById('modalTitle');
     title.innerText = 'Ruta hacia: ' + lugar;
+    
+    const videoContainer = modal.querySelector('.video-container');
+    if (videoContainer) {
+        if (mediaUrl) {
+            if (tipoMedia === 'imagen') {
+                videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${lugar}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
+            } else {
+                videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
+            }
+        } else {
+            videoContainer.innerHTML = `<p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido no disponible</p>`;
+        }
+    }
+    
     modal.classList.add('active');
   }
 
   function cerrarSimulacion() {
     const modal = document.getElementById('videoModal');
     modal.classList.remove('active');
+    const video = modal.querySelector('video');
+    if (video) {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+    }
+    const videoContainer = modal.querySelector('.video-container');
+    if (videoContainer) videoContainer.innerHTML = '';
+    if (video) {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+    }
+    const videoContainer = modal.querySelector('.video-container');
+    if (videoContainer) videoContainer.innerHTML = '';
   }
   
   function abrirModalPisos() {
@@ -163,14 +252,32 @@
     botonHtml.classList.add('activo');
   }
 
-  function abrirModalAulaVirtual(aula) {
+  function abrirModalAulaVirtual(aula, mediaUrl = '', tipoMedia = 'imagen') {
     document.getElementById('titulo-aula-virtual').innerText = 'Destino: ' + aula;
+    
+    const modal = document.getElementById('modalAulaVirtual');
+    const videoContainer = modal.querySelector('.video-container');
+    if (videoContainer) {
+        if (mediaUrl) {
+            if (tipoMedia === 'video') {
+                videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
+            } else {
+                videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${aula}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
+            }
+        } else {
+            videoContainer.innerHTML = `<p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido no disponible</p>`;
+        }
+    }
+
     cerrarModalPisos();
-    document.getElementById('modalAulaVirtual').classList.add('active');
+    modal.classList.add('active');
   }
 
   function cerrarModalAulaVirtual() {
-    document.getElementById('modalAulaVirtual').classList.remove('active');
+    const modal = document.getElementById('modalAulaVirtual');
+    modal.classList.remove('active');
+    const video = modal.querySelector('video');
+    if (video) video.pause();
   }
   
   function abrirModalGPS() {
@@ -336,6 +443,19 @@
     document.getElementById('modalSmart').classList.remove('active');
   }
 
+  window.buscarDestinoModal = function() {
+      const selectModal = document.getElementById('busquedaDestinoModal');
+      if (selectModal && selectModal.value) {
+          window.manejarSeleccionDestino(selectModal.value);
+          
+          const modal = document.getElementById('searchModal');
+          const overlay = document.getElementById('searchOverlay');
+          if(modal) modal.classList.remove('active');
+          if(overlay) overlay.classList.remove('active');
+          selectModal.value = ""; 
+      }
+  };
+
   document.getElementById('videoModal').addEventListener('click', function(e) { if(e.target === this) cerrarSimulacion(); });
   document.getElementById('modalPisos').addEventListener('click', function(e) { if(e.target === this) cerrarModalPisos(); });
   document.getElementById('modalAulaVirtual').addEventListener('click', function(e) { if(e.target === this) cerrarModalAulaVirtual(); });
@@ -346,11 +466,14 @@
     fetch('navbar.html')
     .then(response => response.text())
     .then(data => {
-      document.getElementById('menu-contenedor').innerHTML = data;
-      // Iluminar el enlace correcto de la página "Nosotros"
-      const navNosotros = document.getElementById('nav-nosotros');
-      if (navNosotros) {
-          navNosotros.classList.add('activo');
+      const menuContenedor = document.getElementById('menu-contenedor');
+      if (menuContenedor) {
+          menuContenedor.innerHTML = data;
+          const navNosotros = document.getElementById('nav-nosotros');
+          if (navNosotros && window.location.pathname.includes('nosotros.html')) {
+              navNosotros.classList.add('activo');
+          }
       }
+      if (typeof transformarBuscadoresEnSelect === 'function') transformarBuscadoresEnSelect();
     })
     .catch(error => console.error('Error cargando el navbar:', error));

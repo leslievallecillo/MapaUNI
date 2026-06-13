@@ -113,6 +113,23 @@
   </div>
 </footer>
 
+<!-- Modales de Búsqueda -->
+<div class="overlay-search" id="searchOverlay" onclick="toggleSearchModal()"></div>
+<div class="search-modal" id="searchModal">
+  <h3 style="margin-bottom: 20px; color: var(--primary-color); text-align: center;">Seleccionar Destino</h3>
+  <form id="formBusquedaModal" onsubmit="event.preventDefault(); window.buscarDestinoModal ? window.buscarDestinoModal() : buscarDestinoModal();">
+    <div class="search-input-wrapper" style="margin-bottom: 20px;">
+      <span class="material-icons">location_on</span>
+      <select id="busquedaDestinoModal" style="flex-grow: 1; border: none; outline: none; background: transparent; font-size: 16px; cursor: pointer; padding: 5px;">
+        <option value="">Destinos disponibles...</option>
+      </select>
+    </div>
+    <button type="submit" class="btn-select" style="width: 100%;">
+      <span class="material-icons">search</span> Ir al destino
+    </button>
+  </form>
+</div>
+
 <script src="/Script/script.js"></script>
 
 <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>

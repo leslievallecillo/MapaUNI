@@ -26,7 +26,7 @@
       </ul>
     </nav>
     <div class="search-container" onclick="toggleSearchModal()">
-      <input type="text" placeholder="Acceder (Búsqueda)..." readonly>
+      <input type="text" placeholder="Buscar destino..." readonly style="pointer-events: none;">
       <span class="material-icons">search</span>
     </div>
 
@@ -37,22 +37,18 @@
 
   <div class="overlay-search" id="searchOverlay" onclick="toggleSearchModal()"></div>
   <div class="search-modal" id="searchModal">
-    <div class="search-input-wrapper">
-      <span class="material-icons">location_on</span>
-      <input type="text" id="busquedaDestinoModal" placeholder="Buscar lugar">
-      <span class="material-icons">mic</span>
-      <button onclick="buscarDestinoModal()">
-        Buscar
-      </button>
-    </div>
-    <div class="search-recent">
-      <h4>Busquedas Recientes</h4>
-      <div class="recent-tags">
-        <span class="tag">Biblioteca</span>
-        <span class="tag">El Gueguense</span>
-        <span class="tag">Secretaria Academica</span>
+    <h3 style="margin-bottom: 20px; color: var(--primary-color); text-align: center;">Seleccionar Destino</h3>
+    <form id="formBusquedaModal" onsubmit="event.preventDefault(); window.buscarDestinoModal ? window.buscarDestinoModal() : buscarDestinoModal();">
+      <div class="search-input-wrapper" style="margin-bottom: 20px;">
+        <span class="material-icons">location_on</span>
+        <select id="busquedaDestinoModal" style="flex-grow: 1; border: none; outline: none; background: transparent; font-size: 16px; cursor: pointer; padding: 5px;">
+          <option value="">Destinos disponibles...</option>
+        </select>
       </div>
-    </div>
+      <button type="submit" class="btn-select" style="width: 100%;">
+        <span class="material-icons">search</span> Ir al destino
+      </button>
+    </form>
   </div>
 </body>
 
