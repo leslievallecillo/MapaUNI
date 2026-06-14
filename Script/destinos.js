@@ -1,6 +1,7 @@
 // --- VARIABLES GLOBALES PARA ALMACENAR DATOS ---
 let datosCompletos = null;
-let indicacionesData = null; // NUEVA VARIABLE
+let indicacionesData = null;
+let edificioActualId = "";
 
 // Nueva función para transformar las barras de búsqueda en select (Combo box)
 const destinosGlobales = [
@@ -26,7 +27,6 @@ window.manejarSeleccionDestino = function(destino) {
 };
 
 window.transformarBuscadoresEnSelect = function() {
-
     const selectInicio = document.getElementById('busquedaDestino');
     if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
         destinosGlobales.forEach(destino => {
@@ -120,7 +120,6 @@ window.toggleMenuMovil = function () {
 // -------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", async () => {
 
-  // Lista de todas las rutas posibles para evadir el error de GitHub (Mayúsculas/Minúsculas/Carpetas)
   const rutasPosibles = [
     './Json/destinos.json',
     './json/destinos.json',
@@ -132,34 +131,30 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let dataCargada = null;
 
-  // Intentamos cargar el JSON probando cada ruta
   for (const ruta of rutasPosibles) {
     try {
       const response = await fetch(ruta);
       if (response.ok) {
         dataCargada = await response.json();
         console.log("JSON cargado exitosamente desde:", ruta);
-        break; // Si lo encuentra, detenemos la búsqueda
+        break;
       }
     } catch (e) {
-      // Si falla, el ciclo continua con la siguiente ruta invisiblemente
+      // Si falla, el ciclo continúa
     }
   }
 
-  // Si después de probar todo no hay datos, mostramos el error
   if (!dataCargada) {
     console.error("No se pudo cargar el archivo destinos.json en ninguna ruta.");
     return;
   }
 
-  // Si lo encontró, asignamos los datos y dibujamos la página
   datosCompletos = dataCargada;
   renderizarCategoria(datosCompletos.categorias.principales, 'track-principales');
   renderizarCategoria(datosCompletos.categorias.laboratorios, 'track-laboratorios');
   renderizarCategoria(datosCompletos.categorias.cafetines, 'track-cafetines');
   inicializarCarruseles();
 
-  // Función para inyectar las tarjetas
   function renderizarCategoria(items, contenedorId) {
     const contenedor = document.getElementById(contenedorId);
     if (!contenedor) return;
@@ -182,7 +177,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     contenedor.innerHTML = html;
   }
 
-  // Función para mover el carrusel
   function inicializarCarruseles() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -243,7 +237,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 // -------------------------------------------------------------
 // LÓGICA MAPA GPS 
 // -------------------------------------------------------------
-// aqui comence a trabajar io (io soy uriel )12/06
 document.addEventListener('DOMContentLoaded', function () {
   let mapa;
   let userMarker;
@@ -251,6 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let lineaRuta = null;
   let rutaActiva = null;
   let pasoActual = 0;
+  
   const sitiosUNI = {
     "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
     "Edificio Posgrado": [12.131009312952209, -86.27012610686415],
@@ -286,7 +280,6 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const rutasUNI = {
-    // Entrada Principal -> Rigoberto
     "Entrada Principal|Edificio Rigoberto Lopez Perez": [
       sitiosUNI["Entrada Principal"],
       sitiosUNI["Registro academico"],
@@ -296,7 +289,6 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Entrada IES"],
       sitiosUNI["Edificio Rigoberto Lopez Perez"]
     ],
-    // Entrada IES -> Arquitectura
     "Entrada IES|Edificio Arquitectura": [
       sitiosUNI["Entrada IES"],
       sitiosUNI["Biblioteca"],
@@ -310,77 +302,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const instruccionesUNI = {
     "Entrada Principal|Edificio Rigoberto Lopez Perez": [
-      {
-        punto: sitiosUNI["Entrada Principal"],
-        texto: "Camina 8 metros hasta Registro Académico"
-      },
-      {
-        punto: sitiosUNI["Registro academico"],
-        texto: "Camina 116 metros hasta llegar al Cafetín El Chele"
-      },
-      {
-        punto: sitiosUNI["Cafetin el chele"],
-        texto: "Continúa 51 metros hasta llegar al Cafetín El Deportivo"
-      },
-      {
-        punto: sitiosUNI["Cafetin El Deportivo"],
-        texto: "Sigue recto 40 metros hasta llegar a la Biblioteca"
-      },
-      {
-        punto: sitiosUNI["Biblioteca"],
-        texto: "Camina 40 metros hasta llegar a la entrada IES"
-      },
-      {
-        punto: sitiosUNI["Entrada IES"],
-        texto: "Gira a la derecha y camina 100 metros hasta llegar al edificio Rigoberto Lopez Perez"
-      },
-      {
-        punto: sitiosUNI["Edificio Rigoberto Lopez Perez"],
-        texto: "Has llegado a tu destino"
-      }
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta Registro Académico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 116 metros hasta llegar al Cafetín El Chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Continúa 51 metros hasta llegar al Cafetín El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Sigue recto 40 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 40 metros hasta llegar a la entrada IES" },
+      { punto: sitiosUNI["Entrada IES"], texto: "Gira a la derecha y camina 100 metros hasta llegar al edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Has llegado a tu destino" }
     ],
     "Entrada IES|Edificio Arquitectura": [
-      {
-        punto: sitiosUNI["Entrada IES"],
-        texto: "Camina 46 metros hasta llegar a la biblioteca"
-      },
-      {
-        punto: sitiosUNI["Biblioteca"],
-        texto: "Camina 44 metros hasta el cafetin el deportivo"
-      },
-      {
-        punto: sitiosUNI["Cafetin El Deportivo"],
-        texto: "Continúa 53 metros recto hasta el Cafetín El Chele"
-      },
-      {
-        punto: sitiosUNI["Cafetin el chele"],
-        texto: "Sigue 51 metros de frente hasta llegar al Cafetín El Comal"
-      },
-      {
-        punto: sitiosUNI["Cafetin El Comal"],
-        texto: "Continúa 63 metros hasta llegar a Registro Academico"
-      },
-      {
-        punto: sitiosUNI["Registro academico"],
-        texto: "Gira a la derecha y camina 31 metros hasta llegar al edificio de arquitectura"
-      },
-      {
-        punto: sitiosUNI["Edificio Arquitectura"],
-        texto: "Has llegado al Edificio de Arquitectura"
-      }
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 46 metros hasta llegar a la biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 44 metros hasta el cafetin el deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Continúa 53 metros recto hasta el Cafetín El Chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Sigue 51 metros de frente hasta llegar al Cafetín El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Continúa 63 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Gira a la derecha y camina 31 metros hasta llegar al edificio de arquitectura" },
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Has llegado al Edificio de Arquitectura" }
     ]
   };
-
 
   function dibujarRutaPersonalizada(origenNombre, destinoNombre) {
     const clave = `${origenNombre}|${destinoNombre}`;
     const ruta = rutasUNI[clave];
     if (!ruta) {
-      Swal.fire(
-        "Ruta no disponible",
-        "Todavía no se ha programado esa ruta.",
-        "info"
-      );
+      Swal.fire("Ruta no disponible", "Todavía no se ha programado esa ruta.", "info");
       return;
     }
     if (lineaRuta) {
@@ -395,20 +340,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (instruccionesUNI[clave]) {
       rutaActiva = instruccionesUNI[clave];
       pasoActual = 0;
-      actualizarPanelRuta(
-        rutaActiva[0].texto,
-        mapa.distance(
-          userLocation || rutaActiva[0].punto,
-          rutaActiva[0].punto
-        )
-      );
-      hablar(
-        "Ruta iniciada. " +
-        rutaActiva[0].texto
-      );
+      actualizarPanelRuta(rutaActiva[0].texto, mapa.distance(userLocation || rutaActiva[0].punto, rutaActiva[0].punto));
+      hablar("Ruta iniciada. " + rutaActiva[0].texto);
     }
   }
-
 
   function actualizarPanelRuta(texto, distancia) {
     const panel = document.getElementById("panelNavegacion");
@@ -418,15 +353,11 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.style.display = "block";
     txt.textContent = texto;
     if (distancia !== undefined) {
-      metros.textContent =
-        distancia < 1000
-          ? `${Math.round(distancia)} m`
-          : `${(distancia / 1000).toFixed(1)} km`;
+      metros.textContent = distancia < 1000 ? `${Math.round(distancia)} m` : `${(distancia / 1000).toFixed(1)} km`;
     }
   }
 
   let userLocation = null;
-  let instruccionHablada = "";
 
   function hablar(texto) {
     if ('speechSynthesis' in window) {
@@ -437,47 +368,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-
   function verificarPasoRuta() {
     if (!rutaActiva || !userLocation) return;
     if (pasoActual >= rutaActiva.length) return;
-    const puntoObjetivo =
-      rutaActiva[pasoActual].punto;
-    const distancia =
-      mapa.distance(
-        userLocation,
-        puntoObjetivo
-      );
-    actualizarPanelRuta(
-      rutaActiva[pasoActual].texto,
-      distancia
-    );
+    const puntoObjetivo = rutaActiva[pasoActual].punto;
+    const distancia = mapa.distance(userLocation, puntoObjetivo);
+    actualizarPanelRuta(rutaActiva[pasoActual].texto, distancia);
     if (distancia <= 10) {
       pasoActual++;
       if (pasoActual < rutaActiva.length) {
-        actualizarPanelRuta(
-          rutaActiva[pasoActual].texto,
-          mapa.distance(
-            userLocation,
-            rutaActiva[pasoActual].punto
-          )
-        );
-        hablar(
-          rutaActiva[pasoActual].texto
-        );
+        actualizarPanelRuta(rutaActiva[pasoActual].texto, mapa.distance(userLocation, rutaActiva[pasoActual].punto));
+        hablar(rutaActiva[pasoActual].texto);
       } else {
-        actualizarPanelRuta(
-          "Has llegado a tu destino",
-          0
-        );
-        hablar(
-          "Has llegado a tu destino"
-        );
+        actualizarPanelRuta("Has llegado a tu destino", 0);
+        hablar("Has llegado a tu destino");
         rutaActiva = null;
       }
     }
   }
-
 
   if (document.getElementById('uni-mapa')) {
     const capaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 });
@@ -489,7 +397,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const select = document.getElementById('destino');
     for (let nombre in sitiosUNI) {
       let option = document.createElement('option');
-      option.value = nombre; option.text = nombre;
+      option.value = nombre; 
+      option.text = nombre;
       if (select) select.appendChild(option);
       if (sitiosUNI[nombre][0] !== 0) {
         L.marker(sitiosUNI[nombre]).bindPopup(`<strong style="color:#001f3f;">${nombre}</strong>`).addTo(mapa);
@@ -504,7 +413,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnActivarGPS = document.getElementById('btnActivarGPS');
     if (btnActivarGPS) {
       btnActivarGPS.onclick = function () {
-        let utterance = new SpeechSynthesisUtterance(""); window.speechSynthesis.speak(utterance);
+        let utterance = new SpeechSynthesisUtterance(""); 
+        window.speechSynthesis.speak(utterance);
         if (!navigator.geolocation) return Swal.fire("Error", "GPS no soportado.", "error");
 
         Swal.fire({ title: 'Buscando tu ubicación...', didOpen: () => { Swal.showLoading(); } });
@@ -533,25 +443,18 @@ document.addEventListener('DOMContentLoaded', function () {
         );
       };
     }
+    
     const btnIr = document.getElementById('btnIr');
     if (btnIr) {
       btnIr.onclick = function () {
-
         const origenNombre = document.getElementById('origen').value;
         const destinoNombre = document.getElementById('destino').value;
 
         if (!destinoNombre) {
-          return Swal.fire(
-            "Atención",
-            "Selecciona un destino.",
-            "info"
-          );
+          return Swal.fire("Atención", "Selecciona un destino.", "info");
         }
-        // =====================================
-        // SI EL ORIGEN ES GPS
-        // =====================================
-        if (origenNombre === "gps") {
 
+        if (origenNombre === "gps") {
           Swal.fire({
             title: 'Activando GPS...',
             text: 'Obteniendo ubicación actual.',
@@ -561,14 +464,9 @@ document.addEventListener('DOMContentLoaded', function () {
           navigator.geolocation.getCurrentPosition(
             function (pos) {
               Swal.close();
-              userLocation = [
-                pos.coords.latitude,
-                pos.coords.longitude
-              ];
+              userLocation = [pos.coords.latitude, pos.coords.longitude];
               if (!userMarker) {
-                userMarker = L.marker(userLocation)
-                  .addTo(mapa)
-                  .bindPopup("Tu ubicación");
+                userMarker = L.marker(userLocation).addTo(mapa).bindPopup("Tu ubicación");
               } else {
                 userMarker.setLatLng(userLocation);
               }
@@ -576,70 +474,29 @@ document.addEventListener('DOMContentLoaded', function () {
               mapa.setView(userLocation, 18);
 
               let origenDetectado = "Entrada Principal";
-              const distanciaEntradaPrincipal =
-                mapa.distance(
-                  userLocation,
-                  sitiosUNI["Entrada Principal"]
-                );
-              const distanciaEntradaIES =
-                mapa.distance(
-                  userLocation,
-                  sitiosUNI["Entrada IES"]
-                );
+              const distanciaEntradaPrincipal = mapa.distance(userLocation, sitiosUNI["Entrada Principal"]);
+              const distanciaEntradaIES = mapa.distance(userLocation, sitiosUNI["Entrada IES"]);
               if (distanciaEntradaIES < distanciaEntradaPrincipal) {
                 origenDetectado = "Entrada IES";
               }
-              dibujarRutaPersonalizada(
-                origenDetectado,
-                destinoNombre
-              );
+              dibujarRutaPersonalizada(origenDetectado, destinoNombre);
             },
-
             function () {
-
-              Swal.fire(
-                "GPS no disponible",
-                "No se pudo obtener tu ubicación.",
-                "error"
-              );
+              Swal.fire("GPS no disponible", "No se pudo obtener tu ubicación.", "error");
             },
-
-            {
-              enableHighAccuracy: true,
-              timeout: 10000
-            }
+            { enableHighAccuracy: true, timeout: 10000 }
           );
-
-        }
-        // =====================================
-        // SI EL ORIGEN ES UN LUGAR DE LA UNI
-        // =====================================
-        else {
-
-          dibujarRutaPersonalizada(
-            origenNombre,
-            destinoNombre
-          );
-
+        } else {
+          dibujarRutaPersonalizada(origenNombre, destinoNombre);
         }
       };
     }
   }
-
 });
-// hasta aqui trabaje io (io soy uriel) 12/06
 
 // -------------------------------------------------------------
 // FUNCIONES DE MODALES Y LÓGICA DE AULAS DINÁMICA
 // -------------------------------------------------------------
-let edificioActualId = "";
- Feria
-window.abrirSimulacion = function (lugar) {
-  const modal = document.getElementById('videoModal');
-  const title = document.getElementById('modalTitle');
-  if (title) title.innerText = 'Ruta hacia: ' + lugar;
-  if (modal) modal.classList.add('active');
-=======
 window.abrirSimulacion = async function(lugar, mediaUrl = '', tipoMedia = 'imagen', itemId = '') {
   const modal = document.getElementById('videoModal');
   const title = document.getElementById('modalTitle');
@@ -658,19 +515,16 @@ window.abrirSimulacion = async function(lugar, mediaUrl = '', tipoMedia = 'image
       }
   }
 
-  // --- LÓGICA PARA INYECTAR INDICACIONES ---
   const listaIndicaciones = document.getElementById("lista-indicaciones");
   if (listaIndicaciones) {
       listaIndicaciones.innerHTML = "<li>Cargando indicaciones...</li>";
       
       try {
-          // Cargamos el JSON de indicaciones si no se ha cargado antes
           if (!indicacionesData) {
               const res = await fetch('Json/indicaciones.json');
               indicacionesData = await res.json();
           }
 
-          // Identificamos el ID
           let idBuscado = itemId;
           if (!idBuscado && datosCompletos) {
               for(let cat in datosCompletos.categorias) {
@@ -679,13 +533,11 @@ window.abrirSimulacion = async function(lugar, mediaUrl = '', tipoMedia = 'image
               }
           }
 
-          // Buscamos los pasos o ponemos unos por defecto
           let pasos = indicacionesData[idBuscado];
           if (!pasos || pasos.length === 0) {
               pasos = ["Dirígete a tu destino siguiendo las indicaciones del mapa principal."];
           }
 
-          // Dibujamos los pasos en el HTML
           listaIndicaciones.innerHTML = "";
           pasos.forEach(paso => {
               let li = document.createElement("li");
@@ -699,60 +551,37 @@ window.abrirSimulacion = async function(lugar, mediaUrl = '', tipoMedia = 'image
   }
 
   if(modal) modal.classList.add('active');
- main
 }
+
 window.cerrarSimulacion = function () {
   const modal = document.getElementById('videoModal');
-  Feria
-  if (modal) modal.classList.remove('active');
   if(modal) {
       modal.classList.remove('active');
       const video = modal.querySelector('video');
       if (video) {
           video.pause();
-          video.removeAttribute('src'); // Corta la conexión de red
-          video.load(); // Fuerza al navegador a liberar la memoria
+          video.removeAttribute('src');
+          video.load();
       }
-      // Limpiamos el contenedor por completo
       const videoContainer = modal.querySelector('.video-container');
       if (videoContainer) videoContainer.innerHTML = '';
   }
- main
 }
 
 window.abrirModalPisos = function (edificioId) {
   edificioActualId = edificioId || "rigoberto";
   const modal = document.getElementById('modalPisos');
-Feria
-  if (modal) modal.classList.add('active');
-  window.cambiarPestanaRigoberto('info');
-
-  if (datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
-    const pisosData = datosCompletos.detallesEdificios[edificioActualId].pisos;
-    const trackPisos = document.getElementById('track-pisos');
-    if (trackPisos) {
-      trackPisos.innerHTML = "";
-      pisosData.forEach(piso => {
-        let btn = document.createElement('button');
-        btn.className = 'piso-btn';
-        btn.innerText = piso.label.toUpperCase();
-        btn.onclick = function () { window.seleccionarPiso(piso.id, piso.label, this); };
-        trackPisos.appendChild(btn);
-      });
-    }
 
   if(modal) modal.classList.add('active');
   window.cambiarPestanaRigoberto('info'); 
   
-  // --- LÓGICA NUEVA: Cargar la imagen del edificio dinámicamente ---
   const imgEdificio = document.getElementById('img-info-edificio');
   if (imgEdificio && datosCompletos) {
       const edificioData = datosCompletos.categorias.principales.find(e => e.id === edificioActualId);
       if (edificioData) {
-          imgEdificio.src = edificioData.img; // Inserta la URL de Postimg
+          imgEdificio.src = edificioData.img;
       }
   }
-  // -----------------------------------------------------------------
 
   if(datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
       const pisosData = datosCompletos.detallesEdificios[edificioActualId].pisos;
@@ -767,7 +596,6 @@ Feria
               trackPisos.appendChild(btn);
           });
       }
- main
   }
 }
 
@@ -831,24 +659,15 @@ window.seleccionarPiso = function (pisoId, pisoLabel, botonHtml) {
       return;
     }
 
- Feria
     aulasDelPiso.forEach(aula => {
       contenedorTarjetas.innerHTML += `
-              <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                  <h4 style="margin-bottom: 12px; font-size: 16px;">${aula.nombre}</h4>
-                  <button onclick="window.abrirModalAulaVirtual('${aula.nombre}')" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s;">
-                      <span class="material-icons" style="font-size: 18px; vertical-align: bottom; margin-right: 5px;">vrpano</span> Entrar (360)
-
-      aulasDelPiso.forEach(aula => {
-          contenedorTarjetas.innerHTML += `
-              <div class="tarjeta-aula-modal">
-                  <h4>${aula.nombre}</h4>
-                  <button onclick="window.abrirModalAulaVirtual('${aula.nombre}', '${aula.media || ''}', '${aula.tipoMedia || 'imagen'}')">
-                      <span class="material-icons">image</span> Ver Imagen
- main
-                  </button>
-              </div>
-          `;
+        <div class="tarjeta-aula-modal">
+          <h4>${aula.nombre}</h4>
+          <button onclick="window.abrirModalAulaVirtual('${aula.nombre}', '${aula.media || ''}', '${aula.tipoMedia || 'imagen'}')">
+            <span class="material-icons">image</span> Ver Imagen
+          </button>
+        </div>
+      `;
     });
   } else {
     contenedorTarjetas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">Datos no disponibles para este piso aún.</p>`;
@@ -863,14 +682,6 @@ document.addEventListener('change', function (e) {
     }
   }
 });
-
- Feria
-window.abrirModalAulaVirtual = function (aula) {
-  const titulo = document.getElementById('titulo-aula-virtual');
-  if (titulo) titulo.innerText = 'Destino: ' + aula;
-  window.cerrarModalPisos();
-  const modal = document.getElementById('modalAulaVirtual');
-  if (modal) modal.classList.add('active');
 
 window.abrirModalAulaVirtual = function(aula, mediaUrl = '', tipoMedia = 'imagen') {
   const titulo = document.getElementById('titulo-aula-virtual');
@@ -892,14 +703,10 @@ window.abrirModalAulaVirtual = function(aula, mediaUrl = '', tipoMedia = 'imagen
 
   window.cerrarModalPisos();
   if(modal) modal.classList.add('active');
- main
 }
 
 window.cerrarModalAulaVirtual = function () {
   const modal = document.getElementById('modalAulaVirtual');
- Feria
-  if (modal) modal.classList.remove('active');
-
   if(modal) {
       modal.classList.remove('active');
       const video = modal.querySelector('video');
@@ -911,7 +718,6 @@ window.cerrarModalAulaVirtual = function () {
       const videoContainer = modal.querySelector('.video-container');
       if (videoContainer) videoContainer.innerHTML = '';
   }
- main
 }
 
 document.addEventListener('click', function (e) {
@@ -923,8 +729,7 @@ document.addEventListener('click', function (e) {
   if (e.target === mAula) window.cerrarModalAulaVirtual();
 });
 
-
-// de aqui trabaje io (io soy uriel)
+// Carga de destino desde localStorage
 document.addEventListener("DOMContentLoaded", function () {
   const destinoGuardado = localStorage.getItem("destinoBuscado");
 
@@ -934,28 +739,22 @@ document.addEventListener("DOMContentLoaded", function () {
     Swal.fire({
       title: destino.nombre,
       html: `
-                <img src="${destino.img}" 
-                     style="width:100%; max-height:250px; object-fit:cover; border-radius:10px; margin-bottom:15px;">
-                <p>${destino.desc}</p>
-            `,
+        <img src="${destino.img}" style="width:100%; max-height:250px; object-fit:cover; border-radius:10px; margin-bottom:15px;">
+        <p>${destino.desc}</p>
+      `,
       confirmButtonText: "Ver ruta"
     }).then(() => {
       abrirSimulacion(destino.nombre);
     });
 
- Feria
     localStorage.removeItem("destinoBuscado");
   }
 
-        localStorage.removeItem("destinoBuscado");
-    }
-
-    const destinoSimple = localStorage.getItem("destinoBuscadoSimple");
-    if (destinoSimple) {
-        setTimeout(() => {
-            window.manejarSeleccionDestino(destinoSimple);
-        }, 300);
-        localStorage.removeItem("destinoBuscadoSimple");
-    }
- main
+  const destinoSimple = localStorage.getItem("destinoBuscadoSimple");
+  if (destinoSimple) {
+    setTimeout(() => {
+      window.manejarSeleccionDestino(destinoSimple);
+    }, 300);
+    localStorage.removeItem("destinoBuscadoSimple");
+  }
 });
