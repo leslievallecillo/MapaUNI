@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let rutaActiva = null;
   let pasoActual = 0;
   
-  const sitiosUNI = {
+ const sitiosUNI = {
     "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
     "Edificio Posgrado": [12.131009312952209, -86.27012610686415],
     "Laboratorios robotica": [12.131584651748083, -86.27005832378829],
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
     "Autoservicio de impresiones": [12.129091217122017, -86.27057892767442],
     "Entrada Principal": [12.129222488740314, -86.27027854062317],
     "Entrada IES": [12.13144814009071, -86.27106191565036],
-    "Entrada Trasera":[12.132836010391078, -86.26883320255943],
+    "Entrada Trasera": [12.132836010391078, -86.26883320255943],
     "Parqueo Posgrado": [12.130806261883121, -86.27004596357038],
     "Parqueo edificio rigoberto": [12.132240605882307, -86.26940334418464],
     "Registro academico": [12.129346707202687, -86.27020754103975],
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
     "Biblioteca": [12.131143624844496, -86.27087762197696],
     "Cafetin El Deportivo": [12.130877631060027, -86.27074259503898],
     "Cafetin El Comal": [12.129897227413625, -86.27048857927917],
-    "Cafetin La Fritanga": [12.130100, -86.270500] // <- Coordenada agregada para evitar error de undefined
+    "Cafetin La Fritanga": [12.130201, -86.270503]
   };
 
   const rutasUNI = {
@@ -316,6 +316,19 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Cafetin El Comal"],
       sitiosUNI["Registro academico"],
       sitiosUNI["Edificio Arquitectura"]
+    ],
+    "Edificio Rigoberto Lopez Perez|Cafetin el chele": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Cafetin el chele"]
+    ],
+    "Edificio Rigoberto Lopez Perez|Cafetin La Fritanga": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin La Fritanga"]
     ],
     "Edificio Rigoberto Lopez Perez|Laboratorios redes": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
@@ -512,11 +525,24 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Registro academico"], texto: "Gira a la derecha y camina 31 metros hasta llegar al edificio de arquitectura" },
       { punto: sitiosUNI["Edificio Arquitectura"], texto: "Has llegado al Edificio de Arquitectura" }
     ],
+    "Edificio Rigoberto Lopez Perez|Cafetin el chele": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 109 metros hasta llegar a la biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 73 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 45 metros hasta llegar al Cafetin El Chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Has llegado a tu destino, Buen provecho" }
+    ],
+    "Edificio Rigoberto Lopez Perez|Cafetin La Fritanga": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 109 metros hasta llegar a la biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 73 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 45 metros hasta llegar al Cafetin El Chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 10 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Has llegado a tu destino, Buen provecho" }
+    ],
     "Edificio Rigoberto Lopez Perez|Laboratorios redes": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
       { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
       { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La mita" },
-      { punto: sitiosUNI["La mita"], texto: "Camina 100 metros hasta llegar a Laboratorios redes" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 40 metros hasta llegar al Laboratorio de Redes" },
       { punto: sitiosUNI["Laboratorios redes"], texto: "Has llegado a tu destino" }
     ],
     "Edificio Rigoberto Lopez Perez|Copias UNI": [
@@ -530,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
       { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
       { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
-      { punto: sitiosUNI["Registro academico"], texto: "Camina 50 metros hasta llegar al Cajero" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 55 metros hasta llegar al Cajero" },
       { punto: sitiosUNI["Cajero"], texto: "Has llegado a tu destino" }
     ],
     "Edificio Rigoberto Lopez Perez|Cafetin EL Gueguense": [
@@ -541,29 +567,22 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 90 metros hasta llegar al Cafetin Batidos Miranda" },
       { punto: sitiosUNI["Batidos Miranda"], texto: "Has llegado a tu destino, Buen provecho!" }
     ],
-    "Edificio Posgrado|Cajero": [
-      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
-      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
-      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
-      { punto: sitiosUNI["Registro academico"], texto: "Camina 50 metros hasta llegar al Cajero" },
-      { punto: sitiosUNI["Cajero"], texto: "Has llegado a tu destino" }
-    ],
     "Edificio Rigoberto Lopez Perez|Cafetin El Duarte": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
       { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
-      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Has llegado a tu destino, Buen provecho!" }
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Has llegado a tu destino" }
     ],
     "Edificio Rigoberto Lopez Perez|Cafetin El Deportivo": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 109 metros hasta llegar a la biblioteca" },
-      { punto: sitiosUNI["Biblioteca"], texto: "Camina 44 metros hasta el cafetin el deportivo" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 73 metros hasta llegar al Cafetin El Deportivo" },
       { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Has llegado a tu destino, Buen provecho!" }
     ],
     "Edificio Rigoberto Lopez Perez|Cafetin El Comal": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 109 metros hasta llegar a la biblioteca" },
-      { punto: sitiosUNI["Biblioteca"], texto: "Camina 44 metros hasta el cafetin el deportivo" },
-      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Continúa 53 metros recto hasta el Cafetín El Chele" },
-      { punto: sitiosUNI["Cafetin el chele"], texto: "Sigue 51 metros de frente hasta llegar al Cafetín La Fritanga" },
-      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 65 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 73 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 45 metros hasta llegar al Cafetin El Chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 10 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 25 metros hasta llegar al Cafetin El Comal" },
       { punto: sitiosUNI["Cafetin El Comal"], texto: "Has llegado a tu destino, Buen provecho" }
     ],
     "Edificio Rigoberto Lopez Perez|Biblioteca": [
@@ -676,7 +695,7 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
       { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
       { punto: sitiosUNI["La mita"], texto: "Camina 26 metros hasta llegar a la Piscina" },
-      { punto: sitiosUNI["Piscina"], texto: "Has llegado a tu destino"}
+      { punto: sitiosUNI["Piscina"], texto: "Has llegado a tu destino" }
     ],
     "Edificio Rigoberto Lopez Perez|Edificio Carlos Santos Berroterán": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 75 metros hasta llegar al Auditorio Salomon de la Selva" },
@@ -685,6 +704,13 @@ document.addEventListener('DOMContentLoaded', function () {
     ],
     "Edificio Rigoberto Lopez Perez|Edificio Rigoberto Lopez Perez": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Ya estas ubicado en el Edificio Rigoberto Lopez Perez" }
+    ],
+    "Edificio Posgrado|Cajero": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 55 metros hasta llegar al Cajero" },
+      { punto: sitiosUNI["Cajero"], texto: "Has llegado a tu destino" }
     ]
   };
 
