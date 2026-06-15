@@ -58,23 +58,13 @@
     }
 
     @keyframes pulseText {
-      from {
-        opacity: 0.5;
-      }
-
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0.5; }
+      to { opacity: 1; }
     }
 
     @keyframes moveLoaderPath {
-      from {
-        stroke-dashoffset: 50;
-      }
-
-      to {
-        stroke-dashoffset: 0;
-      }
+      from { stroke-dashoffset: 50; }
+      to { stroke-dashoffset: 0; }
     }
 
     .loader-path {
@@ -82,7 +72,6 @@
       animation: moveLoaderPath 0.8s linear infinite;
     }
 
-    /* Estado de carga finalizada (pausa las animaciones) */
     .loaded .mascot1-body-group,
     .loaded .mascot1-leg-left,
     .loaded .mascot1-leg-right,
@@ -161,114 +150,47 @@
     }
 
     @keyframes mascotWalk {
-      0% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-8px);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
     }
 
     @keyframes legLeft {
-      0% {
-        transform: rotate(-20deg);
-      }
-
-      50% {
-        transform: rotate(25deg);
-      }
-
-      100% {
-        transform: rotate(-20deg);
-      }
+      0% { transform: rotate(-20deg); }
+      50% { transform: rotate(25deg); }
+      100% { transform: rotate(-20deg); }
     }
 
     @keyframes legRight {
-      0% {
-        transform: rotate(25deg);
-      }
-
-      50% {
-        transform: rotate(-20deg);
-      }
-
-      100% {
-        transform: rotate(25deg);
-      }
+      0% { transform: rotate(25deg); }
+      50% { transform: rotate(-20deg); }
+      100% { transform: rotate(25deg); }
     }
 
     @keyframes armWave {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      50% {
-        transform: rotate(-35deg);
-      }
-
-      100% {
-        transform: rotate(0deg);
-      }
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(-35deg); }
+      100% { transform: rotate(0deg); }
     }
 
     @keyframes roadMove {
-      from {
-        stroke-dashoffset: 40;
-      }
-
-      to {
-        stroke-dashoffset: 0;
-      }
+      from { stroke-dashoffset: 40; }
+      to { stroke-dashoffset: 0; }
     }
 
     @keyframes pinBounce {
-      0% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-
-      100% {
-        transform: translateY(0);
-      }
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
     }
 
-    .phrase-content {
-      flex: 1;
-    }
-
-    .phrase-container h2 {
-      color: #001f3f;
-      font-size: 2.2rem;
-      font-weight: 900;
-      margin-bottom: 15px;
-    }
-
-    .phrase-container p {
-      color: #6c757d;
-      font-size: 1.25rem;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    .phrase-container strong {
-      color: #001f3f;
-      font-weight: 900;
-    }
+    .phrase-content { flex: 1; }
+    .phrase-container h2 { color: #001f3f; font-size: 2.2rem; font-weight: 900; margin-bottom: 15px; }
+    .phrase-container p { color: #6c757d; font-size: 1.25rem; line-height: 1.6; margin: 0; }
+    .phrase-container strong { color: #001f3f; font-weight: 900; }
 
     @media (max-width: 768px) {
-      .phrase-container {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 20px;
-      }
+      .phrase-container { flex-direction: column; text-align: center; padding: 30px 20px; }
     }
 
     .card {
@@ -278,34 +200,12 @@
       background: var(--white);
     }
 
-    .card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 40px rgba(0, 31, 63, 0.15);
-    }
-
-    .card img {
-      transition: transform 0.6s ease;
-    }
-
-    .card:hover img {
-      transform: scale(1.08);
-    }
-
-    .card-body {
-      position: relative;
-      background: var(--white);
-    }
-
-    .card-body .btn-select {
-      background: var(--primary-color);
-      transition: all 0.3s;
-    }
-
-    .card:hover .btn-select {
-      background: var(--accent-color);
-      color: var(--primary-color);
-      box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
-    }
+    .card:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0, 31, 63, 0.15); }
+    .card img { transition: transform 0.6s ease; }
+    .card:hover img { transform: scale(1.08); }
+    .card-body { position: relative; background: var(--white); }
+    .card-body .btn-select { background: var(--primary-color); transition: all 0.3s; }
+    .card:hover .btn-select { background: var(--accent-color); color: var(--primary-color); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4); }
 
     .gps-banner {
       background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
@@ -324,184 +224,94 @@
     .gps-banner::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
+      top: -50%; left: -50%; width: 200%; height: 200%;
       background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, transparent 60%);
       animation: rotateBg 15s linear infinite;
     }
 
-    @keyframes rotateBg {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .gps-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .gps-banner h2 {
-      font-size: 2.8rem;
-      font-weight: 900;
-      margin-bottom: 15px;
-      color: var(--white);
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    .gps-banner h2 span {
-      color: var(--accent-color);
-    }
-
-    .gps-banner p {
-      font-size: 1.2rem;
-      margin-bottom: 35px;
-      color: #d0e5ff;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-    }
+    @keyframes rotateBg { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .gps-content { position: relative; z-index: 2; }
+    .gps-banner h2 { font-size: 2.8rem; font-weight: 900; margin-bottom: 15px; color: var(--white); text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
+    .gps-banner h2 span { color: var(--accent-color); }
+    .gps-banner p { font-size: 1.2rem; margin-bottom: 35px; color: #d0e5ff; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; }
 
     .btn-super-glow {
-      background: var(--accent-color);
-      color: var(--primary-color);
-      font-size: 1.3rem;
-      font-weight: 900;
-      padding: 18px 45px;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      animation: pulse-glow 2s infinite;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      background: var(--accent-color); color: var(--primary-color);
+      font-size: 1.3rem; font-weight: 900; padding: 18px 45px;
+      border: none; border-radius: 50px; cursor: pointer;
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.6); transition: all 0.3s;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 12px; animation: pulse-glow 2s infinite;
+      text-transform: uppercase; letter-spacing: 1px;
     }
 
     .btn-super-glow:hover {
-      transform: scale(1.05) translateY(-3px);
-      box-shadow: 0 0 40px rgba(0, 210, 255, 0.9);
-      background: #ffffff;
+      transform: scale(1.05) translateY(-3px); box-shadow: 0 0 40px rgba(0, 210, 255, 0.9); background: #ffffff;
     }
 
     @keyframes pulse-glow {
-      0% {
-        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7);
-      }
-
-      70% {
-        box-shadow: 0 0 0 20px rgba(0, 210, 255, 0);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0);
-      }
+      0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7); }
+      70% { box-shadow: 0 0 0 20px rgba(0, 210, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
     }
 
     .corner-widget {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 1000;
-      display: flex;
-      align-items: flex-end;
-      gap: 15px;
-      cursor: pointer;
+      position: fixed; bottom: 30px; right: 30px; z-index: 1000;
+      display: flex; align-items: flex-end; gap: 15px; cursor: pointer;
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       max-width: calc(100vw - 40px);
     }
-
-    .corner-widget:hover {
-      transform: scale(1.08);
-    }
+    .corner-widget:hover { transform: scale(1.08); }
 
     .corner-bubble {
-      background: #ffffff;
-      color: #001f3f;
-      padding: 15px 25px;
-      border-radius: 25px 25px 0 25px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-      font-weight: 700;
-      font-size: 1.1rem;
-      border: 2px solid #00d2ff;
-      text-align: center;
-      animation: floatBubble 3s infinite ease-in-out;
-      word-wrap: break-word;
+      background: #ffffff; color: #001f3f; padding: 15px 25px;
+      border-radius: 25px 25px 0 25px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      font-weight: 700; font-size: 1.1rem; border: 2px solid #00d2ff;
+      text-align: center; animation: floatBubble 3s infinite ease-in-out; word-wrap: break-word;
     }
 
-    .corner-bubble strong {
-      color: #00d2ff;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .corner-svg-container {
-      width: 120px;
-      height: 120px;
-      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
-      flex-shrink: 0;
-    }
+    .corner-bubble strong { color: #00d2ff; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
+    .corner-svg-container { width: 120px; height: 120px; filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2)); flex-shrink: 0; }
 
     @keyframes floatBubble {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-8px);
-      }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
     @media (max-width: 768px) {
-      .corner-widget {
-        bottom: 20px;
-        right: 20px;
-        gap: 10px;
-      }
-
-      .corner-bubble {
-        padding: 10px 15px;
-        font-size: 0.95rem;
-        max-width: 220px;
-      }
-
-      .corner-svg-container {
-        width: 90px;
-        height: 90px;
-      }
+      .corner-widget { bottom: 20px; right: 20px; gap: 10px; }
+      .corner-bubble { padding: 10px 15px; font-size: 0.95rem; max-width: 220px; }
+      .corner-svg-container { width: 90px; height: 90px; }
     }
 
     @media (max-width: 480px) {
-      .corner-widget {
-        bottom: 15px;
-        right: 15px;
-        gap: 8px;
-      }
+      .corner-widget { bottom: 15px; right: 15px; gap: 8px; }
+      .corner-bubble { padding: 8px 12px; font-size: 0.85rem; max-width: 160px; }
+      .corner-svg-container { width: 75px; height: 75px; }
+    }
 
-      .corner-bubble {
-        padding: 8px 12px;
-        font-size: 0.85rem;
-        max-width: 160px;
-      }
+    /* Estilos integrados para el select */
+    .hero-search-box {
+      display: flex; align-items: center; background: white;
+      border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
 
-      .corner-svg-container {
-        width: 75px;
-        height: 75px;
-      }
+    .hero-search-box select {
+      flex: 1; border: none; outline: none; background: transparent;
+      font-size: 16px; padding: 0 35px 0 15px; cursor: pointer; color: #001f3f; width: 100%; font-family: 'Roboto', sans-serif;
+      appearance: none; -webkit-appearance: none; -moz-appearance: none;
+      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23001f3f%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E');
+      background-repeat: no-repeat; background-position: right 15px center; background-size: 18px;
+    }
+
+    .hero-search-box select optgroup { font-weight: bold; color: #001f3f; background-color: #f0f0f0; }
+    .hero-search-box select option { padding: 10px; color: #333; background-color: white; }
+    .hero-search-box select option:hover { background-color: #e6f3ff; }
+
+    .hero-search-box button {
+      background: var(--accent-color); color: var(--primary-color); border: none;
+      padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer;
+      font-size: 16px; transition: 0.3s; white-space: nowrap; margin-right: 6px;
     }
   </style>
 </head>
@@ -521,11 +331,7 @@
             <stop offset="100%" stop-color="#003399" />
           </linearGradient>
         </defs>
-
-        <!-- Sendero de la pantalla de carga -->
-        <path d="M 10 185 Q 125 195 240 185" fill="none" stroke="#003399" stroke-width="8" stroke-linecap="round"
-          class="loader-path" opacity="0.3" />
-
+        <path d="M 10 185 Q 125 195 240 185" fill="none" stroke="#003399" stroke-width="8" stroke-linecap="round" class="loader-path" opacity="0.3" />
         <g class="mascot1-leg-left">
           <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5" />
           <path d="M 35 165 C 35 160 65 160 65 165 L 65 175 C 65 180 35 180 35 175 Z" fill="url(#shoeGradLoader)" />
@@ -540,22 +346,17 @@
           <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8" />
           <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4" />
           <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGradLoader)" />
-          <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff"
-            stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
           <circle cx="50" cy="120" r="5" fill="#1a1a1a" />
           <circle cx="52" cy="118" r="1.5" fill="#ffffff" />
           <circle cx="80" cy="120" r="5" fill="#1a1a1a" />
           <circle cx="82" cy="118" r="1.5" fill="#ffffff" />
           <path d="M 58 130 Q 65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
-
           <g class="mascot1-arm-left">
             <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10" stroke-linecap="round" />
             <circle cx="15" cy="128" r="8" fill="#ffffff" />
-
-            <!-- Pequeño mapa en la mano -->
             <g transform="translate(-5, 110) rotate(-20)">
-              <path d="M 0 0 L 25 -5 L 25 15 L 0 20 Z" fill="#ffffff" stroke="#003399" stroke-width="1.5"
-                stroke-linejoin="round" />
+              <path d="M 0 0 L 25 -5 L 25 15 L 0 20 Z" fill="#ffffff" stroke="#003399" stroke-width="1.5" stroke-linejoin="round" />
               <path d="M 8.3 -1.6 L 8.3 18.3 M 16.6 -3.3 L 16.6 16.6" stroke="#003399" stroke-width="1" />
               <circle cx="12" cy="8" r="2" fill="#ff3333" />
             </g>
@@ -578,22 +379,17 @@
 
       <section id="inicio" class="anim-element visible"
         style="background-image: linear-gradient(rgba(0, 10, 30, 0.7), rgba(0, 10, 30, 0.5)), url('https://nicaraguaactual.tv/wp-content/uploads/2023/11/Universidad-Nacional-de-Ingenieria-UNI-Foto-Nicaragua-Actual.jpeg'); background-size: cover; background-position: center; border-radius: 15px; margin-top: 20px; padding: 100px 40px 120px 40px; color: var(--white); text-align: center;">
-        <div class="hero-text fade-in-delay-1"
-          style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
-          <h1
-            style="font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+        <div class="hero-text fade-in-delay-1" style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
+          <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">
             Navega el Campus con Precisión.</h1>
           <p style="font-size: 1.2rem; margin-bottom: 30px; color: #f0f0f0; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">
             Encuentra aulas, laboratorios y servicios al instante mediante recorridos inmersivos.</p>
 
-          <div class="hero-search-box fade-in-delay-2"
-            style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 6px 6px 6px 20px; display: flex; align-items: center; background: white; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-            <select id="busquedaDestino" style="flex: 1; border: none; outline: none; background: transparent; font-size: 16px; padding: 0 35px 0 5px; cursor: pointer; color: #333; width: 100%; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23001f3f%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 10px center; background-size: 18px;">
+          <div class="hero-search-box fade-in-delay-2" style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto; padding: 6px;">
+            <select id="busquedaDestino">
               <option value="" disabled selected>¿A dónde quieres ir? Selecciona un destino...</option>
             </select>
-            <button onclick="buscarDestino()" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; white-space: nowrap;">
-              Encontrar ruta
-            </button>
+            <button onclick="buscarDestino()">Encontrar ruta</button>
           </div>
 
           <div class="hero-ctas fade-in-delay-3" style="justify-content: center; margin-top: 30px;">
@@ -609,7 +405,6 @@
         </div>
       </section>
 
-      <!-- Banner Principal con Mascota Original -->
       <div class="phrase-container anim-element visible">
         <div class="mascot-container">
           <svg class="svg-mascot" viewBox="0 0 250 200" xmlns="http://www.w3.org/2000/svg">
@@ -627,46 +422,34 @@
                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
               </filter>
             </defs>
-
             <path d="M 120 160 Q 200 160 230 80" fill="none" stroke="#00d2ff" stroke-width="15" filter="url(#glow)" />
             <path d="M 120 160 Q 200 160 230 80" fill="none" stroke="#ffffff" stroke-width="6" class="road-glow" />
-
             <g class="map-pin" transform="translate(200, 20)">
-              <path d="M 15 0 C 6.7 0 0 6.7 0 15 C 0 26.2 15 40 15 40 C 15 40 30 26.2 30 15 C 30 6.7 23.3 0 15 0 Z"
-                fill="#ff3333" />
+              <path d="M 15 0 C 6.7 0 0 6.7 0 15 C 0 26.2 15 40 15 40 C 15 40 30 26.2 30 15 C 30 6.7 23.3 0 15 0 Z" fill="#ff3333" />
               <circle cx="15" cy="15" r="6" fill="#ffffff" />
             </g>
-
             <g class="mascot1-leg-left">
               <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5" />
               <path d="M 35 165 C 35 160 65 160 65 165 L 65 175 C 65 180 35 180 35 175 Z" fill="url(#shoeGrad)" />
               <path d="M 35 172 L 65 172" stroke="#ffffff" stroke-width="3" />
             </g>
-
             <g class="mascot1-leg-right">
               <rect x="95" y="140" width="12" height="30" fill="#002277" rx="5" />
               <path d="M 85 165 C 85 160 115 160 115 165 L 115 175 C 115 180 85 180 85 175 Z" fill="url(#shoeGrad)" />
               <path d="M 85 172 L 115 172" stroke="#ffffff" stroke-width="3" />
             </g>
-
             <g class="mascot1-body-group">
               <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8" />
               <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4" />
-
               <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGrad)" />
-
-              <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff"
-                stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
-
+              <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
               <circle cx="50" cy="120" r="5" fill="#1a1a1a" />
               <circle cx="52" cy="118" r="1.5" fill="#ffffff" />
               <circle cx="80" cy="120" r="5" fill="#1a1a1a" />
               <circle cx="82" cy="118" r="1.5" fill="#ffffff" />
               <path d="M 58 130 Q 65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
-
               <g class="mascot1-arm-left">
-                <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10"
-                  stroke-linecap="round" />
+                <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10" stroke-linecap="round" />
                 <circle cx="15" cy="128" r="8" fill="#ffffff" />
               </g>
             </g>
@@ -674,19 +457,16 @@
         </div>
         <div class="phrase-content">
           <h2>¿Desorientación en el recinto? UNI-WAY es la solución.</h2>
-          <p>Se ofrece un mapa interactivo completo y totalmente funcional para ubicar aulas, laboratorios y servicios
-            al instante. <strong>El control del campus en un solo clic.</strong></p>
+          <p>Se ofrece un mapa interactivo completo y totalmente funcional para ubicar aulas, laboratorios y servicios al instante. <strong>El control del campus en un solo clic.</strong></p>
         </div>
       </div>
 
       <section class="anim-element visible" style="padding: 0 20px;">
         <div class="gps-banner">
           <div class="gps-content">
-            <span class="material-icons"
-              style="font-size: 70px; color: var(--accent-color); margin-bottom: 10px;">explore</span>
+            <span class="material-icons" style="font-size: 70px; color: var(--accent-color); margin-bottom: 10px;">explore</span>
             <h2>¿Perdido en el <span>Campus?</span></h2>
-            <p>No des más vueltas. Activa nuestro Navegador GPS con instrucciones en tiempo real y llega a tu clase a
-              tiempo y sin complicaciones.</p>
+            <p>No des más vueltas. Activa nuestro Navegador GPS con instrucciones en tiempo real y llega a tu clase a tiempo y sin complicaciones.</p>
             <button class="btn-super-glow" onclick="window.location.href='destinos.html'">
               <span class="material-icons">near_me</span> Iniciar Navegación Asistida
             </button>
@@ -696,12 +476,10 @@
 
       <section id="smart-nav" class="anim-element visible" style="padding-top: 20px;">
         <h2 class="section-title" style="font-size: 26px; margin-bottom: 10px;">¿Qué necesitas hoy?</h2>
-        <p style="text-align: center; color: var(--text-gray); margin-bottom: 30px;">Selecciona una opción rápida basada
-          en lo que buscas ahora mismo.</p>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 30px;">Selecciona una opción rápida basada en lo que buscas ahora mismo.</p>
 
         <div class="context-grid">
-          <button class="btn-context" style="border-color: var(--accent-color); background: #f0faff;"
-            onclick="abrirModalSmart('primer-dia')">
+          <button class="btn-context" style="border-color: var(--accent-color); background: #f0faff;" onclick="abrirModalSmart('primer-dia')">
             <span class="material-icons">school</span> Es mi primer día
           </button>
           <button class="btn-context" onclick="abrirModalSmart('donde-estoy')">
@@ -719,12 +497,10 @@
         </div>
 
         <div class="planner-box">
-          <h3
-            style="color: var(--primary-color); margin-bottom: 15px; font-size: 22px; display: flex; align-items: center; gap: 10px; font-weight: 900;">
+          <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 22px; display: flex; align-items: center; gap: 10px; font-weight: 900;">
             <span class="material-icons" style="font-size: 28px;">route</span> Planificador de Día
           </h3>
-          <p style="color: var(--text-gray); margin-bottom: 25px; font-size: 16px;">Arma tu ruta seleccionando tus
-            clases y descansos. Optimizaremos tu recorrido por el campus.</p>
+          <p style="color: var(--text-gray); margin-bottom: 25px; font-size: 16px;">Arma tu ruta seleccionando tus clases y descansos. Optimizaremos tu recorrido por el campus.</p>
 
           <div class="planner-row">
             <select class="planner-select" id="plan1">
@@ -735,9 +511,7 @@
                 <option value="A-1-3">A-1-3</option>
               </optgroup>
             </select>
-
             <span class="material-icons" style="color: var(--text-gray);">arrow_forward</span>
-
             <select class="planner-select" id="plan2">
               <option value="">Laboratorios</option>
               <optgroup label="Lab Redes">
@@ -745,18 +519,13 @@
                 <option value="Lab Redes 2">Lab Redes 2</option>
               </optgroup>
             </select>
-
             <span class="material-icons" style="color: var(--text-gray);">arrow_forward</span>
-
             <select class="planner-select" id="plan3">
               <option value="">Destino Final</option>
               <option value="Auditorio Salomón de la Selva">Auditorio Salomón de la Selva</option>
               <option value="Biblioteca">Biblioteca</option>
             </select>
-
-            <button class="btn-select"
-              style="width: auto; padding: 15px 30px; font-size: 16px; margin-left: auto; border-radius: 8px;"
-              onclick="abrirModalSmart('planner')">Optimizar Ruta</button>
+            <button class="btn-select" style="width: auto; padding: 15px 30px; font-size: 16px; margin-left: auto; border-radius: 8px;" onclick="abrirModalSmart('planner')">Optimizar Ruta</button>
           </div>
         </div>
       </section>
@@ -776,8 +545,7 @@
           </div>
           <div class="card">
             <div style="overflow: hidden; border-radius: 15px 15px 0 0;">
-              <img src="imagenes/edificioSalomonSelva.jpeg" alt="Auditorio Salomón de la Selva"
-                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200/001f3f/ffffff?text=Auditorio';">
+              <img src="imagenes/edificioSalomonSelva.jpeg" alt="Auditorio Salomón de la Selva" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200/001f3f/ffffff?text=Auditorio';">
             </div>
             <div class="card-body">
               <h3>Auditorio Salomón de la Selva</h3>
@@ -822,31 +590,25 @@
       <section id="testimonios" class="anim-element visible">
         <h2 class="section-title">Testimonios</h2>
         <div class="testimonials-grid">
-          <div class="testimonio-card"
-            style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
+          <div class="testimonio-card" style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
             <div class="stars">★★★★★</div>
-            <p>"Gracias a esta plataforma encontré mi aula en el Edificio Rigoberto en menos de 5 minutos en mi primer
-              día de clases."</p>
+            <p>"Gracias a esta plataforma encontré mi aula en el Edificio Rigoberto en menos de 5 minutos en mi primer día de clases."</p>
             <br><strong style="color: var(--primary-color);">- Carlos M.</strong>
           </div>
-          <div class="testimonio-card"
-            style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
+          <div class="testimonio-card" style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
             <div class="stars">★★★★★</div>
             <p>"Los videos guiados son increíbles. Sientes que ya caminaste por el campus antes de siquiera llegar."</p>
             <br><strong style="color: var(--primary-color);">- Ana P.</strong>
           </div>
-          <div class="testimonio-card"
-            style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
+          <div class="testimonio-card" style="background: var(--white); box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none;">
             <div class="stars">★★★★★</div>
-            <p>"La ubicación de los cafetines me salvó la vida en semana de exámenes. Excelente iniciativa estudiantil."
-            </p>
+            <p>"La ubicación de los cafetines me salvó la vida en semana de exámenes. Excelente iniciativa estudiantil."</p>
             <br><strong style="color: var(--primary-color);">- Luis R.</strong>
           </div>
         </div>
       </section>
     </div>
 
-    <!--Este es el logo peque, el q voy a copiar-->
     <div class="corner-widget" onclick="window.location.href='destinos.html'">
       <div class="corner-bubble">¿Perdido en la UNI?<br><strong>Ve a destinos.</strong></div>
       <div class="corner-svg-container">
@@ -861,45 +623,34 @@
               <stop offset="100%" stop-color="#003399" />
             </linearGradient>
           </defs>
-
           <g class="mascot1-leg-left">
             <rect x="45" y="140" width="12" height="30" fill="#003399" rx="5" />
             <path d="M 35 165 C 35 160 65 160 65 165 L 65 175 C 65 180 35 180 35 175 Z" fill="url(#shoeGradCorner)" />
             <path d="M 35 172 L 65 172" stroke="#ffffff" stroke-width="3" />
           </g>
-
           <g class="mascot1-leg-right">
             <rect x="95" y="140" width="12" height="30" fill="#002277" rx="5" />
-            <path d="M 85 165 C 85 160 115 160 115 165 L 115 175 C 115 180 85 180 85 175 Z"
-              fill="url(#shoeGradCorner)" />
+            <path d="M 85 165 C 85 160 115 160 115 165 L 115 175 C 115 180 85 180 85 175 Z" fill="url(#shoeGradCorner)" />
             <path d="M 85 172 L 115 172" stroke="#ffffff" stroke-width="3" />
           </g>
-
           <g class="mascot1-body-group">
             <rect x="-5" y="80" width="30" height="40" fill="#ffb833" rx="8" />
             <rect x="2" y="85" width="16" height="15" fill="#ffcc66" rx="4" />
-
             <rect x="20" y="50" width="130" height="100" rx="20" fill="url(#bodyGradCorner)" />
-
-            <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff"
-              stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
-
+            <path d="M 20 70 L 60 70 L 60 120 L 90 120 L 90 80 L 120 80 L 120 150" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
             <circle cx="50" cy="120" r="5" fill="#1a1a1a" />
             <circle cx="52" cy="118" r="1.5" fill="#ffffff" />
             <circle cx="80" cy="120" r="5" fill="#1a1a1a" />
             <circle cx="82" cy="118" r="1.5" fill="#ffffff" />
             <path d="M 58 130 Q 65 138 72 130" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
-
             <g class="mascot1-arm-left">
-              <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10"
-                stroke-linecap="round" />
+              <path d="M 25 100 Q 10 110 15 125" fill="none" stroke="#4da6ff" stroke-width="10" stroke-linecap="round" />
               <circle cx="15" cy="128" r="8" fill="#ffffff" />
             </g>
           </g>
         </svg>
       </div>
     </div>
-
   </main>
 
   <footer>
@@ -935,8 +686,7 @@
       </div>
       <div class="modal-body">
         <div class="video-container">
-          <p><span class="material-icons"
-              style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido</p>
+          <p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Video 360° / Recorrido</p>
         </div>
         <div class="steps-container">
           <h4>Indicaciones de ruta:</h4>
@@ -974,11 +724,8 @@
           <button class="view-mode-btn active">Entorno Virtual 3D</button>
           <button class="view-mode-btn inactive">Recorrido Real en Video</button>
         </div>
-        <div class="video-container"
-          style="background: #111; aspect-ratio: 16/9; display: flex; justify-content: center; align-items: center; color: var(--white); border-radius: 10px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-          <p style="text-align: center;"><span class="material-icons"
-              style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido /
-            Video</p>
+        <div class="video-container" style="background: #111; aspect-ratio: 16/9; display: flex; justify-content: center; align-items: center; color: var(--white); border-radius: 10px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+          <p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido / Video</p>
         </div>
       </div>
     </div>
@@ -1000,10 +747,127 @@
       .then(response => response.text())
       .then(data => {
         document.getElementById('menu-contenedor').innerHTML = data;
-      const navInicio = document.getElementById('nav-inicio');
-      if (navInicio) navInicio.classList.add('activo');
-      if (typeof window.transformarBuscadoresEnSelect === 'function') window.transformarBuscadoresEnSelect();
+        const navInicio = document.getElementById('nav-inicio');
+        if (navInicio) navInicio.classList.add('activo');
       });
+
+    // Cargar los lugares en el combobox al iniciar la página
+    async function cargarComboboxDestinos() {
+      try {
+        const response = await fetch("./Json/destinos.json");
+        const data = await response.json();
+        
+        const select = document.getElementById("busquedaDestino");
+        
+        // Limpiar opciones existentes (excepto la primera que es el placeholder)
+        while (select.options.length > 1) {
+          select.remove(1);
+        }
+        
+        // Agrupar por categorías
+        const categorias = {
+          "🏛️ Edificios Principales": data.categorias.principales,
+          "🔬 Laboratorios": data.categorias.laboratorios,
+          "🍽️ Cafetines y Servicios": data.categorias.cafetines
+        };
+        
+        // Llenar el select con grupos
+        for (const [nombreCategoria, items] of Object.entries(categorias)) {
+          const optgroup = document.createElement("optgroup");
+          optgroup.label = nombreCategoria;
+          
+          items.forEach(lugar => {
+            const option = document.createElement("option");
+            option.value = lugar.nombre;
+            option.textContent = lugar.nombre;
+            optgroup.appendChild(option);
+          });
+          
+          select.appendChild(optgroup);
+        }
+        
+      } catch (error) {
+        console.error("Error cargando destinos:", error);
+        const select = document.getElementById("busquedaDestino");
+        const option = document.createElement("option");
+        option.value = "";
+        option.textContent = "Error al cargar destinos";
+        option.disabled = true;
+        select.appendChild(option);
+      }
+    }
+
+    async function buscarDestino() {
+      const select = document.getElementById("busquedaDestino");
+      const destinoSeleccionado = select.value ? select.value.trim() : "";
+
+      if (destinoSeleccionado === "") {
+        Swal.fire({
+          icon: "warning",
+          title: "Campo vacío",
+          text: "Selecciona un destino para buscar.",
+          confirmButtonColor: '#001f3f'
+        });
+        return;
+      }
+
+      try {
+        const response = await fetch("./Json/destinos.json");
+        const data = await response.json();
+        const lugares = [
+          ...data.categorias.principales,
+          ...data.categorias.laboratorios,
+          ...data.categorias.cafetines
+        ];
+
+        const resultado = lugares.find(lugar => lugar.nombre === destinoSeleccionado);
+
+        if (resultado) {
+          localStorage.setItem("destinoBuscado", JSON.stringify(resultado));
+          
+          // Mostrar confirmación antes de redirigir
+          Swal.fire({
+            icon: "success",
+            title: "Destino seleccionado",
+            text: `Redirigiendo a: ${resultado.nombre}`,
+            timer: 1500,
+            showConfirmButton: false
+          }).then(() => {
+            window.location.href = "destinos.html";
+          });
+          
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Destino no encontrado",
+            text: "No existe ese lugar en el sistema."
+          });
+        }
+
+      } catch (error) {
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "No se pudo cargar el archivo de destinos."
+        });
+      }
+    }
+
+    // Inicializar el combobox cuando la página cargue
+    document.addEventListener("DOMContentLoaded", function() {
+      cargarComboboxDestinos();
+      
+      const select = document.getElementById("busquedaDestino");
+      if (select) {
+        select.addEventListener("keypress", function(e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            buscarDestino();
+          }
+        });
+      }
+    });
 
     function abrirSimulacion(lugar) {
       const modal = document.getElementById('videoModal');
@@ -1100,9 +964,9 @@
          <div style="text-align: left;">
            <p style="color: var(--text-gray); margin-bottom: 20px;">Hemos organizado tu día para caminar lo menos posible. Esta es tu ruta:</p>
            <div style="background: var(--bg-light); border-radius: 10px; padding: 20px; border: 1px solid var(--border-color);">
-              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">1. Inicio → <span style="color: var(--text-dark);">\${p1}</span></p>
-              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">2. Siguiente → <span style="color: var(--text-dark);">\${p2}</span></p>
-              <p style="font-weight: bold; color: var(--primary-color);">3. Final → <span style="color: var(--text-dark);">\${p3}</span></p>
+              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">1. Inicio → <span style="color: var(--text-dark);">${p1}</span></p>
+              <p style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">2. Siguiente → <span style="color: var(--text-dark);">${p2}</span></p>
+              <p style="font-weight: bold; color: var(--primary-color);">3. Final → <span style="color: var(--text-dark);">${p3}</span></p>
            </div>
            <button class="btn-select" style="margin-top: 25px; width: 100%;" onclick="window.location.href='destinos.html'">Comenzar Ruta en el Mapa</button>
          </div>
@@ -1114,43 +978,6 @@
 
     function cerrarModalSmart() {
       document.getElementById('modalSmart').classList.remove('active');
-    }
-
-
-    function buscarDestino() {
-      const selectInicio = document.getElementById("busquedaDestino");
-      if (selectInicio && selectInicio.value) {
-        if (typeof window.manejarSeleccionDestino === 'function') {
-          window.manejarSeleccionDestino(selectInicio.value);
-        }
-      } else {
-        Swal.fire({
-          icon: "warning",
-          title: "Selecciona un destino",
-          text: "Por favor elige un lugar de la lista para continuar.",
-          confirmButtonColor: '#00d2ff'
-        });
-      }
-    }
-
-    function buscarDestinoModal() {
-      const selectModal = document.getElementById("busquedaDestinoModal");
-      if (selectModal && selectModal.value) {
-        if (typeof window.manejarSeleccionDestino === 'function') {
-          window.manejarSeleccionDestino(selectModal.value);
-        }
-        const modal = document.getElementById('searchModal');
-        const overlay = document.getElementById('searchOverlay');
-        if(modal) modal.classList.remove('active');
-        if(overlay) overlay.classList.remove('active');
-      } else {
-        Swal.fire({
-          icon: "warning",
-          title: "Selecciona un destino",
-          text: "Por favor elige un lugar de la lista para continuar.",
-          confirmButtonColor: '#00d2ff'
-        });
-      }
     }
   </script>
 
