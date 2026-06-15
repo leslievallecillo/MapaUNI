@@ -312,7 +312,6 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Cafetin El Deportivo"],
       sitiosUNI["Cafetin el chele"],
       sitiosUNI["Cafetin La Fritanga"]
-
     ],
     "Edificio Rigoberto Lopez Perez|Laboratorios redes": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
@@ -320,57 +319,52 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Cafetin El Duarte"],
       sitiosUNI["La mita"],
       sitiosUNI["Laboratorios redes"]
-
     ],
     "Edificio Rigoberto Lopez Perez|Copias UNI": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Edificio Posgrado"],
       sitiosUNI["Parqueo Posgrado"],
       sitiosUNI["Copias UNI"]
-      
     ],
-     "Edificio Rigoberto Lopez Perez|Cajero": [
+    "Edificio Rigoberto Lopez Perez|Cajero": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Edificio Posgrado"],
       sitiosUNI["Cafetin El Duarte"],
       sitiosUNI["La mita"],
       sitiosUNI["Registro academico"],
       sitiosUNI["Cajero"]
-      
+
     ],
-     "Edificio Rigoberto Lopez Perez|Cafetin EL Gueguense": [
+    "Edificio Rigoberto Lopez Perez|Cafetin EL Gueguense": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Cafetin EL Gueguense"]
-      
-      
     ],
-     "Edificio Rigoberto Lopez Perez|Batidos Miranda": [
+    "Edificio Rigoberto Lopez Perez|Batidos Miranda": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Batidos Miranda"]
-      
-      
+
     ],
-     "Edificio Posgrado|Cajero": [
+    "Edificio Posgrado|Cajero": [
       sitiosUNI["Edificio Posgrado"],
       sitiosUNI["Cafetin El Duarte"],
       sitiosUNI["La mita"],
       sitiosUNI["Registro academico"],
       sitiosUNI["Cajero"]
-      
+
     ],
     "Edificio Rigoberto Lopez Perez|Cafetin El Duarte": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Edificio Posgrado"],
       sitiosUNI["Cafetin El Duarte"]
-    
+
     ],
-     "Edificio Rigoberto Lopez Perez|Cafetin El Deportivo": [
+    "Edificio Rigoberto Lopez Perez|Cafetin El Deportivo": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Biblioteca"],
       sitiosUNI["Cafetin El Deportivo"],
 
     ],
-     "Edificio Rigoberto Lopez Perez|Cafetin El Comal": [
+    "Edificio Rigoberto Lopez Perez|Cafetin El Comal": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Biblioteca"],
       sitiosUNI["Cafetin El Deportivo"],
@@ -378,7 +372,149 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Cafetin La Fritanga"],
       sitiosUNI["Cafetin El Comal"]
 
+    ],
+    "Edificio Rigoberto Lopez Perez|Biblioteca": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Biblioteca"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Auditorio Salomon de la Selva": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Auditorio Salomon de la Selva"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Posgrado": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|La mita": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Pabellon 1 IES": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Pabellon 1 IES"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Pabellon 2 IES": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Pabellon 3 IES": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"],
+      sitiosUNI["Pabellon 3 IES"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Albert Einstein": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Laboratorios IES": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Laboratorios IES"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Autoservicio de impresiones": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Autoservicio de impresiones"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Entrada Principal": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Entrada Principal"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Entrada IES": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Entrada IES"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Entrada Trasera": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Parqueo edificio rigoberto"],
+      sitiosUNI["Entrada Trasera"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Parqueo edificio rigoberto": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Parqueo edificio rigoberto"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Parqueo Posgrado": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Parqueo Posgrado"]
+    ],
+    "Edificio Rigoberto Lopez Perez|Registro academico": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"]
+
+    ],
+     "Edificio Rigoberto Lopez Perez|Edificio Arquitectura": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Edificio Arquitectura"]
+
+    ],
+     "Edificio Rigoberto Lopez Perez|Edificio Quimica": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Edificio Quimica"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Piscina": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Piscina"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Carlos Santos Berroterán": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Edificio Carlos Santos Berroterán"]
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Rigoberto Lopez Perez": [
+      sitiosUNI["Edificio Rigoberto Lopez Perez"]
+
     ]
+
+
 
 
   };
@@ -422,7 +558,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     ],
-     "Edificio Rigoberto Lopez Perez|Laboratorios redes": [
+    "Edificio Rigoberto Lopez Perez|Laboratorios redes": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
       { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
       { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La mita" },
@@ -431,13 +567,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     ],
-     "Edificio Rigoberto Lopez Perez|Copias UNI": [
+    "Edificio Rigoberto Lopez Perez|Copias UNI": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
       { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 16 metros hasta llegar al Parqueo de Posgrado" },
       { punto: sitiosUNI["Parqueo Posgrado"], texto: "Camina 36 metros hasta llegar a Copias UNI" },
       { punto: sitiosUNI["Copias UNI"], texto: "Has llegado a tu destino" }
-   ],
-     "Edificio Rigoberto Lopez Perez|Cajero": [
+    ],
+    "Edificio Rigoberto Lopez Perez|Cajero": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
       { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
       { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
@@ -446,13 +582,13 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Cajero"], texto: "Has llegado a tu destino" }
 
     ],
-     "Edificio Rigoberto Lopez Perez|Cafetin EL Gueguense": [
+    "Edificio Rigoberto Lopez Perez|Cafetin EL Gueguense": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 73 metros hasta llegar al Cafetin el Gueguense" },
       { punto: sitiosUNI["Cafetin EL Gueguense"], texto: "Has llegado a tu destino, Buen provecho!" }
 
     ],
 
-     "Edificio Rigoberto Lopez Perez|Batidos Miranda": [
+    "Edificio Rigoberto Lopez Perez|Batidos Miranda": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 90 metros hasta llegar al Cafetin Batidos Miranda" },
       { punto: sitiosUNI["Batidos Miranda"], texto: "Has llegado a tu destino, Buen provecho!" }
 
@@ -477,7 +613,146 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Cafetin El Comal"], texto: "Has llegado a tu destino, Buen provecho" }
 
     ],
+    "Edificio Rigoberto Lopez Perez|Biblioteca": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 109 metros hasta llegar a la biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Has llegado a tu destino" },
 
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Auditorio Salomon de la Selva": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 75 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Has llegado a tu destino" },
+
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Posgrado": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|La mita": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Has llegado a tu destino, Buen provecho!" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Pabellon 1 IES": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 43 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 34 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Pabellon 2 IES": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 43 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 34 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Pabellon 3 IES": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 43 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 34 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 3 IES" },
+      { punto: sitiosUNI["Pabellon 3 IES"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Albert Einstein": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 43 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Has llegado a tu destino" },
+    ],
+    "Edificio Rigoberto Lopez Perez|Laboratorios IES": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 43 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 34 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 donde estan los Laboratorios IES" },
+      { punto: sitiosUNI["Laboratorios IES"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Autoservicio de impresiones": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 16 metros hasta llegar a la Entrada Principal" },
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 29 metros hasta llegar al Autoservicio de impresiones" },
+      { punto: sitiosUNI["Autoservicio de impresiones"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Entrada Principal": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 16 metros hasta llegar a la Entrada Principal" },
+      { punto: sitiosUNI["Entrada Principal"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Rigoberto Lopez Perez|Entrada IES": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 134 metros hasta llegar a la Entrada IES" },
+      { punto: sitiosUNI["Entrada IES"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Entrada Trasera": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 72 metros hasta llegar al Parqueo edificio rigoberto" },
+      { punto: sitiosUNI["Parqueo edificio rigoberto"], texto: "Camina 100 metros hasta llegar a la Entrada trasera" },
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Parqueo edificio rigoberto": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 72 metros hasta llegar al Parqueo edificio rigoberto" },
+      { punto: sitiosUNI["Parqueo edificio rigoberto"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Parqueo Posgrado": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 16 metros hasta llegar al Parqueo de Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Rigoberto Lopez Perez|Registro academico": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Arquitectura": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 24 metros hasta llegar al Edificio de Arquitectura" },
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Quimica": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 24 metros hasta llegar al Edificio de Arquitectura" },
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 46 metros hasta llegar al Edificio Quimica" },
+      { punto: sitiosUNI["Edificio Quimica"], texto: "Has llegado a tu destino" }
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Piscina": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 63 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 26 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Has llegado a tu destino"}
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Carlos Santos Berroterán": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 75 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 30 metros hasta llegar al Edificio Carlos Santos Berroterán" },
+      { punto: sitiosUNI["Edificio Carlos Santos Berroterán"], texto: "Has llegado a tu destino" },
+
+
+    ],
+    "Edificio Rigoberto Lopez Perez|Edificio Rigoberto Lopez Perez": [
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Ya estas ubicado en el Edificio Rigoberto Lopez Perez" }
+
+    ],
 
     // EDIFICIO POSGRADO
     "Edificio Posgrado|Cajero": [
