@@ -5,80 +5,80 @@ let edificioActualId = "";
 
 // Nueva función para transformar las barras de búsqueda en select (Combo box)
 const destinosGlobales = [
-    "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica", 
-    "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte", 
-    "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES", 
-    "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES", 
-    "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES", 
-    "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico", 
-    "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva", 
-    "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
+  "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica",
+  "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte",
+  "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES",
+  "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES",
+  "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES",
+  "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico",
+  "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva",
+  "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
 ].sort();
 
-window.manejarSeleccionDestino = function(destino) {
-    if (!destino) return;
-    if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
-        // Redirigir directamente al GPS en lugar del modal de video roto
-        const selectDestino = document.getElementById("destino");
-        const btnIr = document.getElementById("btnIr");
-        
-        if (selectDestino && btnIr) {
-            // Verificar si la opción existe, si no, crearla temporalmente para que no de error
-            let optionExists = Array.from(selectDestino.options).some(opt => opt.value === destino);
-            if (!optionExists) {
-                let opt = document.createElement('option');
-                opt.value = destino;
-                opt.text = destino;
-                selectDestino.appendChild(opt);
-            }
-            
-            selectDestino.value = destino;
-            btnIr.click();
-            document.getElementById("navegacion-asistida").scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-            if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
-            else abrirSimulacion(destino);
-        }
+window.manejarSeleccionDestino = function (destino) {
+  if (!destino) return;
+  if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
+    // Redirigir directamente al GPS en lugar del modal de video roto
+    const selectDestino = document.getElementById("destino");
+    const btnIr = document.getElementById("btnIr");
+
+    if (selectDestino && btnIr) {
+      // Verificar si la opción existe, si no, crearla temporalmente para que no de error
+      let optionExists = Array.from(selectDestino.options).some(opt => opt.value === destino);
+      if (!optionExists) {
+        let opt = document.createElement('option');
+        opt.value = destino;
+        opt.text = destino;
+        selectDestino.appendChild(opt);
+      }
+
+      selectDestino.value = destino;
+      btnIr.click();
+      document.getElementById("navegacion-asistida").scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-        localStorage.setItem('destinoBuscadoSimple', destino);
-        window.location.href = 'destinos.html';
+      if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
+      else abrirSimulacion(destino);
     }
+  } else {
+    localStorage.setItem('destinoBuscadoSimple', destino);
+    window.location.href = 'destinos.html';
+  }
 };
 
-window.transformarBuscadoresEnSelect = function() {
-    const selectInicio = document.getElementById('busquedaDestino');
-    if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
-        destinosGlobales.forEach(destino => {
-            const opt = document.createElement('option');
-            opt.value = destino;
-            opt.text = destino;
-            selectInicio.appendChild(opt);
-        });
+window.transformarBuscadoresEnSelect = function () {
+  const selectInicio = document.getElementById('busquedaDestino');
+  if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
+    destinosGlobales.forEach(destino => {
+      const opt = document.createElement('option');
+      opt.value = destino;
+      opt.text = destino;
+      selectInicio.appendChild(opt);
+    });
 
-        selectInicio.addEventListener('change', function() {
-            if (this.value) {
-                window.manejarSeleccionDestino(this.value);
-                this.value = ""; 
-            }
-        });
-    }
+    selectInicio.addEventListener('change', function () {
+      if (this.value) {
+        window.manejarSeleccionDestino(this.value);
+        this.value = "";
+      }
+    });
+  }
 
-    const selectModal = document.getElementById('busquedaDestinoModal');
-    if (selectModal && selectModal.options.length <= 1) {
-        destinosGlobales.forEach(destino => {
-            const opt = document.createElement('option');
-            opt.value = destino;
-            opt.text = destino;
-            selectModal.appendChild(opt);
-        });
-        
-        selectModal.addEventListener('change', function() {
-            if (this.value) {
-                window.manejarSeleccionDestino(this.value);
-                this.value = ""; 
-            }
-        });
-    }
+  const selectModal = document.getElementById('busquedaDestinoModal');
+  if (selectModal && selectModal.options.length <= 1) {
+    destinosGlobales.forEach(destino => {
+      const opt = document.createElement('option');
+      opt.value = destino;
+      opt.text = destino;
+      selectModal.appendChild(opt);
+    });
+
+    selectModal.addEventListener('change', function () {
+      if (this.value) {
+        window.manejarSeleccionDestino(this.value);
+        this.value = "";
+      }
+    });
+  }
 };
 
 // --- SCRIPT PARA CARGAR EL NAVBAR ---
@@ -88,29 +88,29 @@ fetch('navbar.html')
     document.getElementById('menu-contenedor').innerHTML = data;
     const navDestinos = document.getElementById('nav-destinos');
     if (navDestinos) navDestinos.classList.add('activo');
-    
+
     window.transformarBuscadoresEnSelect();
   }).catch(() => console.log('Navbar no encontrado'));
 
-window.buscarDestinoModal = function() {
-    const selectModal = document.getElementById('busquedaDestinoModal');
-    if (selectModal && selectModal.value) {
-        window.manejarSeleccionDestino(selectModal.value);
-        
-        const modal = document.getElementById('searchModal');
-        const overlay = document.getElementById('searchOverlay');
-        if(modal) modal.classList.remove('active');
-        if(overlay) overlay.classList.remove('active');
-        selectModal.value = ""; 
-    }
-};
+window.buscarDestinoModal = function () {
+  const selectModal = document.getElementById('busquedaDestinoModal');
+  if (selectModal && selectModal.value) {
+    window.manejarSeleccionDestino(selectModal.value);
 
-window.toggleSearchModal = function() {
     const modal = document.getElementById('searchModal');
     const overlay = document.getElementById('searchOverlay');
-    if (modal) modal.classList.toggle('active');
-    if (overlay) overlay.classList.toggle('active');
-    window.transformarBuscadoresEnSelect();
+    if (modal) modal.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    selectModal.value = "";
+  }
+};
+
+window.toggleSearchModal = function () {
+  const modal = document.getElementById('searchModal');
+  const overlay = document.getElementById('searchOverlay');
+  if (modal) modal.classList.toggle('active');
+  if (overlay) overlay.classList.toggle('active');
+  window.transformarBuscadoresEnSelect();
 };
 
 // Funciones de navegación e interfaz general
@@ -262,8 +262,8 @@ document.addEventListener('DOMContentLoaded', function () {
   let lineaRuta = null;
   let rutaActiva = null;
   let pasoActual = 0;
-  
- const sitiosUNI = {
+
+  const sitiosUNI = {
     "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
     "Edificio Posgrado": [12.131009312952209, -86.27012610686415],
     "Laboratorios robotica": [12.131584651748083, -86.27005832378829],
@@ -317,6 +317,8 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Registro academico"],
       sitiosUNI["Edificio Arquitectura"]
     ],
+
+    // EDIFICIO RIGOBERTO LOPEZ PEREZ
     "Edificio Rigoberto Lopez Perez|Cafetin el chele": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Biblioteca"],
@@ -359,13 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Batidos Miranda"]
     ],
-    "Edificio Posgrado|Cajero": [
-      sitiosUNI["Edificio Posgrado"],
-      sitiosUNI["Cafetin El Duarte"],
-      sitiosUNI["La mita"],
-      sitiosUNI["Registro academico"],
-      sitiosUNI["Cajero"]
-    ],
+
     "Edificio Rigoberto Lopez Perez|Cafetin El Duarte": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"],
       sitiosUNI["Edificio Posgrado"],
@@ -503,6 +499,209 @@ document.addEventListener('DOMContentLoaded', function () {
     ],
     "Edificio Rigoberto Lopez Perez|Edificio Rigoberto Lopez Perez": [
       sitiosUNI["Edificio Rigoberto Lopez Perez"]
+
+    ],
+    // EDIFICIO POSGRADO
+
+
+    "Edificio Posgrado|Cafetin el chele": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Parqueo Posgrado"],
+      sitiosUNI["Cafetin el chele"]
+    ],
+
+    "Edificio Posgrado|Cafetin La Fritanga": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Parqueo Posgrado"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin La Fritanga"]
+    ],
+
+    "Edificio Posgrado|Laboratorios redes": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Laboratorios redes"]
+    ],
+
+    "Edificio Posgrado|Copias UNI": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Parqueo Posgrado"],
+      sitiosUNI["Copias UNI"]
+    ],
+
+    "Edificio Posgrado|Cajero": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cajero"]
+    ],
+
+    "Edificio Posgrado|Cafetin EL Gueguense": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Cafetin EL Gueguense"]
+    ],
+
+    "Edificio Posgrado|Batidos Miranda": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Batidos Miranda"]
+    ],
+
+    "Edificio Posgrado|Cafetin El Duarte": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"]
+    ],
+
+    "Edificio Posgrado|Cafetin El Deportivo": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Deportivo"]
+    ],
+
+    "Edificio Posgrado|Cafetin El Comal": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Parqueo Posgrado"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin El Comal"]
+    ],
+
+    "Edificio Posgrado|Biblioteca": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Biblioteca"]
+    ],
+
+    "Edificio Posgrado|Auditorio Salomon de la Selva": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Auditorio Salomon de la Selva"]
+    ],
+
+    "Edificio Posgrado|Edificio Rigoberto Lopez Perez": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"]
+    ],
+
+    "Edificio Posgrado|La mita": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"]
+    ],
+
+    "Edificio Posgrado|Pabellon 1 IES": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Pabellon 1 IES"]
+    ],
+
+    "Edificio Posgrado|Pabellon 2 IES": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"]
+    ],
+
+    "Edificio Posgrado|Pabellon 3 IES": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"],
+      sitiosUNI["Pabellon 3 IES"]
+    ],
+
+    "Edificio Posgrado|Edificio Albert Einstein": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Albert Einstein"]
+    ],
+
+    "Edificio Posgrado|Laboratorios IES": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Laboratorios IES"]
+    ],
+
+    "Edificio Posgrado|Autoservicio de impresiones": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Autoservicio de impresiones"]
+    ],
+
+    "Edificio Posgrado|Entrada Principal": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Entrada Principal"]
+    ],
+
+    "Edificio Posgrado|Entrada IES": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Entrada IES"]
+    ],
+
+    "Edificio Posgrado|Entrada Trasera": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Parqueo edificio rigoberto"],
+      sitiosUNI["Entrada Trasera"]
+    ],
+
+    "Edificio Posgrado|Parqueo edificio rigoberto": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Parqueo edificio rigoberto"]
+    ],
+
+    "Edificio Posgrado|Parqueo Posgrado": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Parqueo Posgrado"]
+    ],
+
+    "Edificio Posgrado|Registro academico": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"]
+    ],
+
+    "Edificio Posgrado|Edificio Arquitectura": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Edificio Arquitectura"]
+    ],
+
+    "Edificio Posgrado|Edificio Quimica": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Edificio Quimica"]
+    ],
+
+    "Edificio Posgrado|Piscina": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Piscina"]
+    ],
+
+    "Edificio Posgrado|Edificio Carlos Santos Berroterán": [
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Edificio Carlos Santos Berroterán"]
+    ],
+
+    "Edificio Posgrado|Edificio Posgrado": [
+      sitiosUNI["Edificio Posgrado"]
     ]
   };
 
@@ -525,6 +724,8 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Registro academico"], texto: "Gira a la derecha y camina 31 metros hasta llegar al edificio de arquitectura" },
       { punto: sitiosUNI["Edificio Arquitectura"], texto: "Has llegado al Edificio de Arquitectura" }
     ],
+
+    // Edificio Rigoberto Lopez Perez
     "Edificio Rigoberto Lopez Perez|Cafetin el chele": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 109 metros hasta llegar a la biblioteca" },
       { punto: sitiosUNI["Biblioteca"], texto: "Camina 73 metros hasta llegar al Cafetin El Deportivo" },
@@ -705,13 +906,214 @@ document.addEventListener('DOMContentLoaded', function () {
     "Edificio Rigoberto Lopez Perez|Edificio Rigoberto Lopez Perez": [
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Ya estas ubicado en el Edificio Rigoberto Lopez Perez" }
     ],
+
+
+    //  EDIFICIO POSGRADO
+
+
+    "Edificio Posgrado|Cafetin el chele": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 16 metros hasta llegar al Parqueo de Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Camina 60 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Has llegado a tu destino" }
+    ],
+
+
+    "Edificio Posgrado|Cafetin La Fritanga": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 16 metros hasta llegar al Parqueo de Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Camina 60 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 16 metros hasta llegar al Cafetin la Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Has llegado a tu destino, Buen provecho" }
+    ],
+
+    "Edificio Posgrado|Laboratorios redes": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 40 metros hasta llegar al Laboratorio de Redes" },
+      { punto: sitiosUNI["Laboratorios redes"], texto: "Has llegado a tu destino" }
+    ],
+
+
+
+    "Edificio Posgrado|Copias UNI": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 16 metros hasta llegar al Parqueo de Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Camina 36 metros hasta llegar a Copias UNI" },
+      { punto: sitiosUNI["Copias UNI"], texto: "Has llegado a tu destino" }
+    ],
+
     "Edificio Posgrado|Cajero": [
       { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
       { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
       { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
       { punto: sitiosUNI["Registro academico"], texto: "Camina 55 metros hasta llegar al Cajero" },
       { punto: sitiosUNI["Cajero"], texto: "Has llegado a tu destino" }
-    ]
+    ],
+
+    "Edificio Posgrado|Cafetin EL Gueguense": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 100 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 32 metros hasta llegar al Cafetin Gueguense" },
+      { punto: sitiosUNI["Cafetin EL Gueguense"], texto: "Has llegado a tu destino, Buen provecho!" }
+    ],
+
+    "Edificio Posgrado|Batidos Miranda": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 100 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 34 metros hasta llegar a Batidos Miranda" },
+      { punto: sitiosUNI["Batidos Miranda"], texto: "Has llegado a tu destino, Buen provecho!" }
+    ],
+
+    "Edificio Posgrado|Cafetin El Duarte": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Has llegado a tu destino" }
+
+    ],
+
+    "Edificio Posgrado|Cafetin El Deportivo": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 90 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Has llegado a tu destino, Buen provecho!" }
+    ],
+
+    "Edificio Posgrado|Cafetin El Comal": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 16 metros hasta llegar al Parqueo de Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Camina 60 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 16 metros hasta llegar al Cafetin la Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 30 metros hasta llegar al Cafetin el Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Has llegado a tu destino, Buen provecho" }
+    ],
+
+    "Edificio Posgrado|Biblioteca": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 60 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Auditorio Salomon de la Selva": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 93 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Edificio Rigoberto Lopez Perez": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 42 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|La mita": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Has llegado a tu destino, Buen provecho!" }
+    ],
+
+    "Edificio Posgrado|Pabellon 1 IES": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 100 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 34 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Pabellon 2 IES": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 100 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 34 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Pabellon 3 IES": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 100 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 3 IES" },
+      { punto: sitiosUNI["Pabellon 3 IES"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Edificio Albert Einstein": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 100 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Laboratorios IES": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 100 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 34 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 donde estan los Laboratorios IES" },
+      { punto: sitiosUNI["Laboratorios IES"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Autoservicio de impresiones": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 16 metros hasta llegar a la Entrada Principal" },
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 29 metros hasta llegar al Autoservicio de impresiones" },
+      { punto: sitiosUNI["Autoservicio de impresiones"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Entrada Principal": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 16 metros hasta llegar a la Entrada Principal" },
+      { punto: sitiosUNI["Entrada Principal"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Entrada IES": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 60 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 45 metros hasta llegar a la Entrada IES" },
+      { punto: sitiosUNI["Entrada IES"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Entrada Trasera": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 70 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 72 metros hasta llegar al Parqueo edificio rigoberto" },
+      { punto: sitiosUNI["Parqueo edificio rigoberto"], texto: "Camina 100 metros hasta llegar a la Entrada trasera" },
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Parqueo edificio rigoberto": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 70 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 72 metros hasta llegar al Parqueo edificio rigoberto" },
+      { punto: sitiosUNI["Parqueo edificio rigoberto"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Parqueo Posgrado": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 16 metros hasta llegar al Parqueo de Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Registro academico": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Edificio Arquitectura": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 24 metros hasta llegar al Edificio de Arquitectura" },
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Edificio Quimica": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 90 metros hasta llegar a Registro academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 24 metros hasta llegar al Edificio de Arquitectura" },
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 46 metros hasta llegar al Edificio Quimica" },
+      { punto: sitiosUNI["Edificio Quimica"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Piscina": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 73 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 65 metros hasta llegar al Cafetin La Mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 26 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Edificio Carlos Santos Berroterán": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 93 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 30 metros hasta llegar al Edificio Carlos Santos Berroterán" },
+      { punto: sitiosUNI["Edificio Carlos Santos Berroterán"], texto: "Has llegado a tu destino" }
+    ],
+
+    "Edificio Posgrado|Edificio Posgrado": [
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Ya estas ubicado en el Edificio de Posgrado" }
+    ],
   };
 
   function dibujarRutaPersonalizada(origenNombre, destinoNombre) {
@@ -790,7 +1192,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const select = document.getElementById('destino');
     for (let nombre in sitiosUNI) {
       let option = document.createElement('option');
-      option.value = nombre; 
+      option.value = nombre;
       option.text = nombre;
       if (select) select.appendChild(option);
       if (sitiosUNI[nombre][0] !== 0) {
@@ -806,7 +1208,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnActivarGPS = document.getElementById('btnActivarGPS');
     if (btnActivarGPS) {
       btnActivarGPS.onclick = function () {
-        let utterance = new SpeechSynthesisUtterance(""); 
+        let utterance = new SpeechSynthesisUtterance("");
         window.speechSynthesis.speak(utterance);
         if (!navigator.geolocation) return Swal.fire("Error", "GPS no soportado.", "error");
 
@@ -836,7 +1238,7 @@ document.addEventListener('DOMContentLoaded', function () {
         );
       };
     }
-    
+
     const btnIr = document.getElementById('btnIr');
     if (btnIr) {
       btnIr.onclick = function () {
@@ -890,74 +1292,74 @@ document.addEventListener('DOMContentLoaded', function () {
 // -------------------------------------------------------------
 // FUNCIONES DE MODALES Y LÓGICA DE AULAS DINÁMICA
 // -------------------------------------------------------------
-window.abrirSimulacion = async function(lugar, mediaUrl = '', tipoMedia = 'imagen', itemId = '') {
+window.abrirSimulacion = async function (lugar, mediaUrl = '', tipoMedia = 'imagen', itemId = '') {
   const modal = document.getElementById('videoModal');
   const title = document.getElementById('modalTitle');
-  if(title) title.innerText = 'Ruta hacia: ' + lugar;
-  
+  if (title) title.innerText = 'Ruta hacia: ' + lugar;
+
   const videoContainer = modal.querySelector('.video-container');
   if (videoContainer) {
-      if (mediaUrl) {
-          if (tipoMedia === 'imagen') {
-              videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${lugar}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
-          } else {
-              videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
-          }
+    if (mediaUrl) {
+      if (tipoMedia === 'imagen') {
+        videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${lugar}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
       } else {
-          videoContainer.innerHTML = `<p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Recorrido no disponible</p>`;
+        videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
       }
+    } else {
+      videoContainer.innerHTML = `<p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Recorrido no disponible</p>`;
+    }
   }
 
   const listaIndicaciones = document.getElementById("lista-indicaciones");
   if (listaIndicaciones) {
-      listaIndicaciones.innerHTML = "<li>Cargando indicaciones...</li>";
-      
-      try {
-          if (!indicacionesData) {
-              const res = await fetch('Json/indicaciones.json');
-              indicacionesData = await res.json();
-          }
+    listaIndicaciones.innerHTML = "<li>Cargando indicaciones...</li>";
 
-          let idBuscado = itemId;
-          if (!idBuscado && datosCompletos) {
-              for(let cat in datosCompletos.categorias) {
-                  let encontrado = datosCompletos.categorias[cat].find(i => i.nombre === lugar);
-                  if(encontrado) { idBuscado = encontrado.id; break; }
-              }
-          }
-
-          let pasos = indicacionesData[idBuscado];
-          if (!pasos || pasos.length === 0) {
-              pasos = ["Dirígete a tu destino siguiendo las indicaciones del mapa principal."];
-          }
-
-          listaIndicaciones.innerHTML = "";
-          pasos.forEach(paso => {
-              let li = document.createElement("li");
-              li.textContent = paso;
-              listaIndicaciones.appendChild(li);
-          });
-
-      } catch (error) {
-          listaIndicaciones.innerHTML = "<li>Sigue la ruta marcada en el mapa.</li>";
+    try {
+      if (!indicacionesData) {
+        const res = await fetch('Json/indicaciones.json');
+        indicacionesData = await res.json();
       }
+
+      let idBuscado = itemId;
+      if (!idBuscado && datosCompletos) {
+        for (let cat in datosCompletos.categorias) {
+          let encontrado = datosCompletos.categorias[cat].find(i => i.nombre === lugar);
+          if (encontrado) { idBuscado = encontrado.id; break; }
+        }
+      }
+
+      let pasos = indicacionesData[idBuscado];
+      if (!pasos || pasos.length === 0) {
+        pasos = ["Dirígete a tu destino siguiendo las indicaciones del mapa principal."];
+      }
+
+      listaIndicaciones.innerHTML = "";
+      pasos.forEach(paso => {
+        let li = document.createElement("li");
+        li.textContent = paso;
+        listaIndicaciones.appendChild(li);
+      });
+
+    } catch (error) {
+      listaIndicaciones.innerHTML = "<li>Sigue la ruta marcada en el mapa.</li>";
+    }
   }
 
-  if(modal) modal.classList.add('active');
+  if (modal) modal.classList.add('active');
 }
 
 window.cerrarSimulacion = function () {
   const modal = document.getElementById('videoModal');
-  if(modal) {
-      modal.classList.remove('active');
-      const video = modal.querySelector('video');
-      if (video) {
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-      }
-      const videoContainer = modal.querySelector('.video-container');
-      if (videoContainer) videoContainer.innerHTML = '';
+  if (modal) {
+    modal.classList.remove('active');
+    const video = modal.querySelector('video');
+    if (video) {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    }
+    const videoContainer = modal.querySelector('.video-container');
+    if (videoContainer) videoContainer.innerHTML = '';
   }
 }
 
@@ -965,30 +1367,30 @@ window.abrirModalPisos = function (edificioId) {
   edificioActualId = edificioId || "rigoberto";
   const modal = document.getElementById('modalPisos');
 
-  if(modal) modal.classList.add('active');
-  window.cambiarPestanaRigoberto('info'); 
-  
+  if (modal) modal.classList.add('active');
+  window.cambiarPestanaRigoberto('info');
+
   const imgEdificio = document.getElementById('img-info-edificio');
   if (imgEdificio && datosCompletos) {
-      const edificioData = datosCompletos.categorias.principales.find(e => e.id === edificioActualId);
-      if (edificioData) {
-          imgEdificio.src = edificioData.img;
-      }
+    const edificioData = datosCompletos.categorias.principales.find(e => e.id === edificioActualId);
+    if (edificioData) {
+      imgEdificio.src = edificioData.img;
+    }
   }
 
-  if(datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
-      const pisosData = datosCompletos.detallesEdificios[edificioActualId].pisos;
-      const trackPisos = document.getElementById('track-pisos');
-      if(trackPisos) {
-          trackPisos.innerHTML = "";
-          pisosData.forEach(piso => {
-              let btn = document.createElement('button');
-              btn.className = 'piso-btn';
-              btn.innerText = piso.label.toUpperCase();
-              btn.onclick = function() { window.seleccionarPiso(piso.id, piso.label, this); };
-              trackPisos.appendChild(btn);
-          });
-      }
+  if (datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
+    const pisosData = datosCompletos.detallesEdificios[edificioActualId].pisos;
+    const trackPisos = document.getElementById('track-pisos');
+    if (trackPisos) {
+      trackPisos.innerHTML = "";
+      pisosData.forEach(piso => {
+        let btn = document.createElement('button');
+        btn.className = 'piso-btn';
+        btn.innerText = piso.label.toUpperCase();
+        btn.onclick = function () { window.seleccionarPiso(piso.id, piso.label, this); };
+        trackPisos.appendChild(btn);
+      });
+    }
   }
 }
 
@@ -1076,40 +1478,40 @@ document.addEventListener('change', function (e) {
   }
 });
 
-window.abrirModalAulaVirtual = function(aula, mediaUrl = '', tipoMedia = 'imagen') {
+window.abrirModalAulaVirtual = function (aula, mediaUrl = '', tipoMedia = 'imagen') {
   const titulo = document.getElementById('titulo-aula-virtual');
-  if(titulo) titulo.innerText = 'Destino: ' + aula;
-  
+  if (titulo) titulo.innerText = 'Destino: ' + aula;
+
   const modal = document.getElementById('modalAulaVirtual');
   const videoContainer = modal.querySelector('.video-container');
   if (videoContainer) {
-      if (mediaUrl) {
-          if (tipoMedia === 'video') {
-              videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
-          } else {
-              videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${aula}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
-          }
+    if (mediaUrl) {
+      if (tipoMedia === 'video') {
+        videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
       } else {
-          videoContainer.innerHTML = `<p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido no disponible</p>`;
+        videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${aula}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
       }
+    } else {
+      videoContainer.innerHTML = `<p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido no disponible</p>`;
+    }
   }
 
   window.cerrarModalPisos();
-  if(modal) modal.classList.add('active');
+  if (modal) modal.classList.add('active');
 }
 
 window.cerrarModalAulaVirtual = function () {
   const modal = document.getElementById('modalAulaVirtual');
-  if(modal) {
-      modal.classList.remove('active');
-      const video = modal.querySelector('video');
-      if (video) {
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-      }
-      const videoContainer = modal.querySelector('.video-container');
-      if (videoContainer) videoContainer.innerHTML = '';
+  if (modal) {
+    modal.classList.remove('active');
+    const video = modal.querySelector('video');
+    if (video) {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    }
+    const videoContainer = modal.querySelector('.video-container');
+    if (videoContainer) videoContainer.innerHTML = '';
   }
 }
 
@@ -1126,54 +1528,54 @@ document.addEventListener('click', function (e) {
 // CARGA DE DESTINO DESDE INDEX (LOCALSTORAGE)
 // -------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Caso de búsqueda usando objetos completos (ej: buscarDestino())
-    const destinoGuardado = localStorage.getItem("destinoBuscado");
-    if (destinoGuardado) {
-        try {
-            const destino = JSON.parse(destinoGuardado);
-            setTimeout(() => {
-                const selectDestino = document.getElementById("destino");
-                const btnIr = document.getElementById("btnIr");
-                if (selectDestino && btnIr) {
-                    let optionExists = Array.from(selectDestino.options).some(opt => opt.value === destino.nombre);
-                    if (!optionExists) {
-                        let opt = document.createElement('option');
-                        opt.value = destino.nombre;
-                        opt.text = destino.nombre;
-                        selectDestino.appendChild(opt);
-                    }
-                    
-                    selectDestino.value = destino.nombre;
-                    btnIr.click();
-                    document.getElementById("navegacion-asistida").scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 800); // Dar un poco de tiempo para asegurar que el mapa y los selects de Leaflet se construyeron
-        } catch(e) {
-            console.error(e);
-        }
-        localStorage.removeItem("destinoBuscado");
-    }
+  // 1. Caso de búsqueda usando objetos completos (ej: buscarDestino())
+  const destinoGuardado = localStorage.getItem("destinoBuscado");
+  if (destinoGuardado) {
+    try {
+      const destino = JSON.parse(destinoGuardado);
+      setTimeout(() => {
+        const selectDestino = document.getElementById("destino");
+        const btnIr = document.getElementById("btnIr");
+        if (selectDestino && btnIr) {
+          let optionExists = Array.from(selectDestino.options).some(opt => opt.value === destino.nombre);
+          if (!optionExists) {
+            let opt = document.createElement('option');
+            opt.value = destino.nombre;
+            opt.text = destino.nombre;
+            selectDestino.appendChild(opt);
+          }
 
-    // 2. Caso de búsqueda usando el string simple (ej: barra superior)
-    const destinoSimple = localStorage.getItem("destinoBuscadoSimple");
-    if (destinoSimple) {
-        setTimeout(() => {
-            const selectDestino = document.getElementById("destino");
-            const btnIr = document.getElementById("btnIr");
-            if (selectDestino && btnIr) {
-                let optionExists = Array.from(selectDestino.options).some(opt => opt.value === destinoSimple);
-                if (!optionExists) {
-                    let opt = document.createElement('option');
-                    opt.value = destinoSimple;
-                    opt.text = destinoSimple;
-                    selectDestino.appendChild(opt);
-                }
-                
-                selectDestino.value = destinoSimple;
-                btnIr.click();
-                document.getElementById("navegacion-asistida").scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }, 800);
-        localStorage.removeItem("destinoBuscadoSimple");
+          selectDestino.value = destino.nombre;
+          btnIr.click();
+          document.getElementById("navegacion-asistida").scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 800); // Dar un poco de tiempo para asegurar que el mapa y los selects de Leaflet se construyeron
+    } catch (e) {
+      console.error(e);
     }
+    localStorage.removeItem("destinoBuscado");
+  }
+
+  // 2. Caso de búsqueda usando el string simple (ej: barra superior)
+  const destinoSimple = localStorage.getItem("destinoBuscadoSimple");
+  if (destinoSimple) {
+    setTimeout(() => {
+      const selectDestino = document.getElementById("destino");
+      const btnIr = document.getElementById("btnIr");
+      if (selectDestino && btnIr) {
+        let optionExists = Array.from(selectDestino.options).some(opt => opt.value === destinoSimple);
+        if (!optionExists) {
+          let opt = document.createElement('option');
+          opt.value = destinoSimple;
+          opt.text = destinoSimple;
+          selectDestino.appendChild(opt);
+        }
+
+        selectDestino.value = destinoSimple;
+        btnIr.click();
+        document.getElementById("navegacion-asistida").scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 800);
+    localStorage.removeItem("destinoBuscadoSimple");
+  }
 });
