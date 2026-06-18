@@ -20,7 +20,7 @@
 
     <!-- SweetAlert2 & CSS local -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="Style/destinos.css" />
+    <link rel="stylesheet" href="Style/destinos.css"/>
 </head>
 
 <body>
@@ -112,7 +112,8 @@
                 </div>
             </section>
 
- Feria
+
+        
             <!-- SECCIÓN DE CARROUSELES (Las tarjetas se inyectan con JS desde el JSON) -->
             <section id="destinos" class="anim-element visible" style="padding-top: 0;">
                 <h2 class="section-title">Explorar Entornos 360°</h2>
@@ -120,7 +121,6 @@
         <!-- SECCIÓN DE CARROUSELES -->
         <section id="destinos" class="anim-element visible" style="padding-top: 0;">
             <h2 class="section-title">Explorar Entornos 360°</h2>
- main
 
                 <!-- 1. Edificios Principales -->
                 <div class="carousel-container">
@@ -187,7 +187,7 @@
 
     <!-- MODALES -->
 
- Feria
+
     <!-- Modal 1: Simulación de Ruta (Video 360) -->
     <div class="modal-overlay" id="videoModal">
         <div class="modal-content">
@@ -229,12 +229,11 @@
                 <ol id="lista-indicaciones">
                     <!-- JS inyectará indicaciones aquí -->
                 </ol>
- main
+
             </div>
         </div>
     </div>
 
- Feria
     <!-- Modal 2: Selector de Pisos y Aulas (Dinámico) -->
     <div class="modal-overlay" id="modalPisos">
         <div class="modal-content" style="max-width: 800px;">
@@ -256,11 +255,11 @@
             <div style="display: flex; gap: 10px; margin-bottom: 25px;">
                 <button id="btn-tab-info" onclick="cambiarPestanaRigoberto('info')" style="flex: 1; padding: 12px; background: var(--primary-color); color: white; border: none; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s;">Información Visual</button>
                 <button id="btn-tab-aulas" onclick="cambiarPestanaRigoberto('aulas')" style="flex: 1; padding: 12px; background: #e0e0e0; border: none; font-weight: bold; border-radius: 5px; color: var(--text-gray); cursor: pointer; transition: 0.3s;">Explorar Aulas</button>
-main
+
             </div>
             <div class="modal-body" style="display: block;">
 
- Feria
+
                 <!-- Pestañas -->
                 <div style="display: flex; gap: 10px; margin-bottom: 25px;">
                     <button id="btn-tab-info" onclick="cambiarPestanaRigoberto('info')"
@@ -300,10 +299,10 @@ main
             <div id="contenido-info-rigoberto" style="display: block;">
                 <div style="width: 100%; height: 350px; background-color: #e5e3df; border: 1px solid var(--border-color); border-radius: 10px; display: flex; justify-content: center; align-items: center; overflow: hidden;">
                     <img id="img-info-edificio" src="" alt="Cargando edificio..." style="width: 100%; height: 100%; object-fit: cover;">
- main
+
                 </div>
 
- Feria
+
                 <!-- Contenido Pestaña 2: Aulas -->
                 <div id="contenido-aulas-rigoberto" style="display: none;">
                     <h4 style="margin-bottom: 15px; color: var(--primary-color); font-size: 18px;">Explorar por Pisos:
@@ -327,10 +326,10 @@ main
                     <button class="boton-slider anterior" onclick="desplazarCarruselPisos(-200)"><span class="material-icons">chevron_left</span></button>
                     <div class="carousel-track" id="track-pisos" style="gap: 15px; padding-bottom: 10px;">
                         <!-- Botones de pisos inyectados por JS -->
- main
+
                     </div>
 
- Feria
+
                     <!-- Panel de Aulas Dinámico -->
                     <div id="opciones-aula"
                         style="display: none; background: var(--bg-light); padding: 25px; border-radius: 10px; border: 1px solid var(--border-color);">
@@ -380,14 +379,13 @@ main
                     
                     <div id="contenedor-tarjetas-aula" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; width: 100%;">
                         <!-- Tarjetas de aulas inyectadas por JS -->
- main
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
- Feria
     <!-- Modal 3: Visor Aula 360 -->
     <div class="modal-overlay" id="modalAulaVirtual">
         <div class="modal-content" style="max-width: 900px;">
@@ -418,19 +416,12 @@ main
         <div class="modal-body" style="display: block; padding: 25px;">
             <div class="video-container" id="reproductorAulaVirtual" style="background: #111; aspect-ratio: 16/9; display: flex; justify-content: center; align-items: center; color: var(--white); border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); overflow: hidden;">
                 <p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">image</span><br><br>Cargando imagen...</p>
-              main
             </div>
         </div>
     </div>
 
- Feria
     <!-- Carga final del Script principal -->
     <script src="Script/destinos.js"></script>
-
-<!-- Script Principal -->
-<script src="Script/destinos.js"></script>
- main
-
 </body>
 
 </html>

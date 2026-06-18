@@ -1,65 +1,67 @@
 // --- VARIABLES GLOBALES PARA ALMACENAR DATOS ---
 let datosCompletos = null;
 let indicacionesData = null; // NUEVA VARIABLE
-
+let gpsWatcher = null;
+let marcadorOrigen = null;
+let marcadorDestino = null;
 // Nueva función para transformar las barras de búsqueda en select (Combo box)
 const destinosGlobales = [
-    "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica", 
-    "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte", 
-    "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES", 
-    "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES", 
-    "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES", 
-    "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico", 
-    "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva", 
-    "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
+  "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica",
+  "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte",
+  "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES",
+  "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES",
+  "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES",
+  "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico",
+  "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva",
+  "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
 ].sort();
 
-window.manejarSeleccionDestino = function(destino) {
-    if (!destino) return;
-    if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
-        if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
-        else abrirSimulacion(destino);
-    } else {
-        localStorage.setItem('destinoBuscadoSimple', destino);
-        window.location.href = 'destinos.html';
-    }
+window.manejarSeleccionDestino = function (destino) {
+  if (!destino) return;
+  if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
+    if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
+    else abrirSimulacion(destino);
+  } else {
+    localStorage.setItem('destinoBuscadoSimple', destino);
+    window.location.href = 'destinos.html';
+  }
 };
 
-window.transformarBuscadoresEnSelect = function() {
+window.transformarBuscadoresEnSelect = function () {
 
-    const selectInicio = document.getElementById('busquedaDestino');
-    if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
-        destinosGlobales.forEach(destino => {
-            const opt = document.createElement('option');
-            opt.value = destino;
-            opt.text = destino;
-            selectInicio.appendChild(opt);
-        });
+  const selectInicio = document.getElementById('busquedaDestino');
+  if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
+    destinosGlobales.forEach(destino => {
+      const opt = document.createElement('option');
+      opt.value = destino;
+      opt.text = destino;
+      selectInicio.appendChild(opt);
+    });
 
-        selectInicio.addEventListener('change', function() {
-            if (this.value) {
-                window.manejarSeleccionDestino(this.value);
-                this.value = ""; 
-            }
-        });
-    }
+    selectInicio.addEventListener('change', function () {
+      if (this.value) {
+        window.manejarSeleccionDestino(this.value);
+        this.value = "";
+      }
+    });
+  }
 
-    const selectModal = document.getElementById('busquedaDestinoModal');
-    if (selectModal && selectModal.options.length <= 1) {
-        destinosGlobales.forEach(destino => {
-            const opt = document.createElement('option');
-            opt.value = destino;
-            opt.text = destino;
-            selectModal.appendChild(opt);
-        });
-        
-        selectModal.addEventListener('change', function() {
-            if (this.value) {
-                window.manejarSeleccionDestino(this.value);
-                this.value = ""; 
-            }
-        });
-    }
+  const selectModal = document.getElementById('busquedaDestinoModal');
+  if (selectModal && selectModal.options.length <= 1) {
+    destinosGlobales.forEach(destino => {
+      const opt = document.createElement('option');
+      opt.value = destino;
+      opt.text = destino;
+      selectModal.appendChild(opt);
+    });
+
+    selectModal.addEventListener('change', function () {
+      if (this.value) {
+        window.manejarSeleccionDestino(this.value);
+        this.value = "";
+      }
+    });
+  }
 };
 
 // --- SCRIPT PARA CARGAR EL NAVBAR ---
@@ -69,29 +71,29 @@ fetch('navbar.html')
     document.getElementById('menu-contenedor').innerHTML = data;
     const navDestinos = document.getElementById('nav-destinos');
     if (navDestinos) navDestinos.classList.add('activo');
-    
+
     window.transformarBuscadoresEnSelect();
   }).catch(() => console.log('Navbar no encontrado'));
 
-window.buscarDestinoModal = function() {
-    const selectModal = document.getElementById('busquedaDestinoModal');
-    if (selectModal && selectModal.value) {
-        window.manejarSeleccionDestino(selectModal.value);
-        
-        const modal = document.getElementById('searchModal');
-        const overlay = document.getElementById('searchOverlay');
-        if(modal) modal.classList.remove('active');
-        if(overlay) overlay.classList.remove('active');
-        selectModal.value = ""; 
-    }
-};
+window.buscarDestinoModal = function () {
+  const selectModal = document.getElementById('busquedaDestinoModal');
+  if (selectModal && selectModal.value) {
+    window.manejarSeleccionDestino(selectModal.value);
 
-window.toggleSearchModal = function() {
     const modal = document.getElementById('searchModal');
     const overlay = document.getElementById('searchOverlay');
-    if (modal) modal.classList.toggle('active');
-    if (overlay) overlay.classList.toggle('active');
-    window.transformarBuscadoresEnSelect();
+    if (modal) modal.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    selectModal.value = "";
+  }
+};
+
+window.toggleSearchModal = function () {
+  const modal = document.getElementById('searchModal');
+  const overlay = document.getElementById('searchOverlay');
+  if (modal) modal.classList.toggle('active');
+  if (overlay) overlay.classList.toggle('active');
+  window.transformarBuscadoresEnSelect();
 };
 
 // Funciones de navegación e interfaz general
@@ -271,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function () {
     "Autoservicio de impresiones": [12.129091217122017, -86.27057892767442],
     "Entrada Principal": [12.129222488740314, -86.27027854062317],
     "Entrada IES": [12.13144814009071, -86.27106191565036],
-    "Entrada Trasera":[12.132836010391078, -86.26883320255943],
+    "Entrada Trasera": [12.132836010391078, -86.26883320255943],
     "Parqueo Posgrado": [12.130806261883121, -86.27004596357038],
     "Parqueo edificio rigoberto": [12.132240605882307, -86.26940334418464],
     "Registro academico": [12.129346707202687, -86.27020754103975],
@@ -371,10 +373,11 @@ document.addEventListener('DOMContentLoaded', function () {
     ]
   };
 
-
   function dibujarRutaPersonalizada(origenNombre, destinoNombre) {
+
     const clave = `${origenNombre}|${destinoNombre}`;
     const ruta = rutasUNI[clave];
+
     if (!ruta) {
       Swal.fire(
         "Ruta no disponible",
@@ -383,18 +386,46 @@ document.addEventListener('DOMContentLoaded', function () {
       );
       return;
     }
+
+    // Eliminar ruta anterior
     if (lineaRuta) {
       mapa.removeLayer(lineaRuta);
     }
+
+    // Eliminar marcadores anteriores
+    if (marcadorOrigen) {
+      mapa.removeLayer(marcadorOrigen);
+    }
+
+    if (marcadorDestino) {
+      mapa.removeLayer(marcadorDestino);
+    }
+
+    // Crear marcador inicio
+    marcadorOrigen = L.marker(ruta[0])
+      .addTo(mapa)
+      .bindPopup("Inicio");
+
+    // Crear marcador destino
+    marcadorDestino = L.marker(ruta[ruta.length - 1])
+      .addTo(mapa)
+      .bindPopup("Destino");
+
+    // Dibujar ruta
     lineaRuta = L.polyline(ruta, {
       color: "#00c8f5",
       weight: 8,
       opacity: 0.9
     }).addTo(mapa);
+
     mapa.fitBounds(lineaRuta.getBounds());
+
+    // Cargar instrucciones
     if (instruccionesUNI[clave]) {
+
       rutaActiva = instruccionesUNI[clave];
       pasoActual = 0;
+
       actualizarPanelRuta(
         rutaActiva[0].texto,
         mapa.distance(
@@ -402,6 +433,7 @@ document.addEventListener('DOMContentLoaded', function () {
           rutaActiva[0].punto
         )
       );
+
       hablar(
         "Ruta iniciada. " +
         rutaActiva[0].texto
@@ -429,9 +461,15 @@ document.addEventListener('DOMContentLoaded', function () {
   let instruccionHablada = "";
 
   function hablar(texto) {
+
+    if (texto === instruccionHablada) {
+      return;
+    }
+    instruccionHablada = texto;
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      let msj = new SpeechSynthesisUtterance(texto);
+      let msj =
+        new SpeechSynthesisUtterance(texto);
       msj.lang = 'es-ES';
       window.speechSynthesis.speak(msj);
     }
@@ -439,22 +477,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   function verificarPasoRuta() {
+
     if (!rutaActiva || !userLocation) return;
+
     if (pasoActual >= rutaActiva.length) return;
-    const puntoObjetivo =
-      rutaActiva[pasoActual].punto;
-    const distancia =
+
+    let distanciaActual =
       mapa.distance(
         userLocation,
-        puntoObjetivo
+        rutaActiva[pasoActual].punto
       );
+
     actualizarPanelRuta(
       rutaActiva[pasoActual].texto,
-      distancia
+      distanciaActual
     );
-    if (distancia <= 10) {
+
+    // Llegó al punto actual
+    if (distanciaActual <= 35) {
+
       pasoActual++;
+
       if (pasoActual < rutaActiva.length) {
+
         actualizarPanelRuta(
           rutaActiva[pasoActual].texto,
           mapa.distance(
@@ -462,21 +507,60 @@ document.addEventListener('DOMContentLoaded', function () {
             rutaActiva[pasoActual].punto
           )
         );
+
         hablar(
           rutaActiva[pasoActual].texto
         );
+
       } else {
+
         actualizarPanelRuta(
           "Has llegado a tu destino",
           0
         );
+
         hablar(
           "Has llegado a tu destino"
         );
+
         rutaActiva = null;
+      }
+
+      return;
+    }
+
+    // Detectar si el usuario se saltó puntos
+    for (
+      let i = pasoActual + 1;
+      i < rutaActiva.length;
+      i++
+    ) {
+
+      let distanciaFutura =
+        mapa.distance(
+          userLocation,
+          rutaActiva[i].punto
+        );
+
+      if (distanciaFutura <= 35) {
+
+        pasoActual = i;
+
+        actualizarPanelRuta(
+          rutaActiva[i].texto,
+          distanciaFutura
+        );
+
+        hablar(
+          rutaActiva[i].texto
+        );
+
+        break;
       }
     }
   }
+
+
 
 
   if (document.getElementById('uni-mapa')) {
@@ -491,9 +575,6 @@ document.addEventListener('DOMContentLoaded', function () {
       let option = document.createElement('option');
       option.value = nombre; option.text = nombre;
       if (select) select.appendChild(option);
-      if (sitiosUNI[nombre][0] !== 0) {
-        L.marker(sitiosUNI[nombre]).bindPopup(`<strong style="color:#001f3f;">${nombre}</strong>`).addTo(mapa);
-      }
     }
 
     const btnCentrar = document.getElementById('btnCentrar');
@@ -508,8 +589,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!navigator.geolocation) return Swal.fire("Error", "GPS no soportado.", "error");
 
         Swal.fire({ title: 'Buscando tu ubicación...', didOpen: () => { Swal.showLoading(); } });
-
-        navigator.geolocation.watchPosition(
+        gpsWatcher = navigator.geolocation.watchPosition(
           (pos) => {
             Swal.close();
             userLocation = [pos.coords.latitude, pos.coords.longitude];
@@ -633,97 +713,133 @@ document.addEventListener('DOMContentLoaded', function () {
 // FUNCIONES DE MODALES Y LÓGICA DE AULAS DINÁMICA
 // -------------------------------------------------------------
 let edificioActualId = "";
- Feria
-window.abrirSimulacion = function (lugar) {
+window.abrirSimulacion = async function (
+  lugar,
+  mediaUrl = '',
+  tipoMedia = 'imagen',
+  itemId = ''
+) {
   const modal = document.getElementById('videoModal');
   const title = document.getElementById('modalTitle');
-  if (title) title.innerText = 'Ruta hacia: ' + lugar;
-  if (modal) modal.classList.add('active');
-=======
-window.abrirSimulacion = async function(lugar, mediaUrl = '', tipoMedia = 'imagen', itemId = '') {
-  const modal = document.getElementById('videoModal');
-  const title = document.getElementById('modalTitle');
-  if(title) title.innerText = 'Ruta hacia: ' + lugar;
-  
-  const videoContainer = modal.querySelector('.video-container');
+  if (title) {
+    title.innerText = 'Ruta hacia: ' + lugar;
+  }
+  const videoContainer =
+    modal.querySelector('.video-container');
   if (videoContainer) {
-      if (mediaUrl) {
-          if (tipoMedia === 'imagen') {
-              videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${lugar}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
-          } else {
-              videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
-          }
+    if (mediaUrl) {
+      if (tipoMedia === 'imagen') {
+        videoContainer.innerHTML = `
+                    <img
+                        src="${mediaUrl}"
+                        alt="${lugar}"
+                        style="
+                            width:100%;
+                            height:100%;
+                            object-fit:cover;
+                            border-radius:inherit;
+                        "
+                    >
+                `;
       } else {
-          videoContainer.innerHTML = `<p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Recorrido no disponible</p>`;
+        videoContainer.innerHTML = `
+                    <video
+                        src="${mediaUrl}"
+                        controls
+                        style="
+                            width:100%;
+                            height:100%;
+                            border-radius:inherit;
+                        "
+                    ></video>
+                `;
       }
+    } else {
+      videoContainer.innerHTML = `
+                <p>
+                    <span class="material-icons"
+                          style="font-size:48px;color:var(--accent-color);">
+                        play_circle
+                    </span>
+                    <br>
+                    Recorrido no disponible
+                </p>
+            `;
+    }
   }
-
-  // --- LÓGICA PARA INYECTAR INDICACIONES ---
-  const listaIndicaciones = document.getElementById("lista-indicaciones");
+  const listaIndicaciones =
+    document.getElementById("lista-indicaciones");
   if (listaIndicaciones) {
-      listaIndicaciones.innerHTML = "<li>Cargando indicaciones...</li>";
-      
-      try {
-          // Cargamos el JSON de indicaciones si no se ha cargado antes
-          if (!indicacionesData) {
-              const res = await fetch('Json/indicaciones.json');
-              indicacionesData = await res.json();
-          }
-
-          // Identificamos el ID
-          let idBuscado = itemId;
-          if (!idBuscado && datosCompletos) {
-              for(let cat in datosCompletos.categorias) {
-                  let encontrado = datosCompletos.categorias[cat].find(i => i.nombre === lugar);
-                  if(encontrado) { idBuscado = encontrado.id; break; }
-              }
-          }
-
-          // Buscamos los pasos o ponemos unos por defecto
-          let pasos = indicacionesData[idBuscado];
-          if (!pasos || pasos.length === 0) {
-              pasos = ["Dirígete a tu destino siguiendo las indicaciones del mapa principal."];
-          }
-
-          // Dibujamos los pasos en el HTML
-          listaIndicaciones.innerHTML = "";
-          pasos.forEach(paso => {
-              let li = document.createElement("li");
-              li.textContent = paso;
-              listaIndicaciones.appendChild(li);
-          });
-
-      } catch (error) {
-          listaIndicaciones.innerHTML = "<li>Sigue la ruta marcada en el mapa.</li>";
+    listaIndicaciones.innerHTML =
+      "<li>Cargando indicaciones...</li>";
+    try {
+      if (!indicacionesData) {
+        const res =
+          await fetch('Json/indicaciones.json');
+        indicacionesData =
+          await res.json();
       }
-  }
+      let idBuscado = itemId;
+      if (!idBuscado && datosCompletos) {
+        for (let cat in datosCompletos.categorias) {
+          const encontrado =
+            datosCompletos.categorias[cat]
+              .find(i => i.nombre === lugar);
+          if (encontrado) {
+            idBuscado = encontrado.id;
+            break;
+          }
+        }
+      }
+      let pasos =
+        indicacionesData[idBuscado];
+      if (!pasos || pasos.length === 0) {
+        pasos = [
+          "Dirígete a tu destino siguiendo las indicaciones del mapa principal."
+        ];
+      }
+      listaIndicaciones.innerHTML = "";
+      pasos.forEach(paso => {
+        const li =
+          document.createElement("li");
+        li.textContent = paso;
+        listaIndicaciones.appendChild(li);
+      });
 
-  if(modal) modal.classList.add('active');
- main
-}
+    } catch {
+      listaIndicaciones.innerHTML =
+        "<li>Sigue la ruta marcada en el mapa.</li>";
+    }
+  }
+  modal.classList.add('active');
+};
+
+
 window.cerrarSimulacion = function () {
-  const modal = document.getElementById('videoModal');
-  Feria
-  if (modal) modal.classList.remove('active');
-  if(modal) {
-      modal.classList.remove('active');
-      const video = modal.querySelector('video');
-      if (video) {
-          video.pause();
-          video.removeAttribute('src'); // Corta la conexión de red
-          video.load(); // Fuerza al navegador a liberar la memoria
-      }
-      // Limpiamos el contenedor por completo
-      const videoContainer = modal.querySelector('.video-container');
-      if (videoContainer) videoContainer.innerHTML = '';
+  const modal =
+    document.getElementById('videoModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  const video =
+    modal.querySelector('video');
+  if (video) {
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
   }
- main
-}
+  const videoContainer =
+    modal.querySelector('.video-container');
+  if (videoContainer) {
+    videoContainer.innerHTML = '';
+  }
+};
+
+
 
 window.abrirModalPisos = function (edificioId) {
   edificioActualId = edificioId || "rigoberto";
   const modal = document.getElementById('modalPisos');
-Feria
+
   if (modal) modal.classList.add('active');
   window.cambiarPestanaRigoberto('info');
 
@@ -741,178 +857,225 @@ Feria
       });
     }
 
-  if(modal) modal.classList.add('active');
-  window.cambiarPestanaRigoberto('info'); 
-  
-  // --- LÓGICA NUEVA: Cargar la imagen del edificio dinámicamente ---
-  const imgEdificio = document.getElementById('img-info-edificio');
-  if (imgEdificio && datosCompletos) {
+    if (modal) modal.classList.add('active');
+    window.cambiarPestanaRigoberto('info');
+
+    // --- LÓGICA NUEVA: Cargar la imagen del edificio dinámicamente ---
+    const imgEdificio = document.getElementById('img-info-edificio');
+    if (imgEdificio && datosCompletos) {
       const edificioData = datosCompletos.categorias.principales.find(e => e.id === edificioActualId);
       if (edificioData) {
-          imgEdificio.src = edificioData.img; // Inserta la URL de Postimg
+        imgEdificio.src = edificioData.img; // Inserta la URL de Postimg
       }
-  }
-  // -----------------------------------------------------------------
+    }
+    // -----------------------------------------------------------------
 
-  if(datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
+    if (datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
       const pisosData = datosCompletos.detallesEdificios[edificioActualId].pisos;
       const trackPisos = document.getElementById('track-pisos');
-      if(trackPisos) {
-          trackPisos.innerHTML = "";
-          pisosData.forEach(piso => {
-              let btn = document.createElement('button');
-              btn.className = 'piso-btn';
-              btn.innerText = piso.label.toUpperCase();
-              btn.onclick = function() { window.seleccionarPiso(piso.id, piso.label, this); };
-              trackPisos.appendChild(btn);
-          });
+      if (trackPisos) {
+        trackPisos.innerHTML = "";
+        pisosData.forEach(piso => {
+          let btn = document.createElement('button');
+          btn.className = 'piso-btn';
+          btn.innerText = piso.label.toUpperCase();
+          btn.onclick = function () { window.seleccionarPiso(piso.id, piso.label, this); };
+          trackPisos.appendChild(btn);
+        });
       }
- main
-  }
-}
 
-window.cerrarModalPisos = function () {
-  const modal = document.getElementById('modalPisos');
-  if (modal) modal.classList.remove('active');
-  const opcionesAula = document.getElementById('opciones-aula');
-  if (opcionesAula) opcionesAula.style.display = 'none';
-  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
-  const trackPisos = document.getElementById('track-pisos');
-  if (trackPisos) trackPisos.scrollTo({ left: 0 });
-}
-
-window.cambiarPestanaRigoberto = function (pestana) {
-  const btnInfo = document.getElementById('btn-tab-info');
-  const btnAulas = document.getElementById('btn-tab-aulas');
-  const contenidoInfo = document.getElementById('contenido-info-rigoberto');
-  const contenidoAulas = document.getElementById('contenido-aulas-rigoberto');
-
-  if (pestana === 'info') {
-    if (contenidoInfo) contenidoInfo.style.display = 'block';
-    if (contenidoAulas) contenidoAulas.style.display = 'none';
-    if (btnInfo) { btnInfo.style.background = 'var(--primary-color)'; btnInfo.style.color = 'white'; }
-    if (btnAulas) { btnAulas.style.background = '#e0e0e0'; btnAulas.style.color = 'var(--text-gray)'; }
-  } else {
-    if (contenidoInfo) contenidoInfo.style.display = 'none';
-    if (contenidoAulas) contenidoAulas.style.display = 'block';
-    if (btnAulas) { btnAulas.style.background = 'var(--primary-color)'; btnAulas.style.color = 'white'; }
-    if (btnInfo) { btnInfo.style.background = '#e0e0e0'; btnInfo.style.color = 'var(--text-gray)'; }
-  }
-}
-
-window.desplazarCarruselPisos = function (cantidad) {
-  const track = document.getElementById('track-pisos');
-  if (track) track.scrollBy({ left: cantidad, behavior: 'smooth' });
-}
-
-window.seleccionarPiso = function (pisoId, pisoLabel, botonHtml) {
-  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
-  if (botonHtml) botonHtml.classList.add('activo');
-
-  const opcionesAula = document.getElementById('opciones-aula');
-  if (opcionesAula) opcionesAula.style.display = 'block';
-
-  const inputPiso = document.getElementById('input-piso-actual');
-  if (inputPiso) inputPiso.value = pisoLabel;
-
-  const contenedorTarjetas = document.getElementById('contenedor-tarjetas-aula');
-  if (!contenedorTarjetas) return;
-
-  contenedorTarjetas.innerHTML = "";
-
-  if (datosCompletos && datosCompletos.detallesEdificios[edificioActualId] && datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId]) {
-    const selectLado = document.getElementById('select-lado-aula');
-    const ladoActual = selectLado ? selectLado.value : 'A';
-
-    const aulasDelPiso = datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId][ladoActual] || [];
-
-    if (aulasDelPiso.length === 0) {
-      contenedorTarjetas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">No hay aulas registradas en el Lado ${ladoActual} de este piso.</p>`;
-      return;
     }
+  }
 
- Feria
-    aulasDelPiso.forEach(aula => {
-      contenedorTarjetas.innerHTML += `
-              <div style="background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                  <h4 style="margin-bottom: 12px; font-size: 16px;">${aula.nombre}</h4>
-                  <button onclick="window.abrirModalAulaVirtual('${aula.nombre}')" style="background: var(--accent-color); color: var(--primary-color); border: none; padding: 10px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s;">
-                      <span class="material-icons" style="font-size: 18px; vertical-align: bottom; margin-right: 5px;">vrpano</span> Entrar (360)
+  window.cerrarModalPisos = function () {
+    const modal = document.getElementById('modalPisos');
+    if (modal) modal.classList.remove('active');
+    const opcionesAula = document.getElementById('opciones-aula');
+    if (opcionesAula) opcionesAula.style.display = 'none';
+    document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+    const trackPisos = document.getElementById('track-pisos');
+    if (trackPisos) trackPisos.scrollTo({ left: 0 });
+  }
 
+  window.cambiarPestanaRigoberto = function (pestana) {
+    const btnInfo = document.getElementById('btn-tab-info');
+    const btnAulas = document.getElementById('btn-tab-aulas');
+    const contenidoInfo = document.getElementById('contenido-info-rigoberto');
+    const contenidoAulas = document.getElementById('contenido-aulas-rigoberto');
+
+    if (pestana === 'info') {
+      if (contenidoInfo) contenidoInfo.style.display = 'block';
+      if (contenidoAulas) contenidoAulas.style.display = 'none';
+      if (btnInfo) { btnInfo.style.background = 'var(--primary-color)'; btnInfo.style.color = 'white'; }
+      if (btnAulas) { btnAulas.style.background = '#e0e0e0'; btnAulas.style.color = 'var(--text-gray)'; }
+    } else {
+      if (contenidoInfo) contenidoInfo.style.display = 'none';
+      if (contenidoAulas) contenidoAulas.style.display = 'block';
+      if (btnAulas) { btnAulas.style.background = 'var(--primary-color)'; btnAulas.style.color = 'white'; }
+      if (btnInfo) { btnInfo.style.background = '#e0e0e0'; btnInfo.style.color = 'var(--text-gray)'; }
+    }
+  }
+
+  window.desplazarCarruselPisos = function (cantidad) {
+    const track = document.getElementById('track-pisos');
+    if (track) track.scrollBy({ left: cantidad, behavior: 'smooth' });
+  }
+
+  window.seleccionarPiso = function (pisoId, pisoLabel, botonHtml) {
+    document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+    if (botonHtml) botonHtml.classList.add('activo');
+
+    const opcionesAula = document.getElementById('opciones-aula');
+    if (opcionesAula) opcionesAula.style.display = 'block';
+
+    const inputPiso = document.getElementById('input-piso-actual');
+    if (inputPiso) inputPiso.value = pisoLabel;
+
+    const contenedorTarjetas = document.getElementById('contenedor-tarjetas-aula');
+    if (!contenedorTarjetas) return;
+
+    contenedorTarjetas.innerHTML = "";
+
+    if (datosCompletos && datosCompletos.detallesEdificios[edificioActualId] && datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId]) {
+      const selectLado = document.getElementById('select-lado-aula');
+      const ladoActual = selectLado ? selectLado.value : 'A';
+
+      const aulasDelPiso = datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId][ladoActual] || [];
+
+      if (aulasDelPiso.length === 0) {
+        contenedorTarjetas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">No hay aulas registradas en el Lado ${ladoActual} de este piso.</p>`;
+        return;
+      }
       aulasDelPiso.forEach(aula => {
-          contenedorTarjetas.innerHTML += `
-              <div class="tarjeta-aula-modal">
-                  <h4>${aula.nombre}</h4>
-                  <button onclick="window.abrirModalAulaVirtual('${aula.nombre}', '${aula.media || ''}', '${aula.tipoMedia || 'imagen'}')">
-                      <span class="material-icons">image</span> Ver Imagen
- main
-                  </button>
-              </div>
-          `;
-    });
-  } else {
-    contenedorTarjetas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">Datos no disponibles para este piso aún.</p>`;
-  }
-}
+        contenedorTarjetas.innerHTML += `
+        <div class="tarjeta-aula-modal">
 
-document.addEventListener('change', function (e) {
-  if (e.target && e.target.id === 'select-lado-aula') {
-    const btnActivo = document.querySelector('.piso-btn.activo');
-    if (btnActivo) {
-      btnActivo.click();
+            <h4>${aula.nombre}</h4>
+
+            <button
+                onclick="window.abrirModalAulaVirtual(
+                    '${aula.nombre}',
+                    '${aula.media || ''}',
+                    '${aula.tipoMedia || 'imagen'}'
+                )"
+            >
+                <span class="material-icons">
+                    image
+                </span>
+
+                Ver Imagen
+            </button>
+
+        </div>
+    `;
+      });
+    } else {
+      contenedorTarjetas.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--text-gray);">Datos no disponibles para este piso aún.</p>`;
     }
   }
-});
 
- Feria
-window.abrirModalAulaVirtual = function (aula) {
-  const titulo = document.getElementById('titulo-aula-virtual');
-  if (titulo) titulo.innerText = 'Destino: ' + aula;
-  window.cerrarModalPisos();
-  const modal = document.getElementById('modalAulaVirtual');
-  if (modal) modal.classList.add('active');
+  document.addEventListener('change', function (e) {
+    if (e.target && e.target.id === 'select-lado-aula') {
+      const btnActivo = document.querySelector('.piso-btn.activo');
+      if (btnActivo) {
+        btnActivo.click();
+      }
+    }
+  });
 
-window.abrirModalAulaVirtual = function(aula, mediaUrl = '', tipoMedia = 'imagen') {
+}
+
+window.abrirModalAulaVirtual = function (aula, mediaUrl = '', tipoMedia = 'imagen') {
   const titulo = document.getElementById('titulo-aula-virtual');
-  if(titulo) titulo.innerText = 'Destino: ' + aula;
-  
+  if (titulo) {
+    titulo.innerText =
+      'Destino: ' + aula;
+  }
   const modal = document.getElementById('modalAulaVirtual');
   const videoContainer = modal.querySelector('.video-container');
   if (videoContainer) {
-      if (mediaUrl) {
-          if (tipoMedia === 'video') {
-              videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
-          } else {
-              videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${aula}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
-          }
+    if (mediaUrl) {
+      if (tipoMedia === 'video') {
+        videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="
+        width:100%;
+        height:100%;
+        border-radius:inherit;"
+       ></video>
+      `;
       } else {
-          videoContainer.innerHTML = `<p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido no disponible</p>`;
+        videoContainer.innerHTML = `<img
+    src="${mediaUrl}"
+    alt="${aula}"
+    style="
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:inherit;
+    ">`;
       }
+    } else {
+
+      videoContainer.innerHTML = `
+          < p style = "text-align:center;" >
+                    <span
+                        class="material-icons"
+                        style="font-size:60px;color:var(--accent-color);"
+                    >
+                        play_circle
+                    </span>
+                    <br><br>
+                    Reproductor no disponible
+                </p>
+            `;
+    }
   }
 
   window.cerrarModalPisos();
-  if(modal) modal.classList.add('active');
- main
-}
+
+  modal.classList.add('active');
+};
+
+
+
+
+
 
 window.cerrarModalAulaVirtual = function () {
-  const modal = document.getElementById('modalAulaVirtual');
- Feria
-  if (modal) modal.classList.remove('active');
 
-  if(modal) {
-      modal.classList.remove('active');
-      const video = modal.querySelector('video');
-      if (video) {
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-      }
-      const videoContainer = modal.querySelector('.video-container');
-      if (videoContainer) videoContainer.innerHTML = '';
+  const modal =
+    document.getElementById(
+      'modalAulaVirtual'
+    );
+
+  if (!modal) return;
+
+  modal.classList.remove('active');
+
+  const video =
+    modal.querySelector('video');
+
+  if (video) {
+
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
   }
- main
-}
+
+  const videoContainer =
+    modal.querySelector(
+      '.video-container'
+    );
+
+  if (videoContainer) {
+    videoContainer.innerHTML = '';
+  }
+};
+
+
+
+
+
+
 
 document.addEventListener('click', function (e) {
   const mVideo = document.getElementById('videoModal');
@@ -926,36 +1089,45 @@ document.addEventListener('click', function (e) {
 
 // de aqui trabaje io (io soy uriel)
 document.addEventListener("DOMContentLoaded", function () {
-  const destinoGuardado = localStorage.getItem("destinoBuscado");
+
+  const destinoGuardado =
+    localStorage.getItem("destinoBuscado");
 
   if (destinoGuardado) {
-    const destino = JSON.parse(destinoGuardado);
+
+    const destino =
+      JSON.parse(destinoGuardado);
 
     Swal.fire({
       title: destino.nombre,
       html: `
-                <img src="${destino.img}" 
-                     style="width:100%; max-height:250px; object-fit:cover; border-radius:10px; margin-bottom:15px;">
-                <p>${destino.desc}</p>
-            `,
+     <img src="${destino.img}"
+     style="width:100%;max-height:250px;object-fit:cover;border-radius:10px;margin-bottom:15px;">
+     <p>${destino.desc}</p>
+     `,
       confirmButtonText: "Ver ruta"
     }).then(() => {
       abrirSimulacion(destino.nombre);
     });
-
- Feria
     localStorage.removeItem("destinoBuscado");
   }
 
-        localStorage.removeItem("destinoBuscado");
-    }
+  const destinoSimple =
+    localStorage.getItem(
+      "destinoBuscadoSimple"
+    );
 
-    const destinoSimple = localStorage.getItem("destinoBuscadoSimple");
-    if (destinoSimple) {
-        setTimeout(() => {
-            window.manejarSeleccionDestino(destinoSimple);
-        }, 300);
-        localStorage.removeItem("destinoBuscadoSimple");
-    }
- main
+  if (destinoSimple) {
+
+    setTimeout(() => {
+      window.manejarSeleccionDestino(
+        destinoSimple
+      );
+    }, 300);
+
+    localStorage.removeItem(
+      "destinoBuscadoSimple"
+    );
+  }
+
 });
