@@ -1,84 +1,71 @@
 // --- VARIABLES GLOBALES PARA ALMACENAR DATOS ---
 let datosCompletos = null;
+ Feria
+let indicacionesData = null; // NUEVA VARIABLE
+let gpsWatcher = null;
+let marcadorOrigen = null;
+let marcadorDestino = null;
 let indicacionesData = null;
 let edificioActualId = "";
-
+main
 // Nueva función para transformar las barras de búsqueda en select (Combo box)
 const destinosGlobales = [
-    "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica", 
-    "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte", 
-    "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES", 
-    "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES", 
-    "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES", 
-    "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico", 
-    "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva", 
-    "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
+  "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica",
+  "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte",
+  "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES",
+  "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES",
+  "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES",
+  "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico",
+  "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva",
+  "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
 ].sort();
 
-window.manejarSeleccionDestino = function(destino) {
-    if (!destino) return;
-    if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
-        // Redirigir directamente al GPS en lugar del modal de video roto
-        const selectDestino = document.getElementById("destino");
-        const btnIr = document.getElementById("btnIr");
-        
-        if (selectDestino && btnIr) {
-            // Verificar si la opción existe, si no, crearla temporalmente para que no de error
-            let optionExists = Array.from(selectDestino.options).some(opt => opt.value === destino);
-            if (!optionExists) {
-                let opt = document.createElement('option');
-                opt.value = destino;
-                opt.text = destino;
-                selectDestino.appendChild(opt);
-            }
-            
-            selectDestino.value = destino;
-            btnIr.click();
-            document.getElementById("navegacion-asistida").scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-            if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
-            else abrirSimulacion(destino);
-        }
-    } else {
-        localStorage.setItem('destinoBuscadoSimple', destino);
-        window.location.href = 'destinos.html';
-    }
+window.manejarSeleccionDestino = function (destino) {
+  if (!destino) return;
+  if (document.getElementById('vista-destinos') || window.location.pathname.includes('destinos.html')) {
+    if (typeof window.abrirSimulacion === 'function') window.abrirSimulacion(destino);
+    else abrirSimulacion(destino);
+  } else {
+    localStorage.setItem('destinoBuscadoSimple', destino);
+    window.location.href = 'destinos.html';
+  }
 };
 
-window.transformarBuscadoresEnSelect = function() {
-    const selectInicio = document.getElementById('busquedaDestino');
-    if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
-        destinosGlobales.forEach(destino => {
-            const opt = document.createElement('option');
-            opt.value = destino;
-            opt.text = destino;
-            selectInicio.appendChild(opt);
-        });
+window.transformarBuscadoresEnSelect = function () {
 
-        selectInicio.addEventListener('change', function() {
-            if (this.value) {
-                window.manejarSeleccionDestino(this.value);
-                this.value = ""; 
-            }
-        });
-    }
+  const selectInicio = document.getElementById('busquedaDestino');
+  if (selectInicio && selectInicio.tagName === 'SELECT' && selectInicio.options.length <= 1) {
+    destinosGlobales.forEach(destino => {
+      const opt = document.createElement('option');
+      opt.value = destino;
+      opt.text = destino;
+      selectInicio.appendChild(opt);
+    });
 
-    const selectModal = document.getElementById('busquedaDestinoModal');
-    if (selectModal && selectModal.options.length <= 1) {
-        destinosGlobales.forEach(destino => {
-            const opt = document.createElement('option');
-            opt.value = destino;
-            opt.text = destino;
-            selectModal.appendChild(opt);
-        });
-        
-        selectModal.addEventListener('change', function() {
-            if (this.value) {
-                window.manejarSeleccionDestino(this.value);
-                this.value = ""; 
-            }
-        });
-    }
+    selectInicio.addEventListener('change', function () {
+      if (this.value) {
+        window.manejarSeleccionDestino(this.value);
+        this.value = "";
+      }
+    });
+  }
+
+  const selectModal = document.getElementById('busquedaDestinoModal');
+  if (selectModal && selectModal.options.length <= 1) {
+    destinosGlobales.forEach(destino => {
+      const opt = document.createElement('option');
+      opt.value = destino;
+      opt.text = destino;
+      selectModal.appendChild(opt);
+    });
+
+    selectModal.addEventListener('change', function () {
+      if (this.value) {
+        window.manejarSeleccionDestino(this.value);
+        this.value = "";
+      }
+    });
+  }
 };
 
 // --- SCRIPT PARA CARGAR EL NAVBAR ---
@@ -88,29 +75,29 @@ fetch('navbar.html')
     document.getElementById('menu-contenedor').innerHTML = data;
     const navDestinos = document.getElementById('nav-destinos');
     if (navDestinos) navDestinos.classList.add('activo');
-    
+
     window.transformarBuscadoresEnSelect();
   }).catch(() => console.log('Navbar no encontrado'));
 
-window.buscarDestinoModal = function() {
-    const selectModal = document.getElementById('busquedaDestinoModal');
-    if (selectModal && selectModal.value) {
-        window.manejarSeleccionDestino(selectModal.value);
-        
-        const modal = document.getElementById('searchModal');
-        const overlay = document.getElementById('searchOverlay');
-        if(modal) modal.classList.remove('active');
-        if(overlay) overlay.classList.remove('active');
-        selectModal.value = ""; 
-    }
-};
+window.buscarDestinoModal = function () {
+  const selectModal = document.getElementById('busquedaDestinoModal');
+  if (selectModal && selectModal.value) {
+    window.manejarSeleccionDestino(selectModal.value);
 
-window.toggleSearchModal = function() {
     const modal = document.getElementById('searchModal');
     const overlay = document.getElementById('searchOverlay');
-    if (modal) modal.classList.toggle('active');
-    if (overlay) overlay.classList.toggle('active');
-    window.transformarBuscadoresEnSelect();
+    if (modal) modal.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    selectModal.value = "";
+  }
+};
+
+window.toggleSearchModal = function () {
+  const modal = document.getElementById('searchModal');
+  const overlay = document.getElementById('searchOverlay');
+  if (modal) modal.classList.toggle('active');
+  if (overlay) overlay.classList.toggle('active');
+  window.transformarBuscadoresEnSelect();
 };
 
 // Funciones de navegación e interfaz general
@@ -715,26 +702,65 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   function dibujarRutaPersonalizada(origenNombre, destinoNombre) {
+
     const clave = `${origenNombre}|${destinoNombre}`;
     const ruta = rutasUNI[clave];
+
     if (!ruta) {
       Swal.fire("Ruta no disponible", "Todavía no se ha programado esa ruta.", "info");
       return;
     }
+
+    // Eliminar ruta anterior
     if (lineaRuta) {
       mapa.removeLayer(lineaRuta);
     }
+
+    // Eliminar marcadores anteriores
+    if (marcadorOrigen) {
+      mapa.removeLayer(marcadorOrigen);
+    }
+
+    if (marcadorDestino) {
+      mapa.removeLayer(marcadorDestino);
+    }
+
+    // Crear marcador inicio
+    marcadorOrigen = L.marker(ruta[0])
+      .addTo(mapa)
+      .bindPopup("Inicio");
+
+    // Crear marcador destino
+    marcadorDestino = L.marker(ruta[ruta.length - 1])
+      .addTo(mapa)
+      .bindPopup("Destino");
+
+    // Dibujar ruta
     lineaRuta = L.polyline(ruta, {
       color: "#00c8f5",
       weight: 8,
       opacity: 0.9
     }).addTo(mapa);
+
     mapa.fitBounds(lineaRuta.getBounds());
+
+    // Cargar instrucciones
     if (instruccionesUNI[clave]) {
+
       rutaActiva = instruccionesUNI[clave];
       pasoActual = 0;
-      actualizarPanelRuta(rutaActiva[0].texto, mapa.distance(userLocation || rutaActiva[0].punto, rutaActiva[0].punto));
-      hablar("Ruta iniciada. " + rutaActiva[0].texto);
+      actualizarPanelRuta(
+        rutaActiva[0].texto,
+        mapa.distance(
+          userLocation || rutaActiva[0].punto,
+          rutaActiva[0].punto
+        )
+      );
+
+      hablar(
+        "Ruta iniciada. " +
+        rutaActiva[0].texto
+      );
     }
   }
 
@@ -753,32 +779,102 @@ document.addEventListener('DOMContentLoaded', function () {
   let userLocation = null;
 
   function hablar(texto) {
+
+    if (texto === instruccionHablada) {
+      return;
+    }
+    instruccionHablada = texto;
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      let msj = new SpeechSynthesisUtterance(texto);
+      let msj =
+        new SpeechSynthesisUtterance(texto);
       msj.lang = 'es-ES';
       window.speechSynthesis.speak(msj);
     }
   }
 
   function verificarPasoRuta() {
+
     if (!rutaActiva || !userLocation) return;
+
     if (pasoActual >= rutaActiva.length) return;
-    const puntoObjetivo = rutaActiva[pasoActual].punto;
-    const distancia = mapa.distance(userLocation, puntoObjetivo);
-    actualizarPanelRuta(rutaActiva[pasoActual].texto, distancia);
-    if (distancia <= 10) {
+    let distanciaActual =
+      mapa.distance(
+        userLocation,
+        rutaActiva[pasoActual].punto
+      );
+
+    actualizarPanelRuta(
+      rutaActiva[pasoActual].texto,
+      distanciaActual
+    );
+
+    // Llegó al punto actual
+    if (distanciaActual <= 35) {
+
       pasoActual++;
+
       if (pasoActual < rutaActiva.length) {
-        actualizarPanelRuta(rutaActiva[pasoActual].texto, mapa.distance(userLocation, rutaActiva[pasoActual].punto));
-        hablar(rutaActiva[pasoActual].texto);
+        actualizarPanelRuta(
+          rutaActiva[pasoActual].texto,
+          mapa.distance(
+            userLocation,
+            rutaActiva[pasoActual].punto
+          )
+        );
+
+        hablar(
+          rutaActiva[pasoActual].texto
+        );
+
       } else {
-        actualizarPanelRuta("Has llegado a tu destino", 0);
-        hablar("Has llegado a tu destino");
+
+        actualizarPanelRuta(
+          "Has llegado a tu destino",
+          0
+        );
+
+        hablar(
+          "Has llegado a tu destino"
+        );
+
         rutaActiva = null;
+      }
+
+      return;
+    }
+
+    // Detectar si el usuario se saltó puntos
+    for (
+      let i = pasoActual + 1;
+      i < rutaActiva.length;
+      i++
+    ) {
+
+      let distanciaFutura =
+        mapa.distance(
+          userLocation,
+          rutaActiva[i].punto
+        );
+
+      if (distanciaFutura <= 35) {
+
+        pasoActual = i;
+
+        actualizarPanelRuta(
+          rutaActiva[i].texto,
+          distanciaFutura
+        );
+
+        hablar(
+          rutaActiva[i].texto
+        );
+
+        break;
       }
     }
   }
+
 
   if (document.getElementById('uni-mapa')) {
     const capaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 });
@@ -793,9 +889,6 @@ document.addEventListener('DOMContentLoaded', function () {
       option.value = nombre; 
       option.text = nombre;
       if (select) select.appendChild(option);
-      if (sitiosUNI[nombre][0] !== 0) {
-        L.marker(sitiosUNI[nombre]).bindPopup(`<strong style="color:#001f3f;">${nombre}</strong>`).addTo(mapa);
-      }
     }
 
     const btnCentrar = document.getElementById('btnCentrar');
@@ -811,8 +904,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!navigator.geolocation) return Swal.fire("Error", "GPS no soportado.", "error");
 
         Swal.fire({ title: 'Buscando tu ubicación...', didOpen: () => { Swal.showLoading(); } });
-
-        navigator.geolocation.watchPosition(
+        gpsWatcher = navigator.geolocation.watchPosition(
           (pos) => {
             Swal.close();
             userLocation = [pos.coords.latitude, pos.coords.longitude];
@@ -890,228 +982,370 @@ document.addEventListener('DOMContentLoaded', function () {
 // -------------------------------------------------------------
 // FUNCIONES DE MODALES Y LÓGICA DE AULAS DINÁMICA
 // -------------------------------------------------------------
-window.abrirSimulacion = async function(lugar, mediaUrl = '', tipoMedia = 'imagen', itemId = '') {
+let edificioActualId = "";
+window.abrirSimulacion = async function (
+  lugar,
+  mediaUrl = '',
+  tipoMedia = 'imagen',
+  itemId = ''
+) {
   const modal = document.getElementById('videoModal');
   const title = document.getElementById('modalTitle');
-  if(title) title.innerText = 'Ruta hacia: ' + lugar;
-  
-  const videoContainer = modal.querySelector('.video-container');
+  if (title) {
+    title.innerText = 'Ruta hacia: ' + lugar;
+  }
+  const videoContainer =
+    modal.querySelector('.video-container');
   if (videoContainer) {
-      if (mediaUrl) {
-          if (tipoMedia === 'imagen') {
-              videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${lugar}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
-          } else {
-              videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
-          }
+    if (mediaUrl) {
+      if (tipoMedia === 'imagen') {
+        videoContainer.innerHTML = `
+                    <img
+                        src="${mediaUrl}"
+                        alt="${lugar}"
+                        style="
+                            width:100%;
+                            height:100%;
+                            object-fit:cover;
+                            border-radius:inherit;
+                        "
+                    >
+                `;
       } else {
-          videoContainer.innerHTML = `<p><span class="material-icons" style="font-size: 48px; color: var(--accent-color);">play_circle</span><br>Recorrido no disponible</p>`;
+        videoContainer.innerHTML = `
+                    <video
+                        src="${mediaUrl}"
+                        controls
+                        style="
+                            width:100%;
+                            height:100%;
+                            border-radius:inherit;
+                        "
+                    ></video>
+                `;
       }
+    } else {
+      videoContainer.innerHTML = `
+                <p>
+                    <span class="material-icons"
+                          style="font-size:48px;color:var(--accent-color);">
+                        play_circle
+                    </span>
+                    <br>
+                    Recorrido no disponible
+                </p>
+            `;
+    }
   }
-
-  const listaIndicaciones = document.getElementById("lista-indicaciones");
+  const listaIndicaciones =
+    document.getElementById("lista-indicaciones");
   if (listaIndicaciones) {
-      listaIndicaciones.innerHTML = "<li>Cargando indicaciones...</li>";
-      
-      try {
-          if (!indicacionesData) {
-              const res = await fetch('Json/indicaciones.json');
-              indicacionesData = await res.json();
-          }
-
-          let idBuscado = itemId;
-          if (!idBuscado && datosCompletos) {
-              for(let cat in datosCompletos.categorias) {
-                  let encontrado = datosCompletos.categorias[cat].find(i => i.nombre === lugar);
-                  if(encontrado) { idBuscado = encontrado.id; break; }
-              }
-          }
-
-          let pasos = indicacionesData[idBuscado];
-          if (!pasos || pasos.length === 0) {
-              pasos = ["Dirígete a tu destino siguiendo las indicaciones del mapa principal."];
-          }
-
-          listaIndicaciones.innerHTML = "";
-          pasos.forEach(paso => {
-              let li = document.createElement("li");
-              li.textContent = paso;
-              listaIndicaciones.appendChild(li);
-          });
-
-      } catch (error) {
-          listaIndicaciones.innerHTML = "<li>Sigue la ruta marcada en el mapa.</li>";
+    listaIndicaciones.innerHTML =
+      "<li>Cargando indicaciones...</li>";
+    try {
+      if (!indicacionesData) {
+        const res =
+          await fetch('Json/indicaciones.json');
+        indicacionesData =
+          await res.json();
       }
-  }
+      let idBuscado = itemId;
+      if (!idBuscado && datosCompletos) {
+        for (let cat in datosCompletos.categorias) {
+          const encontrado =
+            datosCompletos.categorias[cat]
+              .find(i => i.nombre === lugar);
+          if (encontrado) {
+            idBuscado = encontrado.id;
+            break;
+          }
+        }
+      }
+      let pasos =
+        indicacionesData[idBuscado];
+      if (!pasos || pasos.length === 0) {
+        pasos = [
+          "Dirígete a tu destino siguiendo las indicaciones del mapa principal."
+        ];
+      }
+      listaIndicaciones.innerHTML = "";
+      pasos.forEach(paso => {
+        const li =
+          document.createElement("li");
+        li.textContent = paso;
+        listaIndicaciones.appendChild(li);
+      });
 
-  if(modal) modal.classList.add('active');
-}
+    } catch {
+      listaIndicaciones.innerHTML =
+        "<li>Sigue la ruta marcada en el mapa.</li>";
+    }
+  }
+  modal.classList.add('active');
+};
+
 
 window.cerrarSimulacion = function () {
-  const modal = document.getElementById('videoModal');
-  if(modal) {
-      modal.classList.remove('active');
-      const video = modal.querySelector('video');
-      if (video) {
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-      }
-      const videoContainer = modal.querySelector('.video-container');
-      if (videoContainer) videoContainer.innerHTML = '';
+  const modal =
+    document.getElementById('videoModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  const video =
+    modal.querySelector('video');
+  if (video) {
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
   }
-}
+  const videoContainer =
+    modal.querySelector('.video-container');
+  if (videoContainer) {
+    videoContainer.innerHTML = '';
+  }
+};
+
+
 
 window.abrirModalPisos = function (edificioId) {
   edificioActualId = edificioId || "rigoberto";
   const modal = document.getElementById('modalPisos');
 
-  if(modal) modal.classList.add('active');
-  window.cambiarPestanaRigoberto('info'); 
-  
-  const imgEdificio = document.getElementById('img-info-edificio');
-  if (imgEdificio && datosCompletos) {
+  if (modal) modal.classList.add('active');
+  window.cambiarPestanaRigoberto('info');
+
+  if (datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
+    const pisosData = datosCompletos.detallesEdificios[edificioActualId].pisos;
+    const trackPisos = document.getElementById('track-pisos');
+    if (trackPisos) {
+      trackPisos.innerHTML = "";
+      pisosData.forEach(piso => {
+        let btn = document.createElement('button');
+        btn.className = 'piso-btn';
+        btn.innerText = piso.label.toUpperCase();
+        btn.onclick = function () { window.seleccionarPiso(piso.id, piso.label, this); };
+        trackPisos.appendChild(btn);
+      });
+    }
+
+    if (modal) modal.classList.add('active');
+    window.cambiarPestanaRigoberto('info');
+
+    // --- LÓGICA NUEVA: Cargar la imagen del edificio dinámicamente ---
+    const imgEdificio = document.getElementById('img-info-edificio');
+    if (imgEdificio && datosCompletos) {
       const edificioData = datosCompletos.categorias.principales.find(e => e.id === edificioActualId);
       if (edificioData) {
-          imgEdificio.src = edificioData.img;
+        imgEdificio.src = edificioData.img; // Inserta la URL de Postimg
       }
-  }
+    }
+    // -----------------------------------------------------------------
 
-  if(datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
+    if (datosCompletos && datosCompletos.detallesEdificios && datosCompletos.detallesEdificios[edificioActualId]) {
       const pisosData = datosCompletos.detallesEdificios[edificioActualId].pisos;
       const trackPisos = document.getElementById('track-pisos');
-      if(trackPisos) {
-          trackPisos.innerHTML = "";
-          pisosData.forEach(piso => {
-              let btn = document.createElement('button');
-              btn.className = 'piso-btn';
-              btn.innerText = piso.label.toUpperCase();
-              btn.onclick = function() { window.seleccionarPiso(piso.id, piso.label, this); };
-              trackPisos.appendChild(btn);
-          });
+      if (trackPisos) {
+        trackPisos.innerHTML = "";
+        pisosData.forEach(piso => {
+          let btn = document.createElement('button');
+          btn.className = 'piso-btn';
+          btn.innerText = piso.label.toUpperCase();
+          btn.onclick = function () { window.seleccionarPiso(piso.id, piso.label, this); };
+          trackPisos.appendChild(btn);
+        });
       }
-  }
-}
 
-window.cerrarModalPisos = function () {
-  const modal = document.getElementById('modalPisos');
-  if (modal) modal.classList.remove('active');
-  const opcionesAula = document.getElementById('opciones-aula');
-  if (opcionesAula) opcionesAula.style.display = 'none';
-  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
-  const trackPisos = document.getElementById('track-pisos');
-  if (trackPisos) trackPisos.scrollTo({ left: 0 });
-}
-
-window.cambiarPestanaRigoberto = function (pestana) {
-  const btnInfo = document.getElementById('btn-tab-info');
-  const btnAulas = document.getElementById('btn-tab-aulas');
-  const contenidoInfo = document.getElementById('contenido-info-rigoberto');
-  const contenidoAulas = document.getElementById('contenido-aulas-rigoberto');
-
-  if (pestana === 'info') {
-    if (contenidoInfo) contenidoInfo.style.display = 'block';
-    if (contenidoAulas) contenidoAulas.style.display = 'none';
-    if (btnInfo) { btnInfo.style.background = 'var(--primary-color)'; btnInfo.style.color = 'white'; }
-    if (btnAulas) { btnAulas.style.background = '#e0e0e0'; btnAulas.style.color = 'var(--text-gray)'; }
-  } else {
-    if (contenidoInfo) contenidoInfo.style.display = 'none';
-    if (contenidoAulas) contenidoAulas.style.display = 'block';
-    if (btnAulas) { btnAulas.style.background = 'var(--primary-color)'; btnAulas.style.color = 'white'; }
-    if (btnInfo) { btnInfo.style.background = '#e0e0e0'; btnInfo.style.color = 'var(--text-gray)'; }
-  }
-}
-
-window.desplazarCarruselPisos = function (cantidad) {
-  const track = document.getElementById('track-pisos');
-  if (track) track.scrollBy({ left: cantidad, behavior: 'smooth' });
-}
-
-window.seleccionarPiso = function (pisoId, pisoLabel, botonHtml) {
-  document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
-  if (botonHtml) botonHtml.classList.add('activo');
-
-  const opcionesAula = document.getElementById('opciones-aula');
-  if (opcionesAula) opcionesAula.style.display = 'block';
-
-  const inputPiso = document.getElementById('input-piso-actual');
-  if (inputPiso) inputPiso.value = pisoLabel;
-
-  const contenedorTarjetas = document.getElementById('contenedor-tarjetas-aula');
-  if (!contenedorTarjetas) return;
-
-  contenedorTarjetas.innerHTML = "";
-
-  if (datosCompletos && datosCompletos.detallesEdificios[edificioActualId] && datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId]) {
-    const selectLado = document.getElementById('select-lado-aula');
-    const ladoActual = selectLado ? selectLado.value : 'A';
-
-    const aulasDelPiso = datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId][ladoActual] || [];
-
-    if (aulasDelPiso.length === 0) {
-      contenedorTarjetas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">No hay aulas registradas en el Lado ${ladoActual} de este piso.</p>`;
-      return;
     }
+  }
 
-    aulasDelPiso.forEach(aula => {
-      contenedorTarjetas.innerHTML += `
+  window.cerrarModalPisos = function () {
+    const modal = document.getElementById('modalPisos');
+    if (modal) modal.classList.remove('active');
+    const opcionesAula = document.getElementById('opciones-aula');
+    if (opcionesAula) opcionesAula.style.display = 'none';
+    document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+    const trackPisos = document.getElementById('track-pisos');
+    if (trackPisos) trackPisos.scrollTo({ left: 0 });
+  }
+
+  window.cambiarPestanaRigoberto = function (pestana) {
+    const btnInfo = document.getElementById('btn-tab-info');
+    const btnAulas = document.getElementById('btn-tab-aulas');
+    const contenidoInfo = document.getElementById('contenido-info-rigoberto');
+    const contenidoAulas = document.getElementById('contenido-aulas-rigoberto');
+
+    if (pestana === 'info') {
+      if (contenidoInfo) contenidoInfo.style.display = 'block';
+      if (contenidoAulas) contenidoAulas.style.display = 'none';
+      if (btnInfo) { btnInfo.style.background = 'var(--primary-color)'; btnInfo.style.color = 'white'; }
+      if (btnAulas) { btnAulas.style.background = '#e0e0e0'; btnAulas.style.color = 'var(--text-gray)'; }
+    } else {
+      if (contenidoInfo) contenidoInfo.style.display = 'none';
+      if (contenidoAulas) contenidoAulas.style.display = 'block';
+      if (btnAulas) { btnAulas.style.background = 'var(--primary-color)'; btnAulas.style.color = 'white'; }
+      if (btnInfo) { btnInfo.style.background = '#e0e0e0'; btnInfo.style.color = 'var(--text-gray)'; }
+    }
+  }
+
+  window.desplazarCarruselPisos = function (cantidad) {
+    const track = document.getElementById('track-pisos');
+    if (track) track.scrollBy({ left: cantidad, behavior: 'smooth' });
+  }
+
+  window.seleccionarPiso = function (pisoId, pisoLabel, botonHtml) {
+    document.querySelectorAll('.piso-btn').forEach(b => b.classList.remove('activo'));
+    if (botonHtml) botonHtml.classList.add('activo');
+
+    const opcionesAula = document.getElementById('opciones-aula');
+    if (opcionesAula) opcionesAula.style.display = 'block';
+
+    const inputPiso = document.getElementById('input-piso-actual');
+    if (inputPiso) inputPiso.value = pisoLabel;
+
+    const contenedorTarjetas = document.getElementById('contenedor-tarjetas-aula');
+    if (!contenedorTarjetas) return;
+
+    contenedorTarjetas.innerHTML = "";
+
+    if (datosCompletos && datosCompletos.detallesEdificios[edificioActualId] && datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId]) {
+      const selectLado = document.getElementById('select-lado-aula');
+      const ladoActual = selectLado ? selectLado.value : 'A';
+
+      const aulasDelPiso = datosCompletos.detallesEdificios[edificioActualId].aulas[pisoId][ladoActual] || [];
+
+      if (aulasDelPiso.length === 0) {
+        contenedorTarjetas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">No hay aulas registradas en el Lado ${ladoActual} de este piso.</p>`;
+        return;
+      }
+      aulasDelPiso.forEach(aula => {
+        contenedorTarjetas.innerHTML += `
         <div class="tarjeta-aula-modal">
-          <h4>${aula.nombre}</h4>
-          <button onclick="window.abrirModalAulaVirtual('${aula.nombre}', '${aula.media || ''}', '${aula.tipoMedia || 'imagen'}')">
-            <span class="material-icons">image</span> Ver Imagen
-          </button>
-        </div>
-      `;
-    });
-  } else {
-    contenedorTarjetas.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">Datos no disponibles para este piso aún.</p>`;
-  }
-}
 
-document.addEventListener('change', function (e) {
-  if (e.target && e.target.id === 'select-lado-aula') {
-    const btnActivo = document.querySelector('.piso-btn.activo');
-    if (btnActivo) {
-      btnActivo.click();
+            <h4>${aula.nombre}</h4>
+
+            <button
+                onclick="window.abrirModalAulaVirtual(
+                    '${aula.nombre}',
+                    '${aula.media || ''}',
+                    '${aula.tipoMedia || 'imagen'}'
+                )"
+            >
+                <span class="material-icons">
+                    image
+                </span>
+
+                Ver Imagen
+            </button>
+
+        </div>
+    `;
+      });
+    } else {
+      contenedorTarjetas.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--text-gray);">Datos no disponibles para este piso aún.</p>`;
     }
   }
-});
 
-window.abrirModalAulaVirtual = function(aula, mediaUrl = '', tipoMedia = 'imagen') {
+  document.addEventListener('change', function (e) {
+    if (e.target && e.target.id === 'select-lado-aula') {
+      const btnActivo = document.querySelector('.piso-btn.activo');
+      if (btnActivo) {
+        btnActivo.click();
+      }
+    }
+  });
+
+}
+
+window.abrirModalAulaVirtual = function (aula, mediaUrl = '', tipoMedia = 'imagen') {
   const titulo = document.getElementById('titulo-aula-virtual');
-  if(titulo) titulo.innerText = 'Destino: ' + aula;
-  
+  if (titulo) {
+    titulo.innerText =
+      'Destino: ' + aula;
+  }
   const modal = document.getElementById('modalAulaVirtual');
   const videoContainer = modal.querySelector('.video-container');
   if (videoContainer) {
-      if (mediaUrl) {
-          if (tipoMedia === 'video') {
-              videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="width: 100%; height: 100%; border-radius: inherit;"></video>`;
-          } else {
-              videoContainer.innerHTML = `<img src="${mediaUrl}" alt="${aula}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">`;
-          }
+    if (mediaUrl) {
+      if (tipoMedia === 'video') {
+        videoContainer.innerHTML = `<video src="${mediaUrl}" controls style="
+        width:100%;
+        height:100%;
+        border-radius:inherit;"
+       ></video>
+      `;
       } else {
-          videoContainer.innerHTML = `<p style="text-align: center;"><span class="material-icons" style="font-size: 60px; color: var(--accent-color);">play_circle</span><br><br>Reproductor de Recorrido no disponible</p>`;
+        videoContainer.innerHTML = `<img
+    src="${mediaUrl}"
+    alt="${aula}"
+    style="
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:inherit;
+    ">`;
       }
+    } else {
+
+      videoContainer.innerHTML = `
+          < p style = "text-align:center;" >
+                    <span
+                        class="material-icons"
+                        style="font-size:60px;color:var(--accent-color);"
+                    >
+                        play_circle
+                    </span>
+                    <br><br>
+                    Reproductor no disponible
+                </p>
+            `;
+    }
   }
 
   window.cerrarModalPisos();
-  if(modal) modal.classList.add('active');
-}
+
+  modal.classList.add('active');
+};
+
+
+
+
+
 
 window.cerrarModalAulaVirtual = function () {
-  const modal = document.getElementById('modalAulaVirtual');
-  if(modal) {
-      modal.classList.remove('active');
-      const video = modal.querySelector('video');
-      if (video) {
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-      }
-      const videoContainer = modal.querySelector('.video-container');
-      if (videoContainer) videoContainer.innerHTML = '';
+
+  const modal =
+    document.getElementById(
+      'modalAulaVirtual'
+    );
+
+  if (!modal) return;
+
+  modal.classList.remove('active');
+
+  const video =
+    modal.querySelector('video');
+
+  if (video) {
+
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
   }
-}
+
+  const videoContainer =
+    modal.querySelector(
+      '.video-container'
+    );
+
+  if (videoContainer) {
+    videoContainer.innerHTML = '';
+  }
+};
+
+
+
+
+
+
 
 document.addEventListener('click', function (e) {
   const mVideo = document.getElementById('videoModal');
@@ -1126,54 +1360,45 @@ document.addEventListener('click', function (e) {
 // CARGA DE DESTINO DESDE INDEX (LOCALSTORAGE)
 // -------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Caso de búsqueda usando objetos completos (ej: buscarDestino())
-    const destinoGuardado = localStorage.getItem("destinoBuscado");
-    if (destinoGuardado) {
-        try {
-            const destino = JSON.parse(destinoGuardado);
-            setTimeout(() => {
-                const selectDestino = document.getElementById("destino");
-                const btnIr = document.getElementById("btnIr");
-                if (selectDestino && btnIr) {
-                    let optionExists = Array.from(selectDestino.options).some(opt => opt.value === destino.nombre);
-                    if (!optionExists) {
-                        let opt = document.createElement('option');
-                        opt.value = destino.nombre;
-                        opt.text = destino.nombre;
-                        selectDestino.appendChild(opt);
-                    }
-                    
-                    selectDestino.value = destino.nombre;
-                    btnIr.click();
-                    document.getElementById("navegacion-asistida").scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 800); // Dar un poco de tiempo para asegurar que el mapa y los selects de Leaflet se construyeron
-        } catch(e) {
-            console.error(e);
-        }
-        localStorage.removeItem("destinoBuscado");
-    }
 
-    // 2. Caso de búsqueda usando el string simple (ej: barra superior)
-    const destinoSimple = localStorage.getItem("destinoBuscadoSimple");
-    if (destinoSimple) {
-        setTimeout(() => {
-            const selectDestino = document.getElementById("destino");
-            const btnIr = document.getElementById("btnIr");
-            if (selectDestino && btnIr) {
-                let optionExists = Array.from(selectDestino.options).some(opt => opt.value === destinoSimple);
-                if (!optionExists) {
-                    let opt = document.createElement('option');
-                    opt.value = destinoSimple;
-                    opt.text = destinoSimple;
-                    selectDestino.appendChild(opt);
-                }
-                
-                selectDestino.value = destinoSimple;
-                btnIr.click();
-                document.getElementById("navegacion-asistida").scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }, 800);
-        localStorage.removeItem("destinoBuscadoSimple");
-    }
+  const destinoGuardado =
+    localStorage.getItem("destinoBuscado");
+
+  if (destinoGuardado) {
+
+    const destino =
+      JSON.parse(destinoGuardado);
+
+    Swal.fire({
+      title: destino.nombre,
+      html: `
+     <img src="${destino.img}"
+     style="width:100%;max-height:250px;object-fit:cover;border-radius:10px;margin-bottom:15px;">
+     <p>${destino.desc}</p>
+     `,
+      confirmButtonText: "Ver ruta"
+    }).then(() => {
+      abrirSimulacion(destino.nombre);
+    });
+    localStorage.removeItem("destinoBuscado");
+  }
+
+  const destinoSimple =
+    localStorage.getItem(
+      "destinoBuscadoSimple"
+    );
+
+  if (destinoSimple) {
+
+    setTimeout(() => {
+      window.manejarSeleccionDestino(
+        destinoSimple
+      );
+    }, 300);
+
+    localStorage.removeItem(
+      "destinoBuscadoSimple"
+    );
+  }
+
 });
