@@ -702,7 +702,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
     "Edificio Posgrado|Edificio Posgrado": [
       sitiosUNI["Edificio Posgrado"]
+    ],
+
+
+    // EDIFICIO DE ARQUITECTURA
+    "Edificio Arquitectura|Piscina": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Piscina"]
+    ],
+     "Edificio Arquitectura|Registro academico": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"]
+    ],
+    "Edificio Arquitectura|Edificio Quimica": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Edificio Quimica"]
+    ],
+    "Edificio Arquitectura|Entrada Principal": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Entrada Principal"]
+    ],
+     "Edificio Arquitectura|Laboratorios redes": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Laboratorios redes"]
+    ],
+    "Edificio Arquitectura|Cajero": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Cajero"]
+    ],
+    "Edificio Arquitectura|Autoservicio de impresiones": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Autoservicio de impresiones"]
     ]
+
+
   };
 
   const instruccionesUNI = {
@@ -1114,6 +1148,41 @@ document.addEventListener('DOMContentLoaded', function () {
     "Edificio Posgrado|Edificio Posgrado": [
       { punto: sitiosUNI["Edificio Posgrado"], texto: "Ya estas ubicado en el Edificio de Posgrado" }
     ],
+
+
+    // EDIFICIO DE ARQUITECTURA
+    "Edificio Arquitectura|Piscina": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 16 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Entrada Principal": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 40 metros hasta llegar a la Entrada Principal" },
+      { punto: sitiosUNI["Entrada Principal"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Registro academico": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Autoservicio de impresiones": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 40 metros hasta llegar a la Entrada Principal" },
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 32 metros hasta llegar al Autoservicio de impresiones" },
+      { punto: sitiosUNI["Autoservicio de impresiones"], texto: "Has llegado a tu destino" }
+    ],
+     "Edificio Arquitectura|Edificio Quimica": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 33 metros hasta llegar al Edificio Quimica" },
+      { punto: sitiosUNI["Edificio Quimica"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Laboratorios redes": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 31 metros hasta llegar al Laboratorios redes" },
+      { punto: sitiosUNI["Laboratorios redes"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Cajero": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 47 metros hasta llegar al Cajero" },
+      { punto: sitiosUNI["Cajero"], texto: "Has llegado a tu destino" }
+    ],
+
+
+
   };
 
   function dibujarRutaPersonalizada(origenNombre, destinoNombre) {
