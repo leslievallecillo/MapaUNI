@@ -299,6 +299,8 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const rutasUNI = {
+    //ENTRADA PRINCIPAL
+
     "Entrada Principal|Edificio Rigoberto Lopez Perez": [
       sitiosUNI["Entrada Principal"],
       sitiosUNI["Registro academico"],
@@ -308,6 +310,125 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Entrada IES"],
       sitiosUNI["Edificio Rigoberto Lopez Perez"]
     ],
+    "Entrada Principal|Registro academico": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Registro academico"]
+    ],
+    "Entrada Principal|Edificio Arquitectura": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Edificio Arquitectura"]
+    ],
+    "Entrada Principal|Edificio Quimica": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Edificio Quimica"]
+    ],
+    "Entrada Principal|Laboratorios redes": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Laboratorios redes"]
+    ],
+    "Entrada Principal|Edificio Posgrado": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Piscina"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["Parqueo Posgrado"],
+      sitiosUNI["Edificio Posgrado"]
+    ],
+    "Entrada Principal|Auditorio Salomon de la Selva": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"]
+    ],
+    "Entrada Principal|Edificio Carlos Santos Berroterán": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Edificio Carlos Santos Berroterán"]
+    ],
+    "Entrada Principal|Edificio Albert Einstein": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Edificio Albert Einstein"]
+    ],
+    "Entrada Principal|Pabellon 1 IES": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"]
+    ],
+    "Entrada Principal|Pabellon 2 IES": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"]
+    ],
+    "Entrada Principal|Pabellon 3 IES": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"],
+      sitiosUNI["Pabellon 3 IES"]
+    ],
+    "Entrada Principal|Laboratorios IES": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Laboratorios IES"]
+    ],
+    "Entrada Principal|Entrada Principal": [
+      sitiosUNI["Entrada Principal"]
+    ],
+    "Entrada Principal|Biblioteca": [
+      sitiosUNI["Entrada Principal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"]
+    ],
+
+
+    //ENTRADA IES
+
     "Entrada IES|Edificio Arquitectura": [
       sitiosUNI["Entrada IES"],
       sitiosUNI["Biblioteca"],
@@ -317,6 +438,87 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Registro academico"],
       sitiosUNI["Edificio Arquitectura"]
     ],
+    "Entrada IES|Edificio Albert Einstein": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Edificio Albert Einstein"]
+    ],
+    "Entrada IES|Edificio Carlos Santos Berroterán": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Edificio Carlos Santos Berroterán"]
+    ],
+    "Entrada IES|Auditorio Salomon de la Selva": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Auditorio Salomon de la Selva"]
+    ],
+    "Entrada IES|Edificio Rigoberto Lopez Perez": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"]
+    ],
+    "Entrada IES|Biblioteca": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Biblioteca"]
+    ],
+    "Entrada IES|Pabellon 1 IES": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"]
+    ],
+    "Entrada IES|Pabellon 2 IES": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"]
+    ],
+    "Entrada IES|Pabellon 3 IES": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"],
+      sitiosUNI["Pabellon 3 IES"]
+    ],
+    "Entrada IES|Laboratorios IES": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Laboratorios IES"]
+    ],
+    "Entrada IES|Registro academico": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Registro academico"]
+    ],
+    "Entrada IES|Edificio Quimica": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Edificio Quimica"]
+    ],
+    "Entrada IES|Laboratorios redes": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Laboratorios redes"]
+    ],
+    "Entrada IES|Edificio Posgrado": [
+      sitiosUNI["Entrada IES"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Edificio Posgrado"]
+    ],
+     "Entrada IES|Entrada IES": [
+      sitiosUNI["Entrada IES"]
+    ],
+
 
     // EDIFICIO RIGOBERTO LOPEZ PEREZ
     "Edificio Rigoberto Lopez Perez|Cafetin el chele": [
@@ -710,7 +912,7 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Edificio Arquitectura"],
       sitiosUNI["Piscina"]
     ],
-     "Edificio Arquitectura|Registro academico": [
+    "Edificio Arquitectura|Registro academico": [
       sitiosUNI["Edificio Arquitectura"],
       sitiosUNI["Registro academico"]
     ],
@@ -722,7 +924,7 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Edificio Arquitectura"],
       sitiosUNI["Entrada Principal"]
     ],
-     "Edificio Arquitectura|Laboratorios redes": [
+    "Edificio Arquitectura|Laboratorios redes": [
       sitiosUNI["Edificio Arquitectura"],
       sitiosUNI["Laboratorios redes"]
     ],
@@ -734,12 +936,231 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Edificio Arquitectura"],
       sitiosUNI["Entrada Principal"],
       sitiosUNI["Autoservicio de impresiones"]
+    ],
+    "Edificio Arquitectura|La mita": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Piscina"],
+      sitiosUNI["La mita"]
+    ],
+    "Edificio Arquitectura|Cafetin El Comal": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"]
+    ],
+    "Edificio Arquitectura|Cafetin La Fritanga": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"]
+    ],
+    "Edificio Arquitectura|Cafetin el chele": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"]
+    ],
+    "Edificio Arquitectura|Copias UNI": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Copias UNI"]
+    ],
+    "Edificio Arquitectura|Cafetin El Duarte": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Duarte"]
+    ],
+    "Edificio Arquitectura|Parqueo Posgrado": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Piscina"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["Parqueo Posgrado"]
+    ],
+    "Edificio Arquitectura|Edificio Posgrado": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Piscina"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["Parqueo Posgrado"],
+      sitiosUNI["Edificio Posgrado"]
+    ],
+    "Edificio Arquitectura|Cafetin El Deportivo": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"]
+    ],
+    "Edificio Arquitectura|Biblioteca": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"]
+    ],
+    "Edificio Arquitectura|Entrada IES": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Entrada IES"]
+    ],
+    "Edificio Arquitectura|Edificio Rigoberto Lopez Perez": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Piscina"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["Parqueo Posgrado"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"]
+    ],
+    "Edificio Arquitectura|Parqueo edificio rigoberto": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Piscina"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["Parqueo Posgrado"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Parqueo edificio rigoberto"]
+    ],
+    "Edificio Arquitectura|Entrada Trasera": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Piscina"],
+      sitiosUNI["La mita"],
+      sitiosUNI["Cafetin El Duarte"],
+      sitiosUNI["Parqueo Posgrado"],
+      sitiosUNI["Edificio Posgrado"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Parqueo edificio rigoberto"],
+      sitiosUNI["Entrada Trasera"]
+    ],
+    "Edificio Arquitectura|Edificio Carlos Santos Berroterán": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Edificio Carlos Santos Berroterán"]
+    ],
+    "Edificio Arquitectura|Auditorio Salomon de la Selva": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"]
+    ],
+    "Edificio Arquitectura|Edificio Albert Einstein": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Edificio Albert Einstein"]
+    ],
+    "Edificio Arquitectura|Batidos Miranda": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Batidos Miranda"]
+    ],
+    "Edificio Arquitectura|Cafetin EL Gueguense": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Cafetin EL Gueguense"]
+    ],
+    "Edificio Arquitectura|Pabellon 1 IES": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"]
+    ],
+    "Edificio Arquitectura|Pabellon 2 IES": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"]
+    ],
+    "Edificio Arquitectura|Pabellon 3 IES": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"],
+      sitiosUNI["Pabellon 3 IES"]
+    ],
+    "Edificio Arquitectura|Laboratorios IES": [
+      sitiosUNI["Edificio Arquitectura"],
+      sitiosUNI["Registro academico"],
+      sitiosUNI["Cafetin El Comal"],
+      sitiosUNI["Cafetin La Fritanga"],
+      sitiosUNI["Cafetin el chele"],
+      sitiosUNI["Cafetin El Deportivo"],
+      sitiosUNI["Biblioteca"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Laboratorios IES"]
+    ],
+    "Edificio Arquitectura|Edificio Arquitectura": [
+      sitiosUNI["Edificio Arquitectura"]
     ]
 
 
   };
 
   const instruccionesUNI = {
+
+    // ENTRADA PRINCIPAL
     "Entrada Principal|Edificio Rigoberto Lopez Perez": [
       { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta Registro Académico" },
       { punto: sitiosUNI["Registro academico"], texto: "Camina 116 metros hasta llegar al Cafetín El Chele" },
@@ -749,6 +1170,123 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Entrada IES"], texto: "Gira a la derecha y camina 100 metros hasta llegar al edificio Rigoberto Lopez Perez" },
       { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Has llegado a tu destino" }
     ],
+    "Entrada Principal|Registro academico": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta Registro Académico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Edificio Arquitectura": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 36 metros hasta llegar al Edificio de Arquitectura" },
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Edificio Quimica": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 62 metros hasta llegar al Edificio de Quimica" },
+      { punto: sitiosUNI["Edificio Quimica"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Laboratorios redes": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 60 metros hasta llegar a los Laboratorios redes" },
+      { punto: sitiosUNI["Laboratorios redes"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Edificio Posgrado": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 43 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Camina 66 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 92 metros hasta llegar al Cafetin El Duarte " },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 23 metros hasta llegar al Parqueo Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Camina 26 metros hasta llegar al Edificio Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Auditorio Salomon de la Selva": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Edificio Carlos Santos Berroterán": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 63 metros hasta llegar al Edificio Carlos Santos Berroterán" },
+      { punto: sitiosUNI["Edificio Carlos Santos Berroterán"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Edificio Albert Einstein": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 33 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Pabellon 1 IES": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Pabellon 2 IES": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Pabellon 3 IES": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 3 IES" },
+      { punto: sitiosUNI["Pabellon 3 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Laboratorios IES": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 donde estan los Laboratorios IES" },
+      { punto: sitiosUNI["Laboratorios IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Principal|Entrada Principal": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Ya estas ubicado en la Entrada Principal" }
+    ],
+    "Entrada Principal|Biblioteca": [
+      { punto: sitiosUNI["Entrada Principal"], texto: "Camina 8 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Has llegado a tu destino" },
+    ],
+
+    // ENTRADA IES
     "Entrada IES|Edificio Arquitectura": [
       { punto: sitiosUNI["Entrada IES"], texto: "Camina 46 metros hasta llegar a la biblioteca" },
       { punto: sitiosUNI["Biblioteca"], texto: "Camina 44 metros hasta el cafetin el deportivo" },
@@ -758,6 +1296,89 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Registro academico"], texto: "Gira a la derecha y camina 31 metros hasta llegar al edificio de arquitectura" },
       { punto: sitiosUNI["Edificio Arquitectura"], texto: "Has llegado al Edificio de Arquitectura" }
     ],
+    "Entrada IES|Edificio Albert Einstein": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 69 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Has llegado al Edificio Albert Einstein" }
+    ],
+    "Entrada IES|Auditorio Salomon de la Selva": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 41 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Has llegado al Auditorio Salomon de la Selva" }
+    ],
+    "Entrada IES|Edificio Carlos Santos Berroterán": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 28 metros hasta llegar al Edificio Carlos Santos Berroterán" },
+      { punto: sitiosUNI["Edificio Carlos Santos Berroterán"], texto: "Has llegado al Edificio Carlos Santos Berroterán" }
+    ],
+    "Entrada IES|Edificio Rigoberto Lopez Perez": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 123 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Has llegado al Edificio Rigoberto Lopez Perez" }
+    ],
+    "Entrada IES|Biblioteca": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Has llegado a la Biblioteca" }
+    ],
+    "Entrada IES|Pabellon 1 IES": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 41 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada IES|Pabellon 2 IES": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 41 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada IES|Pabellon 3 IES": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 41 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 3 IES" },
+      { punto: sitiosUNI["Pabellon 3 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada IES|Laboratorios IES": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 41 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 donde estan los Laboratorios IES" },
+      { punto: sitiosUNI["Laboratorios IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada IES|Edificio Quimica": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 46 metros hasta llegar a la biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 44 metros hasta el cafetin el deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Continúa 53 metros recto hasta el Cafetín El Chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Sigue 51 metros de frente hasta llegar al Cafetín El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Continúa 63 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Gira a la derecha y camina 31 metros hasta llegar al edificio de arquitectura" },
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 33 metros hasta llegar al Edificio Quimica" },
+      { punto: sitiosUNI["Edificio Quimica"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada IES|Laboratorios redes": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 46 metros hasta llegar a la biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 44 metros hasta el cafetin el deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Continúa 53 metros recto hasta el Cafetín El Chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Sigue 51 metros de frente hasta llegar al Cafetín El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Continúa 63 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Gira a la derecha y camina 31 metros hasta llegar al edificio de arquitectura" },
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 31 metros hasta llegar al Laboratorios redes" },
+      { punto: sitiosUNI["Laboratorios redes"], texto: "Has llegado a tu destino" }
+    ],
+     "Entrada IES|Registro academico": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 46 metros hasta llegar a la biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 44 metros hasta el cafetin el deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Continúa 53 metros recto hasta el Cafetín El Chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Sigue 51 metros de frente hasta llegar al Cafetín El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Continúa 63 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Has llegado a tu destino" },
+    
+    ],
+    "Entrada IES|Edificio Posgrado": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 66 metros hasta llegar al Edificio de Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada IES|Entrada IES": [
+      { punto: sitiosUNI["Entrada IES"], texto: "Ya estas ubicado en la Entrada IES" }
+    ],
+
+
 
     // Edificio Rigoberto Lopez Perez
     "Edificio Rigoberto Lopez Perez|Cafetin el chele": [
@@ -1168,7 +1789,7 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Entrada Principal"], texto: "Camina 32 metros hasta llegar al Autoservicio de impresiones" },
       { punto: sitiosUNI["Autoservicio de impresiones"], texto: "Has llegado a tu destino" }
     ],
-     "Edificio Arquitectura|Edificio Quimica": [
+    "Edificio Arquitectura|Edificio Quimica": [
       { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 33 metros hasta llegar al Edificio Quimica" },
       { punto: sitiosUNI["Edificio Quimica"], texto: "Has llegado a tu destino" }
     ],
@@ -1180,6 +1801,223 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 47 metros hasta llegar al Cajero" },
       { punto: sitiosUNI["Cajero"], texto: "Has llegado a tu destino" }
     ],
+    "Edificio Arquitectura|La mita": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 16 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Camina 66 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Has llegado a tu destino, Buen provecho!" }
+    ],
+    "Edificio Arquitectura|Cafetin El Comal": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Cafetin La Fritanga": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Has llegado a tu destino, Provechito!" }
+    ],
+    "Edificio Arquitectura|Cafetin el chele": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Has llegado a tu destino, Provechito!" }
+    ],
+    "Edificio Arquitectura|Copias UNI": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 23 metros hasta llegar a Copias UNI" },
+      { punto: sitiosUNI["Copias UNI"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Cafetin El Duarte": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 64 metros hasta llegar al Cafetin El Duarte" },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Has llegado a tu destino, Provechito!" }
+    ],
+    "Edificio Arquitectura|Parqueo Posgrado": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 16 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Camina 66 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 92 metros hasta llegar al Cafetin El Duarte " },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 23 metros hasta llegar al Parqueo Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Edificio Posgrado": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 16 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Camina 66 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 92 metros hasta llegar al Cafetin El Duarte " },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 23 metros hasta llegar al Parqueo Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Camina 26 metros hasta llegar al Edificio Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Cafetin El Deportivo": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Has llegado a tu destino, Provechito!" }
+    ],
+    "Edificio Arquitectura|Biblioteca": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Entrada IES": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 37 metros hasta llegar a la Entrada IES" },
+      { punto: sitiosUNI["Entrada IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Edificio Rigoberto Lopez Perez": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 16 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Camina 66 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 92 metros hasta llegar al Cafetin El Duarte " },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 23 metros hasta llegar al Parqueo Posgrado" },
+      { punto: sitiosUNI["Parqueo Posgrado"], texto: "Camina 26 metros hasta llegar al Edificio Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 42 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Parqueo edificio rigoberto": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 16 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Camina 66 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 92 metros hasta llegar al Cafetin El Duarte " },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 23 metros hasta llegar al Parqueo Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 70 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 72 metros hasta llegar al Parqueo edificio rigoberto" },
+      { punto: sitiosUNI["Parqueo edificio rigoberto"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Entrada Trasera": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 16 metros hasta llegar a la Piscina" },
+      { punto: sitiosUNI["Piscina"], texto: "Camina 66 metros hasta llegar al Cafetin La mita" },
+      { punto: sitiosUNI["La mita"], texto: "Camina 92 metros hasta llegar al Cafetin El Duarte " },
+      { punto: sitiosUNI["Cafetin El Duarte"], texto: "Camina 23 metros hasta llegar al Parqueo Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Camina 70 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 72 metros hasta llegar al Parqueo edificio rigoberto" },
+      { punto: sitiosUNI["Parqueo edificio rigoberto"], texto: "Camina 100 metros hasta llegar a la Entrada trasera" },
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Edificio Carlos Santos Berroterán": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 63 metros hasta llegar al Edificio Carlos Santos Berroterán" },
+      { punto: sitiosUNI["Edificio Carlos Santos Berroterán"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Auditorio Salomon de la Selva": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Edificio Albert Einstein": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 33 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Batidos Miranda": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 33 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 43 metros hasta llegar a Batidos Miranda" },
+      { punto: sitiosUNI["Batidos Miranda"], texto: "Has llegado a tu destino!" }
+    ],
+    "Edificio Arquitectura|Cafetin EL Gueguense": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 33 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 38 metros hasta llegar al Cafetin EL Gueguense" },
+      { punto: sitiosUNI["Cafetin EL Gueguense"], texto: "Has llegado a tu destino!" }
+    ],
+    "Edificio Arquitectura|Pabellon 1 IES": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Pabellon 2 IES": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Pabellon 3 IES": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 3 IES" },
+      { punto: sitiosUNI["Pabellon 3 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Laboratorios IES": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 22 metros hasta llegar a Registro Academico" },
+      { punto: sitiosUNI["Registro academico"], texto: "Camina 60 metros hasta llegar al Cafetin El Comal" },
+      { punto: sitiosUNI["Cafetin El Comal"], texto: "Camina 58 metros hasta llegar al Cafetin La Fritanga" },
+      { punto: sitiosUNI["Cafetin La Fritanga"], texto: "Camina 21 metros hasta llegar al Cafetin el chele" },
+      { punto: sitiosUNI["Cafetin el chele"], texto: "Camina 65 metros hasta llegar al Cafetin El Deportivo" },
+      { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Camina 67 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 donde estan los Laboratorios IES" },
+      { punto: sitiosUNI["Laboratorios IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Edificio Arquitectura|Edificio Arquitectura": [
+      { punto: sitiosUNI["Edificio Arquitectura"], texto: "Ya estas ubicado en el Edificio de Arquitectura" }
+    ],
+
+
 
 
 
