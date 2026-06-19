@@ -515,8 +515,77 @@ document.addEventListener('DOMContentLoaded', function () {
       sitiosUNI["Biblioteca"],
       sitiosUNI["Edificio Posgrado"]
     ],
-     "Entrada IES|Entrada IES": [
+    "Entrada IES|Entrada IES": [
       sitiosUNI["Entrada IES"]
+    ],
+
+    //ENTRADA TRASERA
+    "Entrada Trasera|Edificio Rigoberto Lopez Perez": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"]
+    ],
+    "Entrada Trasera|Edificio Albert Einstein": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"]
+
+    ],
+    "Entrada Trasera|Auditorio Salomon de la Selva": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Auditorio Salomon de la Selva"]
+    ],
+    "Entrada Trasera|Edificio Carlos Santos Berroterán": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Edificio Carlos Santos Berroterán"]
+    ],
+    "Entrada Trasera|Pabellon 1 IES": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"]
+    ],
+    "Entrada Trasera|Pabellon 2 IES": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"]
+    ],
+    "Entrada Trasera|Pabellon 3 IES": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Pabellon 2 IES"],
+      sitiosUNI["Pabellon 3 IES"]
+    ],
+    "Entrada Trasera|Laboratorios IES": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Pabellon 1 IES"],
+      sitiosUNI["Laboratorios IES"]
+    ],
+    "Entrada Trasera|Biblioteca": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Albert Einstein"],
+      sitiosUNI["Auditorio Salomon de la Selva"],
+      sitiosUNI["Biblioteca"]
+    ],
+    "Entrada Trasera|Edificio Posgrado": [
+      sitiosUNI["Entrada Trasera"],
+      sitiosUNI["Edificio Rigoberto Lopez Perez"],
+      sitiosUNI["Edificio Posgrado"]
     ],
 
 
@@ -1360,14 +1429,14 @@ document.addEventListener('DOMContentLoaded', function () {
       { punto: sitiosUNI["Edificio Arquitectura"], texto: "Camina 31 metros hasta llegar al Laboratorios redes" },
       { punto: sitiosUNI["Laboratorios redes"], texto: "Has llegado a tu destino" }
     ],
-     "Entrada IES|Registro academico": [
+    "Entrada IES|Registro academico": [
       { punto: sitiosUNI["Entrada IES"], texto: "Camina 46 metros hasta llegar a la biblioteca" },
       { punto: sitiosUNI["Biblioteca"], texto: "Camina 44 metros hasta el cafetin el deportivo" },
       { punto: sitiosUNI["Cafetin El Deportivo"], texto: "Continúa 53 metros recto hasta el Cafetín El Chele" },
       { punto: sitiosUNI["Cafetin el chele"], texto: "Sigue 51 metros de frente hasta llegar al Cafetín El Comal" },
       { punto: sitiosUNI["Cafetin El Comal"], texto: "Continúa 63 metros hasta llegar a Registro Academico" },
       { punto: sitiosUNI["Registro academico"], texto: "Has llegado a tu destino" },
-    
+
     ],
     "Entrada IES|Edificio Posgrado": [
       { punto: sitiosUNI["Entrada IES"], texto: "Camina 35 metros hasta llegar a la Biblioteca" },
@@ -1377,6 +1446,74 @@ document.addEventListener('DOMContentLoaded', function () {
     "Entrada IES|Entrada IES": [
       { punto: sitiosUNI["Entrada IES"], texto: "Ya estas ubicado en la Entrada IES" }
     ],
+
+    //ENTRADA TRASERA
+    "Entrada Trasera|Edificio Rigoberto Lopez Perez": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Has llegado al Edificio Rigoberto Lopez Perez" }
+    ],
+    "Entrada Trasera|Edificio Albert Einstein": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 41 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Has llegado al Edificio Albert Einstein" }
+    ],
+    "Entrada Trasera|Auditorio Salomon de la Selva": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 41 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 10 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Trasera|Edificio Carlos Santos Berroterán": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 41 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 10 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Edificio Carlos Santos Berroterán"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Trasera|Pabellon 1 IES": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 41 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 10 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Trasera|Pabellon 2 IES": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 41 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 10 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Trasera|Pabellon 3 IES": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 41 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 10 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 IES" },
+      { punto: sitiosUNI["Pabellon 2 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 3 IES" },
+      { punto: sitiosUNI["Pabellon 3 IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Trasera|Laboratorios IES": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 41 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 10 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 21 metros hasta llegar al Pabellon 1 IES" },
+      { punto: sitiosUNI["Pabellon 1 IES"], texto: "Camina 25 metros hasta llegar al Pabellon 2 donde estan los Laboratorios IES" },
+      { punto: sitiosUNI["Laboratorios IES"], texto: "Has llegado a tu destino" }
+    ],
+    "Entrada Trasera|Biblioteca": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 41 metros hasta llegar al Edificio Albert Einstein" },
+      { punto: sitiosUNI["Edificio Albert Einstein"], texto: "Camina 10 metros hasta llegar al Auditorio Salomon de la Selva" },
+      { punto: sitiosUNI["Auditorio Salomon de la Selva"], texto: "Camina 67 metros hasta llegar a la Biblioteca" },
+      { punto: sitiosUNI["Biblioteca"], texto: "Has llegado a tu destino" }
+    ],
+     "Entrada Trasera|Edificio Posgrado": [
+      { punto: sitiosUNI["Entrada Trasera"], texto: "Camina 137 metros hasta llegar al Edificio Rigoberto Lopez Perez" },
+      { punto: sitiosUNI["Edificio Rigoberto Lopez Perez"], texto: "Camina 67 metros hasta llegar al Edificio Posgrado" },
+      { punto: sitiosUNI["Edificio Posgrado"], texto: "Has llegado a tu destino" }
+    ],
+
 
 
 
