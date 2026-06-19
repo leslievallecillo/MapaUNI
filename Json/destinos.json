@@ -2,7 +2,7 @@
   "categorias": {
     "principales": [
       { "id": "rigoberto", "nombre": "Edificio Rigoberto López Pérez", "desc": "Complejo principal con aulas y laboratorios de computación.", "img": "https://i.postimg.cc/CKnJ4wJg/IMG-20260428-142110.jpg", "tipo": "complejo", "media": "https://i.postimg.cc/CKnJ4wJg/IMG-20260428-142110.jpg", "tipoMedia": "imagen" },
-      { "id": "ies", "nombre": "Edificio IES", "desc": "Edificio correspondiente a la carrera de Ingeniería de Sistemas.", "img": "imagenes/edificioies.jpeg", "tipo": "estandar", "media": "https://www.image2url.com/r2/default/videos/1781212543080-4e734fb5-7bdb-42e1-9a06-b841e8a89ac5.mp4", "tipoMedia": "video" },
+      { "id": "ies", "nombre": "Edificio IES", "desc": "Edificio correspondiente a la carrera de Ingeniería de Sistemas.", "img": "imagenes/edificioies.jpeg", "tipo": "estandar", "media": "imagenes/edificioies.jpeg", "tipoMedia": "imagen" },
       { "id": "pabellon1_ies", "nombre": "Pabellón 1 IES", "desc": "Bloque de aulas del IES.", "img": "https://i.postimg.cc/MGLNWs3f/IMG-20260428-WA0355.jpg", "tipo": "estandar", "media": "https://i.postimg.cc/MGLNWs3f/IMG-20260428-WA0355.jpg", "tipoMedia": "imagen" },
       { "id": "pabellon2_ies", "nombre": "Pabellón 2 IES", "desc": "Bloque de aulas del IES.", "img": "https://i.postimg.cc/xTGwK3qV/IMG-20260428-WA0419.jpg", "tipo": "estandar", "media": "https://i.postimg.cc/xTGwK3qV/IMG-20260428-WA0419.jpg", "tipoMedia": "imagen" },
       { "id": "pabellon3_ies", "nombre": "Pabellón 3 IES", "desc": "Bloque de aulas del IES.", "img": "https://i.postimg.cc/ZKPGrxnD/IMG-20260428-WA0421.jpg", "tipo": "estandar", "media": "https://i.postimg.cc/ZKPGrxnD/IMG-20260428-WA0421.jpg", "tipoMedia": "imagen" },
