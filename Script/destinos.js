@@ -1,24 +1,33 @@
 // --- VARIABLES GLOBALES PARA ALMACENAR DATOS ---
 let datosCompletos = null;
- Feria
-let indicacionesData = null; // NUEVA VARIABLE
+let indicacionesData = null;
 let gpsWatcher = null;
 let marcadorOrigen = null;
 let marcadorDestino = null;
-let indicacionesData = null;
 let edificioActualId = "";
-main
+
+
+
 // Nueva función para transformar las barras de búsqueda en select (Combo box)
 const destinosGlobales = [
-  "Edificio Rigoberto Lopez Perez", "Edificio Posgrado", "Laboratorios robotica",
-  "Laboratorios redes", "Cajero Automático", "Cafetería El Chele", "Cafetería El Duarte",
-  "Cafetería El Güegüense", "La mita", "Batidos Miranda", "Pabellon 1 IES",
+  "Edificio Rigoberto Lopez Perez",
+  "Edificio Posgrado",
+  "Laboratorios robotica",
+  "Laboratorios redes",
+  "Cajero",
+  "Cafetin el chele",
+  "Cafetin El Duarte",
+  "Cafetin EL Gueguense",
+  "La mita",
+  "Batidos Miranda",
+  "Pabellon 1 IES",
   "Pabellon 2 IES", "Pabellon 3 IES", "Edificio Albert Einstein", "Laboratorios IES",
   "Copias UNI", "Autoservicio de impresiones", "Entrada Principal", "Entrada IES",
   "Parqueo Posgrado", "Parqueo edificio rigoberto", "Registro academico",
   "Edificio Arquitectura", "Edificio Quimica", "Piscina", "Auditorio Salomon de la Selva",
   "Edificio Carlos Santos Berroterán", "Biblioteca Central", "RapiCopias Castellón"
 ].sort();
+
 
 window.manejarSeleccionDestino = function (destino) {
   if (!destino) return;
@@ -249,8 +258,11 @@ document.addEventListener('DOMContentLoaded', function () {
   let lineaRuta = null;
   let rutaActiva = null;
   let pasoActual = 0;
-  
- const sitiosUNI = {
+  let instruccionHablada = "";
+  let destinoFinalActual = null;
+  let recalculandoRuta = false;
+
+  const sitiosUNI = {
     "Edificio Rigoberto Lopez Perez": [12.131795792366901, -86.26988943520622],
     "Edificio Posgrado": [12.131009312952209, -86.27012610686415],
     "Laboratorios robotica": [12.131584651748083, -86.27005832378829],
@@ -283,6 +295,67 @@ document.addEventListener('DOMContentLoaded', function () {
     "Cafetin El Deportivo": [12.130877631060027, -86.27074259503898],
     "Cafetin El Comal": [12.129897227413625, -86.27048857927917],
     "Cafetin La Fritanga": [12.130201, -86.270503]
+  };
+
+  const conexionesUNI = {
+    "Entrada Principal": [
+      "Registro academico"
+    ],
+    "Registro academico": [
+      "Entrada Principal",
+      "La mita",
+      "Edificio Arquitectura",
+      "Cajero",
+      "Cafetin El Comal"
+    ],
+    "La mita": [
+      "Registro academico",
+      "Cafetin El Duarte",
+      "Piscina",
+      "Laboratorios redes"
+    ],
+    "Cafetin El Duarte": [
+      "La mita",
+      "Edificio Posgrado"
+    ],
+    "Edificio Posgrado": [
+      "Cafetin El Duarte",
+      "Parqueo Posgrado",
+      "Edificio Rigoberto Lopez Perez"
+    ],
+    "Edificio Rigoberto Lopez Perez": [
+      "Edificio Posgrado",
+      "Biblioteca",
+      "Entrada IES",
+      "Edificio Albert Einstein",
+      "Auditorio Salomon de la Selva"
+    ],
+    "Biblioteca": [
+      "Edificio Rigoberto Lopez Perez",
+      "Cafetin El Deportivo",
+      "Entrada IES"
+    ],
+    "Cafetin El Deportivo": [
+      "Biblioteca",
+      "Cafetin el chele"
+    ],
+    "Cafetin el chele": [
+      "Cafetin El Deportivo",
+      "Cafetin La Fritanga"
+    ],
+    "Cafetin La Fritanga": [
+      "Cafetin el chele",
+      "Cafetin El Comal"
+    ],
+    "Cafetin El Comal": [
+      "Cafetin La Fritanga",
+      "Registro academico"
+    ],
+    "Entrada IES": [
+      "Biblioteca",
+      "Edificio Rigoberto Lopez Perez",
+      "Edificio Carlos Santos Berroterán"
+    ]
   };
 
   const rutasUNI = {
@@ -701,67 +774,98 @@ document.addEventListener('DOMContentLoaded', function () {
     ]
   };
 
+
+
+  function calcularRuta(origen, destino) {
+    const cola = [[origen]];
+    const visitados = new Set();
+    visitados.add(origen);
+    while (cola.length > 0) {
+      const ruta = cola.shift();
+      const nodoActual = ruta[ruta.length - 1];
+      if (nodoActual === destino) {
+        return ruta;
+      }
+      const vecinos = conexionesUNI[nodoActual] || [];
+      for (const vecino of vecinos) {
+        if (!visitados.has(vecino)) {
+          visitados.add(vecino);
+          cola.push([
+            ...ruta,
+            vecino
+          ]);
+        }
+      }
+    }
+    return null;
+  }
+
+
+  function convertirRutaACoordenadas(rutaNombres) {
+    return rutaNombres.map(nombre => sitiosUNI[nombre]);
+  }
+
+  function generarInstruccionesDinamicas(rutaNombres) {
+    const instrucciones = [];
+    for (let i = 0; i < rutaNombres.length; i++) {
+      const nombreActual = rutaNombres[i];
+      const puntoActual = sitiosUNI[nombreActual];
+      // Último punto
+      if (i === rutaNombres.length - 1) {
+        instrucciones.push({ punto: puntoActual, texto: `Has llegado a ${nombreActual}` });
+        continue;
+      }
+      const siguienteNombre = rutaNombres[i + 1];
+      const siguientePunto = sitiosUNI[siguienteNombre];
+      const distancia = Math.round(mapa.distance(puntoActual, siguientePunto)
+      );
+      instrucciones.push({
+        punto: puntoActual, texto: `Camina aproximadamente ${distancia} metros hasta ${siguienteNombre}`
+      });
+    }
+    return instrucciones;
+  }
+
   function dibujarRutaPersonalizada(origenNombre, destinoNombre) {
-
+    destinoFinalActual = destinoNombre;
     const clave = `${origenNombre}|${destinoNombre}`;
-    const ruta = rutasUNI[clave];
-
-    if (!ruta) {
-      Swal.fire("Ruta no disponible", "Todavía no se ha programado esa ruta.", "info");
+    const rutaNombres = calcularRuta(origenNombre, destinoNombre);
+    if (!rutaNombres) {
+      Swal.fire("Ruta no disponible", "contacte con los desarrolladores en la vista de contactos");
       return;
     }
-
-    // Eliminar ruta anterior
+    const ruta = convertirRutaACoordenadas(rutaNombres);
     if (lineaRuta) {
       mapa.removeLayer(lineaRuta);
     }
-
-    // Eliminar marcadores anteriores
     if (marcadorOrigen) {
       mapa.removeLayer(marcadorOrigen);
     }
-
     if (marcadorDestino) {
       mapa.removeLayer(marcadorDestino);
     }
-
-    // Crear marcador inicio
     marcadorOrigen = L.marker(ruta[0])
       .addTo(mapa)
       .bindPopup("Inicio");
-
-    // Crear marcador destino
     marcadorDestino = L.marker(ruta[ruta.length - 1])
       .addTo(mapa)
       .bindPopup("Destino");
-
-    // Dibujar ruta
     lineaRuta = L.polyline(ruta, {
       color: "#00c8f5",
       weight: 8,
       opacity: 0.9
     }).addTo(mapa);
-
     mapa.fitBounds(lineaRuta.getBounds());
-
-    // Cargar instrucciones
+    // Si existe una ruta manual la usamos
     if (instruccionesUNI[clave]) {
-
       rutaActiva = instruccionesUNI[clave];
-      pasoActual = 0;
-      actualizarPanelRuta(
-        rutaActiva[0].texto,
-        mapa.distance(
-          userLocation || rutaActiva[0].punto,
-          rutaActiva[0].punto
-        )
-      );
-
-      hablar(
-        "Ruta iniciada. " +
-        rutaActiva[0].texto
-      );
+    } else {
+      // Si no existe, generar instrucciones automáticamente
+      rutaActiva = generarInstruccionesDinamicas(rutaNombres);
     }
+    pasoActual = 0;
+    actualizarPanelRuta(rutaActiva[0].texto, mapa.distance(userLocation || rutaActiva[0].punto, rutaActiva[0].punto));
+    hablar("Ruta iniciada. " + rutaActiva[0].texto);
   }
 
   function actualizarPanelRuta(texto, distancia) {
@@ -777,102 +881,109 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   let userLocation = null;
-
   function hablar(texto) {
-
+    if (!('speechSynthesis' in window)) {
+      return;
+    }
     if (texto === instruccionHablada) {
       return;
     }
     instruccionHablada = texto;
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      let msj =
-        new SpeechSynthesisUtterance(texto);
-      msj.lang = 'es-ES';
-      window.speechSynthesis.speak(msj);
+    window.speechSynthesis.cancel();
+    const msj = new SpeechSynthesisUtterance(texto);
+    msj.lang = "es-ES";
+    msj.rate = 1;
+    msj.pitch = 1;
+    msj.volume = 1;
+    window.speechSynthesis.speak(msj);
+    console.log("🔊 Hablando:", texto);
+  }
+
+  // Aqui trabaje io hoy 18 de junio, un dia antes a la feria POR ERLING!!
+  function obtenerPasoMasCercano() {
+    if (!rutaActiva || !userLocation) return pasoActual;
+    let indiceMasCercano = pasoActual;
+    let menorDistancia = Infinity;
+    for (let i = pasoActual; i < rutaActiva.length; i++) {
+      const distancia = mapa.distance(
+        userLocation,
+        rutaActiva[i].punto
+      );
+      if (distancia < menorDistancia) {
+        menorDistancia = distancia;
+        indiceMasCercano = i;
+      }
     }
+    return indiceMasCercano;
+  }
+
+
+  function recalcularRutaPorDesvio() {
+    if (!userLocation) return;
+    if (!destinoFinalActual) return;
+    if (recalculandoRuta) return;
+    recalculandoRuta = true;
+    const origenActual =
+      obtenerPuntoMasCercano(userLocation);
+    hablar("Te has desviado de la ruta. Recalculando recorrido.");
+    setTimeout(() => {
+      dibujarRutaPersonalizada(origenActual.nombre, destinoFinalActual);
+      recalculandoRuta = false;
+    }, 1000);
   }
 
   function verificarPasoRuta() {
-
     if (!rutaActiva || !userLocation) return;
-
+    const distanciaAlPasoActual = mapa.distance(userLocation, rutaActiva[pasoActual].punto);
+    // Si está demasiado lejos del punto esperado
+    if (distanciaAlPasoActual > 35 && pasoActual < rutaActiva.length - 1) {
+      recalcularRutaPorDesvio();
+      return;
+    }
     if (pasoActual >= rutaActiva.length) return;
+    const nuevoPaso = obtenerPasoMasCercano();
+    if (nuevoPaso > pasoActual) {
+      pasoActual = nuevoPaso;
+      actualizarPanelRuta(rutaActiva[pasoActual].texto, mapa.distance(userLocation, rutaActiva[pasoActual].punto));
+      hablar(rutaActiva[pasoActual].texto);
+    }
     let distanciaActual =
-      mapa.distance(
-        userLocation,
-        rutaActiva[pasoActual].punto
-      );
-
-    actualizarPanelRuta(
-      rutaActiva[pasoActual].texto,
-      distanciaActual
-    );
-
-    // Llegó al punto actual
+      mapa.distance(userLocation, rutaActiva[pasoActual].punto);
+    actualizarPanelRuta(rutaActiva[pasoActual].texto, distanciaActual);
     if (distanciaActual <= 35) {
-
       pasoActual++;
-
       if (pasoActual < rutaActiva.length) {
         actualizarPanelRuta(
           rutaActiva[pasoActual].texto,
-          mapa.distance(
-            userLocation,
-            rutaActiva[pasoActual].punto
-          )
+          mapa.distance(userLocation, rutaActiva[pasoActual].punto)
         );
-
-        hablar(
-          rutaActiva[pasoActual].texto
-        );
-
+        hablar(rutaActiva[pasoActual].texto);
       } else {
-
-        actualizarPanelRuta(
-          "Has llegado a tu destino",
-          0
-        );
-
-        hablar(
-          "Has llegado a tu destino"
-        );
-
+        actualizarPanelRuta("Has llegado a tu destino", 0);
+        hablar("Has llegado a tu destino");
         rutaActiva = null;
       }
-
-      return;
     }
+  }
 
-    // Detectar si el usuario se saltó puntos
-    for (
-      let i = pasoActual + 1;
-      i < rutaActiva.length;
-      i++
-    ) {
+  function obtenerPuntoMasCercano(posicion) {
+    let puntoMasCercano = null;
+    let menorDistancia = Infinity;
+    for (const nombre in sitiosUNI) {
+      const distancia = mapa.distance(
+        posicion,
+        sitiosUNI[nombre]
+      );
+      if (distancia < menorDistancia) {
 
-      let distanciaFutura =
-        mapa.distance(
-          userLocation,
-          rutaActiva[i].punto
-        );
-
-      if (distanciaFutura <= 35) {
-
-        pasoActual = i;
-
-        actualizarPanelRuta(
-          rutaActiva[i].texto,
-          distanciaFutura
-        );
-
-        hablar(
-          rutaActiva[i].texto
-        );
-
-        break;
+        menorDistancia = distancia;
+        puntoMasCercano = nombre;
       }
     }
+    return {
+      nombre: puntoMasCercano,
+      distancia: menorDistancia
+    };
   }
 
 
@@ -886,7 +997,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const select = document.getElementById('destino');
     for (let nombre in sitiosUNI) {
       let option = document.createElement('option');
-      option.value = nombre; 
+      option.value = nombre;
       option.text = nombre;
       if (select) select.appendChild(option);
     }
@@ -899,7 +1010,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const btnActivarGPS = document.getElementById('btnActivarGPS');
     if (btnActivarGPS) {
       btnActivarGPS.onclick = function () {
-        let utterance = new SpeechSynthesisUtterance(""); 
+        let utterance = new SpeechSynthesisUtterance("");
         window.speechSynthesis.speak(utterance);
         if (!navigator.geolocation) return Swal.fire("Error", "GPS no soportado.", "error");
 
@@ -928,7 +1039,7 @@ document.addEventListener('DOMContentLoaded', function () {
         );
       };
     }
-    
+
     const btnIr = document.getElementById('btnIr');
     if (btnIr) {
       btnIr.onclick = function () {
@@ -958,13 +1069,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
               mapa.setView(userLocation, 18);
 
-              let origenDetectado = "Entrada Principal";
-              const distanciaEntradaPrincipal = mapa.distance(userLocation, sitiosUNI["Entrada Principal"]);
-              const distanciaEntradaIES = mapa.distance(userLocation, sitiosUNI["Entrada IES"]);
-              if (distanciaEntradaIES < distanciaEntradaPrincipal) {
-                origenDetectado = "Entrada IES";
-              }
-              dibujarRutaPersonalizada(origenDetectado, destinoNombre);
+              const origen = obtenerPuntoMasCercano(userLocation);
+              dibujarRutaPersonalizada(origen.nombre, destinoNombre);
             },
             function () {
               Swal.fire("GPS no disponible", "No se pudo obtener tu ubicación.", "error");
@@ -982,7 +1088,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // -------------------------------------------------------------
 // FUNCIONES DE MODALES Y LÓGICA DE AULAS DINÁMICA
 // -------------------------------------------------------------
-let edificioActualId = "";
 window.abrirSimulacion = async function (
   lugar,
   mediaUrl = '',
@@ -1306,46 +1411,22 @@ window.abrirModalAulaVirtual = function (aula, mediaUrl = '', tipoMedia = 'image
 };
 
 
-
-
-
-
 window.cerrarModalAulaVirtual = function () {
-
-  const modal =
-    document.getElementById(
-      'modalAulaVirtual'
-    );
-
+  const modal = document.getElementById('modalAulaVirtual');
   if (!modal) return;
-
   modal.classList.remove('active');
-
-  const video =
-    modal.querySelector('video');
-
+  const video = modal.querySelector('video');
   if (video) {
-
     video.pause();
     video.removeAttribute('src');
     video.load();
   }
 
-  const videoContainer =
-    modal.querySelector(
-      '.video-container'
-    );
-
+  const videoContainer = modal.querySelector('.video-container');
   if (videoContainer) {
     videoContainer.innerHTML = '';
   }
 };
-
-
-
-
-
-
 
 document.addEventListener('click', function (e) {
   const mVideo = document.getElementById('videoModal');
@@ -1360,15 +1441,10 @@ document.addEventListener('click', function (e) {
 // CARGA DE DESTINO DESDE INDEX (LOCALSTORAGE)
 // -------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
-
   const destinoGuardado =
     localStorage.getItem("destinoBuscado");
-
   if (destinoGuardado) {
-
-    const destino =
-      JSON.parse(destinoGuardado);
-
+    const destino = JSON.parse(destinoGuardado);
     Swal.fire({
       title: destino.nombre,
       html: `
@@ -1384,21 +1460,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const destinoSimple =
-    localStorage.getItem(
-      "destinoBuscadoSimple"
-    );
-
+    localStorage.getItem("destinoBuscadoSimple");
   if (destinoSimple) {
-
     setTimeout(() => {
-      window.manejarSeleccionDestino(
-        destinoSimple
-      );
+      window.manejarSeleccionDestino(destinoSimple);
     }, 300);
-
-    localStorage.removeItem(
-      "destinoBuscadoSimple"
-    );
+    localStorage.removeItem("destinoBuscadoSimple");
   }
 
 });
